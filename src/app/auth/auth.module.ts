@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { GrocerInfoComponent } from './grocer-info/grocer-info.component';
-import { SupplierInfoComponent } from './supplier-info/supplier-info.component';
+import { RegisterComponent } from './components/register/register.component';
+import { GrocerInfoComponent } from './components/grocer-info/grocer-info.component';
+import { SupplierInfoComponent } from './components/supplier-info/supplier-info.component';
 
 
 const routes: Routes = [
