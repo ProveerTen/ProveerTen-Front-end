@@ -1,0 +1,9 @@
+<div class="chat-container">
+    <div class="contacts-list">
+      <div *ngFor="let contact of contacts" (click)="openChat(contact)">
+        {{ contact.name }}
+      </div>
+    </div>
+    <app-chat-window *ngIf="selectedContact" [contact]="selectedContact" (closeChatEvent)="closeChatWindow()"></app-chat-window>
+  </div>
+  

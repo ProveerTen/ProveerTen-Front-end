@@ -1,0 +1,22 @@
+
+<div class="slider-container">
+    <h1 class="title is-4 has-text-centered pt-4">¡Los más vendidos!</h1>
+    <button class="prev-button" (click)="prevProducts()"></button>
+    <div class="slider">
+        <div class="slides">
+            <div *ngFor="let product of visibleProducts" class="product">
+                <img [src]="product.imageUrl" alt="{{ product.name }}" />
+                <div class="product-details">
+                    <h3>{{ product.name }}</h3>
+                    <div class="buttons">
+                        <button (click)="likeProduct(product)">l {{ product.likes }}</button>
+                        <button (click)="commentProduct(product)">C {{ product.comments }}</button>
+                        <button (click)="shareProduct(product)">Share</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="next-button" (click)="nextProducts()"></button>
+</div>
+

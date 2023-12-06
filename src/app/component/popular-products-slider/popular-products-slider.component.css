@@ -1,0 +1,81 @@
+h1{
+    color: #FF914D;
+}
+
+.slider-container {
+    overflow: hidden;
+    width: 50%; /* Ajusta el ancho según tus necesidades */
+    border: 3px solid #FF914D;
+    position: relative; /* Añade posición relativa para centrar los botones */
+    margin: auto;
+    margin-top: 20px;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+.slides {
+    display: flex;
+}
+
+.product {
+    flex: 0 0 33.33%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 15px;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-details {
+    color: #000000;
+    padding: 5px;
+}
+
+.buttons button {
+    margin: 5px;
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.prev-button,
+.next-button {
+    color: #333;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute; /* Añade posición absoluta para poder centrar */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Ajusta para centrar verticalmente */
+}
+
+.prev-button {
+    left: 0; /* Coloca el botón Prev en el lado izquierdo */
+}
+
+.next-button {
+    right: 0; /* Coloca el botón Next en el lado derecho */
+}
+
+/* Agrega flechas a los botones */
+.prev-button::before,
+.next-button::before {
+    content: '>'; /* Flecha izquierda para Prev y flecha derecha para Next */
+    font-size: 18px;
+    margin-right: 5px; /* Espacio entre la flecha y el texto del botón */
+}
+.prev-button::before {
+    content: '<';
+}
+

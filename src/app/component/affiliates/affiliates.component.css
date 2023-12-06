@@ -1,0 +1,36 @@
+h1{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #FF914D;
+  }
+.line{
+  background-color: #FF914D;
+}
+.affiliates-carousel {
+  overflow: hidden;
+  width: 700px; /* Ajusta el tamaño del carrusel según tus necesidades */
+  margin: 0 auto;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: calc(500px / 3); /* Ajusta el tamaño de las imágenes según tus necesidades */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+
+
+  
+
+

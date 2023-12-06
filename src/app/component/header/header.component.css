@@ -1,0 +1,12 @@
+.title{
+    color: #FF914D;
+}
+.breadcrumb{
+    background-color: #FF914D;
+    color: black;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

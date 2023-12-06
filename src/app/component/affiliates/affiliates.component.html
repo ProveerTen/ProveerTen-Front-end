@@ -1,0 +1,14 @@
+
+<h1 class="title is-4 has-text-centered pt-1">Afiliados proveerten</h1>
+<div class="affiliates-carousel">
+  <div class="carousel-inner" [style.transform]="'translateX(' + translateX + 'px)'">
+    <div class="carousel-item" *ngFor="let affiliate of affiliates">
+      <img [src]="affiliate.image" alt="{{ affiliate.alt }}">
+    </div>
+  </div>
+</div>
+<hr class="line">
+
+
+  
+  

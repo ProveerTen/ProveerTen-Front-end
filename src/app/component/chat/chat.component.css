@@ -1,0 +1,26 @@
+.chat-container {
+  display: flex;
+}
+
+.contacts-list {
+  width: 200px;
+  border-right: 1px solid #d4773d;
+  padding: 10px;
+}
+
+.contacts-list div {
+  cursor: pointer;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  background-color: #FF914D;
+}
+
+
+.chat-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  margin: 10px;
+}

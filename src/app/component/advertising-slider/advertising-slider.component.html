@@ -1,0 +1,15 @@
+<div>
+    <div class="slider">
+        <div class="slides" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+            <div *ngFor="let slide of slides; let i = index" class="slide">
+                <img [src]="slide.imageUrl" alt="{{ slide.content }}" />
+                <div class="slide-content">{{ slide.content }}</div>
+            </div>
+        </div>
+
+        <div class="indicators">
+            <div *ngFor="let slide of slides; let i = index" class="indicator" [class.active]="currentIndex === i"
+                (click)="showSlide(i)"></div>
+        </div>
+    </div>
+</div>
