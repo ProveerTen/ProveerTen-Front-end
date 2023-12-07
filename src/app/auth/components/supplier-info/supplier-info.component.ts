@@ -31,7 +31,6 @@ export class SupplierInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.toastr.error("Holaaaa", "Error")
   }
 
   onSubmit() {
