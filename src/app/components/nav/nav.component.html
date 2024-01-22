@@ -1,0 +1,19 @@
+<nav>
+    <div class="logo">
+        ProveerTen
+    </div>
+
+    <ul>
+        <li><a routerLink="/">Home</a></li>
+    </ul>
+
+    <p *ngIf="auth.isCompany() | async">¡Hi Company!</p>
+    <p *ngIf="auth.isProvider() | async">¡Hi Provider!</p>
+    <p *ngIf="auth.isGrocer() | async">¡Hi Grocer!</p>
+
+    <ul>
+        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="login">Log in</a></li>
+        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="register">Sign up</a></li>
+        <li *ngIf="auth.isLoggedIn() | async"><a routerLink="login" (click)="auth.logout()">Log out</a></li>
+    </ul>
+</nav>
