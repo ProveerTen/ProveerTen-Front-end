@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,14 +9,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class NavComponent {
 
-  constructor(public auth: AuthService) {
-    this.auth.isCompany().subscribe(companyValue => {
-      console.log('Valor actual de company:', companyValue);
-      // Hacer algo con el valor, por ejemplo, mostrar u ocultar elementos en el componente
-    });
-    console.log(this.auth.getRole());
+  constructor(public auth: AuthService, private router: Router) { }
 
-
+  view_profile() {
+    let id = localStorage.getItem('id');
+    this.router.navigate(['view-my-profile', id]);
   }
 
 }

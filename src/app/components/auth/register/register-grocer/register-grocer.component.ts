@@ -52,7 +52,7 @@ export class RegisterGrocerComponent {
       this.client.postRequest('http://localhost:5001/register/grocer', this.grocer).subscribe({
         next: (response) => {
           console.log(response);
-
+          this.router.navigate(["login"]);
         },
         error: (error) => {
           console.log(error);

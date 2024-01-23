@@ -17,6 +17,8 @@ import { RegisterCompanyComponent } from './components/auth/register/register-co
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login/login.component';
 import { RegisterComponent } from './components/auth/register/register/register.component';
+import { ViewMyProfileComponent } from './components/profile/view-profile/view-my-profile/view-my-profile.component';
+import { ViewOtherProfileComponent } from './components/profile/view-profile/view-other-profile/view-other-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { RegisterComponent } from './components/auth/register/register/register.
     RegisterCompanyComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ViewMyProfileComponent,
+    ViewOtherProfileComponent
   ],
   imports: [
     BrowserModule,

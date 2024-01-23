@@ -15,12 +15,18 @@ import { LoginComponent } from './components/auth/login/login/login.component';
 import { LoginGrocerComponent } from './components/auth/login/login-grocer/login-grocer.component';
 import { LoginCompanyComponent } from './components/auth/login/login-company/login-company.component';
 
+// profile component
+import { ViewMyProfileComponent } from './components/profile/view-profile/view-my-profile/view-my-profile.component';
+import { ViewOtherProfileComponent } from './components/profile/view-profile/view-other-profile/view-other-profile.component';
+
 import { AuthGuard } from './guards/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'view-my-profile/:id', component: ViewMyProfileComponent },
+  { path: 'view-profile/:id', component: ViewOtherProfileComponent },
   // { path: 'register/company', component: RegisterCompanyComponent, canActivate: [AuthGuard] },
   // { path: 'register/grocer', component: RegisterGrocerComponent, canActivate: [AuthGuard] },
   // { path: 'login/company', component: LoginCompanyComponent, canActivate: [AuthGuard] },

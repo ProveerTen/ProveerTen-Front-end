@@ -16,4 +16,6 @@
         <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="register">Sign up</a></li>
         <li *ngIf="auth.isLoggedIn() | async"><a routerLink="login" (click)="auth.logout()">Log out</a></li>
     </ul>
+
+    <button *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
 </nav>

@@ -42,7 +42,7 @@ export class RegisterCompanyComponent {
       this.client.postRequest('http://localhost:5001/register/company', this.company).subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(["/"]);
+          this.router.navigate(["login"]);
 
         },
         error: (error) => {
