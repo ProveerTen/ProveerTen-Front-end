@@ -19,6 +19,11 @@ import { LoginComponent } from './components/auth/login/login/login.component';
 import { RegisterComponent } from './components/auth/register/register/register.component';
 import { ViewMyProfileComponent } from './components/profile/view-profile/view-my-profile/view-my-profile.component';
 import { ViewOtherProfileComponent } from './components/profile/view-profile/view-other-profile/view-other-profile.component';
+import { CreateProductComponent } from './components/product/create-product/create-product.component';
+import { ProductComponent } from './components/product/product/product.component';
+import { PublicationComponent } from './components/publication/publication/publication.component';
+import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
+import { ViewAllPublicationsComponent } from './components/view/view-all-publications/view-all-publications.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { ViewOtherProfileComponent } from './components/profile/view-profile/vie
     LoginComponent,
     RegisterComponent,
     ViewMyProfileComponent,
-    ViewOtherProfileComponent
+    ViewOtherProfileComponent,
+    CreateProductComponent,
+    ProductComponent,
+    PublicationComponent,
+    CreatePublicationComponent,
+    ViewAllPublicationsComponent
   ],
   imports: [
     BrowserModule,

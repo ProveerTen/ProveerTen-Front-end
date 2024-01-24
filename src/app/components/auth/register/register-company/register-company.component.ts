@@ -4,6 +4,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 
 import company from '../../../../interfaces/company';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-company',
@@ -39,7 +40,7 @@ export class RegisterCompanyComponent {
         description_company: this.form.value.description_company,
       }
 
-      this.client.postRequest('http://localhost:5001/register/company', this.company).subscribe({
+      this.client.postRequest(`${environment.url_auth}/register/company`, this.company).subscribe({
         next: (response) => {
           console.log(response);
           this.router.navigate(["login"]);

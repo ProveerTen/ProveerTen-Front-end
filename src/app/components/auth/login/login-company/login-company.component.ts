@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-company',
@@ -28,14 +29,15 @@ export class LoginCompanyComponent {
         password_company: this.form.value.password_company,
       }
 
-      this.client.postRequest('http://localhost:5001/login/company', this.data).subscribe({
+      this.client.postRequest(`${environment.url_auth}/login/company`, this.data).subscribe({
         next: (response: any) => {
           console.log(response);
           this.auth.login(response.token, response.data._role, response.data.id_company);
-          this.router.navigate(["/"]);
+          let id = localStorage.getItem('id');
+          this.router.navigate(['view-my-profile', id]);
         },
         error: (error) => {
-          console.log(error.error.Status);
+          console.log(error);
         },
         complete: () => console.log('complete'),
       });

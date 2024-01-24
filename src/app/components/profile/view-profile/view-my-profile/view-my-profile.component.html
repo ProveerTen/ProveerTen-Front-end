@@ -4,8 +4,18 @@
     <p>{{data?.description_company}}</p>
     <p>{{data?.foundation_company}}</p>
     <p>{{data?.national_line_company}}</p>
-    <!-- Agregar publicaciones -->
+
+    <div class="div" *ngIf="publications; else noPublications">
+        <div *ngFor="let publication of publications">
+            {{publication?.text}}
+            <img [src]="publication.image_url" style="max-width: 100px; height: auto;">
+        </div>
+    </div>
 </div>
+
+<ng-template #noPublications>
+    <p>No hay publicaciones</p>
+</ng-template>
 
 <div class="div" *ngIf="auth.isProvider() | async">
     <h2>Provider</h2>

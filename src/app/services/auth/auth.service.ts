@@ -13,6 +13,7 @@ export class AuthService {
 
   constructor() {
     this.initAuthState();
+    this.checkLocalStorage();
   }
 
   private initAuthState(): void {
@@ -64,6 +65,10 @@ export class AuthService {
     return this.checkToken() ? localStorage.getItem('role') : null;
   }
 
+  getId(): string | null {
+    return this.checkToken() ? localStorage.getItem('id') : null;
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
@@ -89,5 +94,15 @@ export class AuthService {
 
   isGrocer(): Observable<boolean> {
     return this.grocer.asObservable();
+  }
+
+  checkLocalStorage() {
+    setInterval(() => {
+      if (!(this.getToken() && this.getRole() && this.getId())) {
+        window.addEventListener('storage', () => {
+          this.logout();
+        })
+      }
+    }, 1000);
   }
 }

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// Guards
+import { AuthGuard } from './guards/auth/auth.guard';
+import { AccessHomeGuard } from './guards/access/access-home.guard';
 
 // home component
 import { HomeComponent } from './components/home/home.component';
@@ -19,7 +22,11 @@ import { LoginCompanyComponent } from './components/auth/login/login-company/log
 import { ViewMyProfileComponent } from './components/profile/view-profile/view-my-profile/view-my-profile.component';
 import { ViewOtherProfileComponent } from './components/profile/view-profile/view-other-profile/view-other-profile.component';
 
-import { AuthGuard } from './guards/auth/auth.guard';
+// product component
+import { ProductComponent } from './components/product/product/product.component';
+
+// publication component
+import { PublicationComponent } from './components/publication/publication/publication.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,6 +34,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'view-my-profile/:id', component: ViewMyProfileComponent },
   { path: 'view-profile/:id', component: ViewOtherProfileComponent },
+  { path: 'product', component: ProductComponent },
+  { path: 'publication', component: PublicationComponent },
   // { path: 'register/company', component: RegisterCompanyComponent, canActivate: [AuthGuard] },
   // { path: 'register/grocer', component: RegisterGrocerComponent, canActivate: [AuthGuard] },
   // { path: 'login/company', component: LoginCompanyComponent, canActivate: [AuthGuard] },

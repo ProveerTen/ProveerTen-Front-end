@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-grocer',
@@ -28,14 +29,14 @@ export class LoginGrocerComponent {
         email_grocer: this.form.value.email_grocer,
         password_grocer: this.form.value.password_grocer
       }
-      this.client.postRequest('http://localhost:5001/login/grocer', this.data).subscribe({
+      this.client.postRequest(`${environment.url_auth}/login/grocer`, this.data).subscribe({
         next: (response: any) => {
           console.log(response);
           this.auth.login(response.token, response.data._role, response.data.id_grocer);
           this.router.navigate(["/"]);
         },
         error: (error) => {
-          console.log(error.error.Status);
+          console.log(error);
         },
         complete: () => console.log('complete'),
       });

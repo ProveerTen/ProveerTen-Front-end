@@ -4,6 +4,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 
 import grocer from '../../../../interfaces/grocer';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-grocer',
@@ -49,7 +50,7 @@ export class RegisterGrocerComponent {
         number_grocer: this.form.value.number_grocer
       }
 
-      this.client.postRequest('http://localhost:5001/register/grocer', this.grocer).subscribe({
+      this.client.postRequest(`${environment.url_auth}/register/grocer`, this.grocer).subscribe({
         next: (response) => {
           console.log(response);
           this.router.navigate(["login"]);
