@@ -1,0 +1,14 @@
+<div class="buttons">
+    <button (click)="setRole('grocer')">Tendero</button>
+    <button (click)="setRole('company')">Empresa</button>
+</div>
+
+<div *ngIf="isRole('grocer')">
+    <h2>Grocer</h2>
+    <app-register-grocer></app-register-grocer>
+</div>
+
+<div *ngIf="isRole('company')">
+    <h2>Company</h2>
+    <app-register-company></app-register-company>
+</div>
