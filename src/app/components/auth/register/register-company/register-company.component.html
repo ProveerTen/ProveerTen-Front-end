@@ -1,0 +1,14 @@
+<div class="content">
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName="nit_company" placeholder="Nit">
+            <input type="text" formControlName="name_company" placeholder="Nombre de la compañia">
+            <input type="email" formControlName="email_company" placeholder="Correo electrónico">
+            <input type="password" formControlName="password_company" placeholder="Contraseña">
+            <input type="tel" formControlName="national_line_company" placeholder="Linea nacional telefónica">
+            <input type="date" formControlName="foundation_company" placeholder="Fecha de fundación de la compañía">
+            <input type="text" formControlName="description_company" placeholder="Breve descripción de la empresa">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
