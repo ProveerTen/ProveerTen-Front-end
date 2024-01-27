@@ -1,0 +1,10 @@
+<div class="div" *ngIf="publications; else noPublications">
+    <div *ngFor="let publication of publications">
+        {{publication?.text}}
+        <img [src]="publication.image_url" style="max-width: 100px; height: auto;">
+    </div>
+</div>
+
+<ng-template #noPublications>
+    <p>No hay publicaciones</p>
+</ng-template>

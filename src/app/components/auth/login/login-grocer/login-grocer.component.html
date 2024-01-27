@@ -1,0 +1,9 @@
+<div class="content">
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="email" formControlName="email_grocer" placeholder="Correo electrónico">
+            <input type="password" formControlName="password_grocer" placeholder="Contraseña">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
