@@ -18,11 +18,11 @@ export class AuthService {
   constructor() {
     this.checkAuth();
 
-    if (!(this.getToken())) {
-      window.addEventListener('storage', () => {
-        this.logout();
-      });
-    }
+    // if (!(this.getToken())) {
+    //   window.addEventListener('storage', () => {
+    //     this.logout();
+    //   });
+    // }
   }
 
   public getToken() {

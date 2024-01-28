@@ -15,4 +15,9 @@ export class NavComponent {
     let id = this.auth.getId();
     this.router.navigate(['profile', id]);
   }
+
+  delete_data_profile() {
+    let id = this.auth.getId();
+    this.router.navigate(['delete/data/grocer', id]);
+  }
 }

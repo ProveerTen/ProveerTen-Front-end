@@ -84,4 +84,28 @@ export class ClientService {
       withCredentials: true,
     });
   }
+
+  deleteRequest(route: string, queries?: RequestOptions, headers?: RequestOptions) {
+    let reqHeaders = new HttpHeaders();
+    let reqParams = new HttpParams();
+
+    if (headers) {
+      Object.getOwnPropertyNames(headers).forEach((key) => {
+        reqHeaders = reqHeaders.set(key, headers[key]);
+      });
+    }
+
+    if (queries) {
+      Object.getOwnPropertyNames(queries).forEach((key) => {
+        reqParams = reqParams.set(key, queries[key]);
+      });
+    }
+
+    return this.http.delete(route, {
+      headers: reqHeaders,
+      params: reqParams,
+      responseType: "json",
+      withCredentials: true,
+    });
+  }
 }

@@ -1,10 +1,31 @@
 <div class="div" *ngIf="auth.isCompany() | async">
     <h2>Company</h2>
+    <div class="image">
+        <img [src]="data?.profile_photo_company" style="width: 200px;">
+        <button (click)="updatePhoto()">Actualizar</button>
+        <form (ngSubmit)="onSubmitPhoto()">
+            <div class="div" *ngIf="photo">
+                <input type="file" (change)="onFileSelected($event)">
+                <button type="submit" [disabled]="!isValidImage">Enviar</button>
+            </div>
+        </form>
+        <button *ngIf="photo" (click)="cancelPhoto()">Cancelar</button>
+    </div>
     <p>{{data?.name_company}}</p>
     <p>{{data?.description_company}}</p>
     <p>{{data?.foundation_company}}</p>
     <p>{{data?.national_line_company}}</p>
-
+    <div class="cover">
+        <img [src]="data?.cover_photo_company" style="width: 200px;">
+        <button (click)="updateCover()">Actualizar</button>
+        <form (ngSubmit)="onSubmitCover()">
+            <div class="div" *ngIf="cover">
+                <input type="file" (change)="onFileSelected($event)">
+                <button [disabled]="!isValidImage">Enviar</button>
+            </div>
+        </form>
+        <button *ngIf="cover" (click)="cancelCover()">Cancelar</button>
+    </div>
     <div class="div" *ngIf="publications; else noPublications">
         <div *ngFor="let publication of publications">
             {{publication?.text}}
@@ -19,6 +40,17 @@
 
 <div class="div" *ngIf="auth.isProvider() | async">
     <h2>Provider</h2>
+    <div class="image">
+        <img [src]="data?.profile_photo_provider" style="width: 200px;">
+        <button (click)="updatePhoto()">Actualizar</button>
+        <form (ngSubmit)="onSubmitPhoto()">
+            <div class="div" *ngIf="photo">
+                <input type="file" (change)="onFileSelected($event)">
+                <button type="submit" [disabled]="!isValidImage">Enviar</button>
+            </div>
+        </form>
+        <button *ngIf="photo" (click)="cancelPhoto()">Cancelar</button>
+    </div>
     <p>{{data?.name_provider}}</p>
     <p>{{data?.last_name_provider}}</p>
     <p>{{data?.city_provider}}</p>
@@ -26,10 +58,32 @@
     <p>{{data?.street}}</p>
     <p>{{data?.number_street}}</p>
     <p>{{data?.number_provider}}</p>
+    <!-- <div class="cover">
+        <img [src]="data?.cover_photo_provider" style="width: 200px;">
+        <button (click)="updateCover()">Actualizar</button>
+        <form (ngSubmit)="onSubmitCover()">
+            <div class="div" *ngIf="cover">
+                <input type="file" (change)="onFileSelected($event)">
+                <button [disabled]="!isValidImage">Enviar</button>
+            </div>
+        </form>
+        <button *ngIf="cover" (click)="cancelCover()">Cancelar</button>
+    </div> -->
 </div>
 
 <div class="div" *ngIf="auth.isGrocer() | async">
     <h2>Grocer</h2>
+    <div class="image">
+        <img [src]="data?.profile_photo_grocer" style="width: 200px;">
+        <button (click)="updatePhoto()">Actualizar</button>
+        <form (ngSubmit)="onSubmitPhoto()">
+            <div class="div" *ngIf="photo">
+                <input type="file" (change)="onFileSelected($event)">
+                <button type="submit" [disabled]="!isValidImage">Enviar</button>
+            </div>
+        </form>
+        <button *ngIf="photo" (click)="cancelPhoto()">Cancelar</button>
+    </div>
     <p>{{data?.name_grocer}}</p>
     <p>{{data?.last_name_grocer}}</p>
     <p>{{data?.number_grocer}}</p>
@@ -39,4 +93,15 @@
     <p>{{data?.street}}</p>
     <p>{{data?.number_street}}</p>
     <p>{{data?.apartment}}</p>
+    <div class="cover">
+        <img [src]="data?.cover_photo_grocer" style="width: 200px;">
+        <button (click)="updateCover()">Actualizar</button>
+        <form (ngSubmit)="onSubmitCover()">
+            <div class="div" *ngIf="cover">
+                <input type="file" (change)="onFileSelected($event)">
+                <button [disabled]="!isValidImage">Enviar</button>
+            </div>
+        </form>
+        <button *ngIf="cover" (click)="cancelCover()">Cancelar</button>
+    </div>
 </div>

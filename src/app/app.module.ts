@@ -28,6 +28,7 @@ import { ViewProfileComponent } from './components/profile/view-profile/view-pro
 import { ViewProfileProviderComponent } from './components/profile/view-profile-provider/view-profile-provider.component';
 import { ViewProfileCompanyComponent } from './components/profile/view-profile-company/view-profile-company.component';
 import { ViewProfileGrocerComponent } from './components/profile/view-profile-grocer/view-profile-grocer.component';
+import { DeleteDataProfileGrocerComponent } from './components/profile/delete-data-profile/delete-data-profile-grocer/delete-data-profile-grocer.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ViewProfileGrocerComponent } from './components/profile/view-profile-gr
     ViewProfileProviderComponent,
     ViewProfileCompanyComponent,
     ViewProfileGrocerComponent,
+    DeleteDataProfileGrocerComponent,
   ],
   imports: [
     BrowserModule,

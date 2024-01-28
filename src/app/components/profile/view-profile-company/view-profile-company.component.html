@@ -4,7 +4,12 @@
     <p>{{data?.description_company}}</p>
     <p>{{data?.foundation_company}}</p>
     <p>{{data?.national_line_company}}</p>
-
+    <div class="image">
+        <img [src]="data?.profile_photo_company" style="width: 200px;">
+    </div>
+    <div class="cover">
+        <img [src]="data?.cover_photo_company" style="width: 200px;">
+    </div>
     <div class="div" *ngIf="publications; else noPublications">
         <div *ngFor="let publication of publications">
             {{publication?.text}}

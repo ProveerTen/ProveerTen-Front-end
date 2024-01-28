@@ -28,6 +28,7 @@ import { companyGuard } from 'src/app/guards/role-guards/company.guard';
 import { profileCompanyGuard } from 'src/app/guards/guards-components/profileCompany.guard';
 import { profileProviderGuard } from 'src/app/guards/guards-components/profileProvider.guard';
 import { profileGrocerGuard } from 'src/app/guards/guards-components/profileGrocer.guard';
+import { DeleteDataProfileGrocerComponent } from './components/profile/delete-data-profile/delete-data-profile-grocer/delete-data-profile-grocer.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
     path: 'profile/grocer/:id',
     component: ViewProfileGrocerComponent,
     canActivate: [profileGrocerGuard]
+  },
+  {
+    path: 'delete/data/grocer/:id',
+    component: DeleteDataProfileGrocerComponent
   },
   {
     path: '404',
