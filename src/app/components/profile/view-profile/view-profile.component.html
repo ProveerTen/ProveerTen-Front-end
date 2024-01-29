@@ -1,7 +1,7 @@
 <div class="div" *ngIf="auth.isCompany() | async">
     <h2>Company</h2>
     <div class="image">
-        <img [src]="data?.profile_photo_company" style="width: 200px;">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
         <button (click)="updatePhoto()">Actualizar</button>
         <form (ngSubmit)="onSubmitPhoto()">
             <div class="div" *ngIf="photo">
@@ -16,7 +16,8 @@
     <p>{{data?.foundation_company}}</p>
     <p>{{data?.national_line_company}}</p>
     <div class="cover">
-        <img [src]="data?.cover_photo_company" style="width: 200px;">
+        <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_company"
+            style="width: 80%; height: 200px;">
         <button (click)="updateCover()">Actualizar</button>
         <form (ngSubmit)="onSubmitCover()">
             <div class="div" *ngIf="cover">
@@ -41,7 +42,7 @@
 <div class="div" *ngIf="auth.isProvider() | async">
     <h2>Provider</h2>
     <div class="image">
-        <img [src]="data?.profile_photo_provider" style="width: 200px;">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
         <button (click)="updatePhoto()">Actualizar</button>
         <form (ngSubmit)="onSubmitPhoto()">
             <div class="div" *ngIf="photo">
@@ -74,7 +75,7 @@
 <div class="div" *ngIf="auth.isGrocer() | async">
     <h2>Grocer</h2>
     <div class="image">
-        <img [src]="data?.profile_photo_grocer" style="width: 200px;">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer" style="width: 200px;">
         <button (click)="updatePhoto()">Actualizar</button>
         <form (ngSubmit)="onSubmitPhoto()">
             <div class="div" *ngIf="photo">
@@ -94,7 +95,8 @@
     <p>{{data?.number_street}}</p>
     <p>{{data?.apartment}}</p>
     <div class="cover">
-        <img [src]="data?.cover_photo_grocer" style="width: 200px;">
+        <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_grocer"
+            style="width: 80%; height: 200px;">
         <button (click)="updateCover()">Actualizar</button>
         <form (ngSubmit)="onSubmitCover()">
             <div class="div" *ngIf="cover">

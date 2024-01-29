@@ -27,6 +27,8 @@ export class ViewProfileComponent {
     this.client.getRequest(`${environment.url_logic}/profile/${this.auth.getRole()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.data = response.data;
+        console.log(response.data.profile_photo_grocer == null);
+
         if (this.auth.getRole() === "company") {
           this.getPublications();
         }
@@ -78,6 +80,7 @@ export class ViewProfileComponent {
       this.client.patchRequest(`${environment.url_logic}/photo/photoProfile/${this.auth.getRole()}`, this.formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.isValidImage = false;
+          window.location.reload();
         },
         error: (error) => {
           console.log(error);
@@ -95,6 +98,7 @@ export class ViewProfileComponent {
       this.client.patchRequest(`${environment.url_logic}/photo/photoCover/${this.auth.getRole()}`, this.formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.isValidImage = false;
+          window.location.reload();
         },
         error: (error) => {
           console.log(error);

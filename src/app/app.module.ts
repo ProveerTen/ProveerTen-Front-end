@@ -30,6 +30,10 @@ import { ViewProfileCompanyComponent } from './components/profile/view-profile-c
 import { ViewProfileGrocerComponent } from './components/profile/view-profile-grocer/view-profile-grocer.component';
 import { DeleteDataProfileGrocerComponent } from './components/profile/delete-data-profile/delete-data-profile-grocer/delete-data-profile-grocer.component';
 
+// Directives
+import { BrokenImageDirective } from './directives/image/broken-image.directive';
+import { BrokenImageProfileDirective } from './directives/image/broken-image-profile.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +52,8 @@ import { DeleteDataProfileGrocerComponent } from './components/profile/delete-da
     ViewProfileCompanyComponent,
     ViewProfileGrocerComponent,
     DeleteDataProfileGrocerComponent,
+    BrokenImageDirective,
+    BrokenImageProfileDirective
   ],
   imports: [
     BrowserModule,
