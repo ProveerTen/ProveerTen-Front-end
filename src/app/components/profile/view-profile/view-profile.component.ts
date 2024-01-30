@@ -117,4 +117,18 @@ export class ViewProfileComponent {
     this.cover = false;
     this.formData.delete(`cover_photo_${this.auth.getRole()}`);
   }
+
+  deleteValue(value: string) {
+    this.client.deleteRequest(`${environment.url_logic}/edit_profile/${this.auth.getRole()}`, { deleteField: `${value}_${this.auth.getRole()}` }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        window.location.reload();
+      },
+      error: (error) => {
+        console.log(error.error.Status);
+      },
+      complete: () => console.log('complete'),
+    });
+  }
+
 }
