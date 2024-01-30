@@ -1,0 +1,24 @@
+<div class="div">
+    <h2>Company</h2>
+    <p>{{data?.name_company}}</p>
+    <p>{{data?.description_company}}</p>
+    <p>{{data?.foundation_company}}</p>
+    <p>{{data?.national_line_company}}</p>
+    <div class="image">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
+    </div>
+    <div class="cover">
+        <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_company"
+            style="width: 80%; height: 200px;">
+    </div>
+    <div class="div" *ngIf="publications; else noPublications">
+        <div *ngFor="let publication of publications">
+            {{publication?.text}}
+            <img [src]="publication.image_url" style="max-width: 100px; height: auto;">
+        </div>
+    </div>
+</div>
+
+<ng-template #noPublications>
+    <p>No hay publicaciones</p>
+</ng-template>

@@ -1,0 +1,43 @@
+<div class="div">
+    <h2>Grocer</h2>
+    <div class="div" *ngIf="data?.name_store">
+        <input type="text" [(ngModel)]="data.name_store" disabled="true">
+        <button (click)="deleteValue('name_store')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.name_grocer">
+        <input type="text" [(ngModel)]="data.name_grocer" disabled="true">
+        <button (click)="deleteValue('name_grocer')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.number_grocer">
+        <input type="text" [(ngModel)]="data.number_grocer" disabled="true">
+        <button (click)="deleteValue('number_grocer')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.name_grocer">
+        <input type="text" [(ngModel)]="data.name_grocer" disabled="true">
+        <button (click)="deleteValue('number_grocer')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.last_name_grocer">
+        <input type="text" [(ngModel)]="data.last_name_grocer" disabled="true">
+        <button (click)="deleteValue('last_name_grocer')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.city_grocer">
+        <input type="text" [(ngModel)]="data.city_grocer" disabled="true">
+        <button (click)="deleteValue('city_grocer')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.neighborhood">
+        <input type="text" [(ngModel)]="data.neighborhood" disabled="true">
+        <button (click)="deleteValue('neighborhood')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.street">
+        <input type="text" [(ngModel)]="data.street" disabled="true">
+        <button (click)="deleteValue('street')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.number_street">
+        <input type="text" [(ngModel)]="data.number_street" disabled="true">
+        <button (click)="deleteValue('number_street')">Delete</button>
+    </div>
+    <div class="div" *ngIf="data?.apartment">
+        <input type="text" [(ngModel)]="data.apartment" disabled="true">
+        <button (click)="deleteValue('apartment')">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div>
+    <h2>Grocer</h2>
+    <p>{{data?.name_grocer}}</p>
+    <p>{{data?.last_name_grocer}}</p>
+    <p>{{data?.number_grocer}}</p>
+    <p>{{data?.name_store}}</p>
+    <p>{{data?.city_grocer}}</p>
+    <p>{{data?.neighborhood}}</p>
+    <p>{{data?.street}}</p>
+    <p>{{data?.number_street}}</p>
+    <p>{{data?.apartment}}</p>
+    <div class="image">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer" style="width: 200px;">
+    </div>
+    <div class="cover">
+        <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_grocer" style="width: 200px;">
+    </div>
+</div>
