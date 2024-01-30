@@ -1,0 +1,14 @@
+<p>delete-data-profile works!</p>
+
+
+<div *ngIf="this.auth.isCompany() | async">
+    <app-delete-data-profile-company></app-delete-data-profile-company>
+</div>
+
+<div *ngIf="this.auth.isProvider() | async">
+    <app-delete-data-profile-provider></app-delete-data-profile-provider>
+</div>
+
+<div *ngIf="this.auth.isGrocer() | async">
+    <app-delete-data-profile-grocer></app-delete-data-profile-grocer>
+</div>

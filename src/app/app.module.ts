@@ -27,6 +27,15 @@ import { ViewProfileComponent } from './components/profile/view-profile/view-pro
 import { ViewProfileProviderComponent } from './components/profile/view-profile-provider/view-profile-provider.component';
 import { ViewProfileCompanyComponent } from './components/profile/view-profile-company/view-profile-company.component';
 import { ViewProfileGrocerComponent } from './components/profile/view-profile-grocer/view-profile-grocer.component';
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile/update-profile.component';
+import { UpdateProfileCompanyComponent } from './components/profile/update-profile/update-profile-company/update-profile-company.component';
+import { UpdateProfileProviderComponent } from './components/profile/update-profile/update-profile-provider/update-profile-provider.component';
+import { UpdateProfileGrocerComponent } from './components/profile/update-profile/update-profile-grocer/update-profile-grocer.component';
+import { DeleteDataProfileComponent } from './components/profile/delete-data-profile/delete-data-profile/delete-data-profile.component';
+import { DeleteDataProfileCompanyComponent } from './components/profile/delete-data-profile/delete-data-profile-company/delete-data-profile-company.component';
+import { DeleteDataProfileProviderComponent } from './components/profile/delete-data-profile/delete-data-profile-provider/delete-data-profile-provider.component';
+import { DeleteDataProfileGrocerComponent } from './components/profile/delete-data-profile/delete-data-profile-grocer/delete-data-profile-grocer.component';
+import { ChangePasswordComponent } from './components/profile/change-password-profile/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +54,15 @@ import { ViewProfileGrocerComponent } from './components/profile/view-profile-gr
     ViewProfileProviderComponent,
     ViewProfileCompanyComponent,
     ViewProfileGrocerComponent,
+    UpdateProfileComponent,
+    UpdateProfileCompanyComponent,
+    UpdateProfileProviderComponent,
+    UpdateProfileGrocerComponent,
+    DeleteDataProfileComponent,
+    DeleteDataProfileCompanyComponent,
+    DeleteDataProfileProviderComponent,
+    DeleteDataProfileGrocerComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

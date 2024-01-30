@@ -1,0 +1,54 @@
+<div class="div" *ngIf="auth.isGrocer() | async">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2>Grocer</h2>
+
+        <h4>Documento tendero: </h4>
+        <input type="text" formControlName="document_grocer" [value]="data?.document_grocer" placeholder="DNI">
+
+        <h4>Nombre: </h4>
+        <input type="text" formControlName="name_grocer" [value]="data?.name_grocer" placeholder="Nombre">
+        <!-- <div *ngIf="err">
+            {{err.msg}}
+        </div> -->
+        <!-- <div *ngIf="err.required">
+            {{err}}
+        </div> -->
+
+        <h4>Apellido: </h4>
+        <input type="text" formControlName="last_name_grocer" [value]="data?.last_name_grocer" placeholder="Apellido">
+
+        <h4>Correo: </h4>
+        <input type="email" formControlName="email_grocer" [value]="data?.email_grocer" placeholder="Correo">
+
+        <h4>Teléfono: </h4>
+        <input type="tel" formControlName="number_grocer" [value]="data?.number_grocer" placeholder="Teléfono">
+
+        <h4>Nombre del establecimiento: </h4>
+        <input type="text" formControlName="name_store" [value]="data?.name_store"
+            placeholder="Nombre del establecimiento">
+
+        <h4>Ciudad: </h4>
+        <input type="text" formControlName="city_grocer" [value]="data?.city_grocer" placeholder="Ciudad">
+
+        <h4>Barrio: </h4>
+        <input type="text" formControlName="neighborhood" [value]="data?.neighborhood" placeholder="Barrio">
+
+        <h4>Calle: </h4>
+        <input type="text" formControlName="street" [value]="data?.street" placeholder="calle">
+
+        <h4>Número de calle: </h4>
+        <input type="text" formControlName="number_street" [value]="data?.number_street" placeholder="# de calle">
+        <p></p>
+
+        <h4>Apartamento: </h4>
+        <div class="inputs">
+            <input type="number" formControlName="apartment" [value]="data?.apartment" placeholder="# de apartamento">
+            <p (click)="deleteField('apartment')"><i class="fa-regular fa-trash-can"></i></p>
+        </div>
+
+        <button type="submit" [disabled]="form.pristine">Guardar Cambios</button>
+
+    </form>
+
+</div>

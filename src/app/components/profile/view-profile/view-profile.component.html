@@ -19,6 +19,7 @@
 
 <div class="div" *ngIf="auth.isProvider() | async">
     <h2>Provider</h2>
+<p>Nombre: {{data?.name_provider}} </p>
 </div>
 
 <div class="div" *ngIf="auth.isGrocer() | async">

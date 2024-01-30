@@ -15,4 +15,14 @@ export class NavComponent {
     let id = this.auth.getId();
     this.router.navigate(['profile', id]);
   }
+
+  update_profile() {
+    let id = this.auth.getId();
+    this.router.navigate(['update-profile/', id])
+  }
+
+  deleteData_profile() {
+    let id = this.auth.getId();
+    this.router.navigate(['deleteData-profile/', id])
+  }
 }

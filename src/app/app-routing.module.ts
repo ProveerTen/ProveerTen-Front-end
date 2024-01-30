@@ -10,6 +10,15 @@ import { LoginComponent } from './components/auth/login/login/login.component';
 // Home component
 import { HomeComponent } from './components/home/home.component';
 
+// update profile component
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile/update-profile.component';
+
+// delete data profile component
+import { DeleteDataProfileComponent } from './components/profile/delete-data-profile/delete-data-profile/delete-data-profile.component';
+
+// change password profile component
+import { ChangePasswordComponent } from './components/profile/change-password-profile/change-password/change-password.component';
+
 // 404 component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
@@ -36,6 +45,18 @@ const routes: Routes = [
     component: ViewProfileComponent
   },
   {
+    path: 'update-profile/:id', 
+    component:UpdateProfileComponent
+  },
+  {
+    path: 'deleteData-profile/:id',
+    component: DeleteDataProfileComponent
+  },
+  {
+    path: 'change-password-profile',
+    component: ChangePasswordComponent
+  },
+  {
     path: '404',
     component: PageNotFoundComponent
   },
@@ -44,6 +65,8 @@ const routes: Routes = [
     redirectTo: '404',
     pathMatch: 'full'
   }
+
+
 ];
 
 @NgModule({

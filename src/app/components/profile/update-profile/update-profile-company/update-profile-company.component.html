@@ -1,0 +1,64 @@
+<div *ngIf="auth.isCompany() | async">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+        <h2>Empresa</h2>
+
+        <!-- <p>{{data?.name_company}}</p> -->
+        <h4>Nit de la compañia: </h4>
+        <input type="text" formControlName="nit_company" [value]="data?.nit_company" placeholder="nit company">
+
+        <h4>Nombre de la compañia: </h4>
+        <input type="text" formControlName="name_company" [value]="data?.name_company" placeholder="Nombre Empresa">
+
+        <!-- <div *ngIf="form.get('name_company')!.invalid && (form.get('name_company')!.dirty || form.get('name_company')!.touched)"> -->
+        <div *ngIf="form.get('name_company')?.hasError('required')">
+            <p class="error-message">Nombre es requerido.</p>
+        </div>
+
+        <div *ngIf="form.get('name_company')?.hasError('minlength') || form.get('name_company')?.hasError('maxlength')">
+            El Nombre debe tener entre 3 a maximo 7 caracteres</div>
+
+        <div *ngIf="form.get('name_company')?.valid">
+            <i class="fas fa-check icon"></i>
+        </div>
+
+        <h4>Correo: </h4>
+        <input type="email" formControlName="email_company" [value]="data?.email_company" placeholder="Correo">
+
+        <!-- <div *ngIf="form.get('name_company')?.hasError('required')">
+            <p class="error-message">Nombre es requerido.</p>
+        </div>
+
+        <div *ngIf="form.get('name_company')?.hasError('minlength') || form.get('name_company')?.hasError('maxlength')">
+            El Nombre debe tener entre 3 a maximo 7 caracteres</div>
+
+        <div *ngIf="form.get('name_company')?.valid">
+            <i class="fas fa-check icon"></i>
+        </div> -->
+
+
+        <h4>Línea nacional: </h4>
+        <input type="number" formControlName="national_line_company" [value]="data?.national_line_company"
+            placeholder="Línea Nacional">
+
+        <h4>Fecha de la fundación: </h4>
+        <!-- <div class="inputs">
+            <input type="text" formControlName="foundation_company" [value]="data?.foundation_company | date:'shortDate'"
+                placeholder="Fecha de fundación">
+            <p (click)="deleteField('foundation_company')"><i class="fa-regular fa-trash-can"></i></p>
+        </div> -->
+        <input type="text" formControlName="foundation_company" placeholder="Fecha de fundación de la compañía">
+
+        <!-- <input type="date" formControlName="foundation_company" > -->
+
+        <h4>Descripción: </h4>
+        <div class="inputs">
+            <input type="text" formControlName="description_company" [value]="data?.description_company"
+                placeholder="Descripción">
+            <p (click)="deleteField('description_company')"><i class="fa-regular fa-trash-can"></i></p>
+        </div>
+
+        <button type="submit" [disabled]="form.invalid || form.pristine">Guardar Cambios</button>
+
+    </form>
+</div>

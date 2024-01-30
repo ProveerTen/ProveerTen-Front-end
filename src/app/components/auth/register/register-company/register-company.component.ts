@@ -23,9 +23,20 @@ export class RegisterCompanyComponent {
       email_company: ['', [Validators.email]],
       password_company: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
       national_line_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      foundation_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
+      foundation_company: ['', [Validators.required]],
       description_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]]
     });
+    this.form.get('foundation_company')?.patchValue(this.formatDate(new Date()))
+  }
+
+  private formatDate(date:any) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
   }
 
   onSubmit() {
@@ -45,7 +56,7 @@ export class RegisterCompanyComponent {
           console.log(response);
           this.router.navigate(["login"]);
 
-        },
+        }, 
         error: (error) => {
           console.log(error);
         },

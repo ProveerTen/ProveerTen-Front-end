@@ -1,0 +1,38 @@
+
+<div class="div" *ngIf="auth.isProvider() | async">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <h2>Proveedor</h2>
+
+        <h4>DNI: </h4>
+        <input type="text" formControlName="document_provider" [value]="data?.document_provider" placeholder="Dni" >
+        
+        <h4>Nombre: </h4>
+        <input type="text" formControlName="name_provider" [value]="data?.name_provider" placeholder="Nombre del Proveedor" >
+        
+        <h4>Apellido: </h4>
+        <input type="text" formControlName="last_name_provider" [value]="data?.last_name_provider" placeholder="Apellido">
+        
+        <h4>Correo: </h4>
+        <input type="email" formControlName="email_provider" [value]="data?.email_provider" placeholder="Correo">
+        
+        <h4>Teléfono: </h4>
+        <input type="tel" formControlName="number_provider" [value]="data?.number_provider" placeholder="Teléfono">
+        
+        <h4>Ciudad: </h4>
+        <input type="text" formControlName="city_provider" [value]="data?.city_provider" placeholder="Ciudad">
+        
+        <h4>Barrio: </h4>
+        <input type="text" formControlName="neighborhood" [value]="data?.neighborhood" placeholder="Barrio">
+        
+        <h4>Calle: </h4>
+        <input type="text" formControlName="street" [value]="data?.street" placeholder="Calle">
+        
+        <h4>Número de calle: </h4>
+        <input type="text" formControlName="number_street" [value]="data?.number_street" placeholder="# de calle">
+
+        <button type="submit" [disabled]="form.pristine">Guardar Cambios</button>
+    </form>
+
+</div>

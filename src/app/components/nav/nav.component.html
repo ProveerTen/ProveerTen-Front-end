@@ -22,5 +22,7 @@
     <p *ngIf="auth.isLoggedIn() | async">{{auth.getId()}}</p>
 
     <button *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
-
+    <button *ngIf="auth.isLoggedIn() | async" (click)="update_profile()">Editar perfil</button>
+    <button *ngIf="auth.isLoggedIn() | async" (click)="deleteData_profile()">Eliminar Datos perfil</button>
+    
 </nav>

@@ -1,0 +1,30 @@
+
+<div *ngIf="auth.isCompany() | async">
+
+    <form [formGroup]="form">
+        <h2>Empresa</h2>
+
+        <!-- <p>{{data?.name_company}}</p> -->
+        <h4>Nit de la compañia: </h4> 
+        <input type="text" formControlName = "nit_company" [value]="data?.nit_company" placeholder="">
+        
+        <h4>Nombre de la compañia: </h4> 
+        <input type="text" formControlName = "name_company" [value]="data?.name_company" placeholder="">
+        
+        <h4>Correo: </h4> 
+        <input type="email" formControlName = "email_company" [value]="data?.email_company" placeholder="">
+        
+        <h4>Línea nacional: </h4> 
+        <input type="number" formControlName = "national_line_company" [value]="data?.national_line_company" placeholder="">
+        
+        <h4>Fecha de la fundación: </h4> 
+        <input type="text" formControlName = "foundation_company" [value]="data?.foundation_company" placeholder=""> <p (click)="deleteField('foundation_company')"><i class="fa-regular fa-trash-can"></i></p>
+        
+        <h4>Descripción: </h4> 
+        <input type="text" formControlName = "description_company"[value]="data?.description_company" placeholder=""> <p (click)="deleteField('description_company')"><i class="fa-regular fa-trash-can"></i></p>
+        
+        <!-- <   button type="submit" [disabled]="form.pristine">Guardar Cambios</> -->
+
+    </form>
+</div>
+
