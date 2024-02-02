@@ -1,27 +1,54 @@
-<nav>
+<nav class="navbar p-2 has-background-white" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand is-flex is-align-items-center">
+        <div class="navbar-item">
+            <a class="title is-size-4" href="#">ProveerTen</a>
+        </div>
 
-    <a href="#">ProveerTen</a>
+        <div class="navbar-item ">
+            <div class="field has-addons">
+                <div class="control has-icons-left is-rounded">
+                    <input class="input is-small is-rounded" type="text" placeholder="Buscar">
+                    <span class="icon is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+            <a *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a routerLink="/">Home</a></a>
 
-    <ul>
-        <li *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a routerLink="/">Home</a></li>
-    </ul>
+            <p *ngIf="auth.isCompany() | async">¡Hi Company!</p>
+            <p *ngIf="auth.isProvider() | async">¡Hi Provider!</p>
+            <p *ngIf="auth.isGrocer() | async">¡Hi Grocer!</p>
+    </div>
 
-    <ul>
-        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="login">Log in</a></li>
-        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="register">Sign up</a></li>
-        <li *ngIf="auth.isLoggedIn() | async"><a routerLink="login" (click)="auth.logout()">Log out</a></li>
-    </ul>
+    <div id="navbarBasicExample" class=" ">
+        <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-item is-flex is-align-items-center">
+                    <div *ngIf="!(auth.isLoggedIn() | async)"><a class="navbar-link" routerLink="login">Log in</a>
+                        
+                    </div>
+                </div>
 
-    <p *ngIf="auth.isLoggedIn() | async">Este es un mensaje para los usuarios</p>
-    <p *ngIf="!(auth.isLoggedIn() | async)">Este es un mensaje para los No usuarios</p>
-
-    <p *ngIf="auth.isCompany() | async">¡Hi Company!</p>
-    <p *ngIf="auth.isProvider() | async">¡Hi Provider!</p>
-    <p *ngIf="auth.isGrocer() | async">¡Hi Grocer!</p>
+                <div class="navbar-dropdown">
+                    <div *ngIf="!(auth.isLoggedIn() | async)">
+                        <a class="navbar-item" routerLink="register">Sign up</a>
+                    </div>
+                    <hr class="navbar-divider">
+                    <div *ngIf="auth.isLoggedIn() | async">
+                        <a class="navbar-item" routerLink="login" (click)="auth.logout()">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p *ngIf="!(auth.isLoggedIn() | async)">Unete a nuestra familia</p>
+    
+    <p *ngIf="auth.isLoggedIn() | async">Gracias por ser parte de nuestra familia</p>
 
     <p *ngIf="auth.isLoggedIn() | async">{{auth.getId()}}</p>
 
-    <button *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
+    <button class="button" *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
     <!-- <button *ngIf="auth.isLoggedIn() | async" (click)="delete_data_profile()">Eliminar data</button> -->
 
 </nav>

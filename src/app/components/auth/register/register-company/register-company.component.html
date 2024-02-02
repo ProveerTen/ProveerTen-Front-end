@@ -1,14 +1,35 @@
-<div class="content">
-    <div class="form">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="text" formControlName="nit_company" placeholder="Nit">
-            <input type="text" formControlName="name_company" placeholder="Nombre de la compañia">
-            <input type="email" formControlName="email_company" placeholder="Correo electrónico">
-            <input type="password" formControlName="password_company" placeholder="Contraseña">
-            <input type="tel" formControlName="national_line_company" placeholder="Linea nacional telefónica">
-            <input type="date" formControlName="foundation_company" placeholder="Fecha de fundación de la compañía">
-            <input type="text" formControlName="description_company" placeholder="Breve descripción de la empresa">
-            <button type="submit">Enviar</button>
-        </form>
+<div class="all is-flex is-justify-content-center">
+    <div class="card is-flex mt-6 ">
+        <div class="right is-half is-flex is-flex-direction-column has-background-light">
+            <div class="form is-flex is-flex-direction-column p-6">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <h1 class="grocer is-size-3">Proveedor</h1>
+                    <div class="above is-flex is-flex-wrap-wrap is-flex-direction-row ">
+                        <input class="half input" type="text" formControlName="name_provider" placeholder="Nombre">
+                        <input class="half input" type="text" formControlName="last_name_provider" placeholder="Apellidos">
+                    </div>
+
+                    <h1 class="grocer is-size-3">Empresa</h1>
+
+                    <div class="down is-flex is-flex-wrap-wrap is-flex-direction-row">
+                        <input class="half input" type="text" formControlName="nit_provider" placeholder="NIT">
+                        <input class="half input" type="text" formControlName="city_provider" placeholder="Ciudad">
+                        <input class="input is-fullwidth" type="text" formControlName="name_company" placeholder="Nombre de la empresa">
+                        <input class="half input" type="text" formControlName="number_provider" placeholder="Telefono">
+                        <input class="half input" type="text" formControlName="neighborhood" placeholder="Barrio">
+                        <input class="half input" type="text" formControlName="street" placeholder="Calle">
+                        <input class="half input" type="text" formControlName="number_street" placeholder="Numero">
+                        <input class="input is-fullwidth" type="text" formControlName="email_provider" placeholder="Correo">
+                        <input class="input is-fullwidth" type="text" formControlName="password_provider" placeholder="Contraseña">
+                        <button class="button is-fullwidth has-text-white" type="submit">Registrarse</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="left is-half">
+
+        </div>
     </div>
 </div>

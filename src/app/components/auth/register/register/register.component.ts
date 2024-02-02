@@ -7,13 +7,16 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
-  selectedRole = "grocer";
+  selectedRole = "company";
+
 
   setRole(role: string): void {
     this.selectedRole = role;
   }
 
   isRole(role: string): boolean {
+    console.log(role);
+    
     return this.selectedRole === role;
   }
 }
