@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { dataDecoded } from 'src/app/interfaces/dataDecoded';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +16,18 @@ export class AuthService {
   private grocer = new BehaviorSubject<boolean>(false);
 
   private data!: dataDecoded;
+  private helper = new JwtHelperService();
 
-  constructor() {
+  constructor(private router: Router) {
     this.checkAuth();
-
-    // if (!(this.getToken())) {
-    //   window.addEventListener('storage', () => {
-    //     this.logout();
-    //   });
-    // }
   }
 
   public getToken() {
     return localStorage.getItem('token')
+  }
+
+  public isExpiredToken() {
+    return this.helper.isTokenExpired(this.getToken());
   }
 
   private loginRole() {
@@ -49,15 +50,15 @@ export class AuthService {
     }
   }
 
-  getId() {
+  public getId() {
     return this.data.id;
   }
 
-  getRole() {
+  public getRole() {
     return this.data.role;
   }
 
-  checkAuth() {
+  private checkAuth() {
     const token = this.getToken();
     if (token) {
       this.getData(token);
@@ -68,43 +69,45 @@ export class AuthService {
     this.isLoggin.next(false);
   }
 
-  getData(token: string) {
-    const decodedPayload = JSON.parse(atob(token.split('.')[1]));
+  private getData(token: string) {
+    // const decodedPayload = JSON.parse(atob(token.split('.')[1]));
+    const decodedToken = this.helper.decodeToken(token);
     this.data = {
-      email: decodedPayload.email,
-      id: decodedPayload.id,
-      role: decodedPayload.role
+      email: decodedToken.email,
+      id: decodedToken.id,
+      role: decodedToken.role
     }
     return this.data;
   }
 
-  login(token: string) {
+  public login(token: string) {
     localStorage.setItem('token', token);
     this.getData(token);
     this.isLoggin.next(true);
     this.loginRole();
   }
 
-  isLoggedIn() {
+  public isLoggedIn() {
     return this.isLoggin.asObservable();
   }
 
-  isCompany() {
+  public isCompany() {
     return this.company.asObservable();
   }
 
-  isProvider() {
+  public isProvider() {
     return this.provider.asObservable();
   }
 
-  isGrocer() {
+  public isGrocer() {
     return this.grocer.asObservable();
   }
 
-  logout() {
+  public logout() {
     localStorage.removeItem('token');
     this.isLoggin.next(false);
     this.logoutRole();
+    this.router.navigate(['login']);
   }
 
 }

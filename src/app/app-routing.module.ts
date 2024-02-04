@@ -31,6 +31,7 @@ import { profileGrocerGuard } from 'src/app/guards/guards-components/profileGroc
 import { DeleteDataProfileGrocerComponent } from './components/profile/delete-data-profile/delete-data-profile-grocer/delete-data-profile-grocer.component';
 import { profileUploadImageGuard } from './guards/guards-components/profile-upload-image.guard';
 import { profileGuard } from './guards/guards-components/profile.guard';
+import { expiredTokenGuard } from './guards/guards-components/expiredToken.guard';
 
 const routes: Routes = [
   {
@@ -49,24 +50,24 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ViewProfileComponent,
-    canActivate: [profileGuard],
+    canActivate: [expiredTokenGuard, profileGuard],
     canDeactivate: [profileUploadImageGuard]
   },
   {
     path: 'profile/company/:id',
     component: ViewProfileCompanyComponent,
-    canActivate: [profileCompanyGuard],
+    canActivate: [expiredTokenGuard, profileCompanyGuard],
 
   },
   {
     path: 'profile/provider/:id',
     component: ViewProfileProviderComponent,
-    canActivate: [profileProviderGuard]
+    canActivate: [expiredTokenGuard, profileProviderGuard]
   },
   {
     path: 'profile/grocer/:id',
     component: ViewProfileGrocerComponent,
-    canActivate: [profileGrocerGuard]
+    canActivate: [expiredTokenGuard, profileGrocerGuard]
   },
   {
     path: 'delete/data/grocer/:id',
