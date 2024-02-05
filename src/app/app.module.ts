@@ -33,6 +33,9 @@ import { DeleteDataProfileGrocerComponent } from './components/profile/delete-da
 // Directives
 import { BrokenImageDirective } from './directives/image/broken-image.directive';
 import { BrokenImageProfileDirective } from './directives/image/broken-image-profile.directive';
+import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
+import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
+import { ViewProvidersComponent } from './components/provider/view-providers/view-providers.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { BrokenImageProfileDirective } from './directives/image/broken-image-pro
     ViewProfileGrocerComponent,
     DeleteDataProfileGrocerComponent,
     BrokenImageDirective,
-    BrokenImageProfileDirective
+    BrokenImageProfileDirective,
+    CreateProviderComponent,
+    ManageProvidersComponent,
+    ViewProvidersComponent
   ],
   imports: [
     BrowserModule,

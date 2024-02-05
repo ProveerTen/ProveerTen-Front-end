@@ -4,7 +4,6 @@ export default interface provider {
     last_name_provider: string,
     email_provider: string,
     password_provider: string,
-    profile_photo_provider?: string | null,
     nit_company: string,
     city_provider: string,
     neighborhood: string,

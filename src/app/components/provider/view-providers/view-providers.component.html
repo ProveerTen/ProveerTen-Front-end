@@ -1,0 +1,6 @@
+<div *ngFor="let provider of data">
+    {{provider?.document_provider}}
+    {{provider?.name_provider}}
+    {{provider?.city_provider}}
+    <button (click)="viewProfile(provider.document_provider)">Ver perfil</button>
+</div>

@@ -1,0 +1,18 @@
+<div class="content">
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName="document_provider" placeholder="Documento">
+            <input type="text" formControlName="name_provider" placeholder="Nombres">
+            <input type="text" formControlName="last_name_provider" placeholder="Apellidos">
+            <input type="email" formControlName="email_provider" placeholder="Correo electrónico">
+            <input type="password" formControlName="password_provider" placeholder="Contraseña">
+            <input type="tel" formControlName="number_provider" placeholder="Número de celular">
+            <input type="text" formControlName="city_provider" placeholder="Ciudad - Pueblo">
+            <input type="text" formControlName="neighborhood" placeholder="Barrio">
+            <input type="text" formControlName="street" placeholder="Calle">
+            <input type="text" formControlName="number_street" placeholder="Número">
+            <button type="submit">Enviar</button>
+        </form>
+        <button (click)="cancel()">Cancelar</button>
+    </div>
+</div>
