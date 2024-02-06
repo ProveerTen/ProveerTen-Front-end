@@ -1,6 +1,26 @@
 <div *ngFor="let provider of data">
-    {{provider?.document_provider}}
-    {{provider?.name_provider}}
-    {{provider?.city_provider}}
-    <button (click)="viewProfile(provider.document_provider)">Ver perfil</button>
+    <table border="2px" class="container">
+        <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Ciudad</th>
+        </tr>
+        <tr>
+            <td>
+                {{provider?.document_provider}}
+            </td>
+            <td>
+                {{provider?.name_provider}}
+            </td>
+            <td>
+                {{provider?.city_provider}}
+            </td>
+            <td>
+                <button (click)="viewProfile(provider.document_provider)">Ver perfil</button>
+            </td>
+            <td>
+                <button (click)="updateProvider(provider.document_provider)">Actualizar datos</button>
+            </td>
+        </tr>
+    </table>
 </div>

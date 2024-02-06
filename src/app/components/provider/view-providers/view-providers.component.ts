@@ -34,4 +34,8 @@ export class ViewProvidersComponent {
   viewProfile(id: string) {
     this.router.navigate(['profile/provider', id]);
   }
+
+  updateProvider(id: string) {
+    this.router.navigate(['update/provider', id]);
+  }
 }

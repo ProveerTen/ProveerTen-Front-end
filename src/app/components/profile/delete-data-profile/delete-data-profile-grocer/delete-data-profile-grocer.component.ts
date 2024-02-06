@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
 export class DeleteDataProfileGrocerComponent {
 
   data: any;
-  publications: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
 

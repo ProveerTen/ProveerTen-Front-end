@@ -50,6 +50,7 @@ export class CreateProviderComponent {
       this.client.postRequest(`${environment.url_auth}/register/provider`, this.provider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
           console.log(response);
+          this.router.navigate(['manage/providers']);
         },
         error: (error) => {
           console.log(error);

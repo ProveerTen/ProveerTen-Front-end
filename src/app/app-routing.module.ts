@@ -10,11 +10,15 @@ import { LoginComponent } from './components/auth/login/login/login.component';
 // Home component
 import { HomeComponent } from './components/home/home.component';
 
-// View component
+// Profile
 import { ViewProfileComponent } from './components/profile/view-profile/view-profile.component';
 import { ViewProfileCompanyComponent } from './components/profile/view-profile-company/view-profile-company.component';
 import { ViewProfileProviderComponent } from './components/profile/view-profile-provider/view-profile-provider.component';
 import { ViewProfileGrocerComponent } from './components/profile/view-profile-grocer/view-profile-grocer.component';
+
+// Provider
+import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
+import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
 
 // 404 component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -32,8 +36,7 @@ import { DeleteDataProfileGrocerComponent } from './components/profile/delete-da
 import { profileUploadImageGuard } from './guards/guards-components/profile-upload-image.guard';
 import { profileGuard } from './guards/guards-components/profile.guard';
 import { expiredTokenGuard } from './guards/guards-components/expiredToken.guard';
-import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
-import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
+import { UpdateProviderComponent } from './components/provider/update-provider/update-provider.component';
 
 const routes: Routes = [
   {
@@ -83,6 +86,10 @@ const routes: Routes = [
     path: 'create/provider',
     component: CreateProviderComponent,
     canActivate: [companyGuard]
+  },
+  {
+    path: 'update/provider/:id',
+    component: UpdateProviderComponent
   },
   {
     path: '404',

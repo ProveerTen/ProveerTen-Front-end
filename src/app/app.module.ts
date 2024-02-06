@@ -36,6 +36,7 @@ import { BrokenImageProfileDirective } from './directives/image/broken-image-pro
 import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
 import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
 import { ViewProvidersComponent } from './components/provider/view-providers/view-providers.component';
+import { UpdateProviderComponent } from './components/provider/update-provider/update-provider.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ViewProvidersComponent } from './components/provider/view-providers/vie
     BrokenImageProfileDirective,
     CreateProviderComponent,
     ManageProvidersComponent,
-    ViewProvidersComponent
+    ViewProvidersComponent,
+    UpdateProviderComponent
   ],
   imports: [
     BrowserModule,
