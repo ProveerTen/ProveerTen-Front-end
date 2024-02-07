@@ -37,6 +37,8 @@ import { profileUploadImageGuard } from './guards/guards-components/profile-uplo
 import { profileGuard } from './guards/guards-components/profile.guard';
 import { expiredTokenGuard } from './guards/guards-components/expiredToken.guard';
 import { UpdateProviderComponent } from './components/provider/update-provider/update-provider.component';
+import { PanelComponent } from './components/panel/panel.component';
+import { panelGuard } from './guards/guards-components/panel.guard';
 
 const routes: Routes = [
   {
@@ -90,6 +92,11 @@ const routes: Routes = [
   {
     path: 'update/provider/:id',
     component: UpdateProviderComponent
+  },
+  {
+    path: 'panel',
+    component: PanelComponent,
+    canActivate: [panelGuard]
   },
   {
     path: '404',

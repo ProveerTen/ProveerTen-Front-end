@@ -32,6 +32,7 @@ export class LoginProviderComponent {
       this.client.postRequest(`${environment.url_auth}/login/provider`, this.data).subscribe({
         next: (response: any) => {
           this.auth.login(response.token);
+          this.router.navigate(['panel']);
         },
         error: (error) => {
           console.log(error);

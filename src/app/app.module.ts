@@ -37,6 +37,7 @@ import { CreateProviderComponent } from './components/provider/create-provider/c
 import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
 import { ViewProvidersComponent } from './components/provider/view-providers/view-providers.component';
 import { UpdateProviderComponent } from './components/provider/update-provider/update-provider.component';
+import { PanelComponent } from './components/panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { UpdateProviderComponent } from './components/provider/update-provider/u
     CreateProviderComponent,
     ManageProvidersComponent,
     ViewProvidersComponent,
-    UpdateProviderComponent
+    UpdateProviderComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,

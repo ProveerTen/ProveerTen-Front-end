@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="div" *ngIf="auth.isCompany() | async">
+        <h2>Company</h2>
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
+        <p>{{data?.name_company}}</p>
+    </div>
+
+    <ng-template #noPublications>
+        <p>No hay publicaciones</p>
+    </ng-template>
+
+    <div class="div" *ngIf="auth.isProvider() | async">
+        <h2>Provider</h2>
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
+        <p>{{data?.name_provider}}</p>
+    </div>
+
+</div>
+
+
+<button *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar proveedores</button>
