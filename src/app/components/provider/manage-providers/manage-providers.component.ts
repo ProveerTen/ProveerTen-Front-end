@@ -13,4 +13,8 @@ export class ManageProvidersComponent {
   createProvider() {
     this.router.navigate(['create/provider']);
   }
+
+  goBack() {
+    this.router.navigate(['panel']);
+  }
 }

@@ -36,4 +36,18 @@ export class ViewPublicationsComponent {
     this.router.navigate(['update/publication', id]);
   }
 
+  deletePublication(id: string) {
+    let res = confirm('¿Seguro qué desea eliminar esta publicación?');
+    if (res) {
+      this.client.deleteRequest(`${environment.url_logic}/publication/delete/${id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          window.location.reload();
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+  }
 }

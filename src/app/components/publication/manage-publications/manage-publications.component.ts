@@ -12,4 +12,8 @@ export class ManagePublicationsComponent {
   createPublication() {
     this.router.navigate(['create/publication'])
   }
+
+  goBack() {
+    this.router.navigate(['panel']);
+  }
 }
