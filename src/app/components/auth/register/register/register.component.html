@@ -1,23 +1,27 @@
-<div class="card">
-    <h1>Selecciona un rol</h1>
-    <div class="rol">
-        <button class="grocer" (click)="setRole('grocer')">Tendero</button>
-        <button class="supplier" (click)="setRole('company')">Empresa</button>
+<div class="text-center ">
+    <h1 class="text-center">Selecciona un rol</h1>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" (click)="setRole('grocer')">Tendero</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" (click)="setRole('company')">Empresa</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<hr class="mt-8">
-
-<div class="card">
-    <div class="card-inner">
-        <div class="card-front" *ngIf="isRole('grocer')">
+<div class="card mt-4">
+    <div class="card-body">
+        <div *ngIf="isRole('grocer')" class="card-text">
             <h2>Grocer</h2>
             <app-register-grocer></app-register-grocer>
         </div>
-        <div *ngIf="isRole('company')" class="card-back">
-            <h2>Company</h2>
+        <div *ngIf="isRole('company')" class="card-text">
             <app-register-company></app-register-company>
         </div>
     </div>
 </div>
+
 

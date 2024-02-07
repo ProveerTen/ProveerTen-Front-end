@@ -1,35 +1,99 @@
-<div class="all is-flex is-justify-content-center">
-    <div class="card is-flex mt-6 ">
-        <div class="right is-half is-flex is-flex-direction-column has-background-light">
-            <div class="form is-flex is-flex-direction-column p-6">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<section class="text-center">
+    <div class="p-5 bg-image"
+        style="background-image: url('https://minutehack.com/public/images/articles/2016/03/world-map.jpg'); height: 300px; width: 900px;">
+    </div>
+    <div class="card mx-4 mx-md-5 shadow-5-strong"
+        style="margin-top: -100px; background: hsla(0, 0%, 100%, 0.836); backdrop-filter: blur(10px);">
+        <div class="card-body">
 
-                    <h1 class="grocer is-size-3">Proveedor</h1>
-                    <div class="above is-flex is-flex-wrap-wrap is-flex-direction-row ">
-                        <input class="half input" type="text" formControlName="name_provider" placeholder="Nombre">
-                        <input class="half input" type="text" formControlName="last_name_provider" placeholder="Apellidos">
-                    </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-5">Registro de Proveedor</h2>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-outline">
+                                    <input type="text" id="name_provider" class="form-control"
+                                        formControlName="name_provider" />
+                                    <label class="form-label" for="name_provider">Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-outline">
+                                    <input type="text" id="last_name_provider" class="form-control"
+                                        formControlName="last_name_provider" />
+                                    <label class="form-label" for="last_name_provider">Apellidos</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-outline">
+                                    <input type="text" id="nit_provider" class="form-control"
+                                        formControlName="nit_provider" />
+                                    <label class="form-label" for="nit_provider">NIT</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-outline ">
+                                    <input type="text" id="city_provider" class="form-control"
+                                        formControlName="city_provider" />
+                                    <label class="form-label" for="city_provider">Ciudad</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-outline ">
+                            <input type="text" id="name_company" class="form-control" formControlName="name_company" />
+                            <label class="form-label" for="name_company">Nombre de la empresa</label>
+                        </div>
 
-                    <h1 class="grocer is-size-3">Empresa</h1>
-
-                    <div class="down is-flex is-flex-wrap-wrap is-flex-direction-row">
-                        <input class="half input" type="text" formControlName="nit_provider" placeholder="NIT">
-                        <input class="half input" type="text" formControlName="city_provider" placeholder="Ciudad">
-                        <input class="input is-fullwidth" type="text" formControlName="name_company" placeholder="Nombre de la empresa">
-                        <input class="half input" type="text" formControlName="number_provider" placeholder="Telefono">
-                        <input class="half input" type="text" formControlName="neighborhood" placeholder="Barrio">
-                        <input class="half input" type="text" formControlName="street" placeholder="Calle">
-                        <input class="half input" type="text" formControlName="number_street" placeholder="Numero">
-                        <input class="input is-fullwidth" type="text" formControlName="email_provider" placeholder="Correo">
-                        <input class="input is-fullwidth" type="text" formControlName="password_provider" placeholder="Contraseña">
-                        <button class="button is-fullwidth has-text-white" type="submit">Registrarse</button>
-                    </div>
-
-                </form>
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-outline ">
+                                    <input type="text" id="number_provider" class="form-control"
+                                        formControlName="number_provider" />
+                                    <label class="form-label" for="number_provider">Teléfono</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-outline">
+                                    <input type="text" id="neighborhood" class="form-control"
+                                        formControlName="neighborhood" />
+                                    <label class="form-label" for="neighborhood">Barrio</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-outline ">
+                                    <input type="text" id="street" class="form-control" formControlName="street" />
+                                    <label class="form-label" for="street">Calle</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-outline">
+                                    <input type="text" id="number_street" class="form-control"
+                                        formControlName="number_street" />
+                                    <label class="form-label" for="number_street">Número</label>
+                                </div>
+                            </div>
+                        </div>
+                                <div class="form-outline">
+                                    <input type="email" id="email_provider" class="form-control"
+                                        formControlName="email_provider" />
+                                    <label class="form-label" for="email_provider">Correo</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="password_provider" class="form-control"
+                                        formControlName="password_provider" />
+                                    <label class="form-label" for="password_provider">Contraseña</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    Registrarse
+                                </button>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="left is-half">
-
-        </div>
     </div>
-</div>
+</section>
