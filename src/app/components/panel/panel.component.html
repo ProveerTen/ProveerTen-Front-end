@@ -1,26 +1,151 @@
-<div class="container d-flex flex-column gap-3">
-    <div class="div" *ngIf="auth.isCompany() | async">
-        <h2>Company</h2>
-        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
-        <p>{{data?.name_company}}</p>
+<div class="container-fluid vh-100">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 user-details w-100" >
+            <div class="user-image" *ngIf="auth.isCompany() | async" >
+                <h2>Company</h2>
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;"  class="img-circle">
+                <p>{{data?.name_company}}</p>
+                <p>{{data?.description_company}}</p>
+            </div>
+            
+            <ng-template #noPublications>
+                <p>No hay publicaciones</p>
+            </ng-template>
+            
+            <div class="user-image" *ngIf="auth.isProvider() | async">
+                <h2>Provider</h2>
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
+                <p>{{data?.name_provider}}</p>
+            </div>
+        
+
+        </div>
+
+        <div class="w-100">
+            <div class="d-flex justify-content-evenly align-items-center h-100 gap-2">
+                <button class="" *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar Proveedores</button>
+                <button class=""  *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Publicaciones</button>
+                <button class="" *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Productos</button>
+            </div>
+        </div>
     </div>
-
-    <ng-template #noPublications>
-        <p>No hay publicaciones</p>
-    </ng-template>
-
-    <div class="div" *ngIf="auth.isProvider() | async">
-        <h2>Provider</h2>
-        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
-        <p>{{data?.name_provider}}</p>
-    </div>
-
-
-    <div style="border: 2px black solid">
-        <h2>Crear publicación</h2>
+       
+    <div>
         <app-create-publication></app-create-publication>
     </div>
-
-    <button *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar proveedores</button>
-    <button *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar publicaciones</button>
+    
 </div>
+
+<!-- 
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-4 user-details">
+                <ng-container *ngIf="(auth.isCompany() | async) as isCompany">
+                    <div class="user-image" *ngIf="isCompany">
+                        <h2>Company</h2>
+                        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
+                        <p>{{ data?.name_company }}</p>
+                    </div>
+                </ng-container>
+                
+                <ng-container *ngIf="(auth.isProvider() | async) as isProvider">
+                    <div class="user-image" *ngIf="isProvider">
+                        <h2>Provider</h2>
+                        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
+                        <p>{{ data?.name_provider }}</p>
+                    </div>
+                </ng-container>
+                
+                <ul class="navigation">
+                    <li class="active">
+                        <a data-toggle="tab" href="#information"></a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#settings">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#email">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#events">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <ng-container *ngIf="(auth.isCompany() | async) as isCompany">
+                    <button class="btn btn-primary" *ngIf="isCompany" (click)="manageProviders()">Gestionar proveedores</button>
+                    <button class="btn btn-primary" *ngIf="isCompany" (click)="managePublications()">Gestionar publicaciones</button>
+                </ng-container>
+            </div>
+            
+            <div class="col-sm-8 col-md-8">
+                <app-create-publication></app-create-publication>
+            </div>
+        </div>
+    </div>
+     -->
+
+
+
+    
+<!--     
+    <div class="container">
+        <div class="row">
+		<div class="col-sm-4 col-md-4 user-details">
+            <div class="user-image">
+                <img src="http://www.gravatar.com/avatar/2ab7b2009d27ec37bffee791819a090c?s=100&d=mm&r=g" alt="Karan Singh Sisodia" title="Karan Singh Sisodia" class="img-circle">
+            </div>
+            <div class="user-info-block">
+                <div class="user-heading">
+                    <h3>Karan Singh Sisodia</h3>
+                    <span class="help-block">Chandigarh, IN</span>
+                </div>
+                <ul class="navigation">
+                    <li class="active">
+                        <a data-toggle="tab" href="#information">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#settings">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#email">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#events">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="user-body">
+                    <div class="tab-content">
+                        <div id="information" class="tab-pane active">
+                            <h4>Account Information</h4>
+                        </div>
+                        <div id="settings" class="tab-pane">
+                            <h4>Settings</h4>
+                        </div>
+                        <div id="email" class="tab-pane">
+                            <h4>Send Message</h4>
+                        </div>
+                        <div id="events" class="tab-pane">
+                            <h4>Events</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+ -->
