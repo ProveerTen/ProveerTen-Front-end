@@ -38,6 +38,8 @@ import { ManageProvidersComponent } from './components/provider/manage-providers
 import { ViewProvidersComponent } from './components/provider/view-providers/view-providers.component';
 import { UpdateProviderComponent } from './components/provider/update-provider/update-provider.component';
 import { PanelComponent } from './components/panel/panel.component';
+import { ManagePublicationsComponent } from './components/publication/manage-publications/manage-publications.component';
+import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { PanelComponent } from './components/panel/panel.component';
     ManageProvidersComponent,
     ViewProvidersComponent,
     UpdateProviderComponent,
-    PanelComponent
+    PanelComponent,
+    ManagePublicationsComponent,
+    CreatePublicationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<div class="content">
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName="text" placeholder="Texto">
+            <input type="file" formControlName="image" (change)="onFileSelected($event)">
+            <div *ngIf="imagePreview">
+                <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+            </div>
+            <button type="submit" [disabled]="!form.valid || !isValidImage">Crear publicación</button>
+        </form>
+    </div>
+</div>

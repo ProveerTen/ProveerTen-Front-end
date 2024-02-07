@@ -39,6 +39,8 @@ import { expiredTokenGuard } from './guards/guards-components/expiredToken.guard
 import { UpdateProviderComponent } from './components/provider/update-provider/update-provider.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { panelGuard } from './guards/guards-components/panel.guard';
+import { ManagePublicationsComponent } from './components/publication/manage-publications/manage-publications.component';
+import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
 
 const routes: Routes = [
   {
@@ -92,6 +94,14 @@ const routes: Routes = [
   {
     path: 'update/provider/:id',
     component: UpdateProviderComponent
+  },
+  {
+    path: 'manage/publications',
+    component: ManagePublicationsComponent
+  },
+  {
+    path: 'create/publication',
+    component: CreatePublicationComponent
   },
   {
     path: 'panel',

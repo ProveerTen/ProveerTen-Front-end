@@ -31,4 +31,8 @@ export class PanelComponent {
     this.router.navigate(['manage/providers']);
   }
 
+  managePublications() {
+    this.router.navigate(['manage/publications']);
+  }
+
 }

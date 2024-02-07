@@ -17,5 +17,9 @@
 
 </div>
 
+<div>
+    <app-create-publication></app-create-publication>
+</div>
 
 <button *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar proveedores</button>
+<button *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar publicaciones</button>
