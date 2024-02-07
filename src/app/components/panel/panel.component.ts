@@ -35,4 +35,8 @@ export class PanelComponent {
     this.router.navigate(['manage/publications']);
   }
 
+  manageProducts(){
+    this.router.navigate(['manage/products']);
+  }
+
 }

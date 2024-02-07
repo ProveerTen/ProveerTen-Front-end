@@ -1,0 +1,25 @@
+<div class="content">
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName="name_product" placeholder="Nombre del producto">
+            <input type="text" formControlName="description_product" placeholder="Descripción del producto">
+            <input type="number" formControlName="purchase_price_product" placeholder="Precio de venta">
+            <input type="number" formControlName="unit_purchase_price_product" placeholder="Precio unitario">
+            <input type="number" formControlName="suggested_unit_selling_price_product"
+                placeholder="Precio sugerido al tendero">
+            <input type="number" formControlName="purchase_quantity" placeholder="Cantidad del paquete">
+            <input type="number" formControlName="stock_product" placeholder="Cantidad">
+            <input type="text" formControlName="content_product" placeholder="Contenido del producto">
+            <div class="div" *ngFor="let category of dataCategories">
+                <input type="checkbox" [value]="category.name_category"
+                    (change)="onCheckboxChange($event, category.name_category)">
+                {{category.name_category}}
+            </div>
+            <input type="file" formControlName="image_product" (change)="onFileSelected($event)">
+            <div *ngIf="imagePreview">
+                <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+            </div>
+            <button type="submit">Crear producto</button>
+        </form>
+    </div>
+</div>

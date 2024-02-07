@@ -80,7 +80,7 @@ export class UpdateProviderComponent implements OnInit {
       };
       console.log(this.dataProvider);
 
-      this.client.postRequest(`${environment.url_logic}/provideru/update`, this.dataProvider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.postRequest(`${environment.url_logic}/provider/update`, this.dataProvider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
           console.log(response);
           this.router.navigate(['manage/providers']);

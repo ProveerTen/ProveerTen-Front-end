@@ -42,6 +42,8 @@ import { panelGuard } from './guards/guards-components/panel.guard';
 import { ManagePublicationsComponent } from './components/publication/manage-publications/manage-publications.component';
 import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
 import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
+import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
+import { CreateProductComponent } from './components/product/create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -67,7 +69,7 @@ const routes: Routes = [
     path: 'profile/company/:id',
     component: ViewProfileCompanyComponent,
     canActivate: [expiredTokenGuard, profileCompanyGuard],
-
+    
   },
   {
     path: 'profile/provider/:id',
@@ -82,6 +84,11 @@ const routes: Routes = [
   {
     path: 'delete/data/grocer/:id',
     component: DeleteDataProfileGrocerComponent // Eliminar
+  },
+  {
+    path: 'panel',
+    component: PanelComponent,
+    canActivate: [panelGuard]
   },
   {
     path: 'manage/providers',
@@ -109,9 +116,12 @@ const routes: Routes = [
     component: UpdatePublicationComponent
   },
   {
-    path: 'panel',
-    component: PanelComponent,
-    canActivate: [panelGuard]
+    path: 'manage/products',
+    component: ManageProductsComponent
+  },
+  {
+    path: 'create/product',
+    component: CreateProductComponent
   },
   {
     path: '404',
