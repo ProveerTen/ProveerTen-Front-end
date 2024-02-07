@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-flex flex-column gap-3">
     <div class="div" *ngIf="auth.isCompany() | async">
         <h2>Company</h2>
         <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
@@ -15,11 +15,12 @@
         <p>{{data?.name_provider}}</p>
     </div>
 
-</div>
 
-<div>
-    <app-create-publication></app-create-publication>
-</div>
+    <div style="border: 2px black solid">
+        <h2>Crear publicación</h2>
+        <app-create-publication></app-create-publication>
+    </div>
 
-<button *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar proveedores</button>
-<button *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar publicaciones</button>
+    <button *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar proveedores</button>
+    <button *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar publicaciones</button>
+</div>

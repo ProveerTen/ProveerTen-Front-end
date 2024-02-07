@@ -40,6 +40,9 @@ import { UpdateProviderComponent } from './components/provider/update-provider/u
 import { PanelComponent } from './components/panel/panel.component';
 import { ManagePublicationsComponent } from './components/publication/manage-publications/manage-publications.component';
 import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
+import { ViewPublicationsComponent } from './components/publication/view-publications/view-publications.component';
+import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
+import { DeletePublicationComponent } from './components/publication/delete-publication/delete-publication.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { CreatePublicationComponent } from './components/publication/create-publ
     UpdateProviderComponent,
     PanelComponent,
     ManagePublicationsComponent,
-    CreatePublicationComponent
+    CreatePublicationComponent,
+    ViewPublicationsComponent,
+    UpdatePublicationComponent,
+    DeletePublicationComponent
   ],
   imports: [
     BrowserModule,

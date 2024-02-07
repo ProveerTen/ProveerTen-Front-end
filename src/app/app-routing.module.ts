@@ -41,6 +41,7 @@ import { PanelComponent } from './components/panel/panel.component';
 import { panelGuard } from './guards/guards-components/panel.guard';
 import { ManagePublicationsComponent } from './components/publication/manage-publications/manage-publications.component';
 import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
+import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
 
 const routes: Routes = [
   {
@@ -102,6 +103,10 @@ const routes: Routes = [
   {
     path: 'create/publication',
     component: CreatePublicationComponent
+  },
+  {
+    path: 'update/publication/:id',
+    component: UpdatePublicationComponent
   },
   {
     path: 'panel',

@@ -4,6 +4,7 @@
 
     <ul>
         <li *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a routerLink="/">Home</a></li>
+        <li *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))"><a routerLink="panel">Panel</a></li>
     </ul>
 
     <ul>
