@@ -1,0 +1,20 @@
+.inputs {
+    display: flex;
+    gap: 8px;
+}
+
+/* input.ng-invalid.ng-touched + div p.error-message {
+    color: red;
+} */
+
+.message-invalid {
+    color: rgb(255, 0, 128);
+}
+
+.message-valid {
+    border: 2px solid rgb(0, 125, 46);
+}
+
+.message-valid:focus {
+    outline: none; 
+}

@@ -1,0 +1,96 @@
+<div *ngIf="auth.isCompany() | async">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+        <h2>Empresa</h2>
+
+        <h4>Nit de la compañia: </h4>
+        <input type="text" formControlName="nit_company" [value]="data?.nit_company" placeholder="nit company">
+
+        <!--  -->
+        <h4>Nombre de la compañia: </h4>
+
+        <input type="text" formControlName="name_company" [value]="data?.name_company" placeholder="Nombre Empresa" [ngClass]="{'message-valid': isvalid('name_company')}">
+
+        <div *ngIf="form.get('name_company')?.hasError('required')" class="message-invalid">
+            <p>El Nombre es requerido.</p>
+        </div>
+
+        <div *ngIf="form.get('name_company')?.hasError('minlength') || form.get('name_company')?.hasError('maxlength')" class="message-invalid">
+            El Nombre debe tener entre 1 a maximo 100 carácteres
+        </div>
+
+        <!-- <div *ngIf="form.get('name_company')?.valid" class="message-valid">
+            <i class="fas fa-check icon"></i>
+        </div> -->
+        <!--  -->
+
+        <h4>Correo: </h4>
+
+        <input type="email" formControlName="email_company" [value]="data?.email_company" placeholder="Correo" [ngClass]="{'message-valid': isvalid('email_company')}">
+
+        <div *ngIf="form.get('email_company')?.hasError('required')" class="message-invalid">
+            <p class="error-message">El email es un campo requerido.</p>
+        </div>
+
+        <div *ngIf="form.get('email_company')?.hasError('email')" class="message-invalid">
+            Ingrese un correo valido
+        </div>
+<!--  -->
+
+        <h4>Línea nacional: </h4>
+
+        <input type="number" formControlName="national_line_company" [value]="data?.national_line_company" placeholder="Línea Nacional" [ngClass]="{'message-valid': isvalid('national_line_company')}">
+
+        <div *ngIf="form.get('national_line_company')?.hasError('required')" class="message-invalid">
+            <p>El teléfono es requerido.</p>
+        </div>
+
+        <div *ngIf="form.get('national_line_company')?.hasError('minlength') || form.get('national_line_company')?.hasError('maxlength')" class="message-invalid">
+            <p>El teléfono debe tener entre 1 a maximo 20 carácteres</p>
+        </div>
+
+        <!-- <div *ngIf="form.get('national_line_company')?.valid" class="message-valid">
+            <i class="fas fa-check icon"></i>
+        </div> -->
+        <!--  -->
+<!--  -->
+
+        <h4>Fecha de la fundación: </h4>
+
+        <div class="inputs">
+            <input type="text" formControlName="foundation_company" [value]="data?.foundation_company 
+            // | date:'shortDate'"
+                placeholder="Fecha de fundación" [ngClass]="{'message-valid': isvalid('foundation_company')}">
+
+            <p (click)="deleteField('foundation_company')"><i class="fa-regular fa-trash-can"></i></p>
+        </div>
+        <!-- <input type="text" formControlName="foundation_company" placeholder="Fecha de fundación de la compañía" [value]="data?.foundation_company" [ngClass]="{'message-valid': form.get('name_company')?.valid}"> -->
+
+        <!-- <input type="text" formControlName="foundation_company" [placeholder]="form.get('foundation_company')?.valid ? 'Fecha de fundación de la compañía' : 'Fecha de fundación de la compañía'
+  [value]=" data?.foundation_company" [ngClass]="{'valid-input': form.get('foundation_company')?.valid}"> -->
+
+        <div *ngIf="form.get('foundation_company')?.hasError('minlength') || form.get('foundation_company')?.hasError('maxlength')" class="message-invalid">
+            La fecha de fundación debe tener maximo 40 carácteres
+        </div>
+<!--  -->
+
+        <h4>Descripción: </h4>
+
+        <div class="inputs">
+            <textarea type="text" cols="30" rows="8" formControlName="description_company" [value]="data?.description_company" placeholder="Descripción" [ngClass]="{'message-valid': isvalid('description_company')}"></textarea>
+
+            <p (click)="deleteField('description_company')"><i class="fa-regular fa-trash-can"></i></p>
+        </div>
+
+        <div *ngIf="form.get('description_company')?.hasError('maxlength')" class="message-invalid">
+            La descripción debe estar maximo hasta 225 carácteres
+        </div>
+<!--  -->
+
+        <!-- <div *ngIf="form.get('description_company')?.valid" class="message-valid">
+            <i class="fas fa-check icon"></i>
+        </div> -->
+        <button type="submit" [disabled]="form.invalid || form.pristine">Guardar Cambios</button>
+
+    </form>
+</div>

@@ -16,6 +16,12 @@ import { ViewProfileCompanyComponent } from './components/profile/view-profile-c
 import { ViewProfileProviderComponent } from './components/profile/view-profile-provider/view-profile-provider.component';
 import { ViewProfileGrocerComponent } from './components/profile/view-profile-grocer/view-profile-grocer.component';
 
+// update profile component
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile/update-profile.component';
+
+// change password profile component
+import { ChangePasswordComponent } from './components/profile/change-password-profile/change-password/change-password.component';
+
 // Provider
 import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
 import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
@@ -62,6 +68,14 @@ const routes: Routes = [
     component: ViewProfileComponent,
     canActivate: [expiredTokenGuard, profileGuard],
     canDeactivate: [profileUploadImageGuard]
+  },
+  {
+    path: 'update-profile/:id', 
+    component:UpdateProfileComponent
+  },
+  {
+    path: 'change-password-profile',
+    component: ChangePasswordComponent
   },
   {
     path: 'profile/company/:id',

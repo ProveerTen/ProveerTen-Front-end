@@ -1,0 +1,16 @@
+.inputs {
+    display: flex;
+    gap: 8px;
+}
+
+.message-invalid {
+    color: rgb(255, 0, 128);
+}
+
+.message-valid {
+    border: 2px solid rgb(0, 125, 46);
+}
+
+.message-valid:focus {
+    outline: none; 
+}

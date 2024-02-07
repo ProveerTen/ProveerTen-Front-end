@@ -1,0 +1,18 @@
+<p>update-profile works!</p>
+
+
+<div *ngIf="auth.isCompany() | async">
+    <app-update-profile-company></app-update-profile-company>
+</div>
+
+<div *ngIf="auth.isGrocer() | async">
+    <app-update-profile-grocer></app-update-profile-grocer>
+</div>
+<!-- 
+<div *ngIf="auth.isProvider() | async">
+   <app-update-profile-provider></app-update-profile-provider>
+</div> -->
+
+<!-- <app-change-password></app-change-password> -->
+<a href="change-password-profile">Cambiar Contraseña</a>
+

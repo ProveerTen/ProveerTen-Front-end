@@ -43,6 +43,10 @@ import { CreatePublicationComponent } from './components/publication/create-publ
 import { ViewPublicationsComponent } from './components/publication/view-publications/view-publications.component';
 import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
 import { DeletePublicationComponent } from './components/publication/delete-publication/delete-publication.component';
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile/update-profile.component';
+import { UpdateProfileCompanyComponent } from './components/profile/update-profile/update-profile-company/update-profile-company.component';
+import { UpdateProfileGrocerComponent } from './components/profile/update-profile/update-profile-grocer/update-profile-grocer.component';
+import { ChangePasswordComponent } from './components/profile/change-password-profile/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,11 @@ import { DeletePublicationComponent } from './components/publication/delete-publ
     CreatePublicationComponent,
     ViewPublicationsComponent,
     UpdatePublicationComponent,
-    DeletePublicationComponent
+    DeletePublicationComponent,
+    UpdateProfileComponent,
+    UpdateProfileCompanyComponent,
+    UpdateProfileGrocerComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
