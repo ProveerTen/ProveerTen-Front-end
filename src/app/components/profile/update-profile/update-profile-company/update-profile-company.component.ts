@@ -78,6 +78,10 @@ export class UpdateProfileCompanyComponent {
         },
         error: (error) => {
           console.log(error);
+          Swal.fire({
+            title: error.error.errors[0].msg,
+            icon: "error"
+          });
         },
         complete: () => {
           console.log("complete update profile");
@@ -95,7 +99,9 @@ export class UpdateProfileCompanyComponent {
     this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("RESPOnse", response);
+        
         this.form.get(deleteField)!.setValue(null)
+
         Swal.fire({
           title: "Dato Eliminado",
           icon: "success"

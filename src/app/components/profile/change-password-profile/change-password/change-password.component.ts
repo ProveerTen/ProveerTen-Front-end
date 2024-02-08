@@ -15,7 +15,7 @@ export class ChangePasswordComponent {
 
   form: FormGroup;
   data: any;
-
+  isGrocer:any;
   constructor(public auth: AuthService, private fb: FormBuilder, private client: ClientService, private router:Router) {
 
     this.form = this.fb.group({
@@ -24,6 +24,20 @@ export class ChangePasswordComponent {
       new_password_confirmed: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]]
     })
   }
+
+  onSubmit() {
+     
+    this.auth.isCompany().subscribe(value => {
+      if(value) {
+        return this.onSubmitCompany();
+      }
+  })
+    this.auth.isGrocer().subscribe(value => {
+      if(value) {
+        return this.onSubmitGrocer();
+      }
+  })
+}
 
   onSubmitCompany() {
 
@@ -39,10 +53,14 @@ export class ChangePasswordComponent {
           title: "Contraseña actualizada con éxito",
           icon: "success"
         });
-        // this.router.navigate(['/profile', this.auth.getId()])        
+        this.router.navigate(['/profile', this.auth.getId()])        
       },
       error: (error: any) => {
         console.log("error", error);
+        Swal.fire({
+          title: `${error.error.error}`,
+          icon: "error"
+        });
       },
       complete: () => {
         console.log("complete");
@@ -64,9 +82,14 @@ export class ChangePasswordComponent {
           title: "Contraseña actualizada con éxito",
           icon: "success"
         });
+        this.router.navigate(['/profile', this.auth.getId()])        
       },
       error: (error: any) => {
         console.log("error", error);
+        Swal.fire({
+          title: `${error.error.error}`,
+          icon: "error"
+        });
       },
       complete: () => {
         console.log("complete");
@@ -88,13 +111,14 @@ export class ChangePasswordComponent {
           title: "Contraseña actualizada con éxito",
           icon: "success"
         });
+        // this.router.navigate(['/profile', this.auth.getId()])        
         this.router.navigate(['/update-profile', this.auth.getRole()]);
       },
       error: (error: any) => {
         console.log("error", error);
         Swal.fire({
           title: `${error.error.error}`,
-          icon: "warning"
+          icon: "error"
         });
       },
       complete: () => {
@@ -104,41 +128,26 @@ export class ChangePasswordComponent {
   }
 
   isvalid(nameField: string) {
-    console.log("is valid", this.form.get(nameField)?.valid);
-
+    // console.log("is valid", this.form.get(nameField)?.valid);
     return this.form.get(nameField)?.valid;
   }
 
-  // ensayo() { //
-  //   const newPassword = this.form.get('new_password')?.value;
-
-  //   const confirmedPassword = this.form.get('new_password_confirmed')?.value;
-
-  //   if (confirmedPassword != '') {
-  //     if (newPassword === confirmedPassword) {
-  //       return true;
-  //     } 
-  //   } 
-
-  //     return false
-    
-  // }
+  
   confirmPass(valor?:string) {
     let result;
     const newPassword = this.form.get('new_password')?.value;
 
     const confirmedPassword = this.form.get('new_password_confirmed')?.value;
 
-    console.log("chat", newPassword === confirmedPassword);
-    console.log(confirmedPassword)
-    console.log(newPassword === confirmedPassword && confirmedPassword != '');
+    // console.log("chat", newPassword === confirmedPassword);
+    // console.log(confirmedPassword)
+    // console.log(newPassword === confirmedPassword && confirmedPassword != '');
 
     if (confirmedPassword != '') {
       if (newPassword === confirmedPassword) {
         result = true;
       } else {
         result = false
-        // this.form.invalid
       }
     } else if(valor === '0') {
       result = false

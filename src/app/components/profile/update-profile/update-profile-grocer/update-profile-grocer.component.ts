@@ -38,7 +38,6 @@ export class UpdateProfileGrocerComponent {
   ngOnInit(): void {
     this.client.getRequest(`http://localhost:4001/profile/grocer`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        console.log("Response", response);
         console.log("Response data", response.data);
 
         this.data = response.data;
@@ -57,7 +56,7 @@ export class UpdateProfileGrocerComponent {
     if (this.form.valid && !this.form.pristine) {
       this.form.updateValueAndValidity();
 
-      console.log("validado", this.form.value.name_grocer, "ee");
+      console.log("validado", this.form.value.name_grocer, "--");
 
       this.dataUpdate = {
         name_grocer: this.form.value.name_grocer,
@@ -71,7 +70,6 @@ export class UpdateProfileGrocerComponent {
         apartment: this.form.value.apartment,
         number_grocer: this.form.value.number_grocer
       }
-      console.log("data Update", this.dataUpdate);
       console.log("data Update apelido", this.dataUpdate.apartment);
 
       this.client.patchRequest(`http://localhost:4001/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -84,12 +82,11 @@ export class UpdateProfileGrocerComponent {
           this.router.navigate(['/profile', this.auth.getId()])
         },
         error: (error) => {
-          this.err = error.error.errors[0];
-          console.log(error.error.errors[0].msg);          
-          // Swal.fire({
-          //   title: error.error.errors[0].msg,
-          //   icon: "error"
-          // });
+          this.err = error.error.errors[0];        
+          Swal.fire({
+            title: error.error.errors[0].msg,
+            icon: "error"
+          });
         },
         complete: () => {
           console.log("complete update profile");
@@ -101,33 +98,8 @@ export class UpdateProfileGrocerComponent {
     }
   }
 
-  async confirmationWindow():Promise<boolean> {
-    let answer:any;
-    const result = await Swal.fire({
-      title: "Seguro que deseas salir?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Salir y guardar",
-      denyButtonText: `Salir`
-    });
-  
-    if (result.isConfirmed) {
-      return true;
-    } else if (result.isDenied) {
-      return false;
-    }
-  return false
-  }
   async deleteField (deleteField: string) {
     console.log("DELETE FIELD", deleteField);
-
-    let result = await this.confirmationWindow()
-    console.log(result);
-    
-    if (!result) {
-      this.router.navigate(['/login'])     
-      return 
-    }
 
     this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
@@ -137,13 +109,12 @@ export class UpdateProfileGrocerComponent {
           title: "Dato Eliminado",
           icon: "success"
         });
-        this.router.navigate(['/login'])
       },  
       error: (error: any) => {
         console.log(error);
         // Swal.fire({
         //   title: error,
-        //   icon: "success"
+        //   icon: "error"
         // });
       },
       complete: () => {
@@ -155,4 +126,30 @@ export class UpdateProfileGrocerComponent {
   isvalid(nameField: string) {
     return this.form.get(nameField)?.valid;
   }
+
+    // async confirmationWindow():Promise<boolean> {
+  //   let answer:any;
+  //   const result = await Swal.fire({
+  //     title: "Seguro que deseas salir?",
+  //     showDenyButton: true,
+  //     showCancelButton: true,
+  //     confirmButtonText: "Salir y guardar",
+  //     denyButtonText: `Salir`
+  //   });
+  
+  //   if (result.isConfirmed) {
+  //     return true;
+  //   } else if (result.isDenied) {
+  //     return false;
+  //   }
+  // return false
+  // }
+
+      // let result = await this.confirmationWindow()
+    // console.log(result);
+    
+    // if (!result) {
+    //   this.router.navigate(['/login'])     
+    //   return 
+    // }
 }
