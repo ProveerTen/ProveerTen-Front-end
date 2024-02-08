@@ -43,6 +43,7 @@ export class ViewProfileComponent {
         if (this.publications == '') {
           this.publications = false;
         }
+        
       },
       error: (error) => {
         console.log(error.error.Status);

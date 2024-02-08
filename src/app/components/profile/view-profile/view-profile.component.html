@@ -1,4 +1,142 @@
 <div class="div" *ngIf="auth.isCompany() | async">
+
+
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <h5 class="my-3">{{data?.name_company}}</h5>
+                            <p class="text-muted mb-1">{{data?.description_company}}</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
+                                    <button class="btn btn-outline-dark mt-2"
+                                        (click)="updatePhoto()">Actualizar</button>
+                                    <form (ngSubmit)="onSubmitPhoto()">
+                                        <div class="div" *ngIf="photo">
+                                            <input type="file" (change)="onFileSelected($event)">
+                                            <button type="submit" [disabled]="!isValidImage">Enviar</button>
+                                        </div>
+                                    </form>
+                                    <button class="btn btn-primary" *ngIf="photo"
+                                        (click)="cancelPhoto()">Cancelar</button>
+                                    <button *ngIf="data?.profile_photo_grocer"
+                                        (click)="deleteValue('profile_photo')">Eliminar foto</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush rounded-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fas fa-globe fa-lg text-warning"></i>
+                                    <p class="mb-0">https://mdbootstrap.com</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                    <p class="mb-0">mdbootstrap</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                                    <p class="mb-0">@mdbootstrap</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                                    <p class="mb-0">mdbootstrap</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                    <p class="mb-0">mdbootstrap</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="cover d-flex flex-xxl-column m-2 ">
+                        <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_company"
+                            style="width: 100%; height: 200px;">
+                        <div class="d-flex justify-content-center gap-3 mt-2">
+                            <button class="btn btn-outline-dark" (click)="updateCover()">Actualizar</button>
+                            <button class="btn btn-outline-danger" *ngIf="data?.cover_photo_company"
+                                (click)="deleteValue('cover_photo')">Eliminar cover</button>
+                        </div>
+                        <form (ngSubmit)="onSubmitCover()">
+                            <div class="d-flex m-4" *ngIf="cover">
+                                <input type="file" (change)="onFileSelected($event)">
+                                <button [disabled]="!isValidImage">Enviar</button>
+                            </div>
+                        </form>
+                        <button class="btn btn-primary" *ngIf="cover" (click)="cancelCover()">Cancelar</button>
+
+                    </div>
+                    <div class="card mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Descripcion</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.description_company}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Foundation</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.foundation_company}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Linea nacional</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.national_line_company}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <div class="col-md-6 d-flex gap-3 w-100 flex-xxl-column flex-wrap ">
+                            <div class="card" style="width: 100%; height: 100%;" *ngFor="let publication of publications">
+                                <div class="card-body">
+                                    <h1 class="fs-5">{{publication?.text}}</h1>                                        
+                                        <img id="image_publication" [src]="publication.image_url" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <h2>Company</h2>
     <div class="image">
         <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
