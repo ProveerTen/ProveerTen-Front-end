@@ -1,4 +1,34 @@
 <div class="container d-flex flex-column">
+    <button (click)="goBack()">Regresar al pánel</button>
     <button (click)="createProduct()">Crear producto</button>
-    <app-view-products></app-view-products>
+    <!-- <app-view-products></app-view-products> -->
+    <div *ngFor="let product of data">
+        <table border="2px" class="container">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+            </tr>
+            <tr>
+                <td>
+                    {{product?.id_product}}
+                </td>
+                <td>
+                    {{product?.name_product}}
+                </td>
+                <td>
+                    <img appBrokenImage [src]="product.image_product" style="width: 100px; height: 100px;">
+                </td>
+                <td>
+                    <button>Ver</button>
+                </td>
+                <td>
+                    <button (click)="updateProduct(product.id_product)">Actualizar</button>
+                </td>
+                <td>
+                    <button>Eliminar</button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

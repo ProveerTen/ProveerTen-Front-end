@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-view-products',
   templateUrl: './view-products.component.html',

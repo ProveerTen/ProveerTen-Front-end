@@ -30,12 +30,4 @@ export class ViewProvidersComponent {
       complete: () => console.log('complete'),
     });
   }
-
-  viewProfile(id: string) {
-    this.router.navigate(['profile/provider', id]);
-  }
-
-  updateProvider(id: string) {
-    this.router.navigate(['update/provider', id]);
-  }
 }

@@ -44,6 +44,7 @@ import { CreatePublicationComponent } from './components/publication/create-publ
 import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
+import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -69,7 +70,7 @@ const routes: Routes = [
     path: 'profile/company/:id',
     component: ViewProfileCompanyComponent,
     canActivate: [expiredTokenGuard, profileCompanyGuard],
-    
+
   },
   {
     path: 'profile/provider/:id',
@@ -122,6 +123,10 @@ const routes: Routes = [
   {
     path: 'create/product',
     component: CreateProductComponent
+  },
+  {
+    path: 'update/product/:id',
+    component: UpdateProductComponent
   },
   {
     path: '404',

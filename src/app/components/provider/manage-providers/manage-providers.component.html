@@ -1,5 +1,34 @@
 <div class="container d-flex justify-content-center flex-column mt-5">
-    <button class="mb-5" (click)="createProvider()">Crear proveedor</button>
-    <app-view-providers></app-view-providers>
     <button (click)="goBack()">Regresar al pánel</button>
+    <button class="mb-5" (click)="createProvider()">Crear proveedor</button>
+
+    <!-- <app-view-providers></app-view-providers> -->
+
+    <div *ngFor="let provider of data">
+        <table border="2px" class="container">
+            <tr>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+            </tr>
+            <tr>
+                <td>
+                    {{provider?.document_provider}}
+                </td>
+                <td>
+                    {{provider?.name_provider}}
+                </td>
+                <td>
+                    {{provider?.city_provider}}
+                </td>
+                <td>
+                    <button (click)="viewProfile(provider.document_provider)">Ver perfil</button>
+                </td>
+                <td>
+                    <button (click)="updateProvider(provider.document_provider)">Actualizar datos</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </div>

@@ -1,7 +1,34 @@
 <div class="container d-flex flex-column">
+    <button (click)="goBack()">Regresar al pánel</button>
     <button (click)="createPublication()">Crear publicación</button>
 
-    <app-view-publications></app-view-publications>
+    <!-- <app-view-publications></app-view-publications> -->
 
-    <button (click)="goBack()">Regresar al pánel</button>
+    <div class="container">
+        <div class="div" *ngIf="publications; else noPublications">
+            <table class="container" border=" 2px">
+                <tr>
+                    <th>Publicación</th>
+                </tr>
+                <tr>
+                    <div *ngFor="let publication of publications">
+                        <td>
+                            <img [src]="publication.image_url" style="width: 100px; height: 100px;">
+                        </td>
+                        <td>
+                            <button (click)="updatePublication(publication._id)">Actualizar</button>
+                        </td>
+                        <td>
+                            <button (click)="deletePublication(publication._id)">Eliminar</button>
+                        </td>
+                    </div>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <ng-template #noPublications>
+        <p>No hay publicaciones</p>
+    </ng-template>
+
 </div>
