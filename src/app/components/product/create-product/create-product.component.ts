@@ -12,6 +12,7 @@ import product from 'src/app/interfaces/product';
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.css']
 })
+
 export class CreateProductComponent {
 
   form: FormGroup;
@@ -20,10 +21,9 @@ export class CreateProductComponent {
   isValidImage: boolean = true;
   product: product = {} as product;
   dataCategories: any;
-  selectedCategories: string[] = [];
+  categoriesCheckbox: string[] = []
 
   constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router) {
-
     this.form = this.fb.group({
       name_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
       description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
@@ -34,7 +34,6 @@ export class CreateProductComponent {
       stock_product: ['', [Validators.required]],
       content_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       image_product: ['', [Validators.required]],
-      categories: this.fb.array([])
     });
   }
 
@@ -51,9 +50,8 @@ export class CreateProductComponent {
     });
   }
 
-
   onSubmit() {
-    if (this.form.valid && this.isValidImage) {
+    if (this.form.valid && this.categoriesCheckbox.length > 0) {
       this.isValidImage = false;
       const formData = new FormData();
       formData.append('name_product', this.form.value.name_product);
@@ -65,9 +63,9 @@ export class CreateProductComponent {
       formData.append('stock_product', this.form.value.stock_product);
       formData.append('availability_product', 'Disponible');
       formData.append('content_product', this.form.value.content_product);
-      this.selectedCategories.forEach(category => {
+      this.categoriesCheckbox.forEach(category => {
         formData.append('categories[]', category);
-      });
+      })
       formData.append('image_product', this.imageFile);
 
       this.client.postRequest(`${environment.url_logic}/product/create`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -80,8 +78,9 @@ export class CreateProductComponent {
         },
         complete: () => console.log('complete'),
       });
+
     } else {
-      console.log("Error");
+      console.log('ÑO');
     }
   }
 
@@ -99,14 +98,12 @@ export class CreateProductComponent {
     }
   }
 
-  onCheckboxChange(e: any, category: string) {
-    if (e.target.checked) {
-      this.selectedCategories.push(category);
+  verifyCheckbox(value: string) {
+    let pos = this.categoriesCheckbox.indexOf(value);
+    if (pos === -1) {
+      this.categoriesCheckbox.push(value);
     } else {
-      const index = this.selectedCategories.indexOf(category);
-      if (index !== -1) {
-        this.selectedCategories.splice(index, 1);
-      }
+      this.categoriesCheckbox.splice(pos, 1)
     }
   }
 

@@ -11,15 +11,15 @@
             <input type="number" formControlName="stock_product" placeholder="Cantidad">
             <input type="text" formControlName="content_product" placeholder="Contenido del producto">
             <div class="div" *ngFor="let category of dataCategories">
-                <input type="checkbox" [value]="category.name_category"
-                    (change)="onCheckboxChange($event, category.name_category)">
-                {{category.name_category}}
+                <input type="checkbox" [value]="category.name_category" (click)="verifyCheckbox(category.name_category)"
+                    id=" {{category.name_category}}">
+                <label for="checkbox_categories"> {{category.name_category}}</label>
             </div>
             <input type="file" formControlName="image_product" (change)="onFileSelected($event)">
             <div *ngIf="imagePreview">
                 <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
             </div>
-            <button type="submit">Crear producto</button>
+            <button type="submit" [disabled]="!isValidImage">Crear producto</button>
         </form>
     </div>
 </div>
