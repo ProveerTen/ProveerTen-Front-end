@@ -1,0 +1,20 @@
+<div *ngFor="let product of data">
+    <table border="2px" class="container">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Ciudad</th>
+        </tr>
+        <tr>
+            <td>
+                {{product?.id_product}}
+            </td>
+            <td>
+                {{product?.name_product}}
+            </td>
+            <td>
+                <img appBrokenImage [src]="product.image_product" style="width: 100px; height: 100px;">
+            </td>
+        </tr>
+    </table>
+</div>

@@ -46,6 +46,7 @@ import { DeletePublicationComponent } from './components/publication/delete-publ
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
+import { ViewProductsComponent } from './components/product/view-products/view-products.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { ManageProductsComponent } from './components/product/manage-products/ma
     DeletePublicationComponent,
     CreateProductComponent,
     UpdateProductComponent,
-    ManageProductsComponent
+    ManageProductsComponent,
+    ViewProductsComponent
   ],
   imports: [
     BrowserModule,

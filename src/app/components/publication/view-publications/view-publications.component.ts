@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +12,6 @@ import { environment } from 'src/environments/environment';
 })
 export class ViewPublicationsComponent {
 
-  data: any;
   publications: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
