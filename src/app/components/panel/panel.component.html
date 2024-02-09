@@ -143,27 +143,63 @@
             </div>
             <div class="p-4 text-black" style="background-color: #f8f9fa;">
               <div class="d-flex justify-content-evenly text-center py-1">
-                <div>
-                  <p class="mb-1 h5">{{data?.foundation_company | date:'shortDate'}}</p>
+                <div id="info">
+                  <p class="mb-1 h5">{{data?.foundation_company | date:'longDate'}}</p>
                   <p class="small text-muted mb-0">Año de Fundacíon</p>
                 </div>
-                <div class="px-3">
+                <div class="px-3 text-center">
                   <p class="mb-1 h5">{{data?.national_line_company}}</p>
-                  <p class="small text-muted mb-0">Linea Nacional</p>
+                  <p>-------------------</p>
+                  <p class="mb-1 h5">{{data?.email_company}}</p>
+                  <p class="small text-muted mb-0">Contactos</p>
                 </div>
-                <div>
+                <div id="info">
                   <p class="mb-1 h5">478</p>
                   <p class="small text-muted mb-0">Following</p>
                 </div>
               </div>
             </div>
-            <div class="card-body p-4 text-black">
+            <p class="lead fw-normal mb-1 ">Gestion</p>
+            <div class="card-body p-4 text-black ">
               <div class="mb-5">
-                <p class="lead fw-normal mb-1">About</p>
-                <div class="p-4" style="background-color: #f8f9fa;">
-                  <p class="font-italic mb-1">Web Developer</p>
-                  <p class="font-italic mb-1">Lives in New York</p>
-                  <p class="font-italic mb-0">Photographer</p>
+                <div class="p-4 d-flex justify-content-evenly align-items-center" style="background-color: #f8f9fa;">
+                    <button class="" *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar Proveedores</button>
+                    <button class=""  *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Publicaciones</button>
+                    <button class="" *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Productos</button>
+                    
+
+                    <button class="animated-button" *ngIf="auth.isCompany() | async" (click)="manageProviders()" >
+                        <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                          ></path>
+                        </svg>
+                        <span class="text">Gestionar Proveedores</span>
+                        <span class="circle"></span>
+                        <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                          ></path>
+                        </svg>
+                      </button>
+                    
+                      <button class="animated-button" *ngIf="auth.isCompany() | async" (click)="manageProviders()" >
+                        <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                          ></path>
+                        </svg>
+                        <span class="text">Gestionar Publicaciones</span>
+                        <span class="circle"></span>
+                        <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                          ></path>
+                        </svg>
+                      </button>
+
+
+
                 </div>
               </div>
               <div class="d-flex justify-content-between align-items-center mb-4">
