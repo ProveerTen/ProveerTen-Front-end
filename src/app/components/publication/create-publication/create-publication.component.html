@@ -1,12 +1,29 @@
-<div class="content">
-    <div class="form">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="text" formControlName="text" placeholder="Texto">
-            <input type="file" formControlName="image" (change)="onFileSelected($event)">
-            <div *ngIf="imagePreview">
-                <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+<div class="content h-100vh">
+    <div class="container py-4  ">
+        <div class="row justify-content-center ">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4 text-center">Crear Publicación</h5>
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="mb-3">
+                                <textarea class="form-control" id="text" formControlName="text" placeholder="Texto" rows="5" cols="50"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Imagen</label>
+                                <input type="file" class="form-control" id="image" formControlName="image" (change)="onFileSelected($event)">
+                            </div>
+                            <div *ngIf="imagePreview" class="mb-3">
+                                <img [src]="imagePreview" alt="Image Preview" class="img-fluid" style="max-width: 100px; height: auto;">
+                            </div>
+                            <button type="submit" class="button" [disabled]="!form.valid || !isValidImage">Enviar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <button type="submit" [disabled]="!form.valid || !isValidImage">Crear publicación</button>
-        </form>
+        </div>
     </div>
+
+
+    
 </div>

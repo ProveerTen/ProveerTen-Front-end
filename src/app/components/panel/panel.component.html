@@ -1,4 +1,4 @@
-<div class="container d-flex flex-column gap-3">
+<!-- <div class="container d-flex flex-column gap-3">
     <div class="div" *ngIf="auth.isCompany() | async">
         <h2>Company</h2>
         <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;">
@@ -24,4 +24,50 @@
     <button *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar proveedores</button>
     <button *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar publicaciones</button>
     <button *ngIf="auth.isCompany() | async" (click)="manageProducts()">Gestionar productos</button>
+</div> -->
+
+<div class="container-fluid vh-100">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 user-details w-100" >
+            <div class="user-image" *ngIf="auth.isCompany() | async" >
+                <h2>Company</h2>
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;"  class="img-circle">
+                <p>{{data?.name_company}}</p>
+                <p>{{data?.description_company}}</p>
+            </div>
+            
+            <ng-template #noPublications>
+                <p>No hay publicaciones</p>
+            </ng-template>
+            
+            <div class="user-image" *ngIf="auth.isProvider() | async">
+                <h2>Provider</h2>
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
+                <p>{{data?.name_provider}}</p>
+            </div>
+        
+            
+
+        </div>
+
+        <div class="w-100">
+            <div class="d-flex justify-content-evenly align-items-center h-100 gap-2">
+                <button class="" *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar Proveedores</button>
+                <button class=""  *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Publicaciones</button>
+                <button class="" *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Productos</button>
+            </div>
+        </div>
+    </div>
+       
+    <div>
+        <app-create-publication></app-create-publication>
+    </div>
+
+
+    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+        <canvas id="chart"></canvas>
+    </div>
+     
+
+    
 </div>
