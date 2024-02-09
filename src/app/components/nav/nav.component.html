@@ -1,28 +1,54 @@
-<nav>
-
-    <a href="#">ProveerTen</a>
-
-    <ul>
-        <li *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a routerLink="/">Home</a></li>
-        <li *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))"><a routerLink="panel">Panel</a></li>
-    </ul>
-
-    <ul>
-        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="login">Log in</a></li>
-        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="register">Sign up</a></li>
-        <li *ngIf="auth.isLoggedIn() | async"><a routerLink="login" (click)="auth.logout()">Log out</a></li>
-    </ul>
-
-    <p *ngIf="auth.isLoggedIn() | async">Este es un mensaje para los usuarios</p>
-    <p *ngIf="!(auth.isLoggedIn() | async)">Este es un mensaje para los No usuarios</p>
-
-    <p *ngIf="auth.isCompany() | async">¡Hi Company!</p>
-    <p *ngIf="auth.isProvider() | async">¡Hi Provider!</p>
-    <p *ngIf="auth.isGrocer() | async">¡Hi Grocer!</p>
-
-    <p *ngIf="auth.isLoggedIn() | async">{{auth.getId()}}</p>
-
-    <button *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
-    <!-- <button *ngIf="auth.isLoggedIn() | async" (click)="delete_data_profile()">Eliminar data</button> -->
-
+<nav class="navbar  bg-body-tertiary  text-center align-items-center">
+    <div class="container-fluid ">
+        <div class=" text-center align-items-center ">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <p class="d-inline-block p-3" *ngIf="auth.isLoggedIn() | async">Gracias por ser parte de nuestra familia</p>
+        <a class="d-inline-block p-3 nav-link" style="color: orangered" *ngIf="!(auth.isLoggedIn() | async)">
+            Unete a nuestra familia
+        </a>
+    </div>
+    <p class="d-inline-block p-3" *ngIf="auth.isCompany() | async">¡Hi Company!</p>
+    <a class="d-inline-block p-3" *ngIf="auth.isProvider() | async">¡Hi Provider!</a>
+    <a class="d-inline-block p-3" *ngIf="auth.isGrocer() | async">¡Hi Grocer!</a>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <div class="row text-center align-items-center g-0">
+                <div class="col-lg-5 col-md-5">
+                    <div class="d-flex justify-content-around border-top border-bottom border-dark text-center align-items-center ">
+                        <div class="customLink p-3" style="color: orangered"><a class="nav-link"
+                                *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))" routerLink="/"><i
+                                    class="bi bi-house"></i>Home</a></div>
+                        <form class="d-flex mx-auto p-1">
+                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" >
+                        </form>
+                        
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-2">
+                    <div class="text-center py-2">
+                        <img src="https://htmljstemplates.com/static_files/images/logos/logo_4.png" alt="" height="90">
+                    </div>
+                    
+                </div>
+                
+                <div class="col-lg-5 col-md-5 ">
+                    <div class="d-flex justify-content-around border-top border-bottom border-dark text-center align-items-center">
+                        <div class="customLink"><a class=" p-3 nav-link" *ngIf="!(auth.isLoggedIn() | async)" routerLink="login" style="color: orangered">Log in</a></div>
+                        <div class="customLink"><a class="d-inline-block p-3 nav-link" *ngIf="!(auth.isLoggedIn() | async)" routerLink="register" style="color: orangered">Sign up</a></div>
+                        <div class="customLink"><a class="nav-link" *ngIf="auth.isLoggedIn() | async" routerLink="login"
+                                (click)="auth.logout()" style="color: orangered">Log
+                                out</a></div>
+                        
+                        <div class="customLink"><button class="btn  mx-auto d-block"
+                                *ngIf="auth.isLoggedIn() | async" (click)="view_profile()" style="color: orangered">Ver
+                                perfil</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>
