@@ -34,6 +34,10 @@ export class ManageProductsComponent {
     this.router.navigate(['create/product']);
   }
 
+  viewProduct(id: string) {
+    this.router.navigate(['view/product/', id])
+  }
+
   goBack() {
     this.router.navigate(['panel']);
   }

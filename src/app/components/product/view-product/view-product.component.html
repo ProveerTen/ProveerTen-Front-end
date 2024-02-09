@@ -1,0 +1,44 @@
+<div class="container">
+    <!-- {{data?.id_product}} -->
+    <td>
+        <img appBrokenImage [src]="data?.image_product" style="width: 100px; height: 100px;">
+    </td>
+    <p>
+        availability_product:
+        {{data?.availability_product}}
+    </p>
+    <p>
+        content_product:
+        {{data?.content_product}}
+    </p>
+    <p>
+        description_product:
+        {{data?.description_product}}
+    </p>
+    <p>
+        name_product:
+        {{data?.name_product}}
+    </p>
+    <p>
+        purchase_price_product:
+        {{data?.purchase_price_product}}
+    </p>
+    <p>
+        purchase_quantity:
+        {{data?.purchase_quantity}}
+    </p>
+    <p>
+        stock_product:
+        {{data?.stock_product}}
+    </p>
+    <p>
+        suggested_price_product:
+        {{data?.suggested_price_product}}
+    </p>
+    <p>
+        suggested_unit_selling_price_product:
+        {{data?.suggested_unit_selling_price_product}}
+    </p>
+
+    <button (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver compañía</button>
+</div>

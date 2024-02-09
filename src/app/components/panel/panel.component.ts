@@ -35,8 +35,12 @@ export class PanelComponent {
     this.router.navigate(['manage/publications']);
   }
 
-  manageProducts(){
+  manageProducts() {
     this.router.navigate(['manage/products']);
+  }
+
+  viewCompany(id: string) {
+    this.router.navigate(['profile/company', id]);
   }
 
 }

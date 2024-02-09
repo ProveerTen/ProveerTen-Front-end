@@ -45,6 +45,7 @@ import { UpdatePublicationComponent } from './components/publication/update-publ
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
+import { ViewProductComponent } from './components/product/view-product/view-product.component';
 
 const routes: Routes = [
   {
@@ -127,6 +128,10 @@ const routes: Routes = [
   {
     path: 'update/product/:id',
     component: UpdateProductComponent
+  },
+  {
+    path: 'view/product/:id',
+    component: ViewProductComponent
   },
   {
     path: '404',

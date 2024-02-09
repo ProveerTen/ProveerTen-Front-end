@@ -13,10 +13,11 @@
         <h2>Provider</h2>
         <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
         <p>{{data?.name_provider}}</p>
+        <button (click)="viewCompany(data.fk_nit_company)">Ver compañía</button>
     </div>
 
 
-    <div style="border: 2px black solid">
+    <div style="border: 2px black solid" *ngIf="auth.isCompany() | async">
         <h2>Crear publicación</h2>
         <app-create-publication></app-create-publication>
     </div>

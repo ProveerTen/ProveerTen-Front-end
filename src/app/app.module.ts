@@ -47,6 +47,7 @@ import { CreateProductComponent } from './components/product/create-product/crea
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
 import { ViewProductsComponent } from './components/product/view-products/view-products.component';
+import { ViewProductComponent } from './components/product/view-product/view-product.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ViewProductsComponent } from './components/product/view-products/view-p
     CreateProductComponent,
     UpdateProductComponent,
     ManageProductsComponent,
-    ViewProductsComponent
+    ViewProductsComponent,
+    ViewProductComponent
   ],
   imports: [
     BrowserModule,

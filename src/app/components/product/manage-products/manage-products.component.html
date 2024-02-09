@@ -17,10 +17,11 @@
                     {{product?.name_product}}
                 </td>
                 <td>
-                    <img appBrokenImage [src]="product.image_product" style="width: 100px; height: 100px;">
+                    <img appBrokenImage loading="lazy" [src]="product.image_product"
+                        style="width: 100px; height: 100px;">
                 </td>
                 <td>
-                    <button>Ver</button>
+                    <button (click)="viewProduct(product.id_product)">Ver</button>
                 </td>
                 <td>
                     <button (click)="updateProduct(product.id_product)">Actualizar</button>
