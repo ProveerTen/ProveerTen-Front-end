@@ -19,6 +19,8 @@ export class PanelComponent {
     this.client.getRequest(`${environment.url_logic}/profile/${this.auth.getRole()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.data = response.data;
+        console.log(this.data);
+        
       },
       error: (error) => {
         console.log(error.error.Status);

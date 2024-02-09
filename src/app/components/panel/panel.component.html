@@ -26,7 +26,7 @@
     <button *ngIf="auth.isCompany() | async" (click)="manageProducts()">Gestionar productos</button>
 </div> -->
 
-<div class="container-fluid vh-100">
+<!-- <div class="container-fluid vh-100">
     <div class="row">
         <div class="col-sm-4 col-md-4 user-details w-100" >
             <div class="user-image" *ngIf="auth.isCompany() | async" >
@@ -71,3 +71,126 @@
 
     
 </div>
+ -->
+
+
+
+
+<!-- 
+<section class="vh-40 d-flex justify-content-center align-items-center" style="background-color: #9de2ff;">
+ 
+<div class="container row py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class=" row col col-md-9 col-lg-7 col-xl-5">
+        <div class="card " style="border-radius: 15px;">
+          <div class="card-body p-4 ">
+            <div class="d-flex text-black ">
+              <div class="flex-shrink-0">
+                  <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company" style="width: 200px;"  class="img-circle">
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h3 class="mb-1">{{data?.name_company}}</h3>
+                <p class="mb-2 pb-1" style="color: #2b2a2a;">{{data?.description_company}}</p>
+                <div class=" row d-flex justify-content-center rounded-3 p-2 mb-2"
+                  style="background-color: #efefef;">
+                  <div>
+                    <p class="small text-muted mb-1">Fundation</p>
+                    <p class="mb-0">{{data?.foundation_company | date:'shortDate'}} </p>
+                  </div>
+                  <div class="px-3">
+                    <p class="small text-muted mb-1">National Line</p>
+                    <p class="mb-0">{{data?.national_line_company}}</p>
+                  </div>
+                   <div>
+                    <p class="small text-muted mb-1">Rating</p>
+                    <p class="mb-0">8.5</p>
+                  </div> 
+                </div>
+                <div class="d-flex pt-1">
+                  <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                  <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+
+ -->
+
+
+
+
+      <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+        <div class="col col-lg-9 col-xl-7 w-100">
+          <div class="card">
+            <div class="rounded-top text-white d-flex flex-row justify-content-evenly " style="background-color: #000; height:250px;">
+              <div class="d-flex flex-column align-items-center justify-content-center">
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" 
+                  class="img-fluid img-thumbnail"
+                  style="width: 200px; z-index: 1">
+              </div>
+              <div class="ms-3 d-flex flex-column justify-content-center" >
+                <h2 class="text-uppercase">{{data?.name_company}}</h2>
+                <p>{{data?.description_company}}</p>
+              </div>
+            </div>
+            <div class="p-4 text-black" style="background-color: #f8f9fa;">
+              <div class="d-flex justify-content-evenly text-center py-1">
+                <div>
+                  <p class="mb-1 h5">{{data?.foundation_company | date:'shortDate'}}</p>
+                  <p class="small text-muted mb-0">Año de Fundacíon</p>
+                </div>
+                <div class="px-3">
+                  <p class="mb-1 h5">{{data?.national_line_company}}</p>
+                  <p class="small text-muted mb-0">Linea Nacional</p>
+                </div>
+                <div>
+                  <p class="mb-1 h5">478</p>
+                  <p class="small text-muted mb-0">Following</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-4 text-black">
+              <div class="mb-5">
+                <p class="lead fw-normal mb-1">About</p>
+                <div class="p-4" style="background-color: #f8f9fa;">
+                  <p class="font-italic mb-1">Web Developer</p>
+                  <p class="font-italic mb-1">Lives in New York</p>
+                  <p class="font-italic mb-0">Photographer</p>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0">Recent photos</p>
+                <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+              </div>
+              <div class="row g-2">
+                <div class="col mb-2">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div>
+                <div class="col mb-2">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div>
+                <div class="col">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
+                    alt="image 1" class="w-100 rounded-3">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
