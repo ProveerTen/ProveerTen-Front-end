@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import company from '../../../../interfaces/company';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-register-company',
@@ -15,6 +16,7 @@ export class RegisterCompanyComponent {
 
   form: FormGroup;
   company: company = {} as company;
+  fecha: any;
 
   constructor(private fb: FormBuilder, private client: ClientService, private router: Router) {
     this.form = this.fb.group({
@@ -26,6 +28,11 @@ export class RegisterCompanyComponent {
       foundation_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
       description_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]]
     });
+  }
+
+  ngOnInit(): void {
+    let datapipe = new DatePipe('en-US')
+    this.fecha = datapipe.transform(new Date(), 'yyyy-MM-dd')
   }
 
   onSubmit() {

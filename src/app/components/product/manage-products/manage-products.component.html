@@ -7,7 +7,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Ciudad</th>
+                <th>Foto</th>
             </tr>
             <tr>
                 <td>
@@ -27,7 +27,7 @@
                     <button (click)="updateProduct(product.id_product)">Actualizar</button>
                 </td>
                 <td>
-                    <button>Eliminar</button>
+                    <button (click)="deleteProduct(product.id_product)">Eliminar</button>
                 </td>
             </tr>
         </table>

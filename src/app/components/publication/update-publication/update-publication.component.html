@@ -7,7 +7,7 @@
     <div class="form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <input type="text" formControlName="text" placeholder="Texto">
-            <img src="" alt="">
+            <!-- <img src="" alt=""> -->
             <input type="file" formControlName="image" (change)="onFileSelected($event)">
             <div *ngIf="imagePreview">
                 <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">

@@ -38,6 +38,21 @@ export class ManageProductsComponent {
     this.router.navigate(['view/product/', id])
   }
 
+  deleteProduct(id: string) {
+    let res = confirm('¿Seguro qué desea eliminar esta publicación?');
+    if (res) {
+      this.client.postRequest(`${environment.url_logic}/product/delete`, { id_product: id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          window.location.reload();
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+  }
+
   goBack() {
     this.router.navigate(['panel']);
   }

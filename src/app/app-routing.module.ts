@@ -46,6 +46,7 @@ import { ManageProductsComponent } from './components/product/manage-products/ma
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
+import { authGuard } from './guards/guards-components/auth.guard';
 
 const routes: Routes = [
   {
@@ -55,11 +56,13 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'profile/:id',
