@@ -1,14 +1,12 @@
-<div class="buttons">
-    <button (click)="setRole('grocer')">Tendero</button>
-    <button (click)="setRole('company')">Empresa</button>
+<div class="d-flex justify-content-center mt-5 gap-3">
+    <button (click)="setRole('grocer')" type="button" class="btn btn-outline-secondary btn-lg">Tendero</button>
+    <button (click)="setRole('company')" type="button" class="btn btn-outline-secondary btn-lg">Empresa</button>
 </div>
 
 <div *ngIf="isRole('grocer')">
-    <h2>Grocer</h2>
     <app-register-grocer></app-register-grocer>
 </div>
 
-<div *ngIf="isRole('company')">
-    <h2>Company</h2>
+<div *ngIf="isRole('company')">   
     <app-register-company></app-register-company>
 </div>
