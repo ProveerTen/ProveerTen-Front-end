@@ -23,3 +23,97 @@
         </form>
     </div>
 </div>
+
+
+<div class="container py-4 my-4 mx-auto d-flex flex-column " [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="header">
+        <div class="row r1 d-flex justify-content-center">
+            <div class="col-md-9 abc d-flex justify-content-center">
+                <h1>Creación de producto</h1>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container-body mt-4">
+        <div class="row r3">
+            <div class="col-md-5 p-0 klo">
+                <ul>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Nombre del producto:</label>
+                            <input type="text" formControlName="name_product" placeholder="" placeholder=""
+                                class="form-control" />
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Descripción del producto:</label>
+                            <input type="text" formControlName="description_product" placeholder="" placeholder=""
+                                class="form-control" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Precio de venta:</label>
+                            <input type="number" formControlName="purchase_price_product" placeholder="" placeholder=""
+                                class="form-control" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Precio unitario:</label>
+                            <input type="number" formControlName="unit_purchase_price_product" placeholder=""
+                                placeholder="" class="form-control" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Precio sugerido al tendero:</label>
+                            <input type="number" formControlName="suggested_unit_selling_price_product" placeholder=""
+                                placeholder="" class="form-control" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Cantidad del paquete:</label>
+                            <input type="number" formControlName="purchase_quantity" placeholder="" placeholder=""
+                                class="form-control" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Cantidad:</label>
+                            <input type="number" formControlName="stock_product" placeholder="" placeholder=""
+                                class="form-control" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example9">Contenido del producto:</label>
+                            <input type="text" formControlName="content_product" placeholder="" placeholder=""
+                                class="form-control" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7" *ngIf="imagePreview"> <img [src]="imagePreview" alt="Image Preview" width="90%"
+                    height="95%">
+            </div>
+            <div class="d-flex justify-content-center">
+                <input type="file" formControlName="image_product" (change)="onFileSelected($event)">
+            </div>
+            <div class="div" *ngFor="let category of dataCategories">
+                <input type="checkbox" [value]="category.name_category" (click)="verifyCheckbox(category.name_category)"
+                    id="{{category.name_category}}">
+                <label for="checkbox_categories"> {{category.name_category}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="footer d-flex flex-column mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-2 myt"><button type="submit" [disabled]="!isValidImage"
+                    class="btn btn-outline-warning"><a href="#">CREAR PRODUCTO</a></button></div>
+        </div>
+    </div>
+</div>
