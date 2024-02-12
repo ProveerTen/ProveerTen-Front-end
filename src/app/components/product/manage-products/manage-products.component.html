@@ -31,38 +31,80 @@
             </tr>
         </table>
     </div>
-    
+
 </div>
 
 
-<section style="background-color: #eee;">
-    <div class="container py-5" *ngFor="let product of data">
-        <div class="row">
-            <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-                <div class="card text-black">
-                    <img appBrokenImage [src]="product.image_product"
-                        class="card-img-top" alt="iPhone" />
-                    <div class="card-body">
-                        <div class="text-center mt-1">
-                            <h4 class="card-title">{{product?.name_product}}</h4>
-                            <h6 class="text-primary mb-1 pb-3">{{product?.id_product}}</h6>
-                        </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                <div class="table-responsive">
+                    <table class="table user-list">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><span>Id</span></th>
+                                <th class="text-center"><span></span></th>
+                                <th class="text-center"><span>Nombre</span></th>
+                                <th class="text-center"><span>Ciudad</span></th>
+                                <th class="text-center"><span>Ciudad</span></th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of data">
+                                <td>
+                                    {{product?.id_product}}
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <img appBrokenImage [src]="product.image_product" style="width: 100px; height: 100px;" >
+                                    </div>
+                                    
+                                </td>
+                                <td>
+                                    
+                                    <div class="d-flex justify-content-center">
+                                        {{product?.name_product}}
+                                    </div>
 
-                        <div class="text-center">
-                            <div class="p-3 mx-n3 mb-4" style="background-color: #eff1f2;">
-                                <h5 class="mb-0"><button>Ver</button></h5>
-                            </div>
-                        </div>
+                                </td>
 
-                        <div class="d-flex flex-row">
-                            <button type="button" class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark" (click)="updateProduct(product.id_product)">
-                                Actualizar
-                            </button>
-                            <button type="button" class="btn btn-danger flex-fill ms-1">Eliminar</button>
-                        </div>
-                    </div>
+                                <td>
+                                    
+                                    <div class="d-flex justify-content-center">
+                                        ciudad
+                                    </div>
+
+                                </td>
+                                
+                                <td style="width: 30%;">
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"><button type="button" class="btn btn-warning">Ver
+                                                </button></i>
+                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"><button type="button" class="btn btn-info"(click)="updateProduct(product.id_product)">Actualizar</button></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"><button type="button" class="btn btn-danger">Eliminar</button></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>

@@ -30,5 +30,61 @@
             </tr>
         </table>
     </div>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                <div class="table-responsive">
+                    <table class="table user-list">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><span>Nombre</span></th>
+                                <th class="text-center"><span>Documento</span></th>
+                                <th class="text-center"><span>Ciudad</span></th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let provider of data">
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        {{provider?.name_provider}}
+                                    </div> 
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        {{provider?.document_provider}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        {{provider?.city_provider}}
+                                    </div>
+                                </td>
+                                <td style="width: 25%;">
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"><button type="button" class="btn btn-warning" data-mdb-ripple-init
+                                                (click)="viewProfile(provider.document_provider)">Ver
+                                                perfil</button></i>
+                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+
+                                    <a href="#" class="table-link">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"><button type="button" class="btn btn-success" data-mdb-ripple-init (click)="updateProvider(provider.document_provider)">Actualizar datos</button></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
