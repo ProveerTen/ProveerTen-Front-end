@@ -1,0 +1,29 @@
+<p>prueba works!</p>
+
+<h2>Publicaciones</h2>
+
+<div class="publicationes" *ngFor="let publicacion of publicaciones; let i = index">
+
+    <div class="publicationComplete" >
+
+        <div class="publicationOwner">
+            <img [src]="newDataPub[i]?.profile_photo" [alt]="newDataPub[i]?.name_company" width="50px" height="50px">
+    
+            <p (click)="viewProfile(publicacion.nit_company)">Compañía: {{ newDataPub[i]?.name_company }}</p>
+
+            <p>{{publicacion?.date | date:'mediumDate'}} </p>
+        </div>
+    
+        <div class="publication">
+            <h3>{{ publicacion.text }}</h3>
+            <img [src]="publicacion?.secure_url" width="120px" height="120px">
+            <!-- <p>{{ publicacion._id }}</p> -->
+        </div>
+    </div>
+
+</div>
+<div class="finishedMessage" *ngIf="finish">
+    No hay más publicaciones por mostrar
+</div>
+
+

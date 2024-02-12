@@ -44,11 +44,12 @@ import { CreatePublicationComponent } from './components/publication/create-publ
 import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
+import { PruebaComponent } from './components/prueba/prueba.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: PruebaComponent,
     canActivate: [homeGuard]
   },
   {

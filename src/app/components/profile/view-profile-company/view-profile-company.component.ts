@@ -28,7 +28,7 @@ export class ViewProfileCompanyComponent {
       },
       error: (error) => {
         console.log(error.error.Status);
-        this.router.navigate(['404']);
+        // this.router.navigate(['404']);
       },
       complete: () => console.log('complete'),
     });
