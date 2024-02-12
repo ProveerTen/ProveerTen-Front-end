@@ -27,8 +27,44 @@
         </div>
     </div>
 
+
+    <div *ngIf="publications; else noPublications">
+        <div *ngFor="let publication of publications"></div>
+    </div>
+
+    <div class="card px-4 pt-4" style="max-width: 32rem">
+        <!-- News block -->
+        <div>
+          <!-- Featured image -->
+          <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4" data-mdb-ripple-color="light">
+            <img src="https://mdbcdn.b-cdn.net/img/new/fluid/city/113.webp" class="img-fluid" />
+            <a href="#!">
+              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </a>
+          </div>
+      
+          <!-- Article data -->
+          <div class="row mb-3">
+            <div class="col-6">
+              <a href="" class="text-info btn-warning">
+                <i class="fas fa-plane"></i>
+              </a>
+            </div>
+      
+            <div class="col-6 text-end">
+              <u> 15.07.2020</u>
+            </div>
+          </div>
+      
+
     <ng-template #noPublications>
-        <p>No hay publicaciones</p>
+        <div class="alert text-center align-items-center p-5" style="color: orangered" role="alert">
+            <p class="mb-0"></p>
+            <h4 class="alert-heading">Actualmente no hay ninguna publicacíon!</h4>
+            <p>Por favor regrese al panel princial o puedes crear una publicación</p>
+            <hr>
+            <p class="mb-0"></p>
+        </div>
     </ng-template>
 
 </div>
