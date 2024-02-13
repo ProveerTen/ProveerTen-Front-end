@@ -1,5 +1,4 @@
-<nav>
-
+<!-- <nav>
     <a href="#">ProveerTen</a>
 
     <ul>
@@ -23,6 +22,64 @@
     <p *ngIf="auth.isLoggedIn() | async">{{auth.getId()}}</p>
 
     <button *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
-    <!-- <button *ngIf="auth.isLoggedIn() | async" (click)="delete_data_profile()">Eliminar data</button> -->
+</nav> -->
 
+<div class="superNav border-bottom py-2 bg-light">
+    <div class="container">
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-shop me-2"></i> <strong>ProveerTen</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+            <div class="input-group">
+                <span class="border-warning input-group-text bg-warning text-white"><i
+                        class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" class="form-control border-warning" placeholder="..." style="color:#7a7a7a">
+                <button class="btn btn-warning text-white">Buscar</button>
+            </div>
+        </div>
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="ms-auto d-none d-lg-block">
+                <div class="input-group">
+                    <span class="border-warning input-group-text bg-warning text-white"><i
+                            class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" class="form-control border-warning" placeholder="..." style="color:#7a7a7a">
+                    <button class="btn btn-warning text-white">Buscar</button>
+                </div>
+            </div>
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item" *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a
+                        class="nav-link mx-2 text-uppercase" routerLink="/">Inicio</a>
+                </li>
+                <li class="nav-item" *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))"><a
+                        class="nav-link mx-2 text-uppercase" routerLink="panel">Panel</a>
+                </li>
+                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)"><a class="nav-link mx-2 text-uppercase"
+                        routerLink="login">Iniciar sesión</a></li>
+                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)"><a class="nav-link mx-2 text-uppercase"
+                        routerLink="register">Crear cuenta</a></li>
+                <li class="nav-item" *ngIf="auth.isLoggedIn() | async"><a class="nav-link mx-2 text-uppercase"
+                        class="nav-link mx-2 text-uppercase" routerLink="login" (click)="auth.logout()">Cerrar
+                        sesión</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item"> <button class="button" *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">
+                        <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
+                                class="svg-icon">
+                                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="white"
+                                    d="M1.97742 19.7776C4.45061 17.1544 7.80838 15.5423 11.5068 15.5423C15.2053 15.5423 18.5631 17.1544 21.0362 19.7776M16.2715 6.54229C16.2715 9.17377 14.1383 11.307 11.5068 11.307C8.87535 11.307 6.74212 9.17377 6.74212 6.54229C6.74212 3.91082 8.87535 1.77759 11.5068 1.77759C14.1383 1.77759 16.2715 3.91082 16.2715 6.54229Z">
+                                </path>
+                            </svg></span>
+                        <span class="lable">Ver pefil</span>
+                    </button>
+            </ul>
+
+        </div>
+    </div>
 </nav>

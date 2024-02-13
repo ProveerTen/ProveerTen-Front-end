@@ -1,9 +1,70 @@
 <div class="content">
     <div class="form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <input type="email" formControlName="email_provider" placeholder="Correo electrónico">
-            <input type="password" formControlName="password_provider" placeholder="Contraseña">
-            <button type="submit">Enviar</button>
+
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                    <div class="row d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-8 col-lg-7 col-xl-6">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                                class="img-fluid" alt="Phone image">
+                        </div>
+                        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                            <h1 class="d-flex fs-1" style="color: orange;">Provider</h1>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" formControlName="email_provider"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="form1Example13">Email address</label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" formControlName="password_provider"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label" for="form1Example23">Password</label>
+                            </div>
+
+                            <div class="d-flex justify-content-around align-items-center mb-4">
+                                <!-- Checkbox -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="form1Example3"
+                                        checked />
+                                    <label class="form-check-label" for="form1Example3"> Remember me </label>
+                                </div>
+                                <a style="color: orange;" href="#!">Forgot password?</a>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit"
+                                class="btn btn-primary btn-lg btn-block d-grid gap-2 col-6 mx-auto border border-0"
+                                style="background-color: orange; ">Sign in</button>
+
+                            <div class="divider d-flex align-items-center my-4">
+                                <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                            </div>
+
+                            <div class="d-flex gap-3">
+
+                                <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+                                    role="button">
+                                    <i class="fab fa-facebook-f me-2 "></i>Continue with Facebook
+                                </a>
+                                <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+                                    role="button">
+                                    <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- <input type="email" formControlName="email_company" placeholder="Correo electrónico">
+            <input type="password" formControlName="password_company" placeholder="Contraseña">
+            <button type="submit">Enviar</button> -->
         </form>
     </div>
 </div>

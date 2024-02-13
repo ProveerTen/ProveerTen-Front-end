@@ -48,6 +48,7 @@ import { UpdateProductComponent } from './components/product/update-product/upda
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
 import { ViewProductsComponent } from './components/product/view-products/view-products.component';
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { ViewProductComponent } from './components/product/view-product/view-pro
     UpdateProductComponent,
     ManageProductsComponent,
     ViewProductsComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

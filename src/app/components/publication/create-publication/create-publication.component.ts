@@ -34,6 +34,7 @@ export class CreatePublicationComponent {
       this.client.postRequest(`${environment.url_logic}/publication/create`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
+          this.router.navigate(['manage/publications']);
         },
         error: (error) => {
           console.log(error);

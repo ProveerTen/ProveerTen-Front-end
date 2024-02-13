@@ -1,11 +1,13 @@
-<div class="content">
+<!-- <div class="content">
     <div class="form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <input type="text" formControlName="document_grocer" placeholder="Documento">
             <input type="text" formControlName="name_grocer" placeholder="Nombres">
             <input type="text" formControlName="last_name_grocer" placeholder="Apellidos">
             <input type="email" formControlName="email_grocer" placeholder="Correo electrónico">
+
             <input type="password" formControlName="password_grocer" placeholder="Contraseña">
+
             <input type="tel" formControlName="number_grocer" placeholder="Número de celular">
             <input type="text" formControlName="name_store" placeholder="Nombre del establecimiento">
             <input type="text" formControlName="city_grocer" placeholder="Ciudad - Pueblo">
@@ -16,4 +18,132 @@
             <button type="submit">Enviar</button>
         </form>
     </div>
-</div>
+</div> -->
+
+<section class="h-100 bg-white">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                        <div class="col-xl-6">
+                            <div class="card-body p-md-5 text-black">
+                                <h3 style="color: orange;" class="mb-5 text-uppercase d-flex justify-content-center">
+                                    Registrar como tendero
+                                </h3>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="name_grocer" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Nombres</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="last_name_grocer" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Apellidos</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="document_grocer" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Documento</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="email" formControlName="email_grocer" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Correo electrónico</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="tel" formControlName="number_grocer" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Número de celular</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="name_store" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Nombre del establecimiento</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="city_grocer" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Ciudad - Pueblo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="neighborhood" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Barrio</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="street" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Calle</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" formControlName="number_street" placeholder=""
+                                                class="form-control form-control-lg" />
+                                            <label class="form-label">Número de la calle</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" formControlName="apartment" placeholder=""
+                                        class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example8">Apartamento</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input input type="password" formControlName="password_grocer" placeholder=""
+                                        class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example9">Contraseña</label>
+                                </div>
+
+                                <div class="d-flex justify-content-center pt-3">
+                                    <button type="submit" class="btn btn-warning btn-lg ms-2 ">Enviar</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 d-none d-xl-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                alt="Sample photo" class="img-fluid"
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
