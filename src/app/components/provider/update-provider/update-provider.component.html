@@ -1,7 +1,7 @@
 <div class="container d-flex justify-content-center align-items-center">
 
     <div border>
-        <form >
+        <form>
             <div>
                 <label for="document_provider">Document:</label>
                 <input id="document_provider" type="text" formControlName="document_provider">
@@ -64,65 +64,59 @@
 
 
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-    <form class="form-horizontal" method="POST" id="editForm" role="form">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Contact</h4>
-      </div>
-      <div class="modal-body">
-                    <div class="form-group animated fadeIn">
-                        <label for="nameInput" class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-10">
-                        <input type="name" name="name" class="form-control" id="nameInput" placeholder="Name" required>
-                        </div>
+
+
+
+
+<div class="container p-5">
+    <form>
+        <div class="form-header">
+            <h2>Actualizar</h2>
+        </div>
+        <div class="form-body">
+            <fieldset>
+                <legend><i class="fa fa-user"></i> User Information</legend>
+                <label for="document_provider">Document:</label>
+                <input id="document_provider" type="text" formControlName="document_provider">
+
+                <label for="name_provider">Name Provider:</label>
+                <input id="name_provider" type="text" formControlName="name_provider">
+
+                <label for="last_name_provider">Last Name Provider:</label>
+                <input id="last_name_provider" type="text" formControlName="last_name_provider">
+
+                <label for="email_provider">Email Provider:</label>
+                <input id="email_provider" type="text" formControlName="email_provider">
+
+                <label for="number_provider">Number Provider:</label>
+                <input id="number_provider" type="text" formControlName="number_provider">
+
+                <label for="city_provider">City Provider:</label>
+                <input id="city_provider" type="text" formControlName="city_provider">
+
+                <label for="neighborhood">Neighborhood:</label>
+                <input id="neighborhood" type="text" formControlName="neighborhood">
+
+                <label for="street">Street:</label>
+                <input id="street" type="text" formControlName="street">
+
+                <label for="number_street">Number Street:</label>
+                <input id="number_street" type="text" formControlName="number_street">
+            </fieldset>
+            <fieldset>
+                <legend><i class="fa fa-lock"></i> Account Login</legend>
+                <form [formGroup]="formPassword" (ngSubmit)="onSubmitPassword()">
+                    <label for="password_provider">Password Provider:</label>
+                    <input id="password_provider" type="text" formControlName="password_provider">
+                    <div class="form-footer">
+                        <input type="submit" value="Enviar">
                     </div>
-    
-                    <div class="form-group animated fadeIn">
-                        <label for="companyInput" class="col-sm-2 control-label">Company</label>
-                        <div class="col-sm-10">
-                        <input type="company" name="company" class="form-control" id="companyInput" placeholder="Company" required>
-                        </div>
-                    </div>
-    
-                    <div class="form-group animated fadeIn">
-                        <label for="posInput" class="col-sm-2 control-label">Position</label>
-                        <div class="col-sm-10">
-                        <input type="position" name="position" class="form-control" id="posInput" placeholder="Position/Job Title">
-                        </div>
-                    </div>
-    
-                    <div class="form-group animated fadeIn">
-                        <label for="contactInput" class="col-sm-2 control-label">Contact Number</label>
-                        <div class="col-sm-10">
-                        <input type="number" name="contact" class="form-control" id="contactInput" placeholder="Office/Mobile Number" data-error="Please enter a valid mobile number" required>
-                        </div>
-                    </div>
-    
-                    <div class="form-group animated fadeIn">
-                        <label for="emailInput" class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                        <input type="email" name="email" class="form-control" id="emailInput" placeholder="Email Address">
-                        </div>
-                    </div>
-    
-                    <div class="form-group animated fadeIn">
-                        <label for="genderInput" class="col-sm-2 control-label">Gender</label>
-                        <div class="col-sm-10">
-                        <input type="gender" name="gender" class="form-control" id="genderInput" placeholder="Male/Female">
-                        </div>
-                    </div>
-                        <div class="form-group">
-                    <input type="hidden" name="id" class="form-control" id="idInput" placeholder="ID">
-                    </div>
-                    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="editContact" type="submit" class="saveContact btn btn-primary" data-id="">Save</button>
-      </div>
-    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="form-footer text-center">
+            <input  type="submit" value="Actualizar">
+            <input (click)="cancel()" type="submit" value="Cancelar">
+        </div>
     </form>
-    </div>
-    </div>
+</div>
