@@ -77,6 +77,7 @@ export class AuthService {
       id: decodedToken.id,
       role: decodedToken.role
     }
+    console.log(decodedToken);
     return this.data;
   }
 

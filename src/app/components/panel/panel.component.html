@@ -35,18 +35,18 @@
                 <p>{{data?.name_company}}</p>
                 <p>{{data?.description_company}}</p>
             </div>
-            
+
             <ng-template #noPublications>
                 <p>No hay publicaciones</p>
             </ng-template>
-            
+
             <div class="user-image" *ngIf="auth.isProvider() | async">
                 <h2>Provider</h2>
                 <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
                 <p>{{data?.name_provider}}</p>
             </div>
-        
-            
+
+
 
         </div>
 
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-       
+
     <div>
         <app-create-publication></app-create-publication>
     </div>
@@ -67,18 +67,18 @@
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
         <canvas id="chart"></canvas>
     </div>
-     
 
-    
+
+
 </div>
  -->
 
 
 
 
-<!-- 
+<!--
 <section class="vh-40 d-flex justify-content-center align-items-center" style="background-color: #9de2ff;">
- 
+
 <div class="container row py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class=" row col col-md-9 col-lg-7 col-xl-5">
@@ -104,7 +104,7 @@
                    <div>
                     <p class="small text-muted mb-1">Rating</p>
                     <p class="mb-0">8.5</p>
-                  </div> 
+                  </div>
                 </div>
                 <div class="d-flex pt-1">
                   <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
@@ -117,7 +117,7 @@
       </div>
     </div>
   </div>
-  
+
 </section>
 
 
@@ -132,7 +132,7 @@
           <div class="card">
             <div class="rounded-top text-white d-flex flex-row justify-content-evenly " style="background-color: #000; height:250px;">
               <div class="d-flex flex-column align-items-center justify-content-center">
-                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" 
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider"
                   class="img-fluid img-thumbnail"
                   style="width: 200px; z-index: 1">
               </div>
@@ -166,7 +166,7 @@
                     <!-- <button class="" *ngIf="auth.isCompany() | async" (click)="manageProviders()">Gestionar Proveedores</button>
                     <button class=""  *ngIf="auth.isCompany() | async" (click)="managePublications()">Gestionar Publicaciones</button>
                     <button class="" *ngIf="auth.isCompany() | async" (click)="manageProducts()">Gestionar Productos</button> -->
-                    
+
 
                     <button class="animated-button" *ngIf="auth.isCompany() | async" (click)="manageProviders()" >
                         <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
@@ -182,8 +182,8 @@
                           ></path>
                         </svg>
                       </button>
-                    
-                      <button class="animated-button" *ngIf="auth.isCompany() | async" (click)="manageProviders()" >
+
+                      <button class="animated-button" *ngIf="auth.isCompany() | async" (click)="managePublications()" >
                         <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
