@@ -9,6 +9,7 @@ export const profileCompanyGuard = () => {
 
     let isGrocer;
     let isProvider;
+    let isOffline;
 
     auth.isGrocer().subscribe(value => {
         isGrocer = value;
@@ -18,7 +19,13 @@ export const profileCompanyGuard = () => {
         isProvider = value;
     });
 
-    if (isGrocer || isProvider) {
+    auth.isLoggedIn().subscribe(value => {
+        isOffline = value;
+    });
+
+    console.log(isGrocer || isProvider || !(isOffline));
+    
+    if (isGrocer || isProvider || !(isOffline)) {
         return true;
     }
 

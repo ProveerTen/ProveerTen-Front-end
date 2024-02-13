@@ -88,6 +88,8 @@ export class PruebaComponent {
   }
 
   viewProfile(id: string) {
+    console.log("id para ver", id);
+    
     this.router.navigate(['profile/company', id])
   }
 }

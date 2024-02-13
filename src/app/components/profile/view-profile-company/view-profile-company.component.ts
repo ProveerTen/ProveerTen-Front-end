@@ -20,8 +20,11 @@ export class ViewProfileCompanyComponent {
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
     this.id = this.routerActivate.snapshot.params['id'];
-    this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    console.log("id ruta", this.id);
+    
+    this.client.getRequest(`${environment.url_logic}/profile/companiesUserCero/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.data = response.data;
         this.getPublications();
