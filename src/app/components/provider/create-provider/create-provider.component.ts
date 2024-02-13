@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import provider from '../../../interfaces/provider';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-provider',
@@ -17,7 +18,8 @@ export class CreateProviderComponent {
   form: FormGroup;
   provider: provider = {} as provider;
 
-  constructor(private fb: FormBuilder, private client: ClientService, private router: Router, private auth: AuthService) {
+  constructor(private fb: FormBuilder, private client: ClientService, private router: Router, private auth: AuthService,
+    private messageService: MessageService) {
     this.form = this.fb.group({
       document_provider: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(10)]],
       name_provider: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
@@ -50,13 +52,22 @@ export class CreateProviderComponent {
       this.client.postRequest(`${environment.url_auth}/register/provider`, this.provider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(['manage/providers']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
+          setTimeout(() => {
+            this.router.navigate(['manage/providers']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
         },
         complete: () => console.log('complete'),
       });
+    } else {
+      console.log("Error");
+      this.messageService.clear();
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 

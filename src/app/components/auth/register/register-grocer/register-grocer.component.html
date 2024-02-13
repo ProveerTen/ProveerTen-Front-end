@@ -25,8 +25,7 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
                 <div class="card card-registration my-4">
-                    <div class="row g-0" [formGroup]="form" (ngSubmit)="onSubmit()">
-
+                    <form class="row g-0" [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="col-xl-6">
                             <div class="card-body p-md-5 text-black">
                                 <h3 style="color: orange;" class="mb-5 text-uppercase d-flex justify-content-center">
@@ -129,7 +128,7 @@
                                         class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example9">Contraseña</label>
                                 </div>
-
+                                <p-toast position="center" key="center"></p-toast>
                                 <div class="d-flex justify-content-center pt-3">
                                     <button type="submit" class="btn btn-warning btn-lg ms-2 ">Enviar</button>
                                 </div>
@@ -141,7 +140,7 @@
                                 alt="Sample photo" class="img-fluid"
                                 style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

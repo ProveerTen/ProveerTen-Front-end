@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
-
 import company from '../../../../interfaces/company';
 import { environment } from 'src/environments/environment';
 import { DatePipe } from '@angular/common';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register-company',
@@ -18,7 +18,8 @@ export class RegisterCompanyComponent {
   company: company = {} as company;
   fecha: any;
 
-  constructor(private fb: FormBuilder, private client: ClientService, private router: Router) {
+  constructor(private fb: FormBuilder, private client: ClientService, private router: Router,
+    private messageService: MessageService) {
     this.form = this.fb.group({
       nit_company: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]],
       name_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
@@ -50,14 +51,23 @@ export class RegisterCompanyComponent {
       this.client.postRequest(`${environment.url_auth}/register/company`, this.company).subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(["login"]);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
+          setTimeout(() => {
+            this.router.navigate(["login"]);
+          }, 1500);
 
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
         },
         complete: () => console.log('complete'),
       });
+    } else {
+      console.log("Error");
+      this.messageService.clear();
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 }

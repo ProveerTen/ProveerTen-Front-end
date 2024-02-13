@@ -26,7 +26,7 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
                 <div class="card card-registration my-4">
-                    <div class="row g-0" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <form class="row g-0" [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="col-xl-6 d-none d-xl-block">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
                                 alt="Sample photo" class="img-fluid"
@@ -73,7 +73,7 @@
 
                                 <div class="form-outline mb-4">
                                     <input type="date" formControlName="foundation_company" placeholder=""
-                                        class="form-control form-control-lg" />
+                                        class="form-control form-control-lg" [max]="this.fecha" />
                                     <label class="form-label" for="form3Example8">Fecha de fundación de la
                                         compañía</label>
                                 </div>
@@ -90,14 +90,14 @@
                                     <label class="form-label" for="form3Example90">Breve descripción de la
                                         empresa</label>
                                 </div>
-
+                                <p-toast position="center" key="center"></p-toast>
                                 <div class="d-flex justify-content-center pt-3">
                                     <button type="submit" class="btn btn-warning btn-lg ms-2">Enviar</button>
                                 </div>
 
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
