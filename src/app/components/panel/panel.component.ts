@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-panel',
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./panel.component.css']
 })
 export class PanelComponent {
-
+  public chart: Chart;
   data: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
@@ -25,6 +26,31 @@ export class PanelComponent {
       },
       complete: () => console.log('complete'),
     });
+
+
+const datad = {
+  datasets: [{
+    label: 'First Dataset',
+    data: [{
+      x: 20,
+      y: 30,
+      r: 15
+    }, {
+      x: 40,
+      y: 10,
+      r: 10
+    }],
+    backgroundColor: 'rgb(255, 99, 132)'
+  }]
+};
+
+this.chart = new Chart("chart", {
+  type: 'bubble',
+  data: datad,
+  options: {}
+})
+
+
   }
 
   manageProviders() {
