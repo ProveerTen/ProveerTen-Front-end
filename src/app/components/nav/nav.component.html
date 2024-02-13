@@ -1,55 +1,77 @@
-<nav class="navbar  bg-body-tertiary  text-center align-items-center">
-    <div class="container-fluid ">
-        <div class=" text-center align-items-center ">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <p class="d-inline-block p-3" *ngIf="auth.isLoggedIn() | async">Gracias por ser parte de nuestra familia</p>
-        <a class="d-inline-block p-3 nav-link" style="color: orangered" *ngIf="!(auth.isLoggedIn() | async)">
-            Unete a nuestra familia
-        </a>
-    </div>
-    <p class="d-inline-block p-3" *ngIf="auth.isCompany() | async">¡Hi Company!</p>
-    <a class="d-inline-block p-3" *ngIf="auth.isProvider() | async">¡Hi Provider!</a>
-    <a class="d-inline-block p-3" *ngIf="auth.isGrocer() | async">¡Hi Grocer!</a>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-            <div class="row text-center align-items-center g-0">
-                <div class="col-lg-5 col-md-5">
-                    <div class="d-flex justify-content-around border-top border-bottom border-dark text-center align-items-center ">
-                        <div class="customLink p-3" style="color: orangered"><a class="nav-link"
-                                *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))" routerLink="/"><i
-                                    class="bi bi-house"></i>Home</a></div>
-                        <form class="d-flex mx-auto p-1">
-                            <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" >
-                        </form>
-                        
-                    </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-2">
-                    <div class="text-center py-2">
-                        <img src="https://htmljstemplates.com/static_files/images/logos/logo_4.png" alt="" height="90">
-                    </div>
-                    
-                </div>
-                
-                <div class="col-lg-5 col-md-5 ">
-                    <div class="d-flex justify-content-around border-top border-bottom border-dark text-center align-items-center">
-                        <div class="customLink"><a class=" p-3 nav-link" *ngIf="!(auth.isLoggedIn() | async)" routerLink="login" style="color: orangered">Log in</a></div>
-                        <div class="customLink"><a class="d-inline-block p-3 nav-link" *ngIf="!(auth.isLoggedIn() | async)" routerLink="register" style="color: orangered">Sign up</a></div>
-                        <div class="customLink"><a class="nav-link" *ngIf="auth.isLoggedIn() | async" routerLink="login"
-                                (click)="auth.logout()" style="color: orangered">Log
-                                out</a></div>
-                        
-                        <div class="customLink"><button class="btn  mx-auto d-block"
-                                *ngIf="auth.isLoggedIn() | async" (click)="view_profile()" style="color: orangered">Ver
-                                perfil</button></div>
-                    </div>
-                </div>
+
+<div class="superNav border-bottom py-2 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
+                <select class="me-3 border-0 bg-light">
+                    <option value="en-us">EN-US</option>
+                </select>
+                <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3">
+                    <p class="d-inline-block p-3" *ngIf="auth.isCompany() | async">¡Hi Company!</p>
+                    <p class="d-inline-block p-3" *ngIf="auth.isProvider() | async">¡Hi Provider!</p>
+                    <p class="d-inline-block p-3" *ngIf="auth.isGrocer() | async">¡Hi Grocer!</p>
+                </span>
+                <span class="me-3"><i class="fa-solid fa-phone me-1 text-warning"></i>
+                    <p class="d-inline-block p-3" *ngIf="auth.isLoggedIn() | async">Gracias por ser parte de nuestra
+                        familia</p>
+                </span>
+                <a class="d-inline-block p-3 nav-link"  *ngIf="!(auth.isLoggedIn() | async)">
+                    Unete a nuestra familia
+                </a>
             </div>
         </div>
     </div>
-</nav>
+</div>
+<nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-shop me-2"></i> <strong>Proveerten</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+            <div class="input-group">
+                <span class="border-warning input-group-text bg-warning text-white"><i
+                        class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+                <button class="btn btn-warning text-white">Buscar</button>
+            </div>
+        </div>
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="ms-auto d-none d-lg-block">
+                <div class="input-group">
+                    <span class="border-warning input-group-text bg-warning text-white"><i
+                            class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" class="form-control border-warning" style="color:#7a7a7a">
+                    <button class="btn btn-warning text-white">Buscar</button>
+                </div>
+            </div>
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item">
+                    <a class="nav-link mx-2 text-uppercase active" aria-current="page" *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))" routerLink="/" >Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2 text-uppercase" *ngIf="auth.isLoggedIn() | async"
+                    (click)="view_profile()" >Ver perfil</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item">
+                    <a class="nav-link mx-2 text-uppercase" *ngIf="!(auth.isLoggedIn() | async)"
+                    routerLink="login"><i class="fa-solid fa-cart-shopping me-1"></i>
+                        Log in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2 text-uppercase" *ngIf="!(auth.isLoggedIn() | async)" routerLink="register"><i class="fa-solid fa-circle-user me-1"></i>
+                        Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2 text-uppercase" *ngIf="auth.isLoggedIn() | async" routerLink="login"
+                    (click)="auth.logout()"><i class="fa-solid fa-circle-user me-1"></i>
+                        Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
