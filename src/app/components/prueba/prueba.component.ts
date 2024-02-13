@@ -20,7 +20,7 @@ export class PruebaComponent {
 
   ngOnInit(): void {
 
-    this.client.getRequest(`${environment.url_logic}/publication/view`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.getRequest(`${environment.url_logic}/publication/viewUserCero`, undefined).subscribe({
       next: (response: any) => {
         console.log(response);
 
@@ -40,13 +40,14 @@ export class PruebaComponent {
       },
       complete: () => {
 
-        this.client.getRequest(`${environment.url_logic}/profile/allCompanies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined).subscribe({
           next: (response: any) => {
             console.log(response.data);
 
             this.companies = response.data
           },
           error: (error: any) => {
+
             console.log(error);
           },
           complete: () => {

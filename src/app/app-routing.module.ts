@@ -49,8 +49,8 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 const routes: Routes = [
   {
     path: '',
-    component: PruebaComponent,
-    canActivate: [homeGuard]
+    component: HomeComponent
+    // canActivate: [homeGuard]
   },
   {
     path: 'register',
