@@ -135,83 +135,245 @@
                 </div>
             </div>
         </div>
-        <ng-template #noPublications>
+        <!-- <ng-template #noPublications>
             <h1>No hay publicaciones</h1>
-        </ng-template>
+        </ng-template> -->
     </section>
+</div>
 
-    <ng-template #noPublications>
-        <p>No hay publicaciones</p>
-    </ng-template>
+<ng-template #noPublications>
+    <p>No hay publicaciones</p>
+</ng-template>
 
-    <div class="div" *ngIf="auth.isProvider() | async">
-        <h2>Provider</h2>
-        <div class="image">
-            <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
-            <button (click)="updatePhoto()">Actualizar</button>
-            <form (ngSubmit)="onSubmitPhoto()">
-                <div class="div" *ngIf="photo">
-                    <input type="file" (change)="onFileSelected($event)">
-                    <button type="submit" [disabled]="!isValidImage">Enviar</button>
+<div class="div" *ngIf="auth.isProvider() | async">
+
+    <section style="background-color: #eee;">
+        <div class="container w-100 py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider"
+                                style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
+                            <h5 class="my-3">{{data?.name_provider}} {{data?.last_name_provider}}</h5>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
+                                    <div
+                                        class="d-flex justify-content-center gap-3 mt-2 flex-column align-items-center">
+
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-outline-dark"
+                                                (click)="updatePhoto()">Actualizar</button>
+                                            <button class="btn btn-outline-danger" *ngIf="data?.profile_photo_provider"
+                                                (click)="deleteValue('profile_photo')">Eliminar foto</button>
+                                        </div>
+
+                                        <form (ngSubmit)="onSubmitPhoto()">
+                                            <div class="mb-3 d-flex gap-2" *ngIf="photo">
+                                                <input class="form-control" type="file" id="formFile"
+                                                    (change)="onFileSelected($event)">
+                                                <button class="btn btn-outline-success" type="submit"
+                                                    [disabled]="!isValidImage">Enviar</button>
+                                            </div>
+                                        </form>
+                                        <button class="btn btn-primary" *ngIf="photo"
+                                            (click)="cancelPhoto()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <button *ngIf="photo" (click)="cancelPhoto()">Cancelar</button>
-            <button *ngIf="data?.profile_photo_provider" (click)="deleteValue('profile_photo')">Eliminar foto</button>
-        </div>
-        <p>{{data?.name_provider}}</p>
-        <p>{{data?.last_name_provider}}</p>
-        <p>{{data?.city_provider}}</p>
-        <p>{{data?.neighborhood}}</p>
-        <p>{{data?.street}}</p>
-        <p>{{data?.number_street}}</p>
-        <p>{{data?.number_provider}}</p>
-        <!-- <div class="cover">
-        <img [src]="data?.cover_photo_provider" style="width: 200px;">
-        <button (click)="updateCover()">Actualizar</button>
-        <form (ngSubmit)="onSubmitCover()">
-            <div class="div" *ngIf="cover">
-                <input type="file" (change)="onFileSelected($event)">
-                <button [disabled]="!isValidImage">Enviar</button>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de teléfono</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_provider}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Ciudad</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.city_provider}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Barrio</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_street}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-        <button *ngIf="cover" (click)="cancelCover()">Cancelar</button>
-    </div> -->
-    </div>
+        </div>
+    </section>
+</div>
 
-    <div class="div" *ngIf="auth.isGrocer() | async">
-        <h2>Grocer</h2>
-        <div class="image">
-            <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer" style="width: 200px;">
-            <button (click)="updatePhoto()">Actualizar</button>
-            <form (ngSubmit)="onSubmitPhoto()">
-                <div class="div" *ngIf="photo">
-                    <input type="file" (change)="onFileSelected($event)">
-                    <button type="submit" [disabled]="!isValidImage">Enviar</button>
+<div class="div" *ngIf="auth.isGrocer() | async">
+    <section style="background-color: #eee;">
+        <div class="container w-100 py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer"
+                                style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
+                            <h5 class="my-3">{{data?.name_grocer}} {{data?.last_name_grocer}}</h5>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
+                                    <div
+                                        class="d-flex justify-content-center gap-3 mt-2 flex-column align-items-center">
+
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-outline-dark"
+                                                (click)="updatePhoto()">Actualizar</button>
+                                            <button class="btn btn-outline-danger" *ngIf="data?.profile_photo_grocer"
+                                                (click)="deleteValue('profile_photo')">Eliminar foto</button>
+                                        </div>
+
+                                        <form (ngSubmit)="onSubmitPhoto()">
+                                            <div class="mb-3 d-flex gap-2" *ngIf="photo">
+                                                <input class="form-control" type="file" id="formFile"
+                                                    (change)="onFileSelected($event)">
+                                                <button class="btn btn-outline-success" type="submit"
+                                                    [disabled]="!isValidImage">Enviar</button>
+                                            </div>
+                                        </form>
+                                        <button class="btn btn-primary" *ngIf="photo"
+                                            (click)="cancelPhoto()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <button *ngIf="photo" (click)="cancelPhoto()">Cancelar</button>
-            <button *ngIf="data?.profile_photo_grocer" (click)="deleteValue('profile_photo')">Eliminar foto</button>
-        </div>
-        <p>{{data?.name_grocer}}</p>
-        <p>{{data?.last_name_grocer}}</p>
-        <p>{{data?.number_grocer}}</p>
-        <p>{{data?.name_store}}</p>
-        <p>{{data?.city_grocer}}</p>
-        <p>{{data?.neighborhood}}</p>
-        <p>{{data?.street}}</p>
-        <p>{{data?.number_street}}</p>
-        <p>{{data?.apartment}}</p>
-        <div class="cover">
-            <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_grocer"
-                style="width: 80%; height: 200px;">
-            <button (click)="updateCover()">Actualizar</button>
-            <form (ngSubmit)="onSubmitCover()">
-                <div class="div" *ngIf="cover">
-                    <input type="file" (change)="onFileSelected($event)">
-                    <button [disabled]="!isValidImage">Enviar</button>
+                <div class="col-lg-8">
+
+                    <div class="d-flex flex-column">
+
+                        <div class="cover d-flex flex-column m-2 ">
+                            <div class="d-flex justify-content-center gap-3 mt-2 flex-column">
+                                <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_grocer"
+                                    style="width: 100%; height: 200px;" class="rounded">
+
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-outline-dark" (click)="updateCover()">Actualizar</button>
+                                    <button class="btn btn-outline-danger" *ngIf="data?.cover_photo_grocer"
+                                        (click)="deleteValue('cover_photo')">Eliminar cover</button>
+                                </div>
+                            </div>
+                            <form (ngSubmit)="onSubmitCover()">
+                                <div class="mb-3 d-flex gap-2 mt-2" *ngIf="cover">
+                                    <input class="form-control" type="file" id="formFile"
+                                        (change)="onFileSelected($event)">
+                                    <button class="btn btn-outline-success" type="submit"
+                                        [disabled]="!isValidImage">Enviar</button>
+                                </div>
+                            </form>
+                            <button class="btn btn-primary" *ngIf="cover" (click)="cancelCover()">Cancelar</button>
+                        </div>
+
+                    </div>
+                    <div class="card mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de teléfono</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_grocer}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Nombre del establecimiento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.name_store}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Ciudad</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.city_grocer}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Barrio</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_street}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div *ngIf="data?.apartment" class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Apartamento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.apartment}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <button *ngIf="cover" (click)="cancelCover()">Cancelar</button>
-            <button *ngIf="data?.cover_photo_grocer" (click)="deleteValue('cover_photo')">Eliminar cover</button>
+            </div>
         </div>
-    </div>
+    </section>
+</div>
