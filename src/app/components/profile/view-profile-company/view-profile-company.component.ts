@@ -55,7 +55,7 @@ export class ViewProfileCompanyComponent {
 
   getPublications() {
     if (this.isLogin) {
-      this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.id}`, undefined, undefined).subscribe({
+      this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.publications = response.publications;
           console.log(this.publications);
@@ -71,7 +71,7 @@ export class ViewProfileCompanyComponent {
         complete: () => console.log('complete'),
       });
     } else {
-      this.client.getRequest(`${environment.url_logic}/publication/data/view/company/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.getRequest(`${environment.url_logic}/publication/data/view/company/${this.id}`, undefined, undefined).subscribe({
         next: (response: any) => {
           this.publications = response.publications;
           if (this.publications == '') {
