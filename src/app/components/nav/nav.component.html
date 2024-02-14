@@ -1,74 +1,69 @@
-<!-- <nav>
-    <a href="#">ProveerTen</a>
-
-    <ul>
-        <li *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a routerLink="/">Home</a></li>
-        <li *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))"><a routerLink="panel">Panel</a></li>
-    </ul>
-
-    <ul>
-        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="login">Log in</a></li>
-        <li *ngIf="!(auth.isLoggedIn() | async)"><a routerLink="register">Sign up</a></li>
-        <li *ngIf="auth.isLoggedIn() | async"><a routerLink="login" (click)="auth.logout()">Log out</a></li>
-    </ul>
-
-    <p *ngIf="auth.isLoggedIn() | async">Este es un mensaje para los usuarios</p>
-    <p *ngIf="!(auth.isLoggedIn() | async)">Este es un mensaje para los No usuarios</p>
-
-    <p *ngIf="auth.isCompany() | async">¡Hi Company!</p>
-    <p *ngIf="auth.isProvider() | async">¡Hi Provider!</p>
-    <p *ngIf="auth.isGrocer() | async">¡Hi Grocer!</p>
-
-    <p *ngIf="auth.isLoggedIn() | async">{{auth.getId()}}</p>
-
-    <button *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">Ver perfil</button>
-</nav> -->
-
+<!-- Super Nav -->
 <div class="superNav border-bottom py-2 bg-light">
-    <div class="container">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="container rounded">
+                <div class="slider">
+                    <div class="phrases">
+                        <span class="phrase">¡El lugar perfecto para crecer tu negocio!</span>
+                        <span class="phrase">¡Conoce más empresas!</span>
+                        <span class="phrase">¡Conoce más tenderos!</span>
+                        <span class="phrase">¡Expande tu negocio!</span>
+                    </div>
+                    <div class="phrases">
+                        <span class="phrase">¡El lugar perfecto para crecer tu negocio!</span>
+                        <span class="phrase">¡Conoce más empresas!</span>
+                        <span class="phrase">¡Conoce más tenderos!</span>
+                        <span class="phrase">¡Expande tu negocio!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Bootstrap Navigation -->
 <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#"><i class="fa-solid fa-shop me-2"></i> <strong>ProveerTen</strong></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+        <a class="navbar-brand" href="#"><i class="fas fa-store me-2"></i> <strong>ProveerTen</strong></a>
         <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
             <div class="input-group">
-                <span class="border-warning input-group-text bg-warning text-white"><i
-                        class="fa-solid fa-magnifying-glass"></i></span>
+                <span class="border-warning input-group-text bg-warning text-white"><i class="fas fa-search"></i></span>
                 <input type="text" class="form-control border-warning" placeholder="..." style="color:#7a7a7a">
                 <button class="btn btn-warning text-white">Buscar</button>
             </div>
         </div>
-        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <div class="ms-auto d-none d-lg-block">
                 <div class="input-group">
                     <span class="border-warning input-group-text bg-warning text-white"><i
-                            class="fa-solid fa-magnifying-glass"></i></span>
+                            class="fas fa-search"></i></span>
                     <input type="text" class="form-control border-warning" placeholder="..." style="color:#7a7a7a">
                     <button class="btn btn-warning text-white">Buscar</button>
                 </div>
             </div>
-            <ul class="navbar-nav ms-auto ">
-                <li class="nav-item" *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))"><a
-                        class="nav-link mx-2 text-uppercase" routerLink="/">Inicio</a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="/">Inicio</a>
                 </li>
-                <li class="nav-item" *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))"><a
-                        class="nav-link mx-2 text-uppercase" routerLink="panel">Panel</a>
+                <li class="nav-item" *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="panel">Panel</a>
                 </li>
-                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)"><a class="nav-link mx-2 text-uppercase"
-                        routerLink="login">Iniciar sesión</a></li>
-                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)"><a class="nav-link mx-2 text-uppercase"
-                        routerLink="register">Crear cuenta</a></li>
-                <li class="nav-item" *ngIf="auth.isLoggedIn() | async"><a class="nav-link mx-2 text-uppercase"
-                        class="nav-link mx-2 text-uppercase" routerLink="login" (click)="auth.logout()">Cerrar
-                        sesión</a></li>
+                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="login">Iniciar sesión</a>
+                </li>
+                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="register">Crear cuenta</a>
+                </li>
+                <li class="nav-item" *ngIf="auth.isLoggedIn() | async">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="login" (click)="auth.logout()">Cerrar sesión</a>
+                </li>
             </ul>
-            <ul class="navbar-nav ms-auto ">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item"> <button class="button" *ngIf="auth.isLoggedIn() | async" (click)="view_profile()">
                         <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
                                 class="svg-icon">
@@ -78,8 +73,8 @@
                             </svg></span>
                         <span class="lable">Ver pefil</span>
                     </button>
+                </li>
             </ul>
-
         </div>
     </div>
 </nav>
