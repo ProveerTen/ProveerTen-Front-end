@@ -17,6 +17,7 @@ export class BrokenImageProfileDirective {
     } else if (this.imageType === 'cover') {
       element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707880170/Cover_default_nbahdp.jpg';
     }
+
   }
 
 }

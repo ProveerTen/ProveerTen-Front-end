@@ -23,5 +23,6 @@ export const homeGuard = () => {
     }
 
     router.navigate(['panel']);
+
     return false;
 }
