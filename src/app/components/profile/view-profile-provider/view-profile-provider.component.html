@@ -1,16 +1,73 @@
-<div>
-    <h2>Provider</h2>
-    <p>{{data?.name_provider}}</p>
-    <p>{{data?.last_name_provider}}</p>
-    <p>{{data?.city_provider}}</p>
-    <p>{{data?.neighborhood}}</p>
-    <p>{{data?.street}}</p>
-    <p>{{data?.number_street}}</p>
-    <p>{{data?.number_provider}}</p>
-    <div class="image">
-        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider" style="width: 200px;">
-    </div>
-    <!-- <div class="cover">
-        <img [src]="data?.cover_photo_provider" style="width: 200px;">
-    </div> -->
+<div class="div">
+
+    <section style="background-color: #eee;">
+        <div class="container w-100 py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_provider"
+                                style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
+                            <h5 class="my-3">{{data?.name_provider}} {{data?.last_name_provider}}</h5>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de teléfono</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_provider}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Ciudad</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.city_provider}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Barrio</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_street}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

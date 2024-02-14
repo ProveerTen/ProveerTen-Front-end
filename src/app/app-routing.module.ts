@@ -65,7 +65,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'profile/:id',
+    path: 'profile',
     component: ViewProfileComponent,
     canActivate: [expiredTokenGuard, profileGuard],
     canDeactivate: [profileUploadImageGuard]

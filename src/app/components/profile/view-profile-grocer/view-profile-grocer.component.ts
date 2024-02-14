@@ -19,6 +19,8 @@ export class ViewProfileGrocerComponent {
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log('Hola');
+
     this.id = this.routerActivate.snapshot.params['id'];
     this.client.getRequest(`${environment.url_logic}/profile/grocers/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {

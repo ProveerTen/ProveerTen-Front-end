@@ -1,18 +1,103 @@
-<div>
-    <h2>Grocer</h2>
-    <p>{{data?.name_grocer}}</p>
-    <p>{{data?.last_name_grocer}}</p>
-    <p>{{data?.number_grocer}}</p>
-    <p>{{data?.name_store}}</p>
-    <p>{{data?.city_grocer}}</p>
-    <p>{{data?.neighborhood}}</p>
-    <p>{{data?.street}}</p>
-    <p>{{data?.number_street}}</p>
-    <p>{{data?.apartment}}</p>
-    <div class="image">
-        <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer" style="width: 200px;">
-    </div>
-    <div class="cover">
-        <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_grocer" style="width: 200px;">
-    </div>
+<div class="div">
+    <section style="background-color: #eee;">
+        <div class="container w-100 py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer"
+                                style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
+                            <h5 class="my-3">{{data?.name_grocer}} {{data?.last_name_grocer}}</h5>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
+                                    <div
+                                        class="d-flex justify-content-center gap-3 mt-2 flex-column align-items-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+
+                    <div class="d-flex flex-column">
+
+                        <div class="cover d-flex flex-column m-2 ">
+                            <div class="d-flex justify-content-center gap-3 mt-2 flex-column">
+                                <img appBrokenImageProfile [imageType]="'cover'" [src]="data?.cover_photo_grocer"
+                                    style="width: 100%; height: 200px;" class="rounded">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de teléfono</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_grocer}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Nombre del establecimiento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.name_store}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Ciudad</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.city_grocer}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Barrio</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.neighborhood}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Número de calle</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.number_street}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div *ngIf="data?.apartment" class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Apartamento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.apartment}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
