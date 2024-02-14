@@ -16,39 +16,75 @@ export class ViewProfileCompanyComponent {
   id!: string;
   data: any;
   publications: any;
+  isLogin: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.id = this.routerActivate.snapshot.params['id'];
-    this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.data = response.data;
-        this.getPublications();
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-        this.router.navigate(['404']);
-      },
-      complete: () => console.log('complete'),
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) {
+    this.auth.isLoggedIn().subscribe((value: any) => {
+      this.isLogin = value;
     });
   }
 
+  ngOnInit(): void {
+    this.id = this.routerActivate.snapshot.params['id'];
+    if (this.isLogin) {
+      this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          this.data = response.data;
+          this.getPublications();
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+          this.router.navigate(['404']);
+        },
+        complete: () => console.log('complete'),
+      });
+    } else {
+      this.client.getRequest(`${environment.url_logic}/profile/data/companies/${this.id}`, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.data = response.data;
+          this.getPublications();
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+          this.router.navigate(['404']);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+  }
 
   getPublications() {
-    this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.auth.getId()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.publications = response.publications;
-        if (this.publications == '') {
-          this.publications = false;
-        }
+    if (this.isLogin) {
+      this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.id}`, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.publications = response.publications;
+          console.log(this.publications);
 
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete'),
-    });
+          if (this.publications == '') {
+            this.publications = false;
+          }
+
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    } else {
+      this.client.getRequest(`${environment.url_logic}/publication/data/view/company/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          this.publications = response.publications;
+          if (this.publications == '') {
+            this.publications = false;
+          }
+
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
   }
 
 }
