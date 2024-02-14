@@ -12,8 +12,7 @@ export class NavComponent {
   constructor(public auth: AuthService, private router: Router) { }
 
   view_profile() {
-    let id = this.auth.getId();
-    this.router.navigate(['profile', id]);
+    this.router.navigate(['profile']);
   }
 
   update_profile() {
