@@ -22,6 +22,6 @@ export const homeGuard = () => {
         return true;
     }
 
-    router.navigate(['404']);
+    router.navigate(['panel']);
     return false;
 }

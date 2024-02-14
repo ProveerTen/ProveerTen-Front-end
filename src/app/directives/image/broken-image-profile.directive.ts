@@ -13,9 +13,9 @@ export class BrokenImageProfileDirective {
   load_default_image() {
     const element = this.elementRef.nativeElement;
     if (this.imageType === 'photo') {
-      element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707856438/oxp0zsvbcvsfe67wmngr.png';
+      element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707880169/Photo_default_hvdpl7.png';
     } else if (this.imageType === 'cover') {
-      element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707797559/pngvkepjh9pewj1xkek0.jpg';
+      element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707880170/Cover_default_nbahdp.jpg';
     }
   }
 
