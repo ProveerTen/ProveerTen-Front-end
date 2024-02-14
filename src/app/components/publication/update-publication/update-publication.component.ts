@@ -4,6 +4,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-publication',
@@ -19,7 +20,8 @@ export class UpdatePublicationComponent {
   data: any;
   id!: string;
 
-  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router,
+    private routerActivate: ActivatedRoute, private messageService: MessageService) {
     this.form = this.fb.group({
       text: [''],
       image: [null],
@@ -53,15 +55,21 @@ export class UpdatePublicationComponent {
       this.client.patchRequest(`${environment.url_logic}/publication/update`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.router.navigate(['manage/publications']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La publicacion se ha actualizado exitosamente' });
+          setTimeout(() => {
+            this.router.navigate(['manage/publications']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
         },
         complete: () => console.log('complete'),
       });
     } else {
       console.log("Error");
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 

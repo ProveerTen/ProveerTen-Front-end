@@ -50,6 +50,13 @@ import { ViewProductsComponent } from './components/product/view-products/view-p
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+// Toast
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,12 +96,14 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

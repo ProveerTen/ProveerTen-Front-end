@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import provider from '../../../interfaces/provider';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-provider',
@@ -22,7 +23,8 @@ export class UpdateProviderComponent implements OnInit {
   formPassword: FormGroup;
   dataPassword: any;
 
-  constructor(private fb: FormBuilder, private client: ClientService, private router: Router, private auth: AuthService, private routerActivate: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private client: ClientService, private router: Router, private auth: AuthService,
+    private routerActivate: ActivatedRoute, private messageService: MessageService) {
     this.form = this.fb.group({
       document_provider: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(7), Validators.maxLength(10)]],
       name_provider: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
@@ -83,15 +85,21 @@ export class UpdateProviderComponent implements OnInit {
       this.client.postRequest(`${environment.url_logic}/provider/update`, this.dataProvider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(['manage/providers']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Actualización exitosa del trabajador' });
+          setTimeout(() => {
+            this.router.navigate(['manage/providers']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
         },
         complete: () => console.log('complete'),
       });
     } else {
       console.log('error');
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 
@@ -105,14 +113,22 @@ export class UpdateProviderComponent implements OnInit {
       this.client.postRequest(`${environment.url_logic}/provider/update/password`, this.dataPassword, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
           console.log(response);
-          this.router.navigate(['manage/providers']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Actualización de la contraseña exitosa del trabajador' });
+          setTimeout(() => {
+            this.router.navigate(['manage/providers']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
         },
         complete: () => console.log('complete'),
       });
 
+    } else {
+      console.log('error');
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 

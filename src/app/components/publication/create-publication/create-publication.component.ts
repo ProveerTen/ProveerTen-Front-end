@@ -4,6 +4,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-publication',
@@ -17,7 +18,8 @@ export class CreatePublicationComponent {
   imagePreview: any;
   isValidImage: boolean = true;
 
-  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService,
+    private router: Router, private messageService: MessageService) {
     this.form = this.fb.group({
       text: [''],
       image: [null, [Validators.required]],
@@ -34,15 +36,21 @@ export class CreatePublicationComponent {
       this.client.postRequest(`${environment.url_logic}/publication/create`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.router.navigate(['manage/publications']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La publicacion se ha creado exitosamente' });
+          setTimeout(() => {
+            this.router.navigate(['manage/publications']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
         },
         complete: () => console.log('complete'),
       });
     } else {
       console.log("Error");
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 

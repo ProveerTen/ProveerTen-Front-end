@@ -4,8 +4,8 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
-
 import product from 'src/app/interfaces/product';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-product',
@@ -23,7 +23,8 @@ export class CreateProductComponent {
   dataCategories: any;
   categoriesCheckbox: string[] = []
 
-  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService,
+    private router: Router, private messageService: MessageService) {
     this.form = this.fb.group({
       name_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
       description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
@@ -71,16 +72,25 @@ export class CreateProductComponent {
       this.client.postRequest(`${environment.url_logic}/product/create`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.router.navigate(['manage/products']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El producto se ha creado exitosamente' });
+          setTimeout(() => {
+            this.router.navigate(['manage/products']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
         },
         complete: () => console.log('complete'),
       });
 
     } else {
-      console.log('ÑO');
+      console.log("Error");
+      this.messageService.add({
+        key: 'center', severity: 'warn', summary: 'Advertencia',
+        detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
+      });
     }
   }
 
