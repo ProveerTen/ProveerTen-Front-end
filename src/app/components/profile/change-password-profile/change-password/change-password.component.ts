@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-change-password',
@@ -51,19 +50,11 @@ export class ChangePasswordComponent {
       this.client.postRequest(`${environment.url_logic}/password/changePassword/company`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response", response);
-          Swal.fire({
-            title: "Contraseña actualizada con éxito",
-            icon: "success"
-          });
           this.form.reset()
           this.router.navigate(['/profile', this.auth.getId()])        
         },
         error: (error: any) => {
           console.log("error", error);
-          Swal.fire({
-            title: `${error.error.error}`,
-            icon: "error"
-          });
         },
         complete: () => {
           console.log("complete");
@@ -88,20 +79,14 @@ export class ChangePasswordComponent {
       this.client.postRequest(`${environment.url_logic}/password/changePassword/grocer`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response", response);
-          Swal.fire({
-            title: "Contraseña actualizada con éxito",
-            icon: "success"
-          });
+         
           this.form.reset()
           // this.router.navigate(['/profile', this.auth.getId()])        
           this.router.navigate(['/update-profile', this.auth.getRole()]);
         },
         error: (error: any) => {
           console.log("error", error);
-          Swal.fire({
-            title: `${error.error.error}`,
-            icon: "error"
-          });
+         
         },
         complete: () => {
           console.log("complete");
@@ -154,18 +139,13 @@ export class ChangePasswordComponent {
     this.client.postRequest(`${environment.url_logic}/password/changePassword/provider`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("response", response);
-        Swal.fire({
-          title: "Contraseña actualizada con éxito",
-          icon: "success"
-        });
+       
+       
         this.router.navigate(['/profile', this.auth.getId()])
       },
       error: (error: any) => {
         console.log("error", error);
-        Swal.fire({
-          title: `${error.error.error}`,
-          icon: "error"
-        });
+       
       },
       complete: () => {
         console.log("complete");

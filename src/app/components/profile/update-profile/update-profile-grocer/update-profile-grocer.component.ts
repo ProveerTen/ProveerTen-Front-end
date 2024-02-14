@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-profile-grocer',
@@ -75,18 +74,10 @@ export class UpdateProfileGrocerComponent {
       this.client.patchRequest(`http://localhost:4001/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
-          Swal.fire({
-            title: "Datos actualizados con éxito",
-            icon: "success"
-          });
           this.router.navigate(['/profile', this.auth.getId()])
         },
         error: (error) => {
           this.err = error.error.errors[0];        
-          Swal.fire({
-            title: error.error.errors[0].msg,
-            icon: "error"
-          });
         },
         complete: () => {
           console.log("complete update profile");
@@ -106,10 +97,6 @@ export class UpdateProfileGrocerComponent {
         console.log("RESPOnse delete", response);
 
         this.form.get(deleteField)!.setValue(null);
-        Swal.fire({
-          title: "Dato Eliminado",
-          icon: "success"
-        });
       },  
       error: (error: any) => {
         console.log(error);
