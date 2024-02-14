@@ -1,7 +1,6 @@
-<div class="container d-flex flex-column">
+<!-- <div class="container d-flex flex-column">
     <button (click)="goBack()">Regresar al pánel</button>
     <button (click)="createProduct()">Crear producto</button>
-    <!-- <app-view-products></app-view-products> -->
     <div *ngFor="let product of data">
         <table border="2px" class="container">
             <tr>
@@ -31,5 +30,80 @@
                 </td>
             </tr>
         </table>
+    </div>
+</div> -->
+
+
+
+<div class="container d-flex flex-column gap-3">
+
+    <div class="d-flex gap-2 justify-content-center mt-3">
+        <button type="button" class="btn btn-info" (click)="createProduct()"> Crear productos</button>
+        <button type="button" class="btn btn-dark" (click)="goBack()"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
+            </svg>Regresar al panel</button>
+    </div>
+    <div class="row">
+        <div class="col-lg-15">
+            <div class="main-box clearfix">
+                <div class="table-responsive">
+                    <table class="table user-list">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><span>Id</span></th>
+                                <th class="text-center"><span>Foto</span></th>
+                                <th class="text-center"><span>Nombre</span></th>
+
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of data">
+                                <td>
+
+                                    <div class="d-flex justify-content-center">
+                                        {{product?.id_product}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <img appBrokenImage [src]="product.image_product"
+                                            style="width: 100px; height: 100px;">
+                                    </div>
+
+                                </td>
+                                <td>
+
+                                    <div class="d-flex justify-content-center">
+                                        {{product?.name_product}}
+                                    </div>
+
+                                </td>
+                                <td style="width: 25%;">
+                                    <a class="table-link">
+                                        <button type="button" class="btn btn-warning">Ver
+                                        </button>
+
+                                    </a>
+
+                                    <a class="table-link">
+                                        <button type="button" class="btn btn-info"
+                                            (click)="updateProduct(product.id_product)">Actualizar</button>
+
+
+                                    </a>
+                                    <a class="table-link">
+
+                                        <button type="button" class="btn btn-danger">Eliminar</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
