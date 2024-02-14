@@ -73,7 +73,9 @@
                                 </path>
                             </svg></span>
                         <span class="lable">Ver perfil</span>
+                        <!-- <span class="lable">Ver perfil</span> -->
                     </button>
+                    <span class="lable"><button *ngIf="auth.isLoggedIn() | async" (click)="update_profile()">Editar perfil</button></span>
                 </li>
             </ul>
         </div>

@@ -55,6 +55,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ChangePasswordComponent } from './components/profile/change-password-profile/change-password/change-password.component';
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile/update-profile.component';
+import { UpdateProfileCompanyComponent } from './components/profile/update-profile/update-profile-company/update-profile-company.component';
+import { UpdateProfileGrocerComponent } from './components/profile/update-profile/update-profile-grocer/update-profile-grocer.component';
 
 
 @NgModule({
@@ -92,7 +96,11 @@ import { MessageService } from 'primeng/api';
     ManageProductsComponent,
     ViewProductsComponent,
     ViewProductComponent,
-    FooterComponent
+    FooterComponent,
+    ChangePasswordComponent,
+    UpdateProfileComponent,
+    UpdateProfileCompanyComponent,
+    UpdateProfileGrocerComponent
   ],
   imports: [
     BrowserModule,
