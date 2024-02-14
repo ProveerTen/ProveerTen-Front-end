@@ -1,0 +1,17 @@
+<p>view-all-grocers works!</p>
+
+
+<div class="companies" *ngFor="let product of products">
+    <div (click)="viewProfile(product.nit_company)">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="product?.profile_photo_company" alt=""
+            style="width: 100px; height: 100px;">
+        <h2> {{product?.name_company}} </h2>
+        <p> {{product?.description_company}} </p>
+        <!-- <p> {{}} </p>
+        <p> {{}} </p>
+        <p> {{}} </p> -->
+        <!-- <div *ngFor="category of product.categories">
+            <p>{{category}}  </p>
+        </div> -->
+    </div>
+</div>

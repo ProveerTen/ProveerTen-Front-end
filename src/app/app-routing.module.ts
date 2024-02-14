@@ -22,6 +22,9 @@ import { UpdateProfileComponent } from './components/profile/update-profile/upda
 // change password profile component
 import { ChangePasswordComponent } from './components/profile/change-password-profile/change-password/change-password.component';
 
+// ViewAllGrocersComponent
+import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view-all-grocers.component';
+
 // Provider
 import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
 import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
@@ -83,6 +86,10 @@ const routes: Routes = [
   {
     path: 'change-password-profile',
     component: ChangePasswordComponent
+  },
+  {
+    path: 'viewAllcompanies',
+    component: ViewAllGrocersComponent
   },
   {
     path: 'profile/company/:id',
