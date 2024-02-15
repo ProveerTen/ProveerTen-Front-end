@@ -1,0 +1,35 @@
+<p>view-all-companies works!</p>
+
+
+<div class="companies" *ngFor="let company of companies">
+    <div >
+        <img (click)="viewProfile(company.nit_company)" appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt=""
+            style="width: 100px; height: 100px;">
+        <h2 (click)="viewProfile(company.nit_company)"> {{company?.name_company}} </h2>
+
+        <!-- <p> {{company?.description_company}} </p> -->
+        <!-- <p> {{}} </p>
+        <p> {{}} </p>
+        <p> {{}} </p> -->
+        <div class="description-container">
+            <p *ngIf="company.description_company.length <= 20; else showMore">
+                {{company?.description_company}}
+            </p>
+            
+            <!-- Utiliza una directiva estructural (ngIf) para mostrar el botón solo cuando el mensaje es largo -->
+            <!-- <ng-container *ngIf="company.description_company.length > 20">
+                <button >Ver más</button>
+            </ng-container> -->
+            
+            <ng-template #showMore>
+                <p>{{company?.description_company.slice(0, 20)}}...</p>
+                <button (click)="toggleShowMore(company)">Ver más</button>
+            </ng-template>
+        </div>
+
+        <h5 *ngIf="company.categories.length > 0">Empresa de:</h5>
+        <div class="categoriesCompany" *ngFor="let category of company.categories">
+            <p>{{category.fk_product_category_name_category}}  </p>
+        </div>
+    </div>
+</div>

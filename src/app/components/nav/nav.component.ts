@@ -20,6 +20,10 @@ export class NavComponent {
     this.router.navigate(['update-profile/', id])
   }
 
+  allCompanies() {
+    this.router.navigate(['viewAllcompanies/'])
+  }
+
   deleteData_profile() {
     let id = this.auth.getId();
     this.router.navigate(['deleteData-profile/', id])
