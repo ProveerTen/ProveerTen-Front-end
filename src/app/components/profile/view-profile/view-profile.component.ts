@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-view-profile',
@@ -19,7 +20,7 @@ export class ViewProfileComponent {
   photo: boolean = false;
   formData = new FormData();
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.client.getRequest(`${environment.url_logic}/profile/${this.auth.getRole()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -77,15 +78,22 @@ export class ViewProfileComponent {
       this.client.patchRequest(`${environment.url_logic}/photo/photoProfile/${this.auth.getRole()}`, this.formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.isValidImage = false;
-          window.location.reload();
+          console.log(response);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La foto se ha actualizado correctamente.' });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         },
         error: (error) => {
-          console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
         },
         complete: () => console.log('complete'),
       });
     } else {
       console.log("Error");
+      this.messageService.clear();
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 
@@ -96,15 +104,22 @@ export class ViewProfileComponent {
       this.client.patchRequest(`${environment.url_logic}/photo/photoCover/${this.auth.getRole()}`, this.formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.isValidImage = false;
-          window.location.reload();
+          console.log(response);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La foto de portada se ha actualizado correctamente.' });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         },
         error: (error) => {
-          console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
         },
         complete: () => console.log('complete'),
       });
     } else {
       console.log("Error");
+      this.messageService.clear();
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }
 
@@ -122,10 +137,19 @@ export class ViewProfileComponent {
     this.client.deleteRequest(`${environment.url_logic}/edit_profile/${this.auth.getRole()}`, { deleteField: `${value}_${this.auth.getRole()}` }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log(response);
-        window.location.reload();
+        if (value.startsWith('profile')) {
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La foto de perfil se ha eliminada correctamente.' });
+        } else {
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La foto de portada se ha eliminada correctamente.' });
+        }
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+
       },
       error: (error) => {
-        console.log(error.error.Status);
+        this.messageService.clear();
+        this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
       },
       complete: () => console.log('complete'),
     });

@@ -96,10 +96,11 @@
                                     </a>
                                     <a class="table-link">
 
-                                        <button type="button" class="btn btn-danger">Eliminar</button>
+                                        <button type="button" (click)="deleteProduct(product.id_product)" class="btn btn-danger">Eliminar</button>
                                     </a>
                                 </td>
                             </tr>
+                            <p-toast position="bottom-right" key="center"></p-toast>
                         </tbody>
                     </table>
                 </div>

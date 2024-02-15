@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-profile-company',
@@ -16,7 +17,8 @@ export class UpdateProfileCompanyComponent {
   form: FormGroup;
   dataUpdate: any = {};
 
-  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
+    private messageService: MessageService) {
 
     this.form = this.fb.group({
       nit_company: [''],
@@ -69,10 +71,15 @@ export class UpdateProfileCompanyComponent {
       this.client.patchRequest(`http://localhost:4001/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
-          this.router.navigate(['/profile', this.auth.getId()])
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
+          setTimeout(() => {
+            this.router.navigate(['/profile', this.auth.getId()])
+          }, 1500);
         },
         error: (error) => {
-          console.log(error);
+          console.log(error.error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: "Error en la actualización de los datos" });
         },
         complete: () => {
           console.log("complete update profile");
@@ -81,6 +88,11 @@ export class UpdateProfileCompanyComponent {
 
     } else if (!this.form.valid) {
       console.log("No se cumplen las validaciones");
+      this.messageService.clear();
+      this.messageService.add({
+        key: 'center', severity: 'warn', summary: 'Advertencia',
+        detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
+      });
     }
   }
 
@@ -89,13 +101,14 @@ export class UpdateProfileCompanyComponent {
 
     this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        console.log("RESPOnse", response);
-        
+        console.log("RESPOnse", response)
         this.form.get(deleteField)!.setValue(null)
-
+        this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El campo ha sido eliminado exitosamente' });
       },
       error: (error: any) => {
         console.log(error);
+        this.messageService.clear();
+        this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
       },
       complete: () => {
         console.log("Complete delete data Profile");
@@ -107,7 +120,7 @@ export class UpdateProfileCompanyComponent {
   isvalid(nameField: string) {
     return this.form.get(nameField)?.valid;
   }
-  
+
   // disableInput(name: string) {
   //   const myInputControl = this.form.get(name);
   //   if (myInputControl) {

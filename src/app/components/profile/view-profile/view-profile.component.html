@@ -49,7 +49,7 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                    <p class="mb-0">@mdbootstrap</p>
+                                    <p class="mb-0">mdbootstrap</p>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
@@ -75,7 +75,7 @@
                                 <div class="d-flex justify-content-center gap-2">
                                     <button class="btn btn-outline-dark" (click)="updateCover()">Actualizar</button>
                                     <button class="btn btn-outline-danger" *ngIf="data?.cover_photo_company"
-                                        (click)="deleteValue('cover_photo')">Eliminar cover</button>
+                                        (click)="deleteValue('cover_photo')">Eliminar foto de portada</button>
                                 </div>
                             </div>
                             <form (ngSubmit)="onSubmitCover()">
@@ -139,6 +139,7 @@
             <h1>No hay publicaciones</h1>
         </ng-template> -->
     </section>
+    <p-toast position="bottom-right" key="center"></p-toast>
 </div>
 
 <ng-template #noPublications>
@@ -238,6 +239,7 @@
             </div>
         </div>
     </section>
+    <p-toast position="bottom-right" key="center"></p-toast>
 </div>
 
 <div class="div" *ngIf="auth.isGrocer() | async">
@@ -376,4 +378,5 @@
             </div>
         </div>
     </section>
+    <p-toast position="bottom-right" key="center"></p-toast>
 </div>

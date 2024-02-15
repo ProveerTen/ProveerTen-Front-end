@@ -27,49 +27,59 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="document_provider" class="form-label">Documento:</label>
-                            <input type="text" id="document_provider" formControlName="document_provider" class="form-control rounded" placeholder="Documento">
+                            <input type="text" id="document_provider" formControlName="document_provider"
+                                class="form-control rounded" placeholder="Documento">
                         </div>
                         <div class="col-md-6">
                             <label for="name_provider" class="form-label">Nombres:</label>
-                            <input type="text" id="name_provider" formControlName="name_provider" class="form-control rounded" placeholder="Nombres">
+                            <input type="text" id="name_provider" formControlName="name_provider"
+                                class="form-control rounded" placeholder="Nombres">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="last_name_provider" class="form-label">Apellidos:</label>
-                            <input type="text" id="last_name_provider" formControlName="last_name_provider" class="form-control rounded" placeholder="Apellidos">
+                            <input type="text" id="last_name_provider" formControlName="last_name_provider"
+                                class="form-control rounded" placeholder="Apellidos">
                         </div>
                         <div class="col-md-6">
                             <label for="email_provider" class="form-label">Correo electrónico:</label>
-                            <input type="email" id="email_provider" formControlName="email_provider" class="form-control rounded" placeholder="Correo electrónico">
+                            <input type="email" id="email_provider" formControlName="email_provider"
+                                class="form-control rounded" placeholder="Correo electrónico">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="password_provider" class="form-label">Contraseña:</label>
-                            <input type="password" id="password_provider" formControlName="password_provider" class="form-control rounded" placeholder="Contraseña">
+                            <input type="password" id="password_provider" formControlName="password_provider"
+                                class="form-control rounded" placeholder="Contraseña">
                         </div>
                         <div class="col-md-6">
                             <label for="number_provider" class="form-label">Número de celular:</label>
-                            <input type="tel" id="number_provider" formControlName="number_provider" class="form-control rounded" placeholder="Número de celular">
+                            <input type="tel" id="number_provider" formControlName="number_provider"
+                                class="form-control rounded" placeholder="Número de celular">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="city_provider" class="form-label">Ciudad - Pueblo:</label>
-                            <input type="text" id="city_provider" formControlName="city_provider" class="form-control rounded" placeholder="Ciudad - Pueblo">
+                            <input type="text" id="city_provider" formControlName="city_provider"
+                                class="form-control rounded" placeholder="Ciudad - Pueblo">
                         </div>
                         <div class="col-md-6">
                             <label for="neighborhood" class="form-label">Barrio:</label>
-                            <input type="text" id="neighborhood" formControlName="neighborhood" class="form-control rounded" placeholder="Barrio">
+                            <input type="text" id="neighborhood" formControlName="neighborhood"
+                                class="form-control rounded" placeholder="Barrio">
                         </div>
                     </div>
                     <div class="d-grid gap-2">
+                        <p-toast position="bottom-right" key="center"></p-toast>
                         <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg mt-2" (click)="cancel()">Cancelar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg mt-2"
+                            (click)="cancel()">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-  </div>
+</div>

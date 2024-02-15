@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-
 import { environment } from 'src/environments/environment';
-
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-manage-publications',
@@ -15,7 +14,8 @@ export class ManagePublicationsComponent {
 
   publications: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router,
+  private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.auth.getId()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -42,10 +42,15 @@ export class ManagePublicationsComponent {
     if (res) {
       this.client.deleteRequest(`${environment.url_logic}/publication/delete/${id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-          window.location.reload();
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La publicacion se ha eliminado exitosamente' });
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+          
         },
         error: (error) => {
           console.log(error.error.Status);
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
         },
         complete: () => console.log('complete'),
       });

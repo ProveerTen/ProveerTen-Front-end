@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-update-profile-grocer',
@@ -16,7 +17,8 @@ export class UpdateProfileGrocerComponent {
   dataUpdate: any = {};
   err:any;
 
-  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
+    private messageService: MessageService) {
 
     this.form = this.fb.group({
       document_grocer: [''],
@@ -38,7 +40,6 @@ export class UpdateProfileGrocerComponent {
     this.client.getRequest(`http://localhost:4001/profile/grocer`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("Response data oninit", response.data);
-
         this.data = response.data;
         this.form.get('document_grocer')!.disable();
         this.form.patchValue(response.data);
@@ -74,10 +75,17 @@ export class UpdateProfileGrocerComponent {
       this.client.patchRequest(`http://localhost:4001/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
-          this.router.navigate(['/profile', this.auth.getId()])
+
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
+          setTimeout(() => {
+            this.router.navigate(['/profile', this.auth.getId()])
+          }, 1500);
         },
         error: (error) => {
-          this.err = error.error.errors[0];        
+          this.err = error.error.errors[0]; 
+          console.log(error);
+          this.messageService.clear();
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: this.err });
         },
         complete: () => {
           console.log("complete update profile");
@@ -86,6 +94,11 @@ export class UpdateProfileGrocerComponent {
 
     } else {
       console.log("No se cumplen las validaciones");
+      this.messageService.clear();
+      this.messageService.add({
+        key: 'center', severity: 'warn', summary: 'Advertencia',
+        detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
+      });
     }
   }
 
