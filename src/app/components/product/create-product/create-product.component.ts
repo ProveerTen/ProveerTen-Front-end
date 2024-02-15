@@ -87,6 +87,7 @@ export class CreateProductComponent {
 
     } else {
       console.log("Error");
+      this.messageService.clear();
       this.messageService.add({
         key: 'center', severity: 'warn', summary: 'Advertencia',
         detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'

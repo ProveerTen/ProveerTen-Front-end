@@ -42,7 +42,6 @@ import { ManagePublicationsComponent } from './components/publication/manage-pub
 import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
 import { ViewPublicationsComponent } from './components/publication/view-publications/view-publications.component';
 import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
-import { DeletePublicationComponent } from './components/publication/delete-publication/delete-publication.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
@@ -91,7 +90,6 @@ import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view
     CreatePublicationComponent,
     ViewPublicationsComponent,
     UpdatePublicationComponent,
-    DeletePublicationComponent,
     CreateProductComponent,
     UpdateProductComponent,
     ManageProductsComponent,

@@ -99,6 +99,7 @@ export class UpdateProviderComponent implements OnInit {
       });
     } else {
       console.log('error');
+      this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
   }

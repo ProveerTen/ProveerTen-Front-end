@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { MessageService } from 'primeng/api';
 
 import product from 'src/app/interfaces/product';
 
@@ -25,7 +25,7 @@ export class UpdateProductComponent {
   id!: string;
   data: any;
 
-  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private messageService: MessageService) {
     this.form = this.fb.group({
       name_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
       description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
@@ -82,17 +82,22 @@ export class UpdateProductComponent {
       this.client.postRequest(`${environment.url_logic}/product/update`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.router.navigate(['manage/products']);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El producto se ha sido actualizado exitosamente' });
+          setTimeout(() => {
+            this.router.navigate(['manage/products']);
+          }, 1500);
         },
         error: (error) => {
           console.log(error);
           this.isValidImage = true;
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
         },
         complete: () => console.log('complete'),
       });
-
     } else {
-      console.log('ÑO');
+      console.log('error');
+      this.messageService.clear();
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
 
   }

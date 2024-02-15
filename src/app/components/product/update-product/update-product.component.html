@@ -42,6 +42,7 @@
             <div *ngIf="imagePreview">
                 <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
             </div>
+            <p-toast position="bottom-right" key="center"></p-toast>
             <button type="submit" [disabled]="!isValidImage">Actualizar producto</button>
         </form>
     </div>

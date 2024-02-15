@@ -59,7 +59,7 @@
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
                     <a class="nav-link mx-2 text-uppercase" routerLink="register">Crear cuenta</a>
                 </li>
-                <p-toast key="nav"></p-toast>
+                <p-toast position="bottom-right" key="nav"></p-toast>
                 <li class="nav-item" *ngIf="auth.isLoggedIn() | async">
                     <a class="nav-link mx-2 text-uppercase" routerLink="login" (click)="auth.logout()">Cerrar sesión</a>
                 </li>
