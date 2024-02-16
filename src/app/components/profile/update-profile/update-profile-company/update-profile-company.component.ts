@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-update-profile-company',
   templateUrl: './update-profile-company.component.html',
@@ -32,7 +34,7 @@ export class UpdateProfileCompanyComponent {
 
   ngOnInit(): void {
 
-    this.client.getRequest(`http://localhost:4001/profile/company`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.getRequest(`${environment.url_logic}/profile/company`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("Response", response);
         console.log("Response data", response.data);
@@ -68,7 +70,7 @@ export class UpdateProfileCompanyComponent {
       console.log("data Update", this.dataUpdate);
 
 
-      this.client.patchRequest(`http://localhost:4001/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.patchRequest(`${environment.url_logic}/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
           Swal.fire({
@@ -97,7 +99,7 @@ export class UpdateProfileCompanyComponent {
   deleteField(deleteField: string) {
     console.log("DELETE FIELD", deleteField);
 
-    this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("RESPOnse", response);
 
