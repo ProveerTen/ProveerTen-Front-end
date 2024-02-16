@@ -1,7 +1,7 @@
 <div class="content">
     <div class="div">
         <div>
-            <img [src]="data?.image_url" style="max-width: 100px; height: auto;">
+            <img appBrokenImage [src]="data?.image_url" style="max-width: 100px; height: auto;">
         </div>
     </div>
     <div class="form">
@@ -10,7 +10,7 @@
             <!-- <img src="" alt=""> -->
             <input type="file" formControlName="image" (change)="onFileSelected($event)">
             <div *ngIf="imagePreview">
-                <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+                <img appBrokenImage [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
             </div>
             <p-toast position="bottom-right" key="center"></p-toast>
             <button type="submit" [disabled]="!form.valid || !isValidImage">Actualizar publicación</button>

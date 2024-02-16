@@ -60,6 +60,7 @@ import { UpdateProfileCompanyComponent } from './components/profile/update-profi
 import { UpdateProfileGrocerComponent } from './components/profile/update-profile/update-profile-grocer/update-profile-grocer.component';
 import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view-all-grocers.component';
 import { ViewAllCompaniesComponent } from './components/view/view-all-companies/view-all-companies.component';
+import { ViewAllProductsComponent } from './components/view/view-all-products/view-all-products.component';
 
 
 @NgModule({
@@ -102,7 +103,8 @@ import { ViewAllCompaniesComponent } from './components/view/view-all-companies/
     UpdateProfileCompanyComponent,
     UpdateProfileGrocerComponent,
     ViewAllGrocersComponent,
-    ViewAllCompaniesComponent
+    ViewAllCompaniesComponent,
+    ViewAllProductsComponent
   ],
   imports: [
     BrowserModule,

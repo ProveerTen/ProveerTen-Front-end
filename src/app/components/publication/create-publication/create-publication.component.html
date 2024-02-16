@@ -16,7 +16,7 @@
                                     (change)="onFileSelected($event)">
                             </div>
                             <div *ngIf="imagePreview" class="mb-3">
-                                <img [src]="imagePreview" alt="Image Preview" class="img-fluid"
+                                <img appBrokenImage [src]="imagePreview" alt="Image Preview" class="img-fluid"
                                     style="max-width: 100px; height: auto;">
                             </div>
                             <p-toast position="bottom-right" key="center"></p-toast>

@@ -84,5 +84,12 @@ export class HomeComponent {
   viewProfile(id: string) {
     this.router.navigate(['profile/company', id])
   }
+
+  viewCompanies() {
+    this.router.navigate(['viewAllcompanies'])
+  }
+  viewProducts() {
+    this.router.navigate(['viewAllProducts'])
+  }
 }
 

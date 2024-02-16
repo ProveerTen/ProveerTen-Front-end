@@ -3,7 +3,7 @@
     <div border>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div>
-                <img [src]="data?.image_product" style="max-width: 100px; height: auto;">
+                <img appBrokenImage [src]="data?.image_product" style="max-width: 100px; height: auto;">
             </div>
             <div>
                 <label for="name_product">name_product: </label>
@@ -40,7 +40,7 @@
             </div>
             <input type="file" formControlName="image_product" (change)="onFileSelected($event)">
             <div *ngIf="imagePreview">
-                <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+                <img appBrokenImage [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
             </div>
 
             <button type="submit" [disabled]="!isValidImage">Actualizar producto</button>

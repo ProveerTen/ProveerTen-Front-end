@@ -60,7 +60,9 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-light">
                             <li class="dropdown-item" style="cursor: pointer;" (click)="view_profile()">Ver perfil</li>
-                            <li class="dropdown-item" style="cursor: pointer;" (click)="update_profile()">Actualizar
+                            <li class="dropdown-item" style="cursor: pointer;"
+                                *ngIf="(auth.isGrocer() | async) || (auth.isCompany() | async)"
+                                (click)="update_profile()">Actualizar
                                 perfil
                             </li>
                             <hr>
