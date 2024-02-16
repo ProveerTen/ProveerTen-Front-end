@@ -26,6 +26,8 @@ import { ChangePasswordComponent } from './components/profile/change-password-pr
 import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view-all-grocers.component';
 import { ViewAllCompaniesComponent } from './components/view/view-all-companies/view-all-companies.component';
 
+import { ViewAllProductsComponent } from './components/view/view-all-products/view-all-products.component';
+
 // Provider
 import { CreateProviderComponent } from './components/provider/create-provider/create-provider.component';
 import { ManageProvidersComponent } from './components/provider/manage-providers/manage-providers.component';
@@ -163,6 +165,10 @@ const routes: Routes = [
   {
     path: 'view/product/:id',
     component: ViewProductComponent
+  },
+  {
+    path: 'viewAllProducts',
+    component: ViewAllProductsComponent,
   },
   {
     path: '404',

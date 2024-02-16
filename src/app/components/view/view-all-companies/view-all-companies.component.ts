@@ -23,7 +23,7 @@ export class ViewAllCompaniesComponent {
     console.log('Hola');
 
     // this.id = this.routerActivate.snapshot.params['id'];
-    this.client.getRequest(`${environment.url_logic}/view/companies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.getRequest(`${environment.url_logic}/view/companies`, undefined, undefined).subscribe({
       next: (response: any) => {
         this.companies = response.categoriesByCompanies;
 
