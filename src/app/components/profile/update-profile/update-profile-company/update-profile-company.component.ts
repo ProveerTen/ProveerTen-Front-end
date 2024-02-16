@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-profile-company',
@@ -31,15 +34,16 @@ export class UpdateProfileCompanyComponent {
 
   ngOnInit(): void {
 
-    this.client.getRequest(`http://localhost:4001/profile/company`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.getRequest(`${environment.url_logic}/profile/company`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("Response", response);
         console.log("Response data", response.data);
         this.data = response.data;
-
-
+        this.data.national_line_company = Number(response.data.national_line_company);
+        const foundationDate = new Date(this.data.foundation_company);
+        this.data.foundation_company = foundationDate.toISOString().split('T')[0];
         this.form.get('nit_company')!.disable();
-        this.form.patchValue(response.data);
+        this.form.patchValue(this.data);
         // this.disableInput("nit_company")
       },
       error: (error) => {
@@ -66,13 +70,21 @@ export class UpdateProfileCompanyComponent {
       console.log("data Update", this.dataUpdate);
 
 
-      this.client.patchRequest(`http://localhost:4001/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.patchRequest(`${environment.url_logic}/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
+          Swal.fire({
+            title: "Datos actualizados con éxito",
+            icon: "success"
+          });
           this.router.navigate(['/profile', this.auth.getId()])
         },
         error: (error) => {
           console.log(error);
+          Swal.fire({
+            title: error.error.errors[0].msg,
+            icon: "error"
+          });
         },
         complete: () => {
           console.log("complete update profile");
@@ -87,12 +99,16 @@ export class UpdateProfileCompanyComponent {
   deleteField(deleteField: string) {
     console.log("DELETE FIELD", deleteField);
 
-    this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("RESPOnse", response);
-        
+
         this.form.get(deleteField)!.setValue(null)
 
+        Swal.fire({
+          title: "Dato Eliminado",
+          icon: "success"
+        });
       },
       error: (error: any) => {
         console.log(error);
@@ -107,7 +123,7 @@ export class UpdateProfileCompanyComponent {
   isvalid(nameField: string) {
     return this.form.get(nameField)?.valid;
   }
-  
+
   // disableInput(name: string) {
   //   const myInputControl = this.form.get(name);
   //   if (myInputControl) {

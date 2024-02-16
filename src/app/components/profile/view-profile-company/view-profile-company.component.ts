@@ -30,6 +30,8 @@ export class ViewProfileCompanyComponent {
       this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.data = response.data;
+          const foundationDate = new Date(this.data.foundation_company);
+          this.data.foundation_company = foundationDate.toISOString().split('T')[0];
           this.getPublications();
         },
         error: (error) => {
@@ -42,6 +44,8 @@ export class ViewProfileCompanyComponent {
       this.client.getRequest(`${environment.url_logic}/profile/data/companies/${this.id}`, undefined, undefined).subscribe({
         next: (response: any) => {
           this.data = response.data;
+          const foundationDate = new Date(this.data.foundation_company);
+          this.data.foundation_company = foundationDate.toISOString().split('T')[0];
           this.getPublications();
         },
         error: (error) => {

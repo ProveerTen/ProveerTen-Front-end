@@ -9,34 +9,34 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./view-all-grocers.component.css']
 })
 export class ViewAllGrocersComponent {
-  id!: string;
-  products: any;
+  // id!: string;
+  // products: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
+  // constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    console.log('Hola');
+  // ngOnInit(): void {
+  //   console.log('Hola');
 
-    // this.id = this.routerActivate.snapshot.params['id'];
-    this.client.getRequest(`${environment.url_logic}/view/companies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.products = response.categoriesByCompanies;
-        console.log(response.categoriesByCompanies);
-        console.log(response);
+  //   // this.id = this.routerActivate.snapshot.params['id'];
+  //   this.client.getRequest(`${environment.url_logic}/view/companies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+  //     next: (response: any) => {
+  //       this.products = response.categoriesByCompanies;
+  //       console.log(response.categoriesByCompanies);
+  //       console.log(response);
         
-      },
-      error: (error) => {
-        console.log(error.error);
-        // this.router.navigate(['404']);
-      },
-      complete: () => console.log('complete'),
-    });
-  }
+  //     },
+  //     error: (error) => {
+  //       console.log(error.error);
+  //       // this.router.navigate(['404']);
+  //     },
+  //     complete: () => console.log('complete'),
+  //   });
+  // }
 
-  viewProfile(id: string) {
-    console.log("fff", id);
+  // viewProfile(id: string) {
+  //   console.log("fff", id);
     
-    this.router.navigate(['profile/company', id])
-  }
+  //   this.router.navigate(['profile/company', id])
+  // }
 }
 

@@ -1,4 +1,4 @@
-<div class="container d-flex justify-content-center align-items-center">
+<!-- <div class="container d-flex justify-content-center align-items-center">
 
     <div border>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -45,7 +45,7 @@
                 <label for="number_street">Number Street:</label>
                 <input id="number_street" type="text" formControlName="number_street">
             </div>
-            <p-toast key="center"></p-toast>
+            <p-toast position="bottom-right" key="center"></p-toast>
             <button type="submit">Enviar</button>
         </form>
     </div>
@@ -61,3 +61,59 @@
     </div>
 </div>
 <button (click)="cancel()">Cancelar</button>
+ -->
+
+
+
+<div class="container p-5 col-md-6">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-header">
+            <h2>Actualizar</h2>
+        </div>
+        <div class="form-body">
+            <fieldset>
+                <legend><i class="fa fa-user"></i> User Information</legend>
+                <label for="document_provider">Document:</label>
+                <input id="document_provider" type="text" formControlName="document_provider">
+
+                <label for="name_provider">Name Provider:</label>
+                <input id="name_provider" type="text" formControlName="name_provider">
+
+                <label for="last_name_provider">Last Name Provider:</label>
+                <input id="last_name_provider" type="text" formControlName="last_name_provider">
+
+                <label for="email_provider">Email Provider:</label>
+                <input id="email_provider" type="text" formControlName="email_provider">
+
+                <label for="number_provider">Number Provider:</label>
+                <input id="number_provider" type="text" formControlName="number_provider">
+
+                <label for="city_provider">City Provider:</label>
+                <input id="city_provider" type="text" formControlName="city_provider">
+
+                <label for="neighborhood">Neighborhood:</label>
+                <input id="neighborhood" type="text" formControlName="neighborhood">
+
+                <label for="street">Street:</label>
+                <input id="street" type="text" formControlName="street">
+
+                <label for="number_street">Number Street:</label>
+                <input id="number_street" type="text" formControlName="number_street">
+
+                <label for="password_provider">Password Provider:</label>
+                <input id="password_provider" type="text" formControlName="password_provider">
+            </fieldset>
+            <fieldset>
+                <form class="" [formGroup]="formPassword" (ngSubmit)="onSubmitPassword()">
+                    <div class="form-footer p-5">
+                        <input type="submit" value="Enviar">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="form-footer text-center ">
+            <input  type="submit" value="Actualizar">
+            <input (click)="cancel()" type="submit" value="Cancelar">
+        </div>
+    </form>
+</div>

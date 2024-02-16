@@ -42,7 +42,6 @@ import { ManagePublicationsComponent } from './components/publication/manage-pub
 import { CreatePublicationComponent } from './components/publication/create-publication/create-publication.component';
 import { ViewPublicationsComponent } from './components/publication/view-publications/view-publications.component';
 import { UpdatePublicationComponent } from './components/publication/update-publication/update-publication.component';
-import { DeletePublicationComponent } from './components/publication/delete-publication/delete-publication.component';
 import { CreateProductComponent } from './components/product/create-product/create-product.component';
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { ManageProductsComponent } from './components/product/manage-products/manage-products.component';
@@ -60,6 +59,7 @@ import { UpdateProfileComponent } from './components/profile/update-profile/upda
 import { UpdateProfileCompanyComponent } from './components/profile/update-profile/update-profile-company/update-profile-company.component';
 import { UpdateProfileGrocerComponent } from './components/profile/update-profile/update-profile-grocer/update-profile-grocer.component';
 import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view-all-grocers.component';
+import { ViewAllCompaniesComponent } from './components/view/view-all-companies/view-all-companies.component';
 
 
 @NgModule({
@@ -91,7 +91,6 @@ import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view
     CreatePublicationComponent,
     ViewPublicationsComponent,
     UpdatePublicationComponent,
-    DeletePublicationComponent,
     CreateProductComponent,
     UpdateProductComponent,
     ManageProductsComponent,
@@ -102,7 +101,8 @@ import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view
     UpdateProfileComponent,
     UpdateProfileCompanyComponent,
     UpdateProfileGrocerComponent,
-    ViewAllGrocersComponent
+    ViewAllGrocersComponent,
+    ViewAllCompaniesComponent
   ],
   imports: [
     BrowserModule,

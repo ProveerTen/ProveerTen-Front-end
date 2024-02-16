@@ -12,7 +12,7 @@
             <div *ngIf="imagePreview">
                 <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
             </div>
-            <p-toast key="center"></p-toast>
+            <p-toast position="bottom-right" key="center"></p-toast>
             <button type="submit" [disabled]="!form.valid || !isValidImage">Actualizar publicación</button>
         </form>
     </div>

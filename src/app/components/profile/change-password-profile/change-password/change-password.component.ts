@@ -51,7 +51,7 @@ export class ChangePasswordComponent {
         next: (response: any) => {
           console.log("response", response);
           this.form.reset()
-          this.router.navigate(['/profile', this.auth.getId()])        
+          this.router.navigate(['/profile'])
         },
         error: (error: any) => {
           console.log("error", error);
@@ -79,14 +79,14 @@ export class ChangePasswordComponent {
       this.client.postRequest(`${environment.url_logic}/password/changePassword/grocer`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response", response);
-         
+
           this.form.reset()
           // this.router.navigate(['/profile', this.auth.getId()])        
           this.router.navigate(['/update-profile', this.auth.getRole()]);
         },
         error: (error: any) => {
           console.log("error", error);
-         
+
         },
         complete: () => {
           console.log("complete");
@@ -139,13 +139,13 @@ export class ChangePasswordComponent {
     this.client.postRequest(`${environment.url_logic}/password/changePassword/provider`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("response", response);
-       
-       
+
+
         this.router.navigate(['/profile', this.auth.getId()])
       },
       error: (error: any) => {
         console.log("error", error);
-       
+
       },
       complete: () => {
         console.log("complete");

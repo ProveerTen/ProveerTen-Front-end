@@ -74,7 +74,7 @@
 
                                 <div class="form-outline mb-4">
                                     <input type="date" formControlName="foundation_company" placeholder=""
-                                        class="form-control form-control-lg" />
+                                        class="form-control form-control-lg" [max]="this.fecha"/>
                                     <label class="form-label" for="form3Example8">Fecha de fundación de la
                                         empresa</label>
                                 </div>
@@ -91,7 +91,7 @@
                                     <label class="form-label" for="form3Example90">Breve descripción de la
                                         empresa</label>
                                 </div>
-                                <p-toast key="center"></p-toast>
+                                <p-toast position="bottom-right" key="center"></p-toast>
                                 <div class="d-flex justify-content-center pt-3">
                                     <button type="submit" class="btn btn-warning btn-lg ms-2">Registrar</button>
                                 </div>
