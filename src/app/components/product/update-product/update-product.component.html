@@ -1,4 +1,4 @@
-<div class="container d-flex justify-content-center align-items-center">
+<!-- <div class="container d-flex justify-content-center align-items-center">
 
     <div border>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -42,8 +42,74 @@
             <div *ngIf="imagePreview">
                 <img [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
             </div>
-            <p-toast position="bottom-right" key="center"></p-toast>
+
             <button type="submit" [disabled]="!isValidImage">Actualizar producto</button>
         </form>
     </div>
+</div> -->
+
+
+
+<div class="container d-flex justify-content-center align-items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="header">
+            <div class="row r1">
+                <div class="col-md-9 abc">
+                    <h1>Tyre Mountain Cycle 21</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div>
+                    <label for="name_product">name_product: </label>
+                    <input id="name_product" type="text" formControlName="name_product" class="form-control">
+                </div>
+                <div>
+                    <label for="description_product">description_product: </label>
+                    <input id="description_product" type="text" formControlName="description_product"
+                        class="form-control">
+                </div>
+                <div>
+                    <label for="purchase_price_product">purchase_price_product: </label>
+                    <input id="purchase_price_product" type="number" formControlName="purchase_price_product"
+                        class="form-control">
+                </div>
+                <div>
+                    <label for="unit_purchase_price_product">unit_purchase_price_product: </label>
+                    <input id="unit_purchase_price_product" type="number" formControlName="unit_purchase_price_product"
+                        class="form-control">
+                </div>
+                <div>
+                    <label for="suggested_unit_selling_price_product">suggested_unit_selling_price_product: </label>
+                    <input id="suggested_unit_selling_price_product" type="number"
+                        formControlName="suggested_unit_selling_price_product" class="form-control">
+                </div>
+                <div>
+                    <label for="purchase_quantity">purchase_quantity: </label>
+                    <input id="purchase_quantity" type="number" formControlName="purchase_quantity"
+                        class="form-control">
+                </div>
+                <div>
+                    <label for="stock_product">stock_product: </label>
+                    <input id="stock_product" type="number" formControlName="stock_product" class="form-control">
+                </div>
+                <div>
+                    <label for="content_product">content_product: </label>
+                    <input id="content_product" type="text" formControlName="content_product" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img [src]="data?.image_product">
+                <input type="file" formControlName="image_product" (change)="onFileSelected($event)">
+                <div *ngIf="imagePreview">
+                    <img [src]="imagePreview" alt="Image Preview" >
+                </div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!isValidImage" class="btn btn-outline-warning">Actualizar producto</button>
+    </form>
 </div>
+
+
+
