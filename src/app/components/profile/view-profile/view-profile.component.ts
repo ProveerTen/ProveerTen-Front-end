@@ -27,6 +27,8 @@ export class ViewProfileComponent {
       next: (response: any) => {
         this.data = response.data;
         if (this.auth.getRole() === "company") {
+          const foundationDate = new Date(this.data.foundation_company);
+          this.data.foundation_company = foundationDate.toISOString().split('T')[0];
           this.getPublications();
         }
       },

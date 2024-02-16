@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-profile-company',
@@ -17,8 +17,7 @@ export class UpdateProfileCompanyComponent {
   form: FormGroup;
   dataUpdate: any = {};
 
-  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
-    private messageService: MessageService) {
+  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router) {
 
     this.form = this.fb.group({
       nit_company: [''],
@@ -38,10 +37,11 @@ export class UpdateProfileCompanyComponent {
         console.log("Response", response);
         console.log("Response data", response.data);
         this.data = response.data;
-
-
+        this.data.national_line_company = Number(response.data.national_line_company);
+        const foundationDate = new Date(this.data.foundation_company);
+        this.data.foundation_company = foundationDate.toISOString().split('T')[0];
         this.form.get('nit_company')!.disable();
-        this.form.patchValue(response.data);
+        this.form.patchValue(this.data);
         // this.disableInput("nit_company")
       },
       error: (error) => {
@@ -71,15 +71,18 @@ export class UpdateProfileCompanyComponent {
       this.client.patchRequest(`http://localhost:4001/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
-          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
-          setTimeout(() => {
-            this.router.navigate(['/profile', this.auth.getId()])
-          }, 1500);
+          Swal.fire({
+            title: "Datos actualizados con éxito",
+            icon: "success"
+          });
+          this.router.navigate(['/profile', this.auth.getId()])
         },
         error: (error) => {
-          console.log(error.error);
-          this.messageService.clear();
-          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: "Error en la actualización de los datos" });
+          console.log(error);
+          Swal.fire({
+            title: error.error.errors[0].msg,
+            icon: "error"
+          });
         },
         complete: () => {
           console.log("complete update profile");
@@ -88,11 +91,6 @@ export class UpdateProfileCompanyComponent {
 
     } else if (!this.form.valid) {
       console.log("No se cumplen las validaciones");
-      this.messageService.clear();
-      this.messageService.add({
-        key: 'center', severity: 'warn', summary: 'Advertencia',
-        detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
-      });
     }
   }
 
@@ -101,14 +99,17 @@ export class UpdateProfileCompanyComponent {
 
     this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        console.log("RESPOnse", response)
+        console.log("RESPOnse", response);
+
         this.form.get(deleteField)!.setValue(null)
-        this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El campo ha sido eliminado exitosamente' });
+
+        Swal.fire({
+          title: "Dato Eliminado",
+          icon: "success"
+        });
       },
       error: (error: any) => {
         console.log(error);
-        this.messageService.clear();
-        this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
       },
       complete: () => {
         console.log("Complete delete data Profile");
