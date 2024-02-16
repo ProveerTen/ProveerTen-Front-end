@@ -56,6 +56,7 @@ import { CreateProductComponent } from './components/product/create-product/crea
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
 import { authGuard } from './guards/guards-components/auth.guard';
+import { update_profile_guard } from './guards/role-guards/update-profile';
 
 const routes: Routes = [
   {
@@ -81,7 +82,8 @@ const routes: Routes = [
   },
   {
     path: 'update-profile/:id', 
-    component:UpdateProfileComponent
+    component:UpdateProfileComponent,
+    canActivate: [update_profile_guard]
   },
   {
     path: 'change-password-profile',

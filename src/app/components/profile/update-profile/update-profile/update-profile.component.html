@@ -3,10 +3,10 @@
 
 <div *ngIf="auth.isCompany() | async">
     <app-update-profile-company></app-update-profile-company>
+    <a href="change-password-profile">Cambiar Contraseña</a>
 </div>
 
 <div *ngIf="auth.isGrocer() | async">
     <app-update-profile-grocer></app-update-profile-grocer>
+    <a href="change-password-profile">Cambiar Contraseña</a>
 </div>
-
-<a href="change-password-profile">Cambiar Contraseña</a>
