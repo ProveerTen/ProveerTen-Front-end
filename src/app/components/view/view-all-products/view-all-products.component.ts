@@ -11,24 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ViewAllProductsComponent {
 
-  products:any;
+  products: any;
 
-  constructor(public auth:AuthService, private router:Router, private client:ClientService) {}
-
-  ngOnInit() {
-
-    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
-      next: (response:any) => {
-        console.log("Response", response.categoriesByProducts);    
-        this.products = response.categoriesByProducts;    
-      },
-      error: (error:any) => {
-        console.log(error);        
-      },
-      complete: () => {
-        console.log("Complete");        
-      }
-    })
-  }
+  constructor(public auth: AuthService, private router: Router, private client: ClientService) { }
 
 }

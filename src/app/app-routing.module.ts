@@ -60,6 +60,7 @@ import { UpdateProductComponent } from './components/product/update-product/upda
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
 import { authGuard } from './guards/guards-components/auth.guard';
 import { update_profile_guard } from './guards/role-guards/update-profile';
+import { SearchComponent } from './components/view/search/search.component';
 
 const routes: Routes = [
   {
@@ -84,8 +85,8 @@ const routes: Routes = [
     canDeactivate: [profileUploadImageGuard]
   },
   {
-    path: 'update-profile/:id', 
-    component:UpdateProfileComponent,
+    path: 'update-profile/:id',
+    component: UpdateProfileComponent,
     canActivate: [update_profile_guard]
   },
   {
@@ -169,6 +170,22 @@ const routes: Routes = [
   {
     path: 'viewAllProducts',
     component: ViewAllProductsComponent,
+  },
+  {
+    path: 'search/:value',
+    component: SearchComponent
+  },
+  // {
+  //   path: 'search/:value',
+  //   component: SearchComponent
+  // },
+  // {
+  //   path: 'search/:option',
+  //   component: SearchComponent
+  // },
+  {
+    path: 'search',
+    component: SearchComponent
   },
   {
     path: '404',

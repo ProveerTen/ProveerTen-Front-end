@@ -3,7 +3,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,7 @@ export class HomeComponent {
   newDataPub: any[] = [];
   finish: any = false;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) { }
 
   ngOnInit(): void {
 
@@ -86,10 +86,14 @@ export class HomeComponent {
   }
 
   viewCompanies() {
-    this.router.navigate(['viewAllcompanies'])
+    // this.router.navigate(['viewAllcompanies'])
+    this.router.navigate(['search', ''])
+    this.shared.changeSearchOption('companies');
   }
   viewProducts() {
-    this.router.navigate(['viewAllProducts'])
+    // this.router.navigate(['viewAllProducts'])
+    this.router.navigate(['search', ''])
+    this.shared.changeSearchOption('products');
   }
 }
 

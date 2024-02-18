@@ -1,0 +1,65 @@
+<!-- <div class="container d-flex flex-column">
+
+    <div class="d-flex justify-content-center mt-5 gap-3">
+        <button (click)="setOption('products')" type="button"
+            class="btn btn-outline-secondary btn-lg">Productos</button>
+        <button (click)="setOption('companies')" type="button"
+            class="btn btn-outline-secondary btn-lg">Compañías</button>
+    </div>
+
+    <div class="row d-flex gap-0">
+        <div class="col">
+            <div class="overflow-auto w-25" style="max-height: 200px;">
+                <div class="div" *ngFor="let category of dataCategories">
+                    <input type="checkbox" [value]="category.name_category"
+                        (click)="verifyCheckbox(category.name_category)" id=" {{category.name_category}}">
+                    <label for="checkbox_categories"> {{category.name_category}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div *ngIf="isOption('products')">
+                <app-view-all-products></app-view-all-products>
+            </div>
+
+            <div *ngIf="isOption('companies')">
+                <app-view-all-companies></app-view-all-companies>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center mb-3">
+        <button (click)="setOption('products')" type="button"
+            class="btn btn-outline-secondary btn-lg">Productos</button>
+        <button (click)="setOption('companies')" type="button"
+            class="btn btn-outline-secondary btn-lg">Compañías</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="overflow-auto" style="max-height: 200px;">
+                <div class="form-check" *ngFor="let category of dataCategories">
+                    <input class="form-check-input" type="checkbox" [value]="category.name_category"
+                        (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}">
+                    <label class="form-check-label" for="{{category.name_category}}">{{category.name_category}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="container d-flex justify-content-center">
+                <div *ngIf="isOption('products')">
+                    <app-view-all-products></app-view-all-products>
+                </div>
+
+                <div *ngIf="isOption('companies')">
+                    <app-view-all-companies></app-view-all-companies>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

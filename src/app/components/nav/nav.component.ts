@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,14 @@ import { Router } from '@angular/router';
 })
 export class NavComponent {
 
-  constructor(public auth: AuthService, private router: Router) { }
+  form: FormGroup;
+
+  constructor(public auth: AuthService, private router: Router, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      searchTerm: ['', Validators.required]
+    });
+  }
+
 
   view_profile() {
     this.router.navigate(['profile']);
@@ -27,5 +35,17 @@ export class NavComponent {
   deleteData_profile() {
     let id = this.auth.getId();
     this.router.navigate(['deleteData-profile/', id])
+  }
+
+  search() {
+    if (this.form.valid) {
+      let value = this.form.value.searchTerm;
+      value = value.replace(/ /g, '_').toLowerCase();
+      // value = value.replace(/ /g, '_').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      this.form.patchValue({
+        searchTerm: ''
+      })
+      this.router.navigate(['search', value]);
+    }
   }
 }
