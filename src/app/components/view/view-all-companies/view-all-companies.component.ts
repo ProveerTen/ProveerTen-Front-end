@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ClientService } from 'src/app/services/client/client.service';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment.development';
+import { ClientService } from 'src/app/services/client/client.service';
+import { environment } from 'src/environments/environment';
+import { SharedService } from '../../../services/shared/shared.service';
 
 @Component({
   selector: 'app-view-all-companies',
@@ -10,4 +11,15 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./view-all-companies.component.css']
 })
 export class ViewAllCompaniesComponent {
+
+  products: any;
+  value: any;
+
+  constructor(public auth: AuthService, private router: Router, private client: ClientService, private shared: SharedService) { }
+
+  ngOnInit() {
+    this.shared.valueRoute.subscribe(value => {
+      this.value = value;
+    })
+  }
 }

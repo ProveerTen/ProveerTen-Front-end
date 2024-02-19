@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from '../../services/shared/shared.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,7 @@ export class NavComponent {
 
   form: FormGroup;
 
-  constructor(public auth: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private shared: SharedService) {
     this.form = this.fb.group({
       searchTerm: ['', Validators.required]
     });
@@ -41,6 +42,7 @@ export class NavComponent {
     if (this.form.valid) {
       let value = this.form.value.searchTerm;
       value = value.replace(/ /g, '_').toLowerCase();
+      this.shared.changeValueRoute(value);
       // value = value.replace(/ /g, '_').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       this.form.patchValue({
         searchTerm: ''
