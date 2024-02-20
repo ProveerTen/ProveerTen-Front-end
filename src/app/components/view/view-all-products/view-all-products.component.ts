@@ -14,6 +14,7 @@ export class ViewAllProductsComponent {
 
   products: any;
   value: any;
+  data: any;
 
   constructor(public auth: AuthService, private router: Router, private client: ClientService, private shared: SharedService) { }
 
@@ -21,7 +22,28 @@ export class ViewAllProductsComponent {
     this.shared.valueRoute.subscribe(value => {
       this.value = value;
     })
+    this.getProducts();
+  }
 
+  getProducts() {
+    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
+      next: (response: any) => {
+        this.data = response.categoriesByProducts;
+        console.log(this.data);
+
+      },
+      error: (error) => {
+        console.log(error.error.Status);
+        console.log('No hay productos por mostrar');
+
+      },
+      complete: () => console.log('complete'),
+    });
+  }
+
+  viewProduct(id: string) {
+    this.router.navigate(['view/product/', id]);
   }
 
 }
+

@@ -22,7 +22,7 @@ export class SearchComponent {
   }
 
   ngOnInit(): void {
-    // this.value = this.routerActivate.snapshot.params['value'];
+    this.value = this.routerActivate.snapshot.params['value'];
     // this.shared.changeValueRoute(this.value);
     if (this.value != '') {
       this.selectedOption = 'products';
