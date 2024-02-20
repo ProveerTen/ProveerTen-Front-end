@@ -1,0 +1,29 @@
+<!-- <p>view-detail-product works!</p> -->
+
+<!-- <div class="products" *ngFor="let product of products"> -->
+<div class="showModal" *ngIf="showModal">
+    <span class="close-button" (click)="hideModalInfo()">&times;</span>
+
+    <div (click)="viewProfile(product.fk_product_nit_company)">
+        <img appBrokenImageProfile [imageType]="'photo'" [src]="data_company.photo_profile_company" alt=""
+            style="width: 100px;">
+        <p>Empresa:{{data_company.name_company}}</p>
+    </div>
+
+    <img appBrokenImage [src]="product?.image_product" alt="" style="width: 100px;">
+    <p>1 Nombre: {{product?.name_product}} </p>
+    <p>6 precio: {{product?.purchase_price_product}} </p>
+    <p>2 {{product?.description_product}} </p>
+    <p>3 peso: {{product?.content_product}}g </p>
+    <p>4 stock: {{product?.stock_product}} </p>
+    <p>5 #unidades por paquete: {{product?.purchase_quantity}} </p>
+    <p>7 Precio sugerido: {{product?.unit_purchase_price_product}} </p>
+    <p>8 {{product?.suggested_unit_selling_price_product}} </p>
+    <p>9 {{product?.suggested_price_product}} </p>
+    <p>10 Disponibilidad: {{product?.availability_product}} </p>
+
+    <div *ngIf="product.categories.length > 0" class="categories">
+        <h6>Categorias:</h6>
+        <p *ngFor="let category of product.categories">{{category }}</p>
+    </div>
+</div>

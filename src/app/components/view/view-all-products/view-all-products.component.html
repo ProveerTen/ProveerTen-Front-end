@@ -3,24 +3,35 @@
 
 
 
-<div class="products" *ngFor="let product of products">
-    <div>
-        <img appBrokenImage [src]="product?.image_product" alt="" style="width: 100px;">
-        <p>1 Nombre: {{product?.name_product}} </p>
-        <p>6 precio: {{product?.purchase_price_product}} </p>
-        <!-- <p>2 {{product?.description_product}} </p> -->
-        <p>3 peso: {{product?.content_product}}g </p>
-        <!-- <p>4 stock: {{product?.stock_product}} </p> -->
-        <!-- <p>5 #unidades por paquete: {{product?.purchase_quantity}} </p> -->
-        <!-- <p>7 Precio sugerido: {{product?.unit_purchase_price_product}} </p> -->
-        <!-- <p>8 {{product?.suggested_unit_selling_price_product}} </p> -->
-        <!-- <p>9 {{product?.suggested_price_product}} </p> -->
-        <p>10 Disponibilidad: {{product?.availability_product}} </p>
-
+<div class="container">
+    <div class="products" *ngFor="let product of products; let i = index">
         <div>
-            <h6>Categorias:</h6>
-            <p *ngFor="let category of product.categories" >{{category.fk_product_category_name_category
-            }}</p>
+            <div (click)="viewProfile(product.fk_product_nit_company)" class="ownerProduct">
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="newDataProduct[i]?.profile_photo_company"
+                    [alt]="newDataProduct[i]?.name_company" style="width: 50px;">
+                <p>Empresa:{{newDataProduct[i]?.name_company}}</p>
+            </div>
+
+            <img appBrokenImage [src]="product?.image_product" alt="" style="width: 100px;">
+            <p>1 Nombre: {{product?.name_product}} </p>
+            <p>6 precio: {{product?.purchase_price_product}} </p>
+            <!-- <p>2 {{product?.description_product}} </p> -->
+            <p>3 peso: {{product?.content_product}}g </p>
+            <!-- <p>4 stock: {{product?.stock_product}} </p> -->
+            <!-- <p>5 #unidades por paquete: {{product?.purchase_quantity}} </p> -->
+            <!-- <p>7 Precio sugerido: {{product?.unit_purchase_price_product}} </p> -->
+            <!-- <p>8 {{product?.suggested_unit_selling_price_product}} </p> -->
+            <!-- <p>9 {{product?.suggested_price_product}} </p> -->
+            <p>10 Disponibilidad: {{product?.availability_product}} </p>
+
+            <!-- <div *ngIf="product.categories.length > 0" class="categories" >
+                <h6>Categorias:</h6>
+                <p *ngFor="let category of product.categories" >{{category.fk_product_category_name_category
+                }}</p>
+            </div> -->
+            <button (click)="viewInfoProduct(product.id_product, {name_company: newDataProduct[i]?.name_company, photo_profile_company: newDataProduct[i]?.profile_photo_company})">Ver más</button>
         </div>
     </div>
+
+    <app-view-detail-product *ngIf="estado" [id_product]="id_product_" [data_company]="data_company"  (customEvent)="handleEvent($event)"></app-view-detail-product>
 </div>

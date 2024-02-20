@@ -1,13 +1,14 @@
 <p>view-all-companies works!</p>
 
-
-<div class="modal-overlay" class="companies" *ngFor="let company of companies; let i = index">
-    <div >
-        <img class="image" appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt=""
-            style="width: 100px; height: 100px;">
-        <h2> {{company?.name_company}} </h2>
-        <p class="viewProfile" (click)="viewProfile(company.nit_company)">Ver perfil</p>
-        <p class="viewProfile" (click)="showModalInfo(i)">Ver más Info</p>
+<div class="container">
+    <div class="modal-overlay" class="companies" *ngFor="let company of companies; let i = index">
+        <div >
+            <img class="image" appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt=""
+                style="width: 100px; height: 100px;">
+            <h2> {{company?.name_company}} </h2>
+            <p class="viewProfile" (click)="viewProfile(company.nit_company)">Ver perfil</p>
+            <p class="viewProfile" (click)="showModalInfo(i)">Ver más Info</p>
+        </div>
     </div>
 </div>
 
