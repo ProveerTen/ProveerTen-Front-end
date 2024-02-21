@@ -1,4 +1,4 @@
-<div class="content">
+<!-- <div class="content">
     <div class="form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <input type="text" formControlName="name_product" placeholder="Nombre del producto">
@@ -22,5 +22,75 @@
             <p-toast position="bottom-right" key="center"></p-toast>
             <button type="submit" [disabled]="!isValidImage">Crear producto</button>
         </form>
+    </div>
+</div> -->
+
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-header bg-warning text-white text-center">
+                    <h4 class="card-title">Creación de producto</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4 text-center">
+                        <div *ngIf="imagePreview">
+                            <img appBrokenImage [src]="imagePreview" alt="Image Preview" class="img-fluid rounded-circle border border-warning" style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" formControlName="name_product" placeholder="Nombre del producto">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" formControlName="description_product" placeholder="Descripción del producto">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="number" class="form-control" formControlName="purchase_price_product" placeholder="Precio de venta">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="number" class="form-control" formControlName="unit_purchase_price_product" placeholder="Precio unitario">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" formControlName="suggested_unit_selling_price_product" placeholder="Precio sugerido al tendero">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" formControlName="purchase_quantity" placeholder="Cantidad del paquete">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" formControlName="stock_product" placeholder="Cantidad">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" formControlName="content_product" placeholder="Contenido del producto">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check" *ngFor="let category of dataCategories">
+                                <input type="checkbox" class="form-check-input" [value]="category.name_category" (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}">
+                                <label class="form-check-label" for="{{category.name_category}}">{{category.name_category}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" formControlName="image_product" (change)="onFileSelected($event)">
+                        </div>
+                        <div class="mb-3" *ngIf="imagePreview">
+                            <img appBrokenImage [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+                        </div>
+                        <div class="mb-3">
+                            <p-toast position="bottom-right" key="center"></p-toast>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-warning" [disabled]="!isValidImage">Crear producto</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
