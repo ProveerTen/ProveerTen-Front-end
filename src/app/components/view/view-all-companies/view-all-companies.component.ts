@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-all-companies',
