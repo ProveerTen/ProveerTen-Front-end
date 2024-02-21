@@ -13,9 +13,9 @@ export class ViewAllCompaniesComponent {
 
   id!: string;
   companies: any;
-  description:any;
-  showModal:any = false;
-  companyInfo:any;
+  description: any;
+  showModal: any = false;
+  companyInfo: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
@@ -28,11 +28,11 @@ export class ViewAllCompaniesComponent {
         this.companies = response.categoriesByCompanies;
 
         this.companies.forEach(company => {
-          company.showMore = false 
+          company.showMore = false
         });
 
         console.log(response.categoriesByCompanies);
-        console.log(this.companies);        
+        console.log(this.companies);
       },
       error: (error) => {
         console.log(error.error);
@@ -51,7 +51,7 @@ export class ViewAllCompaniesComponent {
     this.showModal = true
     this.companyInfo = this.companies[id]
     console.log("compa info", this.companyInfo);
-    
+
     // this.router.navigate(['profile/company', id])
   }
   hideModalInfo() {
@@ -60,7 +60,7 @@ export class ViewAllCompaniesComponent {
 
   toggleShowMore(company: any) {
     console.log("toggle show more");
-    
+
     company.showMore = !company.showMore;
     event.stopPropagation();
     // if (company.showMore) {
@@ -71,6 +71,6 @@ export class ViewAllCompaniesComponent {
     //   company?.description_company.slice(0, 20) + '...';
     // }
   }
-    // company.description_company = company.description_company.slice(0,21)
+  // company.description_company = company.description_company.slice(0,21)
   // }
 }

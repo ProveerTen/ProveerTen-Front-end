@@ -11,30 +11,30 @@ import { environment } from 'src/environments/environment';
 })
 export class ViewAllProductsComponent {
 
-  products:any;
-  companies:any;
+  products: any;
+  companies: any;
   newDataProduct: any[] = [];
   finish: any = false;
-  estado:boolean = false;
-  id_product_:string;
-  data_company:any
+  estado: boolean = false;
+  id_product_: string;
+  data_company: any
 
-  constructor(public auth:AuthService, private router:Router, private client:ClientService) {}
+  constructor(public auth: AuthService, private router: Router, private client: ClientService) { }
 
   ngOnInit() {
 
     this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
-      next: (response:any) => {
-        console.log("products", response.categoriesByProducts);    
-        this.products = response.categoriesByProducts;    
+      next: (response: any) => {
+        console.log("products", response.categoriesByProducts);
+        this.products = response.categoriesByProducts;
       },
-      error: (error:any) => {
-        console.log(error);        
+      error: (error: any) => {
+        console.log(error);
       },
       complete: () => {
         // console.log("Complete");   
 
-        this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined).subscribe({
+        this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
           next: (response: any) => {
             console.log("companies", response.data);
             this.companies = response.data
@@ -46,7 +46,7 @@ export class ViewAllProductsComponent {
             console.log("complete");
             this.newData();
           }
-        });    
+        });
       }
     })
   }
@@ -70,20 +70,20 @@ export class ViewAllProductsComponent {
       }
       this.finish = i === this.products.length - 1 ? true : false;
     }
-    console.log("new data", this.newDataProduct); 
+    console.log("new data", this.newDataProduct);
   }
-  
+
   viewProfile(id: string) {
     this.router.navigate(['profile/company', id])
   }
 
-  viewInfoProduct(id:string, data_company:any) {
+  viewInfoProduct(id: string, data_company: any) {
     this.estado = true
     this.id_product_ = id
     this.data_company = data_company
     console.log("id desde el padre", this.id_product_);
     console.log("estado padre", this.estado);
-    
+
   }
   handleEvent(value: boolean) {
     this.estado = value;
