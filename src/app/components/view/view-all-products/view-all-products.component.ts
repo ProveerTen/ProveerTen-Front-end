@@ -71,7 +71,6 @@ export class ViewAllProductsComponent {
       this.finish = i === this.products.length - 1 ? true : false;
     }
     console.log("new data", this.newDataProduct); 
-    console.log("ttt", this.companies[1]?.profile_photo_company);  
   }
   
   viewProfile(id: string) {
