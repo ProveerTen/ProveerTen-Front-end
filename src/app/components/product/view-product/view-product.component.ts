@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-view-product',
   templateUrl: './view-product.component.html',
@@ -20,10 +19,12 @@ export class ViewProductComponent {
 
   ngOnInit(): void {
     this.id = this.routerActivate.snapshot.params['id'];
-    this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    console.log(this.id);
+
+    this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id }, undefined, undefined).subscribe({
       next: (response: any) => {
         console.log(response);
-        this.data = response.products[0];
+        this.data = response.categoriesByProducts[0];
         console.log(this.data);
 
       },

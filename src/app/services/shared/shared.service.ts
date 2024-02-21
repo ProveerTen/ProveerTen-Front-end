@@ -18,4 +18,8 @@ export class SharedService {
   changeValueRoute(newValue: string): void {
     this.valueRoute.next(newValue);
   }
+
+  getSearchOption() {
+    return this.searchOption.asObservable();
+  }
 }

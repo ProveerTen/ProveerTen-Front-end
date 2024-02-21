@@ -1,52 +1,12 @@
-<p>view-all-companies works!</p>
-
 <div class="container">
-    <div class="modal-overlay" class="companies" *ngFor="let company of companies; let i = index">
-        <div >
-            <img class="image" appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt=""
-                style="width: 100px; height: 100px;">
-            <h2> {{company?.name_company}} </h2>
-            <p class="viewProfile" (click)="viewProfile(company.nit_company)">Ver perfil</p>
-            <p class="viewProfile" (click)="showModalInfo(i)">Ver más Info</p>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let company of data">
+            <div class="card mb-3 h-100" (click)="viewCompany(company.nit_company)" style="cursor: pointer;">
+                <h2>{{company.name_company}}</h2>
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company"
+                    style="width: 200px; height: 168px;" alt="avatar" class="img-fluid">
+
+            </div>
         </div>
     </div>
-</div>
-
-<div class="showModal" *ngIf="showModal">
-    <span class="close-button" (click)="hideModalInfo()">&times;</span>
-    <img class="image" appBrokenImageProfile [imageType]="'photo'" [src]="companyInfo?.profile_photo_company" alt=""
-        style="width: 100px; height: 100px;">
-    <h2> {{companyInfo?.name_company}} </h2>
-
-    <div *ngIf="companyInfo?.description_company" class="description-container">
-        <p *ngIf="companyInfo.description_company.length <= 80; else showMore">
-            {{companyInfo?.description_company}}
-        </p>
-
-        <!-- Utiliza una directiva estructural (ngIf) para mostrar el botón solo cuando el mensaje es largo -->
-        <!-- <ng-container *ngIf="company.description_company.length > 20">
-            <button >Ver más</button>
-        </ng-container> -->
-
-        <ng-template #showMore class="showMore">
-            <p class="parrafo" *ngIf="!companyInfo.showMore">{{companyInfo?.description_company.slice(0, 80)}}...</p>
-            <p class="parrafo" *ngIf="companyInfo.showMore">{{ companyInfo.description_company.slice(0, 130)}}...</p>
-            <button *ngIf="!companyInfo.showMore" (click)="toggleShowMore(companyInfo)" class="showMore-less">Ver más</button>
-            <button *ngIf="companyInfo.showMore" (click)="toggleShowMore(companyInfo)" class="showMore-less">Ver Menos</button>
-        </ng-template>
-    </div>
-
-    <div *ngIf="companyInfo?.categories.length > 0" class="categoriesCompany">
-        <h6>Empresa de:</h6>
-        <!-- <div  *ngFor="let category of company.categories"> -->
-            <p *ngFor="let category of companyInfo.categories; let last = last"> {{category.fk_product_category_name_category}}<ng-container *ngIf="!last">, </ng-container> </p>
-             
-            
-        <!-- </div> -->
-    </div>
-
-    <p class="viewProfile" (click)="viewProfile(companyInfo?.nit_company)">Ver perfil</p>
-
-    <!-- {{companyInfo.description_company}} -->
-    <!-- <p>hola</p> -->
 </div>
