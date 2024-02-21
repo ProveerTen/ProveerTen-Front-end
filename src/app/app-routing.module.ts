@@ -61,6 +61,7 @@ import { UpdateProductComponent } from './components/product/update-product/upda
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
 import { authGuard } from './guards/guards-components/auth.guard';
 import { update_profile_guard } from './guards/role-guards/update-profile';
+import { SearchComponent } from './components/view/search/search.component';
 
 const routes: Routes = [
   {
@@ -173,6 +174,10 @@ const routes: Routes = [
     path: 'viewAllProducts',
     component: ViewAllProductsComponent,
     canActivate: [homeGuard]
+  },
+  {
+    path: 'search/:value',
+    component: SearchComponent
   },
   {
     path: '404',
