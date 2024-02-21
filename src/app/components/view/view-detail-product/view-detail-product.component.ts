@@ -26,9 +26,9 @@ export class ViewDetailProductComponent {
 
     this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id_product }, undefined, undefined).subscribe({
       next: (response: any) => {
-        console.log("Response", response.categoriesByProducts[0][0][0]);
-
-        this.product = response.categoriesByProducts[0][0][0];
+        console.log("Response", response.categoriesByProducts[0]);
+        this.product = response.categoriesByProducts[0];
+        
         console.log("product individual", this.product);
       },
       error: (error: any) => {
