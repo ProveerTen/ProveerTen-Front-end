@@ -22,7 +22,7 @@
     </button> -->
     </div>
     <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewCompanies()">Encontrar Empresas</button>
-    <button (click)="viewProducts()">Encontrar Productos</button>
+    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewProducts()">Encontrar Productos</button>
 
     <div class="col-md-6 d-flex gap-3 w-50 flex-xxl-column flex-wrap" *ngIf="publicaciones; else noPublications">
         <div class="card" style="width: 100%; height: 100%;" *ngFor="let publicacion of publicaciones; let i = index">
