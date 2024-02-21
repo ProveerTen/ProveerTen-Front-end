@@ -55,14 +55,22 @@
 
         <div class="col-md-8">
             <div class="container d-flex justify-content-center">
-                <div *ngIf="isOption('products')">
+                <div *ngIf="(shared.getSearchOption() | async) === 'products'">
+                    <app-view-all-products></app-view-all-products>
+                </div>
+
+                <div *ngIf="(shared.getSearchOption() | async) === 'companies'">
+                    <app-view-all-companies></app-view-all-companies>
+                </div>
+            </div>
+            <!-- <div *ngIf="isOption('products')">
                     <app-view-all-products></app-view-all-products>
                 </div>
 
                 <div *ngIf="isOption('companies')">
                     <app-view-all-companies></app-view-all-companies>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

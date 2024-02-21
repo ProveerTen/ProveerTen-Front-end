@@ -40,5 +40,6 @@
         {{data?.suggested_unit_selling_price_product}}
     </p>
 
-    <button (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver compañía</button>
+    <button (click)="viewCompany(data.fk_product_nit_company)"
+        *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))">Ver compañía</button>
 </div>
