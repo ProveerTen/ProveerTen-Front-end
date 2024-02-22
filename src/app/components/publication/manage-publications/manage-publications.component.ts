@@ -11,8 +11,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./manage-publications.component.css']
 })
 export class ManagePublicationsComponent {
+viewProduct(arg0: any) {
+throw new Error('Method not implemented.');
+}
 
   publications: any;
+data: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router,
   private messageService: MessageService) { }
@@ -46,7 +50,7 @@ export class ManagePublicationsComponent {
           setTimeout(() => {
             window.location.reload();
           }, 1500);
-          
+
         },
         error: (error) => {
           console.log(error.error.Status);

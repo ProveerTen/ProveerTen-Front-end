@@ -43,8 +43,37 @@
     <button (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver compañía</button>
 </div> -->
 
+<div class="container">
+  <div class="row">
+      <div class="col-md-12 text-center">
+          <img appBrokenImage [src]="data?.image_product" style="width: 150px; height: 150px;">
+      </div>
+  </div>
+  <div class="row ">
+      <div class="col-md-12 ">
+          <h3 class="mt-3">{{data?.name_product}}</h3>
+          <hr>
+          <p><strong>Disponibilidad:</strong> {{data?.availability_product}}</p>
+          <p><strong>Contenido:</strong> {{data?.content_product}}</p>
+          <p><strong>Descripción:</strong> {{data?.description_product}}</p>
+          <p><strong>Precio de compra:</strong> {{data?.purchase_price_product}}</p>
+          <p><strong>Cantidad de compra:</strong> {{data?.purchase_quantity}}</p>
+          <p><strong>Stock:</strong> {{data?.stock_product}}</p>
+          <p><strong>Precio sugerido:</strong> {{data?.suggested_price_product}}</p>
+          <p><strong>Precio unitario sugerido:</strong> {{data?.suggested_unit_selling_price_product}}</p>
+      </div>
+  </div>
+  <div class="row mt-3">
+      <div class="col-md-12 text-center">
+          <button (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async" class="btn btn-primary">Ver compañía</button>
+      </div>
+  </div>
+</div>
 
-<div class="container justify-content-center align-items-center d-flex ">
+
+
+
+<!-- <div class="container justify-content-center align-items-center d-flex ">
     <div class="card">
         <div class="card-body">
             <div class="row justify-content-center align-items-center d-flex">
@@ -112,4 +141,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
