@@ -90,5 +90,11 @@
             </ul>
         </div>
     </div>
+    <div class="search">
+        <form [formGroup]="form" (ngSubmit)="search()">
+            <input type="search" formControlName="searchTerm" placeholder="Buscar">
+            <button>Enviar</button>
+        </form>
+    </div>
     <!-- <button (click)="allCompanies()">ver compañias</button> -->
 </nav>

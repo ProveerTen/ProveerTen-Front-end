@@ -20,15 +20,11 @@ export class ViewDetailProductComponent {
   constructor(public auth: AuthService, private router: Router, private client: ClientService) { }
 
   ngOnInit() {
-    console.log("desde hijo", this.id_product);
-    console.log("estado hijo", this.showModal);
-
 
     this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id_product }, undefined, undefined).subscribe({
       next: (response: any) => {
-        console.log("Response", response.categoriesByProducts[0][0][0]);
+        this.product = response.categoriesByProducts[0];
 
-        this.product = response.categoriesByProducts[0][0][0];
         console.log("product individual", this.product);
       },
       error: (error: any) => {
@@ -46,7 +42,6 @@ export class ViewDetailProductComponent {
 
   hideModalInfo() {
     this.showModal = false
-    console.log("GWUQSWE", this.showModal);
     this.customEvent.emit(false)
   }
 

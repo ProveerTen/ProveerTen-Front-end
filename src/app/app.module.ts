@@ -62,6 +62,7 @@ import { ViewAllGrocersComponent } from './components/view/view-all-grocers/view
 import { ViewAllCompaniesComponent } from './components/view/view-all-companies/view-all-companies.component';
 import { ViewAllProductsComponent } from './components/view/view-all-products/view-all-products.component';
 import { ViewDetailProductComponent } from './components/view/view-detail-product/view-detail-product.component';
+import { SearchComponent } from './components/view/search/search.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { ViewDetailProductComponent } from './components/view/view-detail-produc
     ViewAllGrocersComponent,
     ViewAllCompaniesComponent,
     ViewAllProductsComponent,
-    ViewDetailProductComponent
+    ViewDetailProductComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

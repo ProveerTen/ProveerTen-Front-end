@@ -37,6 +37,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 // Guards
 import { homeGuard } from 'src/app/guards/guards-components/home.guard';
+import { unsavedChanges } from './guards/guards-components/unsavedChanges';
 import { grocerGuard } from 'src/app/guards/role-guards/grocer.guard';
 import { offlineGuard } from 'src/app/guards/role-guards/offline.guard';
 import { providerGuard } from 'src/app/guards/role-guards/provider.guard';
@@ -60,6 +61,7 @@ import { UpdateProductComponent } from './components/product/update-product/upda
 import { ViewProductComponent } from './components/product/view-product/view-product.component';
 import { authGuard } from './guards/guards-components/auth.guard';
 import { update_profile_guard } from './guards/role-guards/update-profile';
+import { SearchComponent } from './components/view/search/search.component';
 
 const routes: Routes = [
   {
@@ -86,7 +88,8 @@ const routes: Routes = [
   {
     path: 'update-profile/:id', 
     component:UpdateProfileComponent,
-    canActivate: [update_profile_guard]
+    canActivate: [update_profile_guard],
+    canDeactivate: [unsavedChanges]
   },
   {
     path: 'change-password-profile',
@@ -98,7 +101,8 @@ const routes: Routes = [
   },
   {
     path: 'viewAllcompanies',
-    component: ViewAllCompaniesComponent
+    component: ViewAllCompaniesComponent,
+    canActivate: [homeGuard]
   },
   {
     path: 'profile/company/:id',
@@ -169,6 +173,11 @@ const routes: Routes = [
   {
     path: 'viewAllProducts',
     component: ViewAllProductsComponent,
+    canActivate: [homeGuard]
+  },
+  {
+    path: 'search/:value',
+    component: SearchComponent
   },
   {
     path: '404',

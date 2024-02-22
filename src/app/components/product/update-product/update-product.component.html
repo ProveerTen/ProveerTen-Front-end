@@ -48,7 +48,77 @@
     </div>
 </div> -->
 
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-warning text-white text-center">
+                    <h4 class="card-title">Actualizar Producto</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name_product">Nombre del Producto</label>
+                                    <input id="name_product" type="text" class="form-control" formControlName="name_product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description_product">Descripción del Producto</label>
+                                    <input id="description_product" type="text" class="form-control" formControlName="description_product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="purchase_price_product">Precio de Venta</label>
+                                    <input id="purchase_price_product" type="number" class="form-control" formControlName="purchase_price_product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="unit_purchase_price_product">Precio Unitario</label>
+                                    <input id="unit_purchase_price_product" type="number" class="form-control" formControlName="unit_purchase_price_product">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="suggested_unit_selling_price_product">Precio Sugerido al Tendero</label>
+                                    <input id="suggested_unit_selling_price_product" type="number" class="form-control" formControlName="suggested_unit_selling_price_product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="purchase_quantity">Cantidad del Paquete</label>
+                                    <input id="purchase_quantity" type="number" class="form-control" formControlName="purchase_quantity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock_product">Cantidad en Stock</label>
+                                    <input id="stock_product" type="number" class="form-control" formControlName="stock_product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="content_product">Contenido del Producto</label>
+                                    <input id="content_product" type="text" class="form-control" formControlName="content_product">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image_product">Imagen del Producto</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="image_product" (change)="onFileSelected($event)">
+                                <label class="input-group-text" for="image_product">Subir</label>
+                            </div>
+                            <div class="mt-2">
+                                <div *ngIf="imagePreview">
+                                    <img appBrokenImage [src]="imagePreview" alt="Image Preview" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center p-3">
+                            <button type="submit" class="btn bg-warning" [disabled]="!isValidImage">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<!-- 
 
 <div class="container d-flex justify-content-center align-items-center">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -113,3 +183,4 @@
 
 
 
+ -->
