@@ -43,8 +43,7 @@ export class UpdateProductComponent {
     this.id = this.routerActivate.snapshot.params['id'];
     this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        console.log(response);
-        this.data = response.products[0];
+        this.data = response.categoriesByProducts[0];
         console.log(this.data);
         this.form.patchValue({
           name_product: this.data.name_product,
