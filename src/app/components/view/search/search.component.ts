@@ -24,13 +24,9 @@ export class SearchComponent {
   ngOnInit(): void {
     this.value = this.routerActivate.snapshot.params['value'];
     // this.shared.changeValueRoute(this.value);
-    if (this.value != 'companies') {
-      this.selectedOption = 'products';
-    } else {
-      this.shared.searchOption.subscribe(option => {
-        this.selectedOption = option;
-      })
-    }
+    this.shared.searchOption.subscribe(option => {
+      this.selectedOption = option;
+    })
     this.client.getRequest(`${environment.url_logic}/category/categories`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.dataCategories = response.categories[0];

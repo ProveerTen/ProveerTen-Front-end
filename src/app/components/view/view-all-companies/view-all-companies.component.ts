@@ -21,6 +21,10 @@ export class ViewAllCompaniesComponent {
   ngOnInit() {
     this.shared.valueRoute.subscribe(value => {
       this.value = value;
+      if (this.value != null) {
+        this.getCompaniesByName();
+        return;
+      }
     })
     this.getCompanies();
   }
@@ -29,13 +33,27 @@ export class ViewAllCompaniesComponent {
     this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined, undefined).subscribe({
       next: (response: any) => {
         this.data = response.data;
-        console.log(this.data);
-
+        if (this.data.length == 0) {
+          console.log('No hay compañías por mostrar');
+        }
       },
       error: (error) => {
         console.log(error.error.Status);
-        console.log('No hay productos por mostrar');
+      },
+      complete: () => console.log('complete'),
+    });
+  }
 
+  getCompaniesByName() {
+    this.client.postRequest(`${environment.url_logic}/search/companies/value`, { value: this.value }, undefined, undefined).subscribe({
+      next: (response: any) => {
+        this.data = response.values;
+        if (this.data.length == 0) {
+          console.log('No hay compañías por mostrar');
+        }
+      },
+      error: (error) => {
+        console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
