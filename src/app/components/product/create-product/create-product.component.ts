@@ -27,7 +27,7 @@ export class CreateProductComponent {
     private router: Router, private messageService: MessageService) {
     this.form = this.fb.group({
       name_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
+      description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(200)]],
       purchase_price_product: ['', [Validators.required]],
       unit_purchase_price_product: ['', [Validators.required]],
       suggested_unit_selling_price_product: [''],
