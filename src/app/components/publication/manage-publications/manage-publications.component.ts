@@ -68,4 +68,8 @@ data: any;
   goBack() {
     this.router.navigate(['panel']);
   }
+
+  isVideo(url: string): boolean {
+    return url.endsWith('.mp4'); // Cambia la condición según el formato del video
+  }
 }

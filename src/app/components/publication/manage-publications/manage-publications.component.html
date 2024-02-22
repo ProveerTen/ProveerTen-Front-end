@@ -17,13 +17,31 @@
               </thead>
               <tbody>
                   <tr *ngFor="let publication of publications">
-                      <td class="align-middle text-center">
+                    <ng-container *ngIf="isVideo(publication.image_url); else isImage">
+                        <td>
+                            <video controls style="width: 100px; height: 100px;">
+                                <source [src]="publication.image_url" type="video/mp4">
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </td>
+                    </ng-container>
+                    <ng-template #isImage>
+                        <td>
+                            <img [src]="publication.image_url" style="width: 100px; height: 100px;">
+                        </td>
+                    </ng-template>
+                        <!--
+
+                            <td class="align-middle text-center">
                           <img [src]="publication.image_url" style="width: 100px; height: 100px;" class="img-thumbnail mx-auto d-block">
                       </td>
-                      <td class="align-middle text-center">
-                          <button class="btn btn-info" (click)="updatePublication(publication._id)">Actualizar</button>
-                          <button class="btn btn-danger" (click)="deletePublication(publication._id)">Eliminar</button>
-                      </td>
+                      
+                          -->
+                          <td class="align-middle text-center">
+                            <button class="btn btn-info" (click)="updatePublication(publication._id)">Actualizar</button>
+                            <button class="btn btn-danger" (click)="deletePublication(publication._id)">Eliminar</button>
+                        </td>
+                      
                   </tr>
               </tbody>
           </table>

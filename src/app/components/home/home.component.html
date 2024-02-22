@@ -40,7 +40,15 @@
             </div>
             <div class="card-body w-100 d-flex justify-content-center flex-column">
                 <p class="fs-3 bg-light" style="color: black">{{ publicacion.text }}</p>
-                <img id="image_publication" [src]="publicacion?.secure_url" class="img-fluid">
+                <ng-container *ngIf="isVideo(publicacion.secure_url); else isImage">
+                    <video id="video_publication" controls class="img-fluid" style="width: 100%;">
+                        <source [src]="publicacion?.secure_url" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </ng-container>
+                <ng-template #isImage>
+                    <img id="image_publication" [src]="publicacion?.secure_url" class="img-fluid">
+                </ng-template>
             </div>
         </div>
         <div class="finishedMessage" *ngIf="finish">

@@ -95,5 +95,9 @@ export class HomeComponent {
     this.router.navigate(['search', 'products'])
     this.shared.changeSearchOption('products');
   }
+
+  isVideo(url: string): boolean {
+    return url.endsWith('.mp4'); // Cambia la condición según el formato del video
+  }
 }
 
