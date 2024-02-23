@@ -4,6 +4,7 @@ import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-profile-grocer',
@@ -37,7 +38,7 @@ export class UpdateProfileGrocerComponent {
 
 
   ngOnInit(): void {
-    this.client.getRequest(`http://localhost:4001/profile/grocer`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.getRequest(`${environment.url_logic}/profile/grocer`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("Response data oninit", response.data);
         this.data = response.data;
@@ -72,7 +73,7 @@ export class UpdateProfileGrocerComponent {
       }
       console.log("data Update apartment", this.dataUpdate.apartment);
 
-      this.client.patchRequest(`http://localhost:4001/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.patchRequest(`${environment.url_logic}/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response patch", response);
 
@@ -105,7 +106,7 @@ export class UpdateProfileGrocerComponent {
   async deleteField (deleteField: string) {
     console.log("DELETE FIELD", deleteField);
 
-    this.client.deleteRequest(`http://localhost:4001/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.deleteRequest(`${environment.url_logic}/edit_profile/grocer`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("RESPOnse delete", response);
 
