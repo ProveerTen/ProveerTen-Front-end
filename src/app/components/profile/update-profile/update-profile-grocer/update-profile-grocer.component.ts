@@ -79,7 +79,7 @@ export class UpdateProfileGrocerComponent {
 
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
           setTimeout(() => {
-            this.router.navigate(['/profile', this.auth.getId()])
+            this.router.navigate(['/profile'])
           }, 1500);
         },
         error: (error) => {
