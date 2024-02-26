@@ -72,6 +72,8 @@ export class UpdateProfileGrocerComponent {
         number_grocer: this.form.value.number_grocer
       }
       console.log("data Update apartment", this.dataUpdate.apartment);
+      console.log(this.dataUpdate);
+      
 
       this.client.patchRequest(`${environment.url_logic}/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
@@ -106,7 +108,7 @@ export class UpdateProfileGrocerComponent {
   async deleteField (deleteField: string) {
     console.log("DELETE FIELD", deleteField);
 
-    this.client.deleteRequest(`${environment.url_logic}/edit_profile/grocer`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log("RESPOnse delete", response);
 

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
   selector: 'app-view-profile-company',
@@ -17,11 +18,16 @@ export class ViewProfileCompanyComponent {
   data: any;
   publications: any;
   isLogin: any;
-  idCompany : any;
-  idGrocer:any;
-  dataChat:any;
+  idCompany: any;
+  idGrocer: any;
+  chat: any;
+  providers: any;
+  messageText: any;
+  messages: any[] = [];
+  showChat: boolean = false;
+  chats: string[] = [];
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) {
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private chatService: ChatService) {
     this.auth.isLoggedIn().subscribe((value: any) => {
       this.isLogin = value;
     });
@@ -43,6 +49,17 @@ export class ViewProfileCompanyComponent {
         },
         complete: () => console.log('complete'),
       });
+      this.client.postRequest(`${environment.url_chat}/provider/city`, { companyId: this.id, grocerId: this.auth.getId() }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.providers = response.providersbycity[0]
+          console.log(this.providers);
+
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+
     } else {
       this.client.getRequest(`${environment.url_logic}/profile/data/companies/${this.id}`, undefined, undefined).subscribe({
         next: (response: any) => {
@@ -95,25 +112,41 @@ export class ViewProfileCompanyComponent {
   }
 
 
-  getId (){
+  chatear(document_provider: any) {
 
-    this.idCompany = this.id;
-    this.idGrocer = this.auth.getId();
-
-    this.dataChat ={
-     companyId: this.idCompany,
-      grocerId: this.idGrocer
-    }
-
-    this.client.postRequest(`${environment.url_chat}/provider/getproviders`, this.dataChat, undefined, undefined).subscribe({
-    next:(response) =>{
-        console.log(response);
+    this.client.postRequest(`${environment.url_chat}/chat/find`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.chat = response
+        if (response.chat.length === 0) {
+          this.client.postRequest(`${environment.url_chat}/chat/create`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
+            next: (response: any) => {
+              console.log(response);
+              this.chats.push(response.chat._id);
+              this.showChat = true;
+              console.log(this.chats);
+            },
+            error: (error) => {
+              console.log(error, "a");
+            }
+          })
+        } else {
+          this.showChat = true;
+          console.log(response);
+          this.chats.push(response.chat[0]._id);
+          console.log(this.chats);
+        }
       },
       error: (error) => {
         console.log(error);
       }
     })
   }
+
+  closeChat(index: number) {
+    this.chats.splice(index, 1);
   }
+
+}
 
 

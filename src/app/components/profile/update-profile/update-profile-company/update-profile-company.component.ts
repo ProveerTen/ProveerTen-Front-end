@@ -77,7 +77,7 @@ export class UpdateProfileCompanyComponent {
             title: "Datos actualizados con éxito",
             icon: "success"
           });
-          this.router.navigate(['/profile'])
+          this.router.navigate(['/profile', this.auth.getId()])
         },
         error: (error) => {
           console.log(error);

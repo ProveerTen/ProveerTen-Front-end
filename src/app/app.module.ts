@@ -63,6 +63,7 @@ import { ViewAllCompaniesComponent } from './components/view/view-all-companies/
 import { ViewAllProductsComponent } from './components/view/view-all-products/view-all-products.component';
 import { ViewDetailProductComponent } from './components/view/view-detail-product/view-detail-product.component';
 import { SearchComponent } from './components/view/search/search.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import { SearchComponent } from './components/view/search/search.component';
     ViewAllCompaniesComponent,
     ViewAllProductsComponent,
     ViewDetailProductComponent,
-    SearchComponent
+    SearchComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
