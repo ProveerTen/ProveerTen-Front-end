@@ -1,4 +1,4 @@
-
+/* 
 .wrap {
     margin: 15px;
     max-width: 600px;
@@ -66,9 +66,9 @@
     border-radius: 4px;
     color: #fff;
     padding: 1em 1.5em;
-    }
+    } */
     /******** Subscription option actions ********/
-    .sub-opts input[name="subscription"] {
+    /* .sub-opts input[name="subscription"] {
     display: none;
     }
     .sub-opts input[name="subscription"] + .sub-opt {
@@ -95,4 +95,4 @@
     .sub-opts .sub-opt .sub-label span.price {
     display: inline-block;
     float: right;
-    }
+    } */
