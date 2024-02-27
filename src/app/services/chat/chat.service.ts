@@ -10,7 +10,7 @@ export class ChatService {
 
   private socket: Socket;
 
-  constructor() { this.socket = io(enviroment.url_chat) }
+  constructor() { this.socket = io(environment.url_chat) }
 
   public joinChat(userId: string, chatId: any): void {
     this.socket.emit('join', userId, chatId);
