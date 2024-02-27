@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-md-4" *ngFor="let product of data">
             <div class="card mb-3 h-100" (click)="viewProduct(product.id_product)" style="cursor: pointer;width: 225px;">
@@ -12,4 +12,27 @@
             </div>
         </div>
     </div>
+</div> -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let product of data">
+            <div class="card h-100 border-0 shadow" (click)="viewProduct(product.id_product)" style="cursor: pointer;">
+                <img appBrokenImage loading="lazy" [src]="product.image_product" class="card-img-top" alt="{{product?.name_product}}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <hr>
+                    <h5 class="card-title">{{product?.name_product}}</h5>
+                    <p class="card-text text-muted" >Precio de compra: {{product?.purchase_price_product}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
