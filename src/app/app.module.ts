@@ -64,6 +64,7 @@ import { ViewAllProductsComponent } from './components/view/view-all-products/vi
 import { ViewDetailProductComponent } from './components/view/view-detail-product/view-detail-product.component';
 import { SearchComponent } from './components/view/search/search.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ListChatsComponent } from './components/chat/list-chats/list-chats.component';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { ChatComponent } from './components/chat/chat.component';
     ViewAllProductsComponent,
     ViewDetailProductComponent,
     SearchComponent,
-    ChatComponent
+    ChatComponent,
+    ListChatsComponent
   ],
   imports: [
     BrowserModule,
