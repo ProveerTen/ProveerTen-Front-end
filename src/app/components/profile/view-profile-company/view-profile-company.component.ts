@@ -20,7 +20,6 @@ export class ViewProfileCompanyComponent {
   isLogin: any;
   idCompany: any;
   idGrocer: any;
-  chat: any;
   providers: any;
   messageText: any;
   messages: any[] = [];
@@ -35,6 +34,11 @@ export class ViewProfileCompanyComponent {
 
   ngOnInit(): void {
     this.id = this.routerActivate.snapshot.params['id'];
+    let localchats = localStorage.getItem('chats');
+    if (localchats) {
+      this.chats = localchats.split(',');
+    }
+    
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
@@ -113,28 +117,29 @@ export class ViewProfileCompanyComponent {
 
 
   chatear(document_provider: any) {
-
     this.client.postRequest(`${environment.url_chat}/chat/find`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
       next: (response: any) => {
-        console.log(response)
-        this.chat = response
+        //console.log(response)
+        //this.chat = response
         if (response.chat.length === 0) {
           this.client.postRequest(`${environment.url_chat}/chat/create`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
             next: (response: any) => {
-              console.log(response);
+              //console.log(response);
               this.chats.push(response.chat._id);
               this.showChat = true;
-              console.log(this.chats);
+              localStorage.setItem('chats', this.chats.toString())
             },
             error: (error) => {
-              console.log(error, "a");
+              console.log(error);
             }
           })
         } else {
           this.showChat = true;
-          console.log(response);
-          this.chats.push(response.chat[0]._id);
-          console.log(this.chats);
+          //console.log(response.chat[0]._id);
+          if (this.chats.indexOf(response.chat[0]._id) === -1) {
+            this.chats.push(response.chat[0]._id);
+            localStorage.setItem('chats', this.chats.toString())
+          }
         }
       },
       error: (error) => {
@@ -144,7 +149,14 @@ export class ViewProfileCompanyComponent {
   }
 
   closeChat(index: number) {
-    this.chats.splice(index, 1);
+    this.chats.splice(index, 1);  
+    if (this.chats.length === 0) {
+      localStorage.removeItem('chats');
+    } else {
+      localStorage.setItem('chats', this.chats.toString())
+    }
+    console.log(this.chats);
+    
   }
 
 }
