@@ -33,8 +33,8 @@ export class ChatComponent {
   loadMessages() {
     this.client.postRequest(`${environment.url_chat}/chat/getmessages`, { chatId: this.chatId }, undefined, undefined).subscribe({
       next: (response: any) => {
-        console.log(response.messages);
-        this.messages = response.messages
+        console.log(response.chat.messages);
+        this.messages = response.chat.messages;
       },
       error: (error) => {
         console.log(error);
