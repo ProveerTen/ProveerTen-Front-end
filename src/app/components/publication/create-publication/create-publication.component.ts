@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { MessageService } from 'primeng/api';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-create-publication',
@@ -27,11 +28,16 @@ export class CreatePublicationComponent {
   }
 
   onSubmit() {
+    const dateCreate: string = format(new Date(), 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'');
+    console.log("currente date rr", dateCreate);
+
     if (this.form.valid && this.isValidImage) {
       this.isValidImage = false;
+      
       const formData = new FormData();
       formData.append('text', this.form.value.text);
       formData.append('image', this.imageFile);
+      formData.append('date', dateCreate)
 
       this.client.postRequest(`${environment.url_logic}/publication/create`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {

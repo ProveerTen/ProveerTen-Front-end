@@ -26,6 +26,8 @@ export class ViewDetailProductComponent {
         this.product = response.categoriesByProducts[0];
 
         console.log("product individual", this.product);
+        console.log("q", this.product.categories.length > 0);
+        
       },
       error: (error: any) => {
         console.log(error);

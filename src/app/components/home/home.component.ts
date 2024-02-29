@@ -27,10 +27,10 @@ export class HomeComponent {
 
         this.publicaciones = response.publications
 
-        // for (let k = 0; k < this.publicaciones.length; k++) {
-        //   const element = this.publicaciones[k].date;
-        //   this.publicaciones[k].date = new Date(element)
-        // }
+        for (let k = 0; k < this.publicaciones.length; k++) {
+          const element = this.publicaciones[k].date;
+          this.publicaciones[k].date = new Date(element)
+        }
 
         this.publicaciones = this.orderByDate(this.publicaciones)
         // console.log("despues deordenar", this.publicaciones);
