@@ -11,21 +11,28 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./manage-publications.component.css']
 })
 export class ManagePublicationsComponent {
-viewProduct(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  viewProduct(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
 
   publications: any;
-data: any;
+  data: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router,
-  private messageService: MessageService) { }
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.auth.getId()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log(response);
         this.publications = response.publications;
+
+        for (let k = 0; k < this.publications.length; k++) {
+          const element = this.publications[k].date;
+          this.publications[k].date = new Date(element)
+        }
+        this.publications = this.orderByDate(this.publications)
+
         if (this.publications == '') {
           this.publications = false;
         }
@@ -35,6 +42,10 @@ data: any;
       },
       complete: () => console.log('complete'),
     });
+  }
+
+  orderByDate(publications: any[]) {
+    return publications.sort((a, b) => b.date - a.date);
   }
 
   updatePublication(id: string) {
