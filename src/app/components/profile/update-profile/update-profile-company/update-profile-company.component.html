@@ -1,169 +1,127 @@
-<div *ngIf="auth.isCompany() | async">
-
-    <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
-        <h2>Empresa</h2>
-
-        <h4>Nit de la compañia: </h4>
-        <input type="text" formControlName="nit_company" [value]="data?.nit_company" placeholder="nit company">
-
-        <!--  -->
-        <h4>Nombre de la compañia: </h4>
-
-        <input type="text" formControlName="name_company" [value]="data?.name_company" placeholder="Nombre Empresa"
-            [ngClass]="{'message-valid': isvalid('name_company')}">
-
-        <div *ngIf="form.get('name_company')?.hasError('required')" class="message-invalid">
-            <p>El Nombre es requerido.</p>
-        </div>
-
-        <div *ngIf="form.get('name_company')?.hasError('minlength') || form.get('name_company')?.hasError('maxlength')"
-            class="message-invalid">
-            El Nombre debe tener entre 1 a maximo 100 carácteres
-        </div>
-
-        <!-- <div *ngIf="form.get('name_company')?.valid" class="message-valid">
-            <i class="fas fa-check icon"></i>
-        </div> -->
-        <!--  -->
-
-        <h4>Correo: </h4>
-
-        <input type="email" formControlName="email_company" [value]="data?.email_company" placeholder="Correo"
-            [ngClass]="{'message-valid': isvalid('email_company')}">
-
-        <div *ngIf="form.get('email_company')?.hasError('required')" class="message-invalid">
-            <p class="error-message">El email es un campo requerido.</p>
-        </div>
-
-        <div *ngIf="form.get('email_company')?.hasError('email')" class="message-invalid">
-            Ingrese un correo valido
-        </div>
-        <!--  -->
-
-        <h4>Línea nacional: </h4>
-
-        <input type="number" formControlName="national_line_company" [value]="data?.national_line_company"
-            placeholder="Línea Nacional" [ngClass]="{'message-valid': isvalid('national_line_company')}">
-
-        <div *ngIf="form.get('national_line_company')?.hasError('required')" class="message-invalid">
-            <p>El teléfono es requerido.</p>
-        </div>
-
-        <div *ngIf="form.get('national_line_company')?.hasError('minlength') || form.get('national_line_company')?.hasError('maxlength')"
-            class="message-invalid">
-            <p>El teléfono debe tener entre 1 a maximo 20 carácteres</p>
-        </div>
-
-        <!-- <div *ngIf="form.get('national_line_company')?.valid" class="message-valid">
-            <i class="fas fa-check icon"></i>
-        </div> -->
-        <!--  -->
-        <!--  -->
-
-        <h4>Fecha de la fundación: </h4>
-
-        <div class="inputs">
-            <input type="text" formControlName="foundation_company" [value]="data?.foundation_company 
-            // | date:'shortDate'" placeholder="Fecha de fundación"
-                [ngClass]="{'message-valid': isvalid('foundation_company')}">
-
-            <p (click)="deleteField('foundation_company')"><i class="fa-regular fa-trash-can"></i></p>
-        </div>
-        <!-- <input type="text" formControlName="foundation_company" placeholder="Fecha de fundación de la compañía" [value]="data?.foundation_company" [ngClass]="{'message-valid': form.get('name_company')?.valid}"> -->
-
-        <!-- <input type="text" formControlName="foundation_company" [placeholder]="form.get('foundation_company')?.valid ? 'Fecha de fundación de la compañía' : 'Fecha de fundación de la compañía'
-  [value]=" data?.foundation_company" [ngClass]="{'valid-input': form.get('foundation_company')?.valid}"> -->
-
-        <div *ngIf="form.get('foundation_company')?.hasError('minlength') || form.get('foundation_company')?.hasError('maxlength')"
-            class="message-invalid">
-            La fecha de fundación debe tener maximo 40 carácteres
-        </div>
-        <!--  -->
-
-        <h4>Descripción: </h4>
-
-        <div class="inputs">
-            <textarea type="text" cols="30" rows="8" formControlName="description_company"
-                [value]="data?.description_company" placeholder="Descripción"
-                [ngClass]="{'message-valid': isvalid('description_company')}"></textarea>
-
-            <p (click)="deleteField('description_company')"><i class="fa-regular fa-trash-can"></i></p>
-        </div>
-
-        <div *ngIf="form.get('description_company')?.hasError('maxlength')" class="message-invalid">
-            La descripción debe estar maximo hasta 225 carácteres
-        </div>
-        <!--  -->
-
-        <!-- <div *ngIf="form.get('description_company')?.valid" class="message-valid">
-            <i class="fas fa-check icon"></i>
-        </div> -->
-        <button type="submit" [disabled]="form.invalid || form.pristine">Guardar Cambios</button>
-
-    </form>
-</div>
-
-<!-- <div class="container w-100">
-    <div class="row justify-content-center">
-        <div class="col-md-8 w-100 mb-5 mt-5">
-            <div class="card bg-light p-4 rounded shadow">
-                <h2 class="text-center mb-4">Registrar Proveedor</h2>
-                <form class="mt-4">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="document_provider" class="form-label">Documento:</label>
-                            <input type="text" id="document_provider" formControlName="document_provider"
-                                class="form-control rounded" placeholder="Documento">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="name_provider" class="form-label">Nombres:</label>
-                            <input type="text" id="name_provider" formControlName="name_provider"
-                                class="form-control rounded" placeholder="Nombres">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="">
-                            <label for="last_name_provider" class="form-label">Apellidos:</label>
-                            <input type="text" id="last_name_provider" formControlName="last_name_provider"
-                                class="form-control rounded" placeholder="Apellidos">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email_provider" class="form-label">Correo electrónico:</label>
-                            <input type="email" id="email_provider" formControlName="email_provider"
-                                class="form-control rounded" placeholder="Correo electrónico">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="password_provider" class="form-label">Contraseña:</label>
-                            <input type="password" id="password_provider" formControlName="password_provider"
-                                class="form-control rounded" placeholder="Contraseña">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="number_provider" class="form-label">Número de celular:</label>
-                            <input type="tel" id="number_provider" formControlName="number_provider"
-                                class="form-control rounded" placeholder="Número de celular">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="city_provider" class="form-label">Ciudad - Pueblo:</label>
-                            <input type="text" id="city_provider" formControlName="city_provider"
-                                class="form-control rounded" placeholder="Ciudad - Pueblo">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="neighborhood" class="form-label">Barrio:</label>
-                            <input type="text" id="neighborhood" formControlName="neighborhood"
-                                class="form-control rounded" placeholder="Barrio">
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <p-toast position="bottom-right" key="center"></p-toast>
-                        <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-lg mt-2">Cancelar</button>
-                    </div>
-                </form>
+<div class="d-flex justify-content-center mt-4 flex-column align-items-center gap-3 mb-5">
+    <h1>¡Actualiza tus datos!</h1>
+    <div class="card  rounded-4 border border-warning-subtle p-4 shadow-lg gap-5" *ngIf="auth.isCompany() | async"
+        style="width: 45%;">
+        <form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+            <div class="d-flex justify-content-center flex-column align-items-center">
+                <h1 class="fs-1 " style="color: orange;">Compañia</h1>
             </div>
-        </div>
+            <hr style="color: orange; border-width: 3px;">
+            <div class="d-flex justify-content-center">
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_company"
+                    style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
+            </div>
+            <div class="form d-flex flex-column mt-4 p-4 rounded-4" style="background-color: rgb(243, 243, 243);">
+
+                <div class="mb-3">
+                    <label class="form-label">Nit de la compañia</label>
+                    <input type="text" class="form-control" formControlName="nit_company" [value]="data?.nit_company"
+                        placeholder="nit company">
+                </div>
+
+                <div class="d-flex gap-3">
+
+                    <div class="mb-3 w-50">
+                        <label class="form-label">Nombre de la compañia</label>
+                        <input type="text" class="form-control" formControlName="name_company"
+                            [value]="data?.name_company" placeholder="Nombre Empresa"
+                            [ngClass]="{'message-valid': isvalid('name_company')}">
+
+                        <div *ngIf="form.get('name_company')?.hasError('required')" class="message-invalid">
+                            <p>El Nombre es requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('name_company')?.hasError('minlength') || form.get('name_company')?.hasError('maxlength')"
+                            class="message-invalid">
+                            El Nombre debe tener entre 1 a maximo 100 carácteres
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 w-50">
+                        <label class="form-label">Correo</label>
+                        <input type="email" class="form-control" formControlName="email_company"
+                            [value]="data?.email_company" placeholder="Correo"
+                            [ngClass]="{'message-valid': isvalid('email_company')}">
+
+                        <div *ngIf="form.get('email_company')?.hasError('required')" class="message-invalid">
+                            <p class="error-message">El email es un campo requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('email_company')?.hasError('email')" class="message-invalid">
+                            Ingrese un correo valido
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-3">
+
+                    <div class="mb-3 w-50">
+                        <label class="form-label">Linea nacional</label>
+                        <input type="number" class="form-control" formControlName="national_line_company"
+                            [value]="data?.national_line_company" placeholder="Línea Nacional"
+                            [ngClass]="{'message-valid': isvalid('national_line_company')}">
+
+                        <div *ngIf="form.get('national_line_company')?.hasError('required')" class="message-invalid">
+                            <p>El teléfono es requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('national_line_company')?.hasError('minlength') || form.get('national_line_company')?.hasError('maxlength')"
+                            class="message-invalid">
+                            <p>El teléfono debe tener entre 1 a maximo 20 carácteres</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 w-50">
+                        <label class="form-label">Fecha de fundacion</label>
+                        <div class="d-flex gap-2">
+                            <input type="text" class="form-control" formControlName="foundation_company" [value]="data?.foundation_company 
+                            // | date:'shortDate'" placeholder="Fecha de fundación"
+                                [ngClass]="{'message-valid': isvalid('foundation_company')}">
+
+                            <button type="button" class="btn btn-danger"
+                                (click)="deleteField('foundation_company')"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                </svg></button>
+                        </div>
+
+                        <div *ngIf="form.get('foundation_company')?.hasError('minlength') || form.get('foundation_company')?.hasError('maxlength')"
+                            class="message-invalid">
+                            La fecha de fundación debe tener maximo 40 carácteres
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 d-flex flex-column gap-2">
+                    <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="text" cols="30"
+                        rows="8" formControlName="description_company" [value]="data?.description_company"
+                        placeholder="Descripción"
+                        [ngClass]="{'message-valid': isvalid('description_company')}"></textarea>
+                    <button type="button" style="width: 6%;" class="btn btn-danger"
+                        (click)="deleteField('description_company')"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                        </svg></button>
+
+                    <div *ngIf="form.get('description_company')?.hasError('maxlength')" class="message-invalid">
+                        La descripción debe estar maximo hasta 225 carácteres
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+                    <p-toast position="bottom-right" key="center"></p-toast>
+                    <button type="submit" [disabled]="form.invalid || form.pristine" class="btn btn-primary">Guardar
+                        cambios</button>
+                    <a href="change-password-profile">Cambiar Contraseña</a>
+                </div>
+            </div>
+        </form>
     </div>
-</div> -->
+</div>

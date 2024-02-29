@@ -17,6 +17,9 @@ export class ViewProfileCompanyComponent {
   data: any;
   publications: any;
   isLogin: any;
+  idCompany : any;
+  idGrocer:any;
+  dataChat:any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) {
     this.auth.isLoggedIn().subscribe((value: any) => {
@@ -91,4 +94,26 @@ export class ViewProfileCompanyComponent {
     }
   }
 
-}
+
+  getId (){
+
+    this.idCompany = this.id;
+    this.idGrocer = this.auth.getId();
+
+    this.dataChat ={
+     companyId: this.idCompany,
+      grocerId: this.idGrocer
+    }
+
+    this.client.postRequest(`${environment.url_chat}/provider/getproviders`, this.dataChat, undefined, undefined).subscribe({
+    next:(response) =>{
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+  }
+
+

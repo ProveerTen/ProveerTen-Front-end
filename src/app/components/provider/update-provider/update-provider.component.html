@@ -1,4 +1,81 @@
-<div class="container d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-center m-5">
+    <div class="card shadow-lg bg-body-tertiary rounded p-5" style="width: 30%;">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="d-flex flex-column gap-4">
+                <h1 style="color:#ffc107; text-align: center;">¡Actualiza el proveedor!</h1>
+
+                <div class="div">
+                    <label class="form-label" for="document_provider"><strong> Documento</strong></label>
+                    <input type="text" class="form-control" formControlName="document_provider" id="document_provider">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="div">
+                        <label class="form-label" for="name_provider"><strong> Nombre proveedor</strong></label>
+                        <input type="text" class="form-control" formControlName="name_provider" id="name_provider">
+                    </div>
+                    <div class="div">
+                        <label class="form-label" for="last_name_provider"><strong> Apellido proveedor</strong></label>
+                        <input type="text" class="form-control" formControlName="last_name_provider"
+                            id="last_name_provider">
+                    </div>
+                </div>
+
+                <div class="div">
+                    <label class="form-label" for="document_provider"><strong> Correo proveedor</strong></label>
+                    <input type="text" class="form-control" formControlName="email_provider" id="email_provider">
+                </div>
+
+
+                <div class="d-flex justify-content-between">
+                    <div class="div">
+                        <label class="form-label" for="number_provider"><strong>Numero del proveedor</strong></label>
+                        <input type="text" class="form-control" formControlName="number_provider" id="number_provider">
+                    </div>
+                    <div class="div">
+                        <label class="form-label" for="city_provider"><strong> Ciudad del proveedor</strong></label>
+                        <input type="text" class="form-control" formControlName="city_provider" id="city_provider">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <div class="div">
+                        <label class="form-label" for="neighborhood"><strong> Barrio</strong></label>
+                        <input type="text" class="form-control" formControlName="neighborhood" id="neighborhood">
+                    </div>
+                    <div class="div">
+                        <label class="form-label" for="street"><strong>Calle</strong></label>
+                        <input type="text" class="form-control" formControlName="street" id="street">
+                    </div>
+                </div>
+
+                <div class="div">
+                    <label class="form-label" for="number_street"><strong> Numero de calle</strong></label>
+                    <input type="text" class="form-control" formControlName="number_street" id="number_street">
+                </div>
+
+                <div class="d-flex gap-2 justify-content-center">
+                    <p-toast position="bottom-right" key="center"></p-toast>
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                    <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </form>
+
+        <form [formGroup]="formPassword" (ngSubmit)="onSubmitPassword()">
+            <div class="d-flex flex-column gap-3">
+                <div class="div">
+                    <label class="form-label" for="password_provider"><strong>Password</strong></label>
+                    <input type="password" class="form-control" formControlName="password_provider" id="password_provider">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- <div class="container d-flex justify-content-center align-items-center">
 
     <div border>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -60,9 +137,83 @@
         </form>
     </div>
 </div>
-<button (click)="cancel()">Cancelar</button>
+<button (click)="cancel()">Cancelar</button> -->
 
+<!--
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card p-4">
+      <h5 class="text-center mb-4">Información del Proveedor</h5>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label for="document_provider">Documento:</label>
+              <input id="document_provider" type="text" class="form-control" formControlName="document_provider">
+          </div>
 
+          <div class="form-group">
+              <label for="name_provider">Nombre del Proveedor:</label>
+              <input id="name_provider" type="text" class="form-control" formControlName="name_provider">
+          </div>
+
+          <div class="form-group">
+              <label for="last_name_provider">Apellido del Proveedor:</label>
+              <input id="last_name_provider" type="text" class="form-control" formControlName="last_name_provider">
+          </div>
+
+          <div class="form-group">
+              <label for="email_provider">Email del Proveedor:</label>
+              <input id="email_provider" type="text" class="form-control" formControlName="email_provider">
+          </div>
+          <div class="form-group">
+              <label for="number_provider">Número del Proveedor:</label>
+              <input id="number_provider" type="text" class="form-control" formControlName="number_provider">
+          </div>
+
+          <div class="form-group">
+              <label for="city_provider">Ciudad del Proveedor:</label>
+              <input id="city_provider" type="text" class="form-control" formControlName="city_provider">
+          </div>
+
+          <div class="form-group">
+              <label for="neighborhood">Barrio:</label>
+              <input id="neighborhood" type="text" class="form-control" formControlName="neighborhood">
+          </div>
+
+          <div class="form-group">
+              <label for="street">Calle:</label>
+              <input id="street" type="text" class="form-control" formControlName="street">
+          </div>
+
+          <div class="form-group">
+              <label for="number_street">Número de la Calle:</label>
+              <input id="number_street" type="text" class="form-control" formControlName="number_street">
+          </div>
+          <div class="text-center">
+              <p-toast position="bottom-right" key="center"></p-toast>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+      </form>
+  </div>
+
+  <div class="ml-4">
+      <div class="card p-4">
+          <h5 class="text-center mb-4">Cambiar Contraseña</h5>
+          <form [formGroup]="formPassword" (ngSubmit)="onSubmitPassword()">
+              <div class="form-group">
+                  <label for="password_provider">Contraseña del Proveedor:</label>
+                  <input id="password_provider" type="text" class="form-control" formControlName="password_provider">
+              </div>
+              <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<div class="container mt-3 text-center">
+  <button class="btn btn-danger" (click)="cancel()">Cancelar</button>
+</div>
+ -->
 
 
 <!-- <div class="container p-5 col-md-6">

@@ -19,7 +19,12 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@auth0/angular-jwt": "^5.2.0",
+<<<<<<< HEAD
     "@types/date-fns": "^2.6.0",
+=======
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+>>>>>>> f3fc528abd64e187fd5ade589d018b7edea14485
     "chart.js": "^4.4.1",
     "date-fns": "^3.3.1",
     "primeng": "^16.9.1",

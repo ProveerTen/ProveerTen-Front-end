@@ -17,20 +17,16 @@ export class SearchComponent {
   dataCategories: any;
   categoriesCheckbox: string[] = []
 
-  constructor(private client: ClientService, public auth: AuthService, private shared: SharedService, private routerActivate: ActivatedRoute,) {
+  constructor(private client: ClientService, public auth: AuthService, public shared: SharedService, private routerActivate: ActivatedRoute, private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.value = this.routerActivate.snapshot.params['value'];
     // this.shared.changeValueRoute(this.value);
-    if (this.value != '') {
-      this.selectedOption = 'products';
-    } else {
-      this.shared.searchOption.subscribe(option => {
-        this.selectedOption = option;
-      })
-    }
+    this.shared.searchOption.subscribe(option => {
+      this.selectedOption = option;
+    })
     this.client.getRequest(`${environment.url_logic}/category/categories`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.dataCategories = response.categories[0];
@@ -47,13 +43,11 @@ export class SearchComponent {
     this.selectedOption = option;
     if (option === 'companies') {
       this.shared.changeSearchOption('companies');
+      this.router.navigate(['search', 'companies']);
       return;
     }
     this.shared.changeSearchOption('products');
-  }
-
-  isOption(option: string): boolean {
-    return this.selectedOption === option;
+    this.router.navigate(['search', 'products']);
   }
 
   verifyCheckbox(value: string) {
@@ -66,8 +60,7 @@ export class SearchComponent {
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.shared.changeValueRoute(null);
   }
+
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ClientService } from 'src/app/services/client/client.service';
 import { environment } from 'src/environments/environment';
+import { SharedService } from '../../../services/shared/shared.service';
 
 @Component({
   selector: 'app-view-all-products',
@@ -11,81 +12,57 @@ import { environment } from 'src/environments/environment';
 })
 export class ViewAllProductsComponent {
 
-  products:any;
-  companies:any;
-  newDataProduct: any[] = [];
-  finish: any = false;
-  estado:boolean = false;
-  id_product_:string;
-  data_company:any
+  products: any;
+  value: any;
+  data: any;
 
-  constructor(public auth:AuthService, private router:Router, private client:ClientService) {}
+  constructor(public auth: AuthService, private router: Router, private client: ClientService, private shared: SharedService) { }
 
   ngOnInit() {
-
-    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
-      next: (response:any) => {
-        console.log("products", response.categoriesByProducts);    
-        this.products = response.categoriesByProducts;    
-      },
-      error: (error:any) => {
-        console.log(error);        
-      },
-      complete: () => {
-        // console.log("Complete");   
-
-        this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined).subscribe({
-          next: (response: any) => {
-            console.log("companies", response.data);
-            this.companies = response.data
-          },
-          error: (error: any) => {
-            console.log(error);
-          },
-          complete: () => {
-            console.log("complete");
-            this.newData();
-          }
-        });    
+    this.shared.valueRoute.subscribe(value => {
+      this.value = value;
+      if (this.value != null) {
+        this.getProductsByName();
+        return;
       }
     })
+
+    this.getProducts();
   }
 
-  newData() {
-    for (let i = 0; i < this.products.length; i++) {
-      const nit_publicacion = this.products[i].fk_product_nit_company
-      // console.log("this.publicaciones[i].nit_company", nit_publicacion);
-
-      for (let j = 0; j < this.companies.length; j++) {
-        const nit_company = this.companies[j].nit_company
-
-        if (nit_publicacion === nit_company) {
-          this.newDataProduct.push({
-            name_company: this.companies[j].name_company,
-            profile_photo_company: this.companies[j].profile_photo_company
-          })
-          // console.log("new data", this.newDataPub);
-          break
+  getProducts() {
+    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
+      next: (response: any) => {
+        this.data = response.categoriesByProducts;
+        if (this.data.length == 0) {
+          console.log('No hay productos por mostrar');
         }
-      }
-      this.finish = i === this.products.length - 1 ? true : false;
-    }
-    console.log("new data", this.newDataProduct); 
-  }
-  
-  viewProfile(id: string) {
-    this.router.navigate(['profile/company', id])
+      },
+      error: (error) => {
+        console.log(error.error.Status);
+      },
+      complete: () => console.log('complete'),
+    });
   }
 
-  viewInfoProduct(id:string, data_company:any) {
-    this.estado = true
-    this.id_product_ = id
-    this.data_company = data_company
-    console.log("id desde el padre", this.id_product_);
-    console.log("estado padre", this.estado);
-    
+  getProductsByName() {
+    this.client.postRequest(`${environment.url_logic}/search/products/value`, { value: this.value }, undefined, undefined).subscribe({
+      next: (response: any) => {
+        this.data = response.values;
+        if (this.data.length == 0) {
+          console.log('No hay productos por mostrar');
+        }
+      },
+      error: (error) => {
+        console.log(error.error.Status);
+      },
+      complete: () => console.log('complete'),
+    });
   }
-  handleEvent(value: boolean) {
-    this.estado = value;
+
+  viewProduct(id: string) {
+    this.router.navigate(['view/product/', id]);
   }
+
 }
+

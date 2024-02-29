@@ -27,8 +27,8 @@ export class UpdateProductComponent {
 
   constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private messageService: MessageService) {
     this.form = this.fb.group({
-      name_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
+      name_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+      description_product: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(200)]],
       purchase_price_product: ['', [Validators.required]],
       unit_purchase_price_product: ['', [Validators.required]],
       suggested_unit_selling_price_product: [''],
@@ -43,7 +43,7 @@ export class UpdateProductComponent {
     this.id = this.routerActivate.snapshot.params['id'];
     this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        this.data = response.products[0];
+        this.data = response.categoriesByProducts[0];
         console.log(this.data);
         this.form.patchValue({
           name_product: this.data.name_product,

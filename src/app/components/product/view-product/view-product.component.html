@@ -1,5 +1,5 @@
-<div class="container">
-    <!-- {{data?.id_product}} -->
+<!-- {{data?.id_product}} -->
+<!-- <div class="container">
     <td>
         <img appBrokenImage [src]="data?.image_product" style="width: 100px; height: 100px;">
     </td>
@@ -41,4 +41,122 @@
     </p>
 
     <button (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver compañía</button>
+</div> -->
+
+<div class="d-flex justify-content-center m-5" style="gap: 8%;">
+        <img appBrokenImage [src]="data?.image_product" class="shadow bg-body-tertiary rounded" style="width: 25%;">
+    <div class="right">
+        <h3 class="mt-3 fs-1 " style="color: #ffc107;">{{data?.name_product}}</h3>
+          <hr>
+          <p><strong>Disponibilidad:</strong> {{data?.availability_product}}</p>
+          <p><strong>Cont:</strong> {{data?.content_product}}</p>
+          <p><strong>Descrip:</strong> {{data?.description_product}}</p>
+          <p><strong>Precio de compra:</strong> {{data?.purchase_price_product}}</p>
+          <p><strong>Cant de compra:</strong> {{data?.purchase_quantity}}</p>
+          <p><strong>Stock:</strong> {{data?.stock_product}}</p>
+          <p><strong>Precio sugerido:</strong> {{data?.suggested_price_product}}</p>
+          <p><strong>Precio unitario sugerido:</strong> {{data?.suggested_unit_selling_price_product}}</p>
+      </div>
 </div>
+
+
+
+<!-- <div class="container">
+  <div class="row">
+      <div class="col-md-12 text-center">
+          <img appBrokenImage [src]="data?.image_product" style="width: 150px; height: 150px;">
+      </div>
+  </div>
+  <div class="row ">
+      <div class="col-md-12 ">
+          <h3 class="mt-3">{{data?.name_product}}</h3>
+          <hr>
+          <p><strong>Disponibilidad:</strong> {{data?.availability_product}}</p>
+          <p><strong>Contenido:</strong> {{data?.content_product}}</p>
+          <p><strong>Descripción:</strong> {{data?.description_product}}</p>
+          <p><strong>Precio de compra:</strong> {{data?.purchase_price_product}}</p>
+          <p><strong>Cantidad de compra:</strong> {{data?.purchase_quantity}}</p>
+          <p><strong>Stock:</strong> {{data?.stock_product}}</p>
+          <p><strong>Precio sugerido:</strong> {{data?.suggested_price_product}}</p>
+          <p><strong>Precio unitario sugerido:</strong> {{data?.suggested_unit_selling_price_product}}</p>
+      </div>
+  </div>
+  <div class="row mt-3">
+      <div class="col-md-12 text-center">
+          <button (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async" class="btn btn-primary">Ver compañía</button>
+      </div>
+  </div>
+</div> -->
+
+
+
+
+<!-- <div class="container justify-content-center align-items-center d-flex ">
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center align-items-center d-flex">
+                <div class="col-lg-5 col-md-6 col-sm-6 justify-content-center align-items-center d-flex">
+                    <div class="white-box text-center "><img appBrokenImage [src]="data?.image_product"
+                            class="img-responsive"></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+
+                    <ul class="list-unstyled ">
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
+                            <h3 class="box-title mt-5">General Info</h3>
+                            <div class="table-responsive ">
+                                <table class="table table-striped table-product">
+                                    <tbody>
+                                        <tr>
+                                            <td width="390">availability_product</td>
+                                            <td> {{data?.availability_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td> content_product:</td>
+                                            <td>{{data?.content_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>description_product:</td>
+                                            <td>{{data?.description_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>name_product:</td>
+                                            <td> {{data?.name_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td> purchase_price_product:</td>
+                                            <td>{{data?.purchase_price_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td> purchase_quantity:</td>
+                                            <td>{{data?.purchase_quantity}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>stock_product:</td>
+                                            <td>{{data?.stock_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>suggested_price_product:</td>
+                                            <td> {{data?.suggested_price_product}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>suggested_unit_selling_price_product:</td>
+                                            <td>{{data?.suggested_unit_selling_price_product}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                                <button (click)="viewCompany(data.fk_product_nit_company)"
+                                    *ngIf="auth.isGrocer() | async" class="btn btn-primary btn-rounded">Ver
+                                    compañía</button>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> -->
