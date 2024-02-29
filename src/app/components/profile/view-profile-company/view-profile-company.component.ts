@@ -88,6 +88,13 @@ export class ViewProfileCompanyComponent {
           this.publications = response.publications;
           console.log(this.publications);
 
+          for (let k = 0; k < this.publications.length; k++) {
+            const element = this.publications[k].date;
+            this.publications[k].date = new Date(element)
+          }
+  
+          this.publications = this.orderByDate(this.publications)
+
           if (this.publications == '') {
             this.publications = false;
           }
@@ -102,6 +109,14 @@ export class ViewProfileCompanyComponent {
       this.client.getRequest(`${environment.url_logic}/publication/data/view/company/${this.id}`, undefined, undefined).subscribe({
         next: (response: any) => {
           this.publications = response.publications;
+
+          for (let k = 0; k < this.publications.length; k++) {
+            const element = this.publications[k].date;
+            this.publications[k].date = new Date(element)
+          }
+  
+          this.publications = this.orderByDate(this.publications)
+          
           if (this.publications == '') {
             this.publications = false;
           }
@@ -114,7 +129,9 @@ export class ViewProfileCompanyComponent {
       });
     }
   }
-
+  orderByDate(publications: any[]) {
+    return publications.sort((a, b) => b.date - a.date);
+  }
 
   chatear(document_provider: any) {
     this.client.postRequest(`${environment.url_chat}/chat/find`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
