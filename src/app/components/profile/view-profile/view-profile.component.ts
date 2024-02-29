@@ -43,6 +43,13 @@ export class ViewProfileComponent {
     this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.auth.getId()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.publications = response.publications;
+
+        for (let k = 0; k < this.publications.length; k++) {
+          const element = this.publications[k].date;
+          this.publications[k].date = new Date(element)
+        }
+        this.publications = this.orderByDate(this.publications)
+
         if (this.publications == '') {
           this.publications = false;
         }
@@ -52,6 +59,10 @@ export class ViewProfileComponent {
       },
       complete: () => console.log('complete'),
     });
+  }
+
+  orderByDate(publications: any[]) {
+    return publications.sort((a, b) => b.date - a.date);
   }
 
   updatePhoto() {

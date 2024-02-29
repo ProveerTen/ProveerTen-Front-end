@@ -26,6 +26,8 @@ export class HomeComponent {
         // console.log(response);
 
         this.publicaciones = response.publications
+        console.log(this.publicaciones);
+        
 
         for (let k = 0; k < this.publicaciones.length; k++) {
           const element = this.publicaciones[k].date;

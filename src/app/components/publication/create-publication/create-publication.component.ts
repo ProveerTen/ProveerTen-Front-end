@@ -61,9 +61,8 @@ export class CreatePublicationComponent {
   }
 
   onFileSelected(event: any) {
-    /*
     this.imageFile = event.target.files[0];
-    if (this.imageFile.type.startsWith('image/'|| this.imageFile.type.startsWith('video/'))) {
+    if (this.imageFile.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePreview = e.target.result;
@@ -73,23 +72,6 @@ export class CreatePublicationComponent {
     } else {
       this.isValidImage = false;
     }
-    */
-
-    this.imageFile = event.target.files[0];
-        if (this.imageFile.type.startsWith('image/') || this.imageFile.type.startsWith('video/')) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.imagePreview = e.target.result;
-          };
-          reader.readAsDataURL(this.imageFile);
-          this.isValidImage = true;
-        } else {
-          this.isValidImage = false;
-        }
-   
   }
-
-  
-  
 
 }
