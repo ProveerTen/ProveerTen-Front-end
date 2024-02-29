@@ -62,6 +62,7 @@ import { ViewProductComponent } from './components/product/view-product/view-pro
 import { authGuard } from './guards/guards-components/auth.guard';
 import { update_profile_guard } from './guards/role-guards/update-profile';
 import { SearchComponent } from './components/view/search/search.component';
+import { PasswordComponent } from './components/password/password.component';
 
 const routes: Routes = [
   {
@@ -98,6 +99,10 @@ const routes: Routes = [
   {
     path: 'viewAllGrocers',
     component: ViewAllGrocersComponent
+  },
+  {
+    path:'resestPassword',
+    component:PasswordComponent
   },
   {
     path: 'viewAllcompanies',

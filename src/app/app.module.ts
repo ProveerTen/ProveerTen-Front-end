@@ -64,6 +64,9 @@ import { ViewAllProductsComponent } from './components/view/view-all-products/vi
 import { ViewDetailProductComponent } from './components/view/view-detail-product/view-detail-product.component';
 import { SearchComponent } from './components/view/search/search.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { PasswordComponent } from './components/password/password.component';
+import { ResetPasswordGrocerComponent } from './components/password/reset-password-grocer/reset-password-grocer.component';
+import { ResetPasswordCompanyComponent } from './components/password/reset-password-company/reset-password-company.component';
 
 
 @NgModule({
@@ -110,7 +113,10 @@ import { ChatComponent } from './components/chat/chat.component';
     ViewAllProductsComponent,
     ViewDetailProductComponent,
     SearchComponent,
-    ChatComponent
+    ChatComponent,
+    PasswordComponent,
+    ResetPasswordGrocerComponent,
+    ResetPasswordCompanyComponent
   ],
   imports: [
     BrowserModule,
