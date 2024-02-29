@@ -53,6 +53,12 @@ export class ChatComponent {
     }
   }
 
+  isMyMessage(sender: string): boolean {
+    return sender === this.auth.getId();
+  }
+
+  
+
   ngOnDestroy() {
     this.messages = [];
   }

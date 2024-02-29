@@ -1,14 +1,50 @@
-
-    <div class="chat-container">
-        <h2>chat {{chatId}}</h2>
-        <div *ngFor="let message of messages" class="message">
-            <div>
-                <span>{{ message.sender }} : </span>
-                <span>{{ message.content }}</span>
+<div class="card rounded-4" style=" width: 30%;">
+    <div class="rounded-top d-flex justify-content-between p-3" style="background-color: #ffc107; color: white;">
+        <p class="mb-0 fw-bold">chat {{chatId}}</p>
+        <p class="mb-0 fw-bold">Live chat</p>
+        <i class="fas fa-times" style="cursor: pointer;"></i>
+    </div>
+    <div class=" overflow-auto" style="height: 400px">
+        <div class="card-body" *ngFor="let message of messages" class="message">
+            <div class="p-3 ">
+                <div *ngIf="isMyMessage(message.sender)" class="my-message d-flex flex-column" style="text-align: right;">
+                        <!-- <span>{{ message.sender }} : </span> -->
+                        <span style="background-color: #ffc107; color: white; border-radius: 10px;" class="p-2 ">{{ message.content }}</span>
+                        <p style="font-size: 12px;">{{message.timestamp  | date:'short'}}</p>
+                </div>
+                <div *ngIf="!isMyMessage(message.sender)" class="their-message d-flex flex-column">
+                    <!-- <span>{{ message.sender }} : </span> -->
+                    <span style="background-color: rgb(219, 218, 218); border-radius: 10px;" class="p-2">{{ message.content }}</span>
+                    <p style="font-size: 12px;">{{message.timestamp  | date:'short'}}</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="input-container">
-        <input type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje...">
-        <button (click)="sendMessage()">Enviar</button>
+    <hr>
+    <div class="form-outline d-flex gap-2 p-2">
+        <input class="form-control" type="text"  [(ngModel)]="messageText" placeholder="Mensaje"
+            aria-label="default input example">
+        <button type="button" class="btn btn-outline-primary" (click)="sendMessage()">Enviar</button>
     </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="chat-container">
+    <h2>chat {{chatId}}</h2>
+    <div *ngFor="let message of messages" class="message">
+        <div>
+            <span>{{ message.sender }} : </span>
+            <span>{{ message.content }}</span>
+        </div>
+    </div>
+</div>
+<div class="input-container">
+    <input type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje...">
+    <button (click)="sendMessage()">Enviar</button>
+</div> -->
