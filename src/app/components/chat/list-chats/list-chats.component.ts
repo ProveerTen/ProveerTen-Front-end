@@ -13,6 +13,7 @@ export class ListChatsComponent {
 
   data: any;
   isLogin: any;
+  chats: string[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) {
     this.auth.isLoggedIn().subscribe((value: any) => {
@@ -21,11 +22,18 @@ export class ListChatsComponent {
   }
 
   ngOnInit(): void {
+
     if (this.isLogin) {
+      let localchats = localStorage.getItem('chats');
+      if (localchats) {
+        this.chats = localchats.split(',');
+      }
       this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
-          this.data = response.chats;
+          this.data = response.chatData;
+          console.log(this.data);
+
         },
         error: (error) => {
           console.log(error);
@@ -34,5 +42,21 @@ export class ListChatsComponent {
       });
     }
   }
+
+  chatear(document_provider: any) {
+    this.client.postRequest(`${environment.url_chat}/chat/find`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
+      next: (response: any) => {
+        if (this.chats.indexOf(response.chat[0]._id) === -1) {
+          this.chats.push(response.chat[0]._id);
+          localStorage.setItem('chats', this.chats.toString())
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+
 
 }
