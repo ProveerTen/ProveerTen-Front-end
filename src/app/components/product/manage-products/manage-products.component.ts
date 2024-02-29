@@ -20,12 +20,28 @@ export class ManageProductsComponent {
       next: (response: any) => {
         console.log(response);
         this.data = response.products;
+        console.log("data", this.data);
+        
+
+        for (let k = 0; k < this.data.length; k++) {
+          const element = this.data[k].date_creation;
+          console.log("element", new Date(element));
+          
+          this.data[k].date_creation = new Date(element)
+          console.log("data[k].date_creation ", this.data[k].date_creation);
+          
+        }
+        this.data = this.orderByDate(this.data)
       },
       error: (error) => {
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
+  }
+
+  orderByDate(data: any[]) {
+    return data.sort((a, b) => b.date_creation - a.date_creation);
   }
 
   updateProduct(id: string) {

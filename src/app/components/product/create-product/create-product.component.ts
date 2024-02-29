@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import product from 'src/app/interfaces/product';
 import { MessageService } from 'primeng/api';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-create-product',
@@ -48,12 +49,18 @@ export class CreateProductComponent {
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
-    });
+    })
   }
 
   onSubmit() {
+
+    const dateCreate: string = format(new Date(), 'yyyy-MM-dd HH:mm:ss.SSS');
+    // const dateCreate: string = format(new Date(), 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'');
+    console.log("currente date rr", dateCreate);
+    
     if (this.form.valid && this.categoriesCheckbox.length > 0) {
       this.isValidImage = false;
+      
       const formData = new FormData();
       formData.append('name_product', this.form.value.name_product);
       formData.append('description_product', this.form.value.description_product);
@@ -64,6 +71,8 @@ export class CreateProductComponent {
       formData.append('stock_product', this.form.value.stock_product);
       formData.append('availability_product', 'Disponible');
       formData.append('content_product', this.form.value.content_product);
+      formData.append('date_creation', dateCreate)
+
       this.categoriesCheckbox.forEach(category => {
         formData.append('categories[]', category);
       })
