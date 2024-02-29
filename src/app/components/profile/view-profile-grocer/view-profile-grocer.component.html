@@ -8,6 +8,7 @@
                             <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer"
                                 style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
                             <h5 class="my-3">{{data?.name_grocer}} {{data?.last_name_grocer}}</h5>
+                            <button (click)="chatear()">Chatear</button>
                             <div class="d-flex justify-content-center mb-2">
                                 <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
                                     <div
@@ -19,6 +20,10 @@
                     </div>
                 </div>
                 <div class="col-lg-7">
+                    <div *ngFor="let chatId of chats; let i = index">
+                        <app-chat [chatId]="selectedChatId"></app-chat>
+                        <button (click)="closeChat(i)">Cerrar Chat</button>
+                    </div>
 
                     <div class="d-flex flex-column">
 

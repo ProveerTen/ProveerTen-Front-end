@@ -1,0 +1,9 @@
+<div class="container contenedor d-flex align-items-center flex-column justify-content-center"
+    style="padding-top: 100px;">
+    <h2>Chats</h2>
+    <div class="overflow-auto w-100" style="max-height: 100vh; padding: 20px;">
+        <div *ngFor="let chat of data">
+            {{chat._id}}
+        </div>
+    </div>
+</div>
