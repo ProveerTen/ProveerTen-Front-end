@@ -1,16 +1,20 @@
 <app-nav></app-nav>
+
 <div class="container">
     <div class="row" *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
-        <!-- <div class="row" > -->
         <div class="col-9">
             <router-outlet></router-outlet>
         </div>
-        <div class="col-3 bg-light sticky-top" style="max-height: 100vh;">
+        <div class="col-3 bg-light" style="position: fixed;height:-webkit-fill-available;right: 0; top: 0;">
             <app-list-chats></app-list-chats>
         </div>
+
     </div>
     <div class="row" *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
         <router-outlet></router-outlet>
     </div>
 </div>
-<app-footer></app-footer>
+
+<div *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
+    <app-footer></app-footer>
+</div>

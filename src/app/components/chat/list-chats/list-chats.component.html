@@ -1,5 +1,5 @@
 <div class="container contenedor d-flex align-items-center flex-column justify-content-center"
-    style="padding-top: 100px;">
+    style="padding-top: 150px;">
     <h2>Chats</h2>
     <div class="overflow-auto w-100" style="max-height: 100vh; padding: 20px;">
         <div *ngFor="let chat of data" class="d-flex flex-column p-2 bg-warning">
@@ -14,8 +14,20 @@
             </div>
         </div>
     </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum necessitatibus sequi laborum reprehenderit
+        impedit animi dolorum ut vitae totam. Magni ab ratione, placeat aut magnam delectus atque officiis rem ipsam!
+    </p>
+
 </div>
 
-<div *ngFor="let chatId of chats; let i = index">
-    <app-chat [chatId]="chatId" [value]="i"></app-chat>
+
+
+<div class="chat-container">
+    <div *ngFor="let chatId of chats; let i = index" class="chat-item">
+        <a style="position: relative;
+    top: 42px;
+    z-index: 1;
+    left: 265px;" (click)="closeChat(i)"><i class="fas fa-times" style="cursor: pointer;"></i></a>
+        <app-chat [chatId]="chatId"></app-chat>
+    </div>
 </div>

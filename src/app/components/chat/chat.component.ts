@@ -65,18 +65,6 @@ export class ChatComponent {
     return sender === this.auth.getId();
   }
 
-  closeChat() {
-    console.log('22222222222222');
-
-    this.chats.splice(this.value, 1);
-    if (this.chats.length === 0) {
-      localStorage.removeItem('chats');
-    } else {
-      localStorage.setItem('chats', this.chats.toString())
-    }
-    console.log(this.chats);
-  }
-
   ngOnDestroy() {
     this.messages = [];
   }

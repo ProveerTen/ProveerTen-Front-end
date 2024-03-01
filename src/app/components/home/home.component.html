@@ -21,8 +21,10 @@
         <span class="visually-hidden">Next</span>
     </button> -->
     </div>
-    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewCompanies()">Encontrar Empresas</button>
-    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewProducts()">Encontrar Productos</button>
+    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewCompanies()">Encontrar
+        Empresas</button>
+    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewProducts()">Encontrar
+        Productos</button>
 
     <div class="col-md-6 d-flex gap-3 w-50 flex-xxl-column flex-wrap" *ngIf="publicaciones; else noPublications">
         <div class="card" style="width: 100%; height: 100%;" *ngFor="let publicacion of publicaciones; let i = index">
@@ -47,8 +49,24 @@
                     </video>
                 </ng-container>
                 <ng-template #isImage>
-                    <img id="image_publication" [src]="publicacion?.secure_url" class="img-fluid">
+                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor: pointer;">
+                        <img id="image_publication" [src]="publicacion?.secure_url" class="img-fluid">
+                    </a>
                 </ng-template>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            <div class="modal-body">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ publicacion.text }}</h1>
+                                <img id="image_publication" [src]="publicacion?.secure_url" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="finishedMessage" *ngIf="finish">
@@ -58,3 +76,5 @@
     <ng-template #noPublications>
         <p>No hay publicaciones por mostrar</p>
     </ng-template>
+
+  

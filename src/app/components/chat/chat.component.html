@@ -1,9 +1,9 @@
-<div class="card rounded-4" style=" width: 100%;">
+<div class="card rounded-4" style="width: 300px;">
     <div class="rounded-top d-flex justify-content-between p-3" style="background-color: #ffc107; color: white;">
         <p class="mb-0 fw-bold">chat {{chatId}}</p>
-        <p class="mb-0 fw-bold">Live chat</p>
-        <button (click)="closeChat()">X</button>
-        <!-- <i class="fas fa-times" style="cursor: pointer;"></i> -->
+        <!--  <p class="mb-0 fw-bold">Live chat</p> -->
+
+          
     </div>
     <div class=" overflow-auto" style="height: 400px">
         <div class="card-body" *ngFor="let message of messages" class="message">
@@ -26,8 +26,7 @@
     </div>
     <hr>
     <div class="form-outline d-flex gap-2 p-2">
-        <input class="form-control" type="text" [(ngModel)]="messageText" placeholder="Mensaje"
-            aria-label="default input example">
+        <input type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje...">
         <button type="button" class="btn btn-outline-primary" (click)="sendMessage()">Enviar</button>
     </div>
 </div>
@@ -36,10 +35,8 @@
 
 
 
-
-
-
-<!-- <div class="chat-container">
+<!-- 
+    <div class="chat-container">
     <h2>chat {{chatId}}</h2>
     <div *ngFor="let message of messages" class="message">
         <div>
@@ -51,4 +48,5 @@
 <div class="input-container">
     <input type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje...">
     <button (click)="sendMessage()">Enviar</button>
-</div> -->
+</div>
+ -->

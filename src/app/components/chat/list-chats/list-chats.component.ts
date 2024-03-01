@@ -57,6 +57,14 @@ export class ListChatsComponent {
     })
   }
 
-
+  closeChat(index:any) {
+    this.chats.splice(index, 1);
+    if (this.chats.length === 0) {
+      localStorage.removeItem('chats');
+    } else {
+      localStorage.setItem('chats', this.chats.toString())
+    }
+    console.log(this.chats);
+  }
 
 }
