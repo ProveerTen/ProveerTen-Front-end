@@ -2,7 +2,7 @@
     style="padding-top: 150px;">
     <h2>Chats</h2>
     <div class="overflow-auto w-100" style="max-height: 100vh; padding: 20px;">
-        <div *ngFor="let chat of data" class="d-flex flex-column p-2 bg-warning">
+        <div *ngFor="let chat of data" class="d-flex flex-column p-2 ">
             <div class="card d-flex w-100 justify-content-center" style="cursor: pointer;"
                 (click)="chatear(chat.participants.providerId)">
                 <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider" [imageType]="'photo'"
@@ -14,13 +14,7 @@
             </div>
         </div>
     </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum necessitatibus sequi laborum reprehenderit
-        impedit animi dolorum ut vitae totam. Magni ab ratione, placeat aut magnam delectus atque officiis rem ipsam!
-    </p>
-
 </div>
-
-
 
 <div class="chat-container">
     <div *ngFor="let chatId of chats; let i = index" class="chat-item">

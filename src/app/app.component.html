@@ -16,5 +16,13 @@
 </div>
 
 <div *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
-    <app-footer></app-footer>
+    <div class="col-12">
+        <app-footer></app-footer>
+    </div>
+</div>
+
+<div *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
+    <div class="col-10">
+        <app-footer></app-footer>
+    </div>
 </div>
