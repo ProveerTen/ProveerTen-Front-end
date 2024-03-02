@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import product from '../../../interfaces/product';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-create-order',
@@ -19,7 +20,7 @@ export class CreateOrderComponent {
   selectedCompany: any;
   searchTerm: string = '';
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
   ngOnInit(): void {
     this.client.getRequest(`${environment.url_logic}/order/companies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -32,6 +33,14 @@ export class CreateOrderComponent {
       },
       complete: () => console.log('complete'),
     });
+
+    this.shared.companyOrder.subscribe((company: any) => {
+      if (company !== null) {
+        company.isSelected = true;
+        this.updateSelection(company);
+        this.showProducts();
+      }
+    })
   }
 
   filterCompanies() {
@@ -41,20 +50,23 @@ export class CreateOrderComponent {
   }
 
   updateSelection(company: any) {
-    this.companies.forEach(c => {
-      if (c !== company) {
-        c.isSelected = false;
-      }
-    });
-
-    this.selectedCompany = this.companies.find(c => c.isSelected);
+    if (this.companies) {
+      this.companies.forEach(c => {
+        if (c !== company) {
+          c.isSelected = false;
+        }
+      });
+      this.selectedCompany = this.companies.find(c => c.isSelected);
+    } else {
+      this.selectedCompany = company;
+    }
 
     this.showProducts();
   }
 
-  viewCompany() {
-    console.log(this.selectedCompany);
-  }
+  // viewCompany() {
+  //   console.log(this.selectedCompany);
+  // }
 
   showProducts() {
     if (this.selectedCompany) {

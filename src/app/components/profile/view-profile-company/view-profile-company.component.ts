@@ -28,7 +28,7 @@ export class ViewProfileCompanyComponent {
 
   ngOnInit(): void {
     this.id = this.routerActivate.snapshot.params['id'];
-    
+
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
@@ -82,7 +82,7 @@ export class ViewProfileCompanyComponent {
             const element = this.publications[k].date;
             this.publications[k].date = new Date(element)
           }
-  
+
           this.publications = this.orderByDate(this.publications)
 
           if (this.publications == '') {
@@ -104,9 +104,9 @@ export class ViewProfileCompanyComponent {
             const element = this.publications[k].date;
             this.publications[k].date = new Date(element)
           }
-  
+
           this.publications = this.orderByDate(this.publications)
-          
+
           if (this.publications == '') {
             this.publications = false;
           }
@@ -155,7 +155,10 @@ export class ViewProfileCompanyComponent {
     })
   }
 
-
+  order() {
+    this.shared.changeCompanyOrder(this.data);
+    this.router.navigate(['create/order']);
+  }
 }
 
 
