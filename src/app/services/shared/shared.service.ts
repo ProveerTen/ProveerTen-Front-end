@@ -8,6 +8,7 @@ export class SharedService {
 
   public searchOption = new BehaviorSubject('products');
   public valueRoute = new BehaviorSubject<any>(null);
+  public chatList = new BehaviorSubject<string[]>([]);
 
   constructor() { }
 
@@ -17,6 +18,9 @@ export class SharedService {
 
   changeValueRoute(newValue: string): void {
     this.valueRoute.next(newValue);
+  }
+  changeChatList(list: string[]): void {
+    this.chatList.next(list);
   }
 
   getSearchOption() {

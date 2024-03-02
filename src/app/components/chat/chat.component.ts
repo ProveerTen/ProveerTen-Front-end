@@ -2,6 +2,7 @@ import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
 import { ClientService } from 'src/app/services/client/client.service';
+import { SharedService } from 'src/app/services/shared/shared.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,15 +18,9 @@ export class ChatComponent implements OnInit {
   chats: string[] = [];
   @ViewChild('messageContainer') messageContainer: ElementRef;
 
-  constructor(private chatService: ChatService, private auth: AuthService, private client: ClientService) { }
+  constructor(private chatService: ChatService, private auth: AuthService, private client: ClientService, public shared: SharedService) { }
 
   ngOnInit(): void {
-    let localchats = localStorage.getItem('chats');
-    if (localchats) {
-      this.chats = localchats.split(',');
-    }
-    console.log(this.chats);
-
     this.loadMessages();
     console.log(this.chatId);
     this.chatService.joinChat(this.auth.getId(), this.chatId);
