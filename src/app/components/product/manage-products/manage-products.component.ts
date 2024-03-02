@@ -24,12 +24,8 @@ export class ManageProductsComponent {
         
 
         for (let k = 0; k < this.data.length; k++) {
-          const element = this.data[k].date_creation;
-          console.log("element", new Date(element));
-          
-          this.data[k].date_creation = new Date(element)
-          console.log("data[k].date_creation ", this.data[k].date_creation);
-          
+          const element = this.data[k].date_creation;          
+          this.data[k].date_creation = new Date(element)          
         }
         this.data = this.orderByDate(this.data)
       },

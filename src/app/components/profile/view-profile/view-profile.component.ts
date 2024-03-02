@@ -19,6 +19,10 @@ export class ViewProfileComponent {
   cover: boolean = false;
   photo: boolean = false;
   formData = new FormData();
+  inputSocialRed: boolean = false
+  valueSocialRed: string
+  dataSocialReds:any
+  valid:boolean = false;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private messageService: MessageService) { }
 
@@ -35,10 +39,14 @@ export class ViewProfileComponent {
       error: (error) => {
         console.log(error.error.Status);
       },
-      complete: () => console.log('complete'),
+      complete: () => {
+        console.log('complete')
+        this.getSocialReds()
+      },
     });
   }
 
+  
   getPublications() {
     this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.auth.getId()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
@@ -166,6 +174,62 @@ export class ViewProfileComponent {
       },
       complete: () => console.log('complete'),
     });
+  }
+
+
+  addSocialRed() {
+    this.inputSocialRed = !this.inputSocialRed
+  }
+  onSubmitSocialRed() {
+    const data = {
+      nit_company: this.auth.getId(),
+      link: this.valueSocialRed,
+      icon: null
+    }
+    console.log(data);
+
+    this.client.postRequest(`${environment.url_logic}/edit_profile/company`, data, undefined, { "Authorization": `Bearer: ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.addSocialRed()
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log("Complete");
+        this.getSocialReds()
+        this.valueSocialRed = null
+      }
+    })
+  }
+
+  valueRed(event: any) {
+    this.valueSocialRed = event.target.value
+    if (this.valueSocialRed.length > 0) {
+      this.valid = true;      
+    } else {
+      this.valid = false;
+    }
+    console.log("VALID", this.valid);
+    
+    console.log("EVENT", this.valueSocialRed);
+  }
+
+  getSocialReds() {
+
+    this.client.getRequest(`${environment.url_logic}/edit_profile/company`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        this.dataSocialReds = response.status.data;   
+        console.log("datos de las redes sociales", this.dataSocialReds);                
+      },
+      error: (error) => {
+        console.log(error.error.Status);
+      },
+      complete: () => {
+        console.log('complete')
+      }
+    })
   }
 
 }
