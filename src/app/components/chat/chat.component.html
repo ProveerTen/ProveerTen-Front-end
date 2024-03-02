@@ -1,10 +1,10 @@
-<div class="card rounded-4" style="width: 300px;">
-    <div class="rounded-top d-flex justify-content-between p-3" style="background-color: #ffc107; color: white;">
+<div class="card" style="width: 300px; height: 450px;">
+    <div class="rounded-top d-flex justify-content-between p-3" style="background-color: #ff9c07; color: white;">
         <p class="mb-0 fw-bold">chat {{chatId}}</p>
     </div>
     <div class="overflow-auto" style="height: 400px" #messageContainer>
         <div class="card-body" *ngFor="let message of messages" class="message">
-            <div class="p-3">
+            <div class="p-1">
                 <div *ngIf="isMyMessage(message.sender)" class="my-message d-flex flex-column"
                     style="text-align: right;">
                     <span style="background-color: #ffc107; color: white; border-radius: 10px;" class="p-2">{{
@@ -20,7 +20,7 @@
         </div>
     </div>
     <hr>
-    <div class="form-outline d-flex gap-2 p-2">
+    <div class="form-outline d-flex gap-2 p-2 justify-content-between">
         <input type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje...">
         <button type="button" class="btn btn-outline-primary" (click)="sendMessage()">Enviar</button>
     </div>

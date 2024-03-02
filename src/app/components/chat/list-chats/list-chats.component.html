@@ -3,14 +3,17 @@
     <h2>Chats</h2>
     <div class="overflow-auto w-100" style="max-height: 100vh; padding: 20px;">
         <div *ngFor="let chat of data" class="d-flex flex-column p-2 ">
-            <div class="card d-flex w-100 justify-content-center" style="cursor: pointer;"
+            <div class="user_chat d-flex w-100 justify-content-center"
+                style="cursor: pointer; padding: 5px; border-radius: 5px;"
                 (click)="chatear(chat.participants.providerId)">
-                <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider" [imageType]="'photo'"
-                    width="50px" height="50px">
-                <p>
-                    <!-- {{chat.dataUser.name_provider}} -->
-                    {{chat.dataUser.name_provider}} {{chat.dataUser.last_name_provider}}
-                </p>
+                <div class="d-flex align-items-center gap-2">
+                    <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider" [imageType]="'photo'"
+                        width="40px" height="40px" class="mr-2">
+                    <p class="mb-0">
+                        <!-- {{chat.dataUser.name_provider}} -->
+                        {{chat.dataUser.name_provider}} {{chat.dataUser.last_name_provider}}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
