@@ -19,7 +19,7 @@ export class ViewProfileCompanyComponent {
   isLogin: any;
   providers: any;
   chats: string[] = [];
-  dataSocialReds:any[]
+  dataSocialReds: any[]
   colorsOfIcons: any[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) {
@@ -30,7 +30,6 @@ export class ViewProfileCompanyComponent {
 
   ngOnInit(): void {
     this.id = this.routerActivate.snapshot.params['id'];
-
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
@@ -79,15 +78,15 @@ export class ViewProfileCompanyComponent {
     this.client.getRequest(`${environment.url_logic}/edit_profile/socialRed/${this.id}`, undefined, undefined).subscribe({
       next: (response: any) => {
         this.dataSocialReds = response.status.data;
-        console.log("social reds", this.dataSocialReds);            
+        console.log("social reds", this.dataSocialReds);
       },
       error: (error) => {
         console.log(error.error.Status);
         this.router.navigate(['404']);
       },
       complete: () => {
-        console.log("Complete");   
-        this.getColorIcon()     
+        console.log("Complete");
+        this.getColorIcon()
       }
     })
   }
@@ -104,8 +103,8 @@ export class ViewProfileCompanyComponent {
     { value: '<i class="fa-brands fa-google-plus-g"></i>', color: "color:#ff2414" },
     { value: '<i class="fa-solid fa-globe"></i>', color: "color:#e6a800" },
     { value: '<i class="fa-solid fa-location-dot"></i>', color: "color:#b30000" },
-    { value: '<i class="fa-solid fa-map-location-dot"></i>', color: "color:#983c25"},
-    { value: '<i class="fa-solid fa-compact-disc"></i>', color: "color:#2a3c5a" }       
+    { value: '<i class="fa-solid fa-map-location-dot"></i>', color: "color:#983c25" },
+    { value: '<i class="fa-solid fa-compact-disc"></i>', color: "color:#2a3c5a" }
   ];
 
   getColorIcon() {
@@ -198,6 +197,10 @@ export class ViewProfileCompanyComponent {
           })
         } else {
           if (this.chats.indexOf(response.chat[0]._id) === -1) {
+            let localchats = localStorage.getItem('chats');
+            if (localchats) {
+              this.chats = localchats.split(',');
+            }
             this.chats.push(response.chat[0]._id);
             this.shared.changeChatList(this.chats);
             localStorage.setItem('chats', this.chats.toString());
