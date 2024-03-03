@@ -12,10 +12,9 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./login-company.component.css']
 })
 export class LoginCompanyComponent {
-
+  loading : boolean = false
   form: FormGroup;
   data: Object = {};
-
   constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService,
     private router: Router, private messageService: MessageService) {
     this.form = this.fb.group({
@@ -25,7 +24,9 @@ export class LoginCompanyComponent {
   }
 
   onSubmit() {
+    this.loading = true
 
+    setTimeout (()=>{
     if (this.form.valid) {
       this.data = {
         email_company: this.form.value.email_company,
@@ -34,6 +35,7 @@ export class LoginCompanyComponent {
 
       this.client.postRequest(`${environment.url_auth}/login/company`, this.data).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.auth.login(response.token);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
           setTimeout(() => {
@@ -41,6 +43,7 @@ export class LoginCompanyComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           if (error.status === 401) {
             this.messageService.clear();
@@ -57,8 +60,10 @@ export class LoginCompanyComponent {
       });
     } else {
       console.log("Error");
+      this.loading = false
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },2000)
   }
 }

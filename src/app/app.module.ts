@@ -66,6 +66,7 @@ import { SearchComponent } from './components/view/search/search.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ListChatsComponent } from './components/chat/list-chats/list-chats.component';
 import { CreateOrderComponent } from './components/order/create-order/create-order.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { CreateOrderComponent } from './components/order/create-order/create-ord
     SearchComponent,
     ChatComponent,
     ListChatsComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

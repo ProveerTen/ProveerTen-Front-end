@@ -1,3 +1,9 @@
+<div class="modal" *ngIf="loading">
+  <div class="modal-content">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
+</div>
+
 <div class="content">
     <div class="form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -12,14 +18,14 @@
                         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                             <h1 class="d-flex fs-1" style="color: orange;">Empresa</h1>
 
-                           
+
                             <div class="form-outline mb-4">
                                 <input type="email" formControlName="email_company"
                                     class="form-control form-control-lg" />
                                 <label class="form-label" for="form1Example13">Correo electrónico</label>
                             </div>
 
-                           
+
                             <div class="form-outline mb-4">
                                 <input type="password" formControlName="password_company"
                                     class="form-control form-control-lg" />

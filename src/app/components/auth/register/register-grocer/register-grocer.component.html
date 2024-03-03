@@ -56,7 +56,7 @@
                                     <input type="text" formControlName="document_grocer"
                                         class="form-control form-control-lg" />
 
-                
+
                                         <div *ngIf="form.get('document_grocer')?.hasError('minlength') || form.get('document_grocer')?.hasError('maxlength')"
                                             class="message-invalid">
                                             <p style="color: red;">El documento debe tener entre 10 a maximo 15 carácteres</p>
@@ -141,3 +141,10 @@
     </div>
 </div>
 
+
+
+<div class="modal" *ngIf="loading">
+  <div class="modal-content">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
+</div>

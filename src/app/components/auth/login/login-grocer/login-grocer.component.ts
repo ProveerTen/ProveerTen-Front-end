@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
 })
 
 export class LoginGrocerComponent {
-
+  loading:boolean = false
   form: FormGroup;
   data: Object = {};
 
@@ -26,6 +26,9 @@ export class LoginGrocerComponent {
   }
 
   onSubmit() {
+    this.loading = true ;
+
+    setTimeout (()=>{
     if (this.form.valid) {
       this.data = {
         email_grocer: this.form.value.email_grocer,
@@ -33,6 +36,7 @@ export class LoginGrocerComponent {
       }
       this.client.postRequest(`${environment.url_auth}/login/grocer`, this.data).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.auth.login(response.token);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
           setTimeout(() => {
@@ -41,6 +45,7 @@ export class LoginGrocerComponent {
         },
         error: (error) => {
           console.log(error);
+          this.loading = false
           if (error.status === 401) {
             this.messageService.clear();
             this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Correo electrónico o contraseña inválidos' });
@@ -55,10 +60,12 @@ export class LoginGrocerComponent {
         complete: () => console.log('complete'),
       });
     } else {
-      
+
       console.log("Error");
+      this.loading = false
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },2000)
   }
 }

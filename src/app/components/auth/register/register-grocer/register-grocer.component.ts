@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./register-grocer.component.css']
 })
 export class RegisterGrocerComponent {
-
+  loading : boolean = false
   form: FormGroup;
   grocer: grocer = {} as grocer;
 
@@ -35,6 +35,10 @@ export class RegisterGrocerComponent {
   }
 
   onSubmit() {
+    this.loading = true
+    setTimeout (()=>{
+
+
     if (this.form.valid) {
       this.grocer = {
         document_grocer: this.form.value.document_grocer,
@@ -53,6 +57,7 @@ export class RegisterGrocerComponent {
 
       this.client.postRequest(`${environment.url_auth}/register/grocer`, this.grocer).subscribe({
         next: (response) => {
+          this.loading = false
           console.log(response);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
           setTimeout(() => {
@@ -60,6 +65,7 @@ export class RegisterGrocerComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           this.messageService.clear();
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
@@ -68,9 +74,11 @@ export class RegisterGrocerComponent {
       });
     } else {
       console.log("Error");
+      this.loading = false
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },2000)
   }
 
 }

@@ -63,6 +63,7 @@ import { authGuard } from './guards/guards-components/auth.guard';
 import { update_profile_guard } from './guards/role-guards/update-profile';
 import { SearchComponent } from './components/view/search/search.component';
 import { CreateOrderComponent } from './components/order/create-order/create-order.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,10 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: 'loader',
+    component : LoaderComponent
   },
   {
     path: 'login',
