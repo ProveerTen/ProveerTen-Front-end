@@ -33,36 +33,56 @@
 
         <!-- Lista de productos -->
         <div class="col-md-9">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">Nombre del Producto</th>
-                        <th scope="col">Precio de Compra</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let product of products">
-                        <td>
-                            <img appBrokenImage loading="lazy" [src]="product.image_product"
-                                alt="{{ product?.name_product }}" class="product-image">
-                        </td>
-                        <td>{{ product?.name_product }}</td>
-                        <td>{{ product?.purchase_price_product }}</td>
-                        <td>{{ product?.stock_product }}</td>
-                        <td>
-                            <button class="btn btn-sm btn-success">+</button>
-                            <button class="btn btn-sm btn-warning">-</button>
-                            <button class="btn btn-sm btn-primary">Agregar</button>
-                            <button class="btn btn-sm btn-danger">Eliminar</button>
-                            <!-- Agrega los botones o acciones que necesitas -->
-                            <!-- Agregar más botones según sea necesario -->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div *ngIf="indexPage === 1">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Nombre del Producto</th>
+                            <th scope="col">Precio de Compra</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td>
+                                <img appBrokenImage loading="lazy" [src]="product.image_product"
+                                    alt="{{ product?.name_product }}" class="product-image">
+                            </td>
+                            <td>{{ product?.name_product }}</td>
+                            <td>{{ product?.purchase_price_product }}</td>
+                            <td>{{ product?.stock_product }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success">+</button>
+                                <button class="btn btn-sm btn-warning">-</button>
+                                <button class="btn btn-sm btn-primary">Agregar</button>
+                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                                <!-- Agrega los botones o acciones que necesitas -->
+                                <!-- Agregar más botones según sea necesario -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="indexPage === 2">
+                <h2>Providers</h2>
+            </div>
+
+            <div *ngIf="indexPage === 3">
+                <h2>Confirm</h2>
+            </div>
+
+        </div>
+        <div class="div">
+            <div class="buttons">
+                <button (click)="cancel()">Cancelar</button>
+                <button *ngIf="indexPage !== 3" [disabled]="isData" (click)="nextPage()">Siguiente</button>
+                <button *ngIf="indexPage === 3">Confirmar</button>
+                <button (click)="returnPage()" *ngIf="indexPage !== 1  && indexPage !== 3 ">Regresar</button>
+            </div>
         </div>
     </div>
 </div>

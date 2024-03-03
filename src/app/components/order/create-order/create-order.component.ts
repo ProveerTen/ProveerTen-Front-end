@@ -19,6 +19,8 @@ export class CreateOrderComponent {
   filteredCompanies: any[];
   selectedCompany: any;
   searchTerm: string = '';
+  indexPage: number = 1;
+  isData = true;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -50,6 +52,7 @@ export class CreateOrderComponent {
   }
 
   updateSelection(company: any) {
+    this.isData = false;
     if (this.companies) {
       this.companies.forEach(c => {
         if (c !== company) {
@@ -82,6 +85,24 @@ export class CreateOrderComponent {
         complete: () => console.log('complete'),
       });
     }
+  }
+
+  nextPage() {
+    if (this.indexPage > 2) {
+      return
+    }
+    this.indexPage++;
+  }
+
+  returnPage() {
+    if (this.indexPage < 1) {
+      return
+    }
+    this.indexPage--;
+  }
+
+  cancel() {
+    this.indexPage = 1;
   }
 }
 
