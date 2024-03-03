@@ -1,0 +1,27 @@
+<div class="container p-5">
+    <div style="max-height: 400px; overflow-y: auto;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Fecha de realización</th>
+                    <th scope="col">Valor del pedido</th>
+                    <th scope="col">Estado del pedido</th>
+                    <th scope="col"></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of data_orders">
+                    <td>{{order.id_order}}</td>
+                    <td>{{order.name_company}}</td>
+                    <td>{{order.order_date | date:'short'}}</td>
+                    <td>{{order.total_ordered_price}}</td>
+                    <td>{{order.status}}</td>
+                    <td>
+                        <button (click)="viewOrder(order.id_order)">Ver pedido</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -127,7 +127,7 @@ export class CreateOrderComponent {
     this.data_order = {
       order_delivery_date: new Date(),
       total_ordered_price: null,
-      status: "En proceso",
+      status: "Creado",
       document_provider: id_provider,
       name_provider: provider_name,
       last_name_provider: last_name,

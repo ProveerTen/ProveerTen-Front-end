@@ -27,7 +27,7 @@ export class HomeComponent {
 
         this.publicaciones = response.publications
         console.log(this.publicaciones);
-        
+
 
         for (let k = 0; k < this.publicaciones.length; k++) {
           const element = this.publicaciones[k].date;
@@ -92,10 +92,19 @@ export class HomeComponent {
     this.router.navigate(['search', 'companies'])
     this.shared.changeSearchOption('companies');
   }
+
   viewProducts() {
     // this.router.navigate(['viewAllProducts'])
     this.router.navigate(['search', 'products'])
     this.shared.changeSearchOption('products');
+  }
+
+  createOrder() {
+    this.router.navigate(['create/order'])
+  }
+
+  viewOrders() {
+    this.router.navigate(['view/orders'])
   }
 
   isVideo(url: string): boolean {

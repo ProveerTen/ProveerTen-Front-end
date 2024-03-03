@@ -64,6 +64,8 @@ import { update_profile_guard } from './guards/role-guards/update-profile';
 import { SearchComponent } from './components/view/search/search.component';
 import { CreateOrderComponent } from './components/order/create-order/create-order.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ViewOrderComponent } from './components/order/view-order/view-order.component';
+import { ViewOrdersComponent } from './components/order/view-orders/view-orders.component';
 
 const routes: Routes = [
   {
@@ -78,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: 'loader',
-    component : LoaderComponent
+    component: LoaderComponent
   },
   {
     path: 'login',
@@ -188,6 +190,14 @@ const routes: Routes = [
   {
     path: 'create/order',
     component: CreateOrderComponent
+  },
+  {
+    path: 'view/orders',
+    component: ViewOrdersComponent
+  },
+  {
+    path: 'view/order/:id',
+    component: ViewOrderComponent
   },
   {
     path: '404',
