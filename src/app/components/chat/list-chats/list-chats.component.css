@@ -1,3 +1,25 @@
 /* .contenedor{
     position: sticky;
 } */
+
+
+.chat-container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    position: fixed;
+    bottom: 0;
+    right: 220px;
+}
+
+
+.chat-item {
+    margin-right: 10px;
+}
+
+.user_chat:hover {
+    background-color: rgb(255, 215, 84);
+    /* border: 1px orange solid; */
+}

@@ -21,86 +21,107 @@
 
  -->
 
+<div class="content">
+    <div class="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-<section class="h-100 bg-white">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col">
-                <div class="card border-0 card-registration my-4">
-                    <form class="row g-0" [formGroup]="form" (ngSubmit)="onSubmit()">
-                        <div class="col-xl-6 d-none d-xl-block">
+            <section class="">
+                <div class="container py-5">
+                    <div class="row d-flex align-items-center justify-content-center  rounded"
+                        style="background-color: white;">
+                        <div class="col-md-8 col-lg-7 col-xl-6">
                             <img src="https://img.freepik.com/vector-premium/diseno-vector-ilustracion-estilo-plano-signo-alta-calidad_538610-344.jpg?size=626&ext=jpg"
-                                alt="Sample photo" class="img-fluid"
-                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                                class="img-fluid" alt="Phone image">
                         </div>
-                        <div class="col-xl-6">
-                            <div class="card-body p-md-5 text-black ">
-                                <h3 style="color: orange;" class="mb-5 text-uppercase d-flex justify-content-center">
-                                    Registrar Como Empresa</h3>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-outline">
-                                            <input type="text" formControlName="nit_company" placeholder=""
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Example1m">Nit</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-outline">
-                                            <input type="text" formControlName="name_company" placeholder=""
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Example1n">Nombre de la empresa </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-outline">
-                                            <input type="email" formControlName="email_company" placeholder=""
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Example1m1">Correo electrónico</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-outline">
-                                            <input type="tel" formControlName="national_line_company" placeholder=""
-                                                class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Example1n1">Telefono</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="date" formControlName="foundation_company" placeholder=""
-                                        class="form-control form-control-lg" [max]="this.fecha"/>
-                                    <label class="form-label" for="form3Example8">Fecha de fundación de la
-                                        empresa</label>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input input type="password" formControlName="password_company" placeholder=""
-                                        class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example9">Contraseña</label>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="text" formControlName="description_company" placeholder=""
-                                        class="form-control form-control-lg form-outline" />
-                                    <label class="form-label" for="form3Example90">Breve descripción de la
-                                        empresa</label>
-                                </div>
-                                <p-toast position="bottom-right" key="center"></p-toast>
-                                <div class="d-flex justify-content-center pt-3">
-                                    <button type="submit" class="btn btn-warning btn-lg ms-2">Registrar</button>
-                                </div>
-
+                        <div class=" col-xl-5 offset-xl-1 shadow p-4 m-4 bg-body-tertiary rounded ">
+                            <div class="d-flex fs-1 justify-content-center mb-3">
+                                <h1 style="color: orange;">Registrate como compañia</h1>
                             </div>
+
+                            <!-- Email input -->
+
+                            <div class="div">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form1Example13"><strong>Nit</strong></label>
+                                    <input type="text" formControlName="nit_company"
+                                        class="form-control form-control-lg" />
+                                </div>
+
+                                <div *ngIf="form.get('nit_company')?.hasError('minlength') || form.get('nit_company')?.hasError('maxlength')"
+                                    class="message-invalid">
+                                    <p style="color: red;">El nit debe tener entre 9 a maximo 15 carácteres</p>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex gap-2">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form1Example13"><strong>Nombre de la
+                                            empresa</strong></label>
+                                    <input type="text" formControlName="name_company"
+                                        class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form1Example13"><strong>Correo</strong></label>
+                                    <input type="email" formControlName="email_company"
+                                        class="form-control form-control-lg" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form1Example13"><strong>Telelfono</strong></label>
+                                    <input type="tel" formControlName="national_line_company"
+                                        class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form1Example13"><strong>Fecha de
+                                            fundación</strong></label>
+                                    <input type="date" formControlName="foundation_company" [max]="this.fecha"
+                                        class="form-control form-control-lg" />
+                                </div>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form1Example13"><strong>Contraseña</strong></label>
+                                <input type="password" formControlName="password_company"
+                                    class="form-control form-control-lg" />
+
+                                <div *ngIf="form.get('password_company')?.hasError('minlength') || form.get('password_company')?.hasError('maxlength')"
+                                    class="message-invalid">
+                                    <p style="color: red;">La contraseña debe tener minimo 8 carácteres</p>
+                                </div>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label"><Strong>Breve
+                                        descripción</Strong></label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="text"
+                                    formControlName="description_company"></textarea>
+                            </div>
+
+
+                            <p-toast position="bottom-right" key="center"></p-toast>
+                            <!-- Submit button -->
+                            <button type="submit"
+                                class="btn btn-primary btn-lg btn-block d-grid gap-2 col-6 mx-auto border border-0"
+                                type="submit" style="background-color: orange; ">Registrar</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </form>
     </div>
-</section>
+</div>
+
+
+<div class="modal" *ngIf="loading">
+  <div class="modal-content">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
+</div>
+
+

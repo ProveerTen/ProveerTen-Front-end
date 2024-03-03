@@ -1,6 +1,6 @@
 <div class="container d-flex flex-column gap-5 align-items-center">
 
-    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="margin-top: 50px;">
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="3000">
                 <img src="https://res.cloudinary.com/ddio1oisb/image/upload/v1707880170/Cover_default_nbahdp.jpg"
@@ -11,20 +11,17 @@
                     class="d-block w-100" alt="...">
             </div>
         </div>
-
-        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button> -->
     </div>
-    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewCompanies()">Encontrar Empresas</button>
-    <button *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" (click)="viewProducts()">Encontrar Productos</button>
 
-    <div class="col-md-6 d-flex gap-3 w-50 flex-xxl-column flex-wrap" *ngIf="publicaciones; else noPublications">
+    <div class="buttons d-flex gap-5">
+        <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewCompanies()">Encontrar Empresas</button>
+        <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewProducts()">Encontrar Productos</button>
+    </div>
+
+    <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap" style="width: 60%;"
+        *ngIf="publicaciones; else noPublications">
         <div class="card" style="width: 100%; height: 100%;" *ngFor="let publicacion of publicaciones; let i = index">
             <div class="card-header d-flex align-items-center gap-4">
                 <img (click)="viewProfile(publicacion.nit_company)" style="cursor: pointer;" appBrokenImageProfile
@@ -32,29 +29,41 @@
                     width="50px" height="50px">
                 <div class="row">
                     <p (click)="viewProfile(publicacion.nit_company)"
-                        style="cursor: pointer; padding: 0; margin: 0; font-size: 20px;">{{
-                        newDataPub[i]?.name_company }}</p>
-                    <!-- <p>{{publicacion?.date | date:'mediumDate'}} </p> -->
-                    <p style="cursor: pointer; padding: 0; margin: 0;">{{publicacion.date | date}} </p>
+                        style="cursor: pointer; padding: 0; margin: 0; font-size: 20px;">{{ newDataPub[i]?.name_company
+                        }}</p>
+                    <p style="cursor: pointer; padding: 0; margin: 0;">{{ publicacion.date | date }} </p>
                 </div>
             </div>
             <div class="card-body w-100 d-flex justify-content-center flex-column">
                 <p class="fs-3 bg-light" style="color: black">{{ publicacion.text }}</p>
-                <ng-container *ngIf="isVideo(publicacion.secure_url); else isImage">
-                    <video id="video_publication" controls class="img-fluid" style="width: 100%;">
-                        <source [src]="publicacion?.secure_url" type="video/mp4">
-                        Tu navegador no soporta el elemento de video.
-                    </video>
-                </ng-container>
-                <ng-template #isImage>
-                    <img id="image_publication" [src]="publicacion?.secure_url" class="img-fluid">
-                </ng-template>
+                <img src="{{ publicacion.secure_url }}" class="img-fluid" style="cursor: pointer;"
+                    data-bs-toggle="modal" [attr.data-bs-target]="'#imageModal_' + i">
             </div>
         </div>
-        <div class="finishedMessage" *ngIf="finish">
-            No hay más publicaciones por mostrar
+    </div>
+    <div class="finishedMessage" *ngIf="finish">
+        <div class="d-flex justify-content-center">
+            <p style="text-align: center;">No hay publicaciones por mostrar</p>
         </div>
     </div>
-    <ng-template #noPublications>
-        <p>No hay publicaciones por mostrar</p>
-    </ng-template>
+</div>
+
+<ng-template #noPublications>
+    <p>No hay publicaciones por mostrar</p>
+</ng-template>
+
+<!-- Modals -->
+<div *ngFor="let publicacion of publicaciones; let i = index" class="modal fade" [id]="'imageModal_' + i" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ publicacion.text }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body img-modal-body">
+                <img src="{{ publicacion.secure_url }}" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>

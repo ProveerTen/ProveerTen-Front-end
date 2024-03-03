@@ -1,6 +1,8 @@
 <div class="d-flex justify-content-center mt-5 gap-3">
-    <button (click)="setRole('grocer')" type="button" class="btn btn-outline-secondary btn-lg">Tendero</button>
-    <button (click)="setRole('company')" type="button" class="btn btn-outline-secondary btn-lg">Empresa</button>
+    <button (click)="setRole('grocer')" type="button" class="btn btn-outline-dark btn-lg">Tendero</button>
+    <button (click)="setRole('company')" type="button" class="btn btn-outline-dark btn-lg">Empresa</button>
+
+    
 </div>
 
 <div *ngIf="isRole('grocer')">

@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./login-provider.component.css']
 })
 export class LoginProviderComponent {
-
+  loading : boolean = false
   form: FormGroup;
   data: Object = {};
 
@@ -25,6 +25,10 @@ export class LoginProviderComponent {
   }
 
   onSubmit() {
+
+    this.loading = true
+    setTimeout (()=>{
+
     if (this.form.valid) {
       this.data = {
         email_provider: this.form.value.email_provider,
@@ -32,6 +36,7 @@ export class LoginProviderComponent {
       }
       this.client.postRequest(`${environment.url_auth}/login/provider`, this.data).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.auth.login(response.token);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
           setTimeout(() => {
@@ -39,6 +44,7 @@ export class LoginProviderComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           if (error.status === 401) {
             this.messageService.clear();
@@ -55,9 +61,11 @@ export class LoginProviderComponent {
       });
     } else {
       console.log("Error");
+      this.loading = false
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },2000)
   }
 
 }

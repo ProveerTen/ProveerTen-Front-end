@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./register-company.component.css']
 })
 export class RegisterCompanyComponent {
-
+  loading : boolean = false
   form: FormGroup;
   company: company = {} as company;
   fecha: any;
@@ -37,6 +37,12 @@ export class RegisterCompanyComponent {
   }
 
   onSubmit() {
+
+      this.loading = true
+
+      setTimeout (()=>{
+
+
     if (this.form.valid) {
       this.company = {
         nit_company: this.form.value.nit_company,
@@ -50,6 +56,7 @@ export class RegisterCompanyComponent {
 
       this.client.postRequest(`${environment.url_auth}/register/company`, this.company).subscribe({
         next: (response) => {
+          this.loading = false
           console.log(response);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
           setTimeout(() => {
@@ -57,6 +64,7 @@ export class RegisterCompanyComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           this.messageService.clear();
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
@@ -64,9 +72,11 @@ export class RegisterCompanyComponent {
         complete: () => console.log('complete'),
       });
     } else {
+      this.loading = false
       console.log("Error");
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },2000)
   }
 }
