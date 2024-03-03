@@ -19,7 +19,7 @@ export class ViewProfileCompanyComponent {
   isLogin: any;
   providers: any;
   chats: string[] = [];
-  dataSocialReds:any
+  dataSocialReds:any[]
   colorsOfIcons: any[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) {
@@ -64,6 +64,7 @@ export class ViewProfileCompanyComponent {
           const foundationDate = new Date(this.data.foundation_company);
           this.data.foundation_company = foundationDate.toISOString().split('T')[0];
           this.getPublications();
+          this.getSocialReds()
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -75,7 +76,7 @@ export class ViewProfileCompanyComponent {
   }
 
   getSocialReds() {
-    this.client.getRequest(`${environment.url_logic}/edit_profile/socialRed/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+    this.client.getRequest(`${environment.url_logic}/edit_profile/socialRed/${this.id}`, undefined, undefined).subscribe({
       next: (response: any) => {
         this.dataSocialReds = response.status.data;
         console.log("social reds", this.dataSocialReds);            

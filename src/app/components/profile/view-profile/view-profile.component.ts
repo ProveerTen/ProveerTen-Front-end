@@ -328,22 +328,25 @@ export class ViewProfileComponent {
   onDeleteSocialRed(id: string) {
     // let id = id
     console.log("id link", id);
+    let res = confirm('¿Seguro qué desea eliminar esta información?');
 
-    this.client.deleteRequest(`${environment.url_logic}/edit_profile/socialRed`, { id }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.dataSocialReds = response.status.data;
-        console.log("datos de las redes sociales", this.dataSocialReds);
-        console.log(this.dataSocialReds.length);
-
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => {
-        console.log('complete')
-        this.getSocialReds()
-      }
-    })
+    if (res) {
+      this.client.deleteRequest(`${environment.url_logic}/edit_profile/socialRed`, { id }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          this.dataSocialReds = response.status.data;
+          console.log("datos de las redes sociales", this.dataSocialReds);
+          console.log(this.dataSocialReds.length);
+  
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => {
+          console.log('complete')
+          this.getSocialReds()
+        }
+      })
+    }
   }
 
 }
