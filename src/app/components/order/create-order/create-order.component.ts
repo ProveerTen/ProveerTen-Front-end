@@ -21,6 +21,7 @@ export class CreateOrderComponent {
   searchTerm: string = '';
   indexPage: number = 1;
   isData = true;
+  providers: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -40,7 +41,7 @@ export class CreateOrderComponent {
       if (company !== null) {
         company.isSelected = true;
         this.updateSelection(company);
-        this.showProducts();
+        // this.showProducts();
       }
     })
   }
@@ -65,6 +66,7 @@ export class CreateOrderComponent {
     }
 
     this.showProducts();
+    this.getProviders();
   }
 
   // viewCompany() {
@@ -78,6 +80,22 @@ export class CreateOrderComponent {
           this.products = response.products;
           console.log(this.products);
 
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+  }
+
+  getProviders() {
+    if (this.selectedCompany) {
+      this.client.postRequest(`${environment.url_chat}/provider/city`, { companyId: this.selectedCompany.nit_company, grocerId: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.providers = response.providersbycity[0];
+          console.log(this.providers);
         },
         error: (error) => {
           console.log(error.error.Status);

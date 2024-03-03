@@ -69,6 +69,11 @@
 
             <div *ngIf="indexPage === 2">
                 <h2>Providers</h2>
+
+                <div *ngFor="let provider of providers">
+                    <p>{{provider.name_provider}} {{provider.last_name_provider}}</p>
+                </div>
+
             </div>
 
             <div *ngIf="indexPage === 3">
