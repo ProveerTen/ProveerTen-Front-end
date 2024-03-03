@@ -20,11 +20,6 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div *ngFor="let chatId of chats; let i = index">
-                        <app-chat [chatId]="selectedChatId"></app-chat>
-                        <button (click)="closeChat(i)">Cerrar Chat</button>
-                    </div>
-
                     <div class="d-flex flex-column">
 
                         <div class="cover d-flex flex-column m-2 ">
