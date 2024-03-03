@@ -62,4 +62,5 @@ export class ViewAllCompaniesComponent {
   viewCompany(id: string) {
     this.router.navigate(['profile/company/', id]);
   }
+  
 }
