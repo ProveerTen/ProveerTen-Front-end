@@ -4,6 +4,7 @@ import { dataDecoded } from 'src/app/interfaces/dataDecoded';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthService {
   private data!: dataDecoded;
   private helper = new JwtHelperService();
 
-  constructor(private router: Router, private messageService: MessageService) {
+  constructor(private router: Router, private messageService: MessageService, private shared: SharedService) {
     this.checkAuth();
   }
 
@@ -111,6 +112,7 @@ export class AuthService {
     this.router.navigate(['login']);
     this.messageService.add({ key: 'nav', severity: 'success', summary: 'Éxito', detail: 'Cierre de sesión exitoso' });
     localStorage.removeItem('chats')
+    this.shared.changeChatList([])
   }
 
 }

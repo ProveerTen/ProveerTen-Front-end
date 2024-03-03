@@ -22,6 +22,7 @@ export class ListChatsComponent {
     });
     this.shared.chatList.subscribe((value: any) => {
       this.chats = value;
+
       this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
@@ -51,8 +52,11 @@ export class ListChatsComponent {
     }
   }
 
-  chatear(document_provider: any) {
-    this.client.postRequest(`${environment.url_chat}/chat/find`, { grocerId: this.auth.getId(), providerId: document_provider }, undefined, undefined).subscribe({
+  chatear(document: any) {
+
+    let filterObject = this.auth.getRole() === 'grocer' ? { grocerId: this.auth.getId(), providerId: document } : { grocerId: document, providerId: this.auth.getId() }
+
+    this.client.postRequest(`${environment.url_chat}/chat/find`, filterObject, undefined, undefined).subscribe({
       next: (response: any) => {
         if (this.chats.indexOf(response.chat[0]._id) === -1) {
           this.chats.push(response.chat[0]._id);
@@ -67,9 +71,6 @@ export class ListChatsComponent {
         console.log(error);
       }
     })
-
-    
-
   }
 
   closeChat(index: any) {
@@ -80,6 +81,10 @@ export class ListChatsComponent {
       localStorage.setItem('chats', this.chats.toString())
     }
     console.log(this.chats);
+  }
+
+  ngOnDestroy() {
+    this.chats = [];
   }
 
 }

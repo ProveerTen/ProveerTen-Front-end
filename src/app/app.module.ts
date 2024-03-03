@@ -67,6 +67,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ListChatsComponent } from './components/chat/list-chats/list-chats.component';
 import { CreateOrderComponent } from './components/order/create-order/create-order.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ViewOrderComponent } from './components/order/view-order/view-order.component';
+import { ViewOrdersComponent } from './components/order/view-orders/view-orders.component';
 
 
 @NgModule({
@@ -116,7 +118,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     ChatComponent,
     ListChatsComponent,
     CreateOrderComponent,
-    LoaderComponent
+    LoaderComponent,
+    ViewOrderComponent,
+    ViewOrdersComponent
   ],
   imports: [
     BrowserModule,

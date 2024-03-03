@@ -92,10 +92,19 @@ export class HomeComponent {
     this.router.navigate(['search', 'companies'])
     this.shared.changeSearchOption('companies');
   }
+
   viewProducts() {
     // this.router.navigate(['viewAllProducts'])
     this.router.navigate(['search', 'products'])
     this.shared.changeSearchOption('products');
+  }
+
+  createOrder() {
+    this.router.navigate(['create/order'])
+  }
+
+  viewOrders() {
+    this.router.navigate(['view/orders'])
   }
 
   isVideo(url: string): boolean {
