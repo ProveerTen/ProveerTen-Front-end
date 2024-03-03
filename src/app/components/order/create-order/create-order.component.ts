@@ -33,7 +33,7 @@ export class CreateOrderComponent {
   isData = true;
   providers: any;
   product_quantity: number;
-  orderProducts: any[];
+  orderProducts: any[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -158,8 +158,19 @@ export class CreateOrderComponent {
   }
 
   addProduct(product: any) {
+    let pos = this.orderProducts.findIndex(p => p.id_product === product.id_product);
+
+    if (pos !== -1) {
+      this.orderProducts[pos].product_quantity += product.product_quantity;
+    } else {
+      this.orderProducts.push({ ...product });
+    }
+    product.product_quantity = 0;
+
+    console.log(this.orderProducts);
 
   }
+
 
   removeProduct(product: any) {
 

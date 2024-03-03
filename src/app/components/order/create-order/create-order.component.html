@@ -63,8 +63,11 @@
                                             <button (click)="decreaseProduct(product)"
                                                 class="btn btn-sm btn-warning">-</button>
                                         </div>
-                                        <button class="btn btn-sm btn-primary">Agregar</button>
-                                        <button [disabled]="product.product_quantity === 0"
+                                        <button (click)="addProduct(product)"
+                                            [disabled]="product.product_quantity === 0"
+                                            class="btn btn-sm btn-primary">Agregar</button>
+                                        <button (click)="addProduct(product)"
+                                            [disabled]="product.product_quantity === 0"
                                             class="btn btn-sm btn-danger">Eliminar</button>
                                         <!-- Agrega los botones o acciones que necesitas -->
                                         <!-- Agregar más botones según sea necesario -->
