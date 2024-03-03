@@ -16,13 +16,23 @@ export class ChatComponent implements OnInit {
   messages: any[] = [];
   messageText: string = '';
   chats: string[] = [];
+  data: any;
+  nameSender: any = '';
   @ViewChild('messageContainer') messageContainer: ElementRef;
 
-  constructor(private chatService: ChatService, private auth: AuthService, private client: ClientService, public shared: SharedService) { }
+  constructor(private chatService: ChatService, public auth: AuthService, private client: ClientService, public shared: SharedService) { }
 
   ngOnInit(): void {
+    this.client.postRequest(`${environment.url_chat}/chat/chatunic`, { chatId: this.chatId }, undefined, undefined).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.data = response
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
     this.loadMessages();
-    console.log(this.chatId);
     this.chatService.joinChat(this.auth.getId(), this.chatId);
     this.chatService.getMessages(this.chatId).subscribe(
       (message: any) => {
@@ -59,11 +69,27 @@ export class ChatComponent implements OnInit {
   }
 
   isMyMessage(sender: string): boolean {
+    if (this.data && this.auth.getRole() === 'grocer') {
+      if (sender === this.auth.getId()) {
+        this.nameSender = this.data.grocer[0].name_grocer
+      } else {
+        this.nameSender = this.data.provider[0].name_provider
+      }
+    }
+    if (this.data && this.auth.getRole() === 'provider') {
+      if (sender === this.auth.getId()) {
+        this.nameSender = this.data.provider[0].name_provider
+      } else {
+        this.nameSender = this.data.grocer[0].name_grocer
+      }
+    }
+
     return sender === this.auth.getId();
   }
 
   ngOnDestroy() {
     this.messages = [];
+    this.nameSender = '';
   }
 
   private scrollToBottom(): void {
