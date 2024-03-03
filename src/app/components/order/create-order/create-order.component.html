@@ -130,7 +130,7 @@
                         <button (click)="cancel()">Cancelar</button>
                         <button *ngIf="indexPage !== 3" [disabled]="isData" (click)="nextPage()">Siguiente</button>
                         <button (click)="confirm()" *ngIf="indexPage === 3">Confirmar</button>
-                        <!-- <button (click)="returnPage()" *ngIf="indexPage !== 1  && indexPage !== 3 ">Regresar</button> -->
+                        <button (click)="editOrder()" *ngIf="indexPage === 3">Editar</button>
                     </div>
                 </div>
             </div>
