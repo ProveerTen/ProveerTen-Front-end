@@ -20,14 +20,13 @@ export class LoginGrocerComponent {
   constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService,
     private router: Router, private messageService: MessageService) {
     this.form = this.fb.group({
-      email_grocer: ['', [Validators.email]],
+      email_grocer: ['', [Validators.email, Validators.required]],
       password_grocer: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
     });
   }
 
   onSubmit() {
     this.loading = true ;
-
     setTimeout (()=>{
     if (this.form.valid) {
       this.data = {
@@ -47,12 +46,15 @@ export class LoginGrocerComponent {
           console.log(error);
           this.loading = false
           if (error.status === 401) {
+            this.loading = false
             this.messageService.clear();
             this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Correo electrónico o contraseña inválidos' });
           } else if (error.status === 500) {
+            this.loading = false
             this.messageService.clear();
             this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Se ha producido un error. Por favor, inténtelo de nuevo más tarde' });
           } else if (error.status === 409) {
+            this.loading = false
             this.messageService.clear();
             this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'El usuario no existe en el sistema. Verifique el correo electrónico o la contraseña.' });
           }
@@ -66,6 +68,6 @@ export class LoginGrocerComponent {
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
-  },2000)
+  },300)
   }
 }
