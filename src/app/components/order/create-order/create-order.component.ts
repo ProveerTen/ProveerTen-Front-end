@@ -137,6 +137,10 @@ export class CreateOrderComponent {
 
   }
 
+  editOrder() {
+    this.indexPage = 1;
+  }
+
   nextPage() {
     if (this.indexPage > 2) {
       return
