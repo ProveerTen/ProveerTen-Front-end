@@ -6,14 +6,16 @@
     <div class="overflow-auto" style="height: 400px" #messageContainer>
         <div class="card-body" *ngFor="let message of messages" class="message">
             <div class="p-1">
-                <p *ngIf="data">{{nameSender}}</p>
+                
                 <div *ngIf="isMyMessage(message.sender)" class="my-message d-flex flex-column"
                     style="text-align: right;">
+                    <p *ngIf="data">{{nameSender}}</p>
                     <span style="background-color: #ffc107; color: white; border-radius: 10px;" class="p-2">{{
                         message.content }}</span>
                     <p style="font-size: 12px;">{{ message.timestamp | date:'short'}}</p>
                 </div>
                 <div *ngIf="!isMyMessage(message.sender)" class="their-message d-flex flex-column">
+                    <p *ngIf="data">{{nameSender}}</p>
                     <span style="background-color: rgb(219, 218, 218); border-radius: 10px;" class="p-2">{{
                         message.content }}</span>
                     <p style="font-size: 12px;">{{ message.timestamp | date:'short'}}</p>
