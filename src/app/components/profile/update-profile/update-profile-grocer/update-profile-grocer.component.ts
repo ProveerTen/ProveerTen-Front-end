@@ -16,7 +16,7 @@ export class UpdateProfileGrocerComponent {
   data: any;
   form: FormGroup;
   dataUpdate: any = {};
-  err:any;
+  err: any;
 
   constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
     private messageService: MessageService) {
@@ -73,7 +73,7 @@ export class UpdateProfileGrocerComponent {
       }
       console.log("data Update apartment", this.dataUpdate.apartment);
       console.log(this.dataUpdate);
-      
+
 
       this.client.patchRequest(`${environment.url_logic}/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
@@ -85,7 +85,7 @@ export class UpdateProfileGrocerComponent {
           }, 1500);
         },
         error: (error) => {
-          this.err = error.error.errors[0]; 
+          this.err = error.error.errors[0];
           console.log(error);
           this.messageService.clear();
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: this.err });
@@ -105,33 +105,32 @@ export class UpdateProfileGrocerComponent {
     }
   }
 
-  async deleteField (deleteField: string) {
+  async deleteField(deleteField: string) {
     console.log("DELETE FIELD", deleteField);
+    let res = confirm('¿Seguro qué desea eliminar esta información?');
+    if (res) {
+      this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log("RESPOnse delete", response);
 
-    this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        console.log("RESPOnse delete", response);
+          this.form.get(deleteField)!.setValue(null);
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log("Complete delete data Profile");
+        }
+      })
+    }
 
-        this.form.get(deleteField)!.setValue(null);
-      },  
-      error: (error: any) => {
-        console.log(error);
-        // Swal.fire({
-        //   title: error,
-        //   icon: "error"
-        // });
-      },
-      complete: () => {
-        console.log("Complete delete data Profile");
-      }
-    })
   }
 
   isvalid(nameField: string) {
     return this.form.get(nameField)?.valid;
   }
 
-    // async confirmationWindow():Promise<boolean> {
+  // async confirmationWindow():Promise<boolean> {
   //   let answer:any;
   //   const result = await Swal.fire({
   //     title: "Seguro que deseas salir?",
@@ -140,7 +139,7 @@ export class UpdateProfileGrocerComponent {
   //     confirmButtonText: "Salir y guardar",
   //     denyButtonText: `Salir`
   //   });
-  
+
   //   if (result.isConfirmed) {
   //     return true;
   //   } else if (result.isDenied) {
@@ -149,11 +148,11 @@ export class UpdateProfileGrocerComponent {
   // return false
   // }
 
-      // let result = await this.confirmationWindow()
-    // console.log(result);
-    
-    // if (!result) {
-    //   this.router.navigate(['/login'])     
-    //   return 
-    // }
+  // let result = await this.confirmationWindow()
+  // console.log(result);
+
+  // if (!result) {
+  //   this.router.navigate(['/login'])     
+  //   return 
+  // }
 }

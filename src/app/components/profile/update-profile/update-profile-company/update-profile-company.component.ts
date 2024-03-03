@@ -77,7 +77,7 @@ export class UpdateProfileCompanyComponent {
             title: "Datos actualizados con éxito",
             icon: "success"
           });
-          this.router.navigate(['/profile', this.auth.getId()])
+          this.router.navigate(['/profile'])
         },
         error: (error) => {
           console.log(error);
@@ -98,25 +98,29 @@ export class UpdateProfileCompanyComponent {
 
   deleteField(deleteField: string) {
     console.log("DELETE FIELD", deleteField);
+    let res = confirm('¿Seguro qué desea eliminar esta información?');
 
-    this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        console.log("RESPOnse", response);
-
-        this.form.get(deleteField)!.setValue(null)
-
-        Swal.fire({
-          title: "Dato Eliminado",
-          icon: "success"
-        });
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log("Complete delete data Profile");
-      }
-    })
+    if(res) {
+      this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log("RESPOnse", response);
+  
+          this.form.get(deleteField)!.setValue(null)
+  
+          Swal.fire({
+            title: "Dato Eliminado",
+            icon: "success"
+          });
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log("Complete delete data Profile");
+        }
+      })
+    }
+    
   }
 
 
