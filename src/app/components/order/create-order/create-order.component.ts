@@ -12,6 +12,8 @@ interface order {
   total_ordered_price: any,
   status: string,
   document_provider: string,
+  name_provider: string,
+  last_name_provider: string,
   products: any[]
 }
 
@@ -35,6 +37,7 @@ export class CreateOrderComponent {
   product_quantity: number;
   orderProducts: any[] = [];
   total: number = 0;
+  data_order: order;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -120,6 +123,20 @@ export class CreateOrderComponent {
     }
   }
 
+  getData(id_provider: string, provider_name: string, last_name: string) {
+    this.data_order = {
+      order_delivery_date: new Date(),
+      total_ordered_price: null,
+      status: "En proceso",
+      document_provider: id_provider,
+      name_provider: provider_name,
+      last_name_provider: last_name,
+      products: this.orderProducts
+    }
+    console.log(this.data_order);
+
+  }
+
   nextPage() {
     if (this.indexPage > 2) {
       return
@@ -136,10 +153,32 @@ export class CreateOrderComponent {
 
   cancel() {
     this.indexPage = 1;
+    this.orderProducts = [];
+    this.data_order = null;
+  }
+
+  finish() {
+    this.indexPage = 1;
+    this.orderProducts = [];
+    this.data_order = null;
   }
 
   confirm() {
-    confirm('Confirmar pedido');
+    let option = confirm('Confirmar pedido');
+    if (option) {
+      this.client.postRequest(`${environment.url_logic}/order/create`, this.data_order, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.finish();
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    } else {
+      this.cancel();
+    }
   }
 
   increaseProduct(product: any) {

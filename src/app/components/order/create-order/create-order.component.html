@@ -80,13 +80,46 @@
                     <h2>Providers</h2>
 
                     <div *ngFor="let provider of providers">
-                        <p>{{provider.name_provider}} {{provider.last_name_provider}}</p>
+                        <div class="card">
+                            <div class="card-body"
+                                (click)="getData(provider.document_provider, provider.name_provider, provider.last_name_provider)"
+                                style="cursor: pointer;">
+                                <p>{{provider.document_provider}}</p>
+                                <p>{{provider.name_provider}} {{provider.last_name_provider}}</p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
 
                 <div *ngIf="indexPage === 3">
                     <h2>Confirm</h2>
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Nombre del Producto</th>
+                                    <th scope="col">Precio de Compra</th>
+                                    <th scope="col">Cantidad Pedida</th>
+                                    <!-- <th scope="col">Stock</th> -->
+                                    <th scope="col">Trabajador</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of data_order.products">
+                                    <td>
+                                        <img appBrokenImage loading="lazy" [src]="product.image_product"
+                                            alt="{{ product?.name_product }}" class="product-image">
+                                    </td>
+                                    <td>{{ product?.name_product }}</td>
+                                    <td>{{ product?.purchase_price_product }}</td>
+                                    <td>{{ product?.product_quantity}}</td>
+                                    <td>{{ data_order?.name_provider}} {{ data_order?.last_name_provider}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="div"
                     style="display: flex; flex-direction: column; align-items: end; border-top: 2px gray solid; padding-top: 5px;">
