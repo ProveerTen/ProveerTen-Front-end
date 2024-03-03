@@ -34,6 +34,7 @@ export class CreateOrderComponent {
   providers: any;
   product_quantity: number;
   orderProducts: any[] = [];
+  total: number = 0;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -159,21 +160,23 @@ export class CreateOrderComponent {
 
   addProduct(product: any) {
     let pos = this.orderProducts.findIndex(p => p.id_product === product.id_product);
-
     if (pos !== -1) {
       this.orderProducts[pos].product_quantity += product.product_quantity;
     } else {
       this.orderProducts.push({ ...product });
     }
+    this.total += product.product_quantity * product.purchase_price_product;
     product.product_quantity = 0;
-
-    console.log(this.orderProducts);
-
+    product.add_product = true;
   }
-
 
   removeProduct(product: any) {
-
+    let pos = this.orderProducts.findIndex(p => p.id_product === product.id_product);
+    this.total -= this.orderProducts[pos].product_quantity * this.orderProducts[pos].purchase_price_product;
+    product.stock_product += this.orderProducts[pos].product_quantity;
+    this.orderProducts.splice(pos, 1);
+    product.add_product = false;
   }
+
 }
 
