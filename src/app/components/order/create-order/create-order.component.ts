@@ -7,21 +7,33 @@ import { environment } from 'src/environments/environment';
 import product from '../../../interfaces/product';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
+interface order {
+  order_delivery_date: Date,
+  total_ordered_price: any,
+  status: string,
+  document_provider: string,
+  products: any[]
+}
+
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css']
 })
+
+
 export class CreateOrderComponent {
 
   companies: any[];
-  products: any[];
+  products: any;
   filteredCompanies: any[];
   selectedCompany: any;
   searchTerm: string = '';
   indexPage: number = 1;
   isData = true;
   providers: any;
+  product_quantity: number;
+  orderProducts: any[];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -78,8 +90,10 @@ export class CreateOrderComponent {
       this.client.postRequest(`${environment.url_logic}/order/products`, { "nit_company": this.selectedCompany.nit_company }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.products = response.products;
+          this.products.forEach(product => {
+            product.product_quantity = 0;
+          });
           console.log(this.products);
-
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -121,6 +135,34 @@ export class CreateOrderComponent {
 
   cancel() {
     this.indexPage = 1;
+  }
+
+  confirm() {
+    confirm('Confirmar pedido');
+  }
+
+  increaseProduct(product: any) {
+    if (product.product_quantity < 0 || product.stock_product == 0) {
+      return;
+    }
+    product.product_quantity++;
+    product.stock_product--;
+  }
+
+  decreaseProduct(product: any) {
+    if (product.product_quantity == 0) {
+      return;
+    }
+    product.product_quantity--;
+    product.stock_product++;
+  }
+
+  addProduct(product: any) {
+
+  }
+
+  removeProduct(product: any) {
+
   }
 }
 

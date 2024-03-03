@@ -33,61 +33,73 @@
 
         <!-- Lista de productos -->
         <div class="col-md-9">
+            <div class="" style="height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div *ngIf="indexPage === 1">
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Nombre del Producto</th>
+                                    <th scope="col">Precio de Compra</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of products">
+                                    <td>
+                                        <img appBrokenImage loading="lazy" [src]="product.image_product"
+                                            alt="{{ product?.name_product }}" class="product-image">
+                                    </td>
+                                    <td>{{ product?.name_product }}</td>
+                                    <td>{{ product?.purchase_price_product }}</td>
+                                    <td>{{ product?.stock_product }}</td>
+                                    <td>
+                                        <div class="btn-modify d-flex justify-content-around">
+                                            <button (click)="increaseProduct(product)"
+                                                class="btn btn-sm btn-success">+</button>
+                                            <p (change)="product.product_quantity">{{product.product_quantity}}</p>
+                                            <button (click)="decreaseProduct(product)"
+                                                class="btn btn-sm btn-warning">-</button>
+                                        </div>
+                                        <button class="btn btn-sm btn-primary">Agregar</button>
+                                        <button [disabled]="product.product_quantity === 0"
+                                            class="btn btn-sm btn-danger">Eliminar</button>
+                                        <!-- Agrega los botones o acciones que necesitas -->
+                                        <!-- Agregar más botones según sea necesario -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div *ngIf="indexPage === 2">
+                    <h2>Providers</h2>
 
-            <div *ngIf="indexPage === 1">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Nombre del Producto</th>
-                            <th scope="col">Precio de Compra</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let product of products">
-                            <td>
-                                <img appBrokenImage loading="lazy" [src]="product.image_product"
-                                    alt="{{ product?.name_product }}" class="product-image">
-                            </td>
-                            <td>{{ product?.name_product }}</td>
-                            <td>{{ product?.purchase_price_product }}</td>
-                            <td>{{ product?.stock_product }}</td>
-                            <td>
-                                <button class="btn btn-sm btn-success">+</button>
-                                <button class="btn btn-sm btn-warning">-</button>
-                                <button class="btn btn-sm btn-primary">Agregar</button>
-                                <button class="btn btn-sm btn-danger">Eliminar</button>
-                                <!-- Agrega los botones o acciones que necesitas -->
-                                <!-- Agregar más botones según sea necesario -->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div *ngFor="let provider of providers">
+                        <p>{{provider.name_provider}} {{provider.last_name_provider}}</p>
+                    </div>
 
-            <div *ngIf="indexPage === 2">
-                <h2>Providers</h2>
-
-                <div *ngFor="let provider of providers">
-                    <p>{{provider.name_provider}} {{provider.last_name_provider}}</p>
                 </div>
 
+                <div *ngIf="indexPage === 3">
+                    <h2>Confirm</h2>
+                </div>
+                <div class="div"
+                    style="display: flex; flex-direction: column; align-items: end; border-top: 2px gray solid; padding-top: 5px;">
+                    <div class="div">
+                        <p>Total: $0 COP</p>
+                    </div>
+                    <div class="buttons" style="display: flex; gap: 10px;">
+                        <button (click)="cancel()">Cancelar</button>
+                        <button *ngIf="indexPage !== 3" [disabled]="isData" (click)="nextPage()">Siguiente</button>
+                        <button (click)="confirm()" *ngIf="indexPage === 3">Confirmar</button>
+                        <!-- <button (click)="returnPage()" *ngIf="indexPage !== 1  && indexPage !== 3 ">Regresar</button> -->
+                    </div>
+                </div>
             </div>
-
-            <div *ngIf="indexPage === 3">
-                <h2>Confirm</h2>
-            </div>
-
         </div>
-        <div class="div">
-            <div class="buttons">
-                <button (click)="cancel()">Cancelar</button>
-                <button *ngIf="indexPage !== 3" [disabled]="isData" (click)="nextPage()">Siguiente</button>
-                <button *ngIf="indexPage === 3">Confirmar</button>
-                <button (click)="returnPage()" *ngIf="indexPage !== 1  && indexPage !== 3 ">Regresar</button>
-            </div>
-        </div>
+
     </div>
 </div>
