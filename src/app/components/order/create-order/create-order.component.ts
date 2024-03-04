@@ -159,12 +159,14 @@ export class CreateOrderComponent {
     this.indexPage = 1;
     this.orderProducts = [];
     this.data_order = null;
+    window.location.reload();
   }
 
   finish() {
     this.indexPage = 1;
     this.orderProducts = [];
     this.data_order = null;
+    window.location.reload();
   }
 
   confirm() {

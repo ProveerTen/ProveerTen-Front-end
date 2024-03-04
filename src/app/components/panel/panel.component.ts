@@ -67,4 +67,12 @@ export class PanelComponent {
     this.router.navigate(['profile/company', id]);
   }
 
+  manageOrders() {
+    this.router.navigate(['manage/orders']);
+  }
+
+  viewGrocers() {
+    this.router.navigate(['viewAllGrocers/']);
+  }
+
 }
