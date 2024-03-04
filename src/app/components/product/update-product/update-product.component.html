@@ -48,6 +48,13 @@
     </div>
 </div> -->
 
+
+<div class="modal" *ngIf="loading">
+  <div class="modal-content">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
+</div>
+
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -118,7 +125,7 @@
 </div>
 
 
-<!-- 
+<!--
 
 <div class="container d-flex justify-content-center align-items-center">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">

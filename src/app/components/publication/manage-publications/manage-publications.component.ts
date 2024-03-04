@@ -14,7 +14,7 @@ export class ManagePublicationsComponent {
   viewProduct(arg0: any) {
     throw new Error('Method not implemented.');
   }
-  loading : boolean = false 
+  loading : boolean = false
   publications: any;
   data: any;
 
@@ -22,8 +22,16 @@ export class ManagePublicationsComponent {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+
+    this.loading = true
+
+      setTimeout (()=>{
+
+
+
     this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.auth.getId()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
+        this.loading = false
         console.log(response);
         this.publications = response.publications;
 
@@ -38,10 +46,12 @@ export class ManagePublicationsComponent {
         }
       },
       error: (error) => {
+        this.loading = false
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
+  },300)
   }
 
   orderByDate(publications: any[]) {
@@ -81,6 +91,6 @@ export class ManagePublicationsComponent {
   }
 
   isVideo(url: string): boolean {
-    return url.endsWith('.mp4'); // Cambia la condición según el formato del video
+    return url.endsWith('.mp4'); 
   }
 }

@@ -8,25 +8,40 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-view-products',
   templateUrl: './view-products.component.html',
-  styleUrls: ['./view-products.component.css']
+  styleUrls: ['./view-products.component.css'],
 })
 export class ViewProductsComponent {
-
+  loading: boolean = false;
   data: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
+  constructor(
+    private client: ClientService,
+    public auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.client.postRequest(`${environment.url_logic}/order/products`, { nit_company: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.data = response.products;
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete'),
-    });
+    this.loading = true;
+    setTimeout(() => {
+      this.client
+        .postRequest(
+          `${environment.url_logic}/order/products`,
+          { nit_company: this.auth.getId() },
+          undefined,
+          { Authorization: `Bearer ${this.auth.getToken()}` }
+        )
+        .subscribe({
+          next: (response: any) => {
+            this.loading = false;
+            console.log(response);
+            this.data = response.products;
+          },
+          error: (error) => {
+            this.loading = false;
+            console.log(error.error.Status);
+          },
+          complete: () => console.log('complete'),
+        });
+    }, 400);
   }
-
 }

@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent {
-
+  loading : boolean = false
   form: FormGroup;
   data: any;
   isGrocer: any;
@@ -28,17 +28,23 @@ export class ChangePasswordComponent {
 
     this.auth.isCompany().subscribe(value => {
       if (value) {
+
         return this.onSubmitCompany();
       }
     })
     this.auth.isGrocer().subscribe(value => {
       if (value) {
+
         return this.onSubmitGrocer();
       }
     })
+
   }
 
   onSubmitCompany() {
+    this.loading = true
+
+    setTimeout (()=>{
 
     if (this.form.valid && !this.form.pristine) {
 
@@ -49,11 +55,13 @@ export class ChangePasswordComponent {
 
       this.client.postRequest(`${environment.url_logic}/password/changePassword/company`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+          this.loading = false
           console.log("response", response);
           this.form.reset()
           this.router.navigate(['/profile'])
         },
         error: (error: any) => {
+          this.loading = false
           console.log("error", error);
         },
         complete: () => {
@@ -61,14 +69,17 @@ export class ChangePasswordComponent {
         }
       })
     } else {
+      this.loading = false
       console.log("Datos no validos");
 
     }
+  }, 400)
   }
 
 
   onSubmitGrocer() {
-
+    this.loading   = true
+      setTimeout (()=>{
     if (this.form.valid && !this.form.pristine) {
 
       this.data = {
@@ -79,12 +90,14 @@ export class ChangePasswordComponent {
       this.client.postRequest(`${environment.url_logic}/password/changePassword/grocer`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("response", response);
+          this.loading = false
 
           this.form.reset()
-          // this.router.navigate(['/profile', this.auth.getId()])        
+          // this.router.navigate(['/profile', this.auth.getId()])
           this.router.navigate(['/update-profile', this.auth.getRole()]);
         },
         error: (error: any) => {
+          this.loading = false
           console.log("error", error);
 
         },
@@ -93,9 +106,11 @@ export class ChangePasswordComponent {
         }
       })
     } else {
+      this.loading = false
       console.log("Datos no validos");
 
     }
+  },400)
   }
 
   isvalid(nameField: string) {
@@ -131,6 +146,11 @@ export class ChangePasswordComponent {
   // esto esta en otro componente
   onSubmitProvider() {
 
+      this.loading = true
+
+      setTimeout (()=>{
+
+
     this.data = {
       old_password: this.form.value.old_password,
       new_password: this.form.value.new_password,
@@ -138,12 +158,14 @@ export class ChangePasswordComponent {
 
     this.client.postRequest(`${environment.url_logic}/password/changePassword/provider`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
+        this.loading = false
         console.log("response", response);
 
 
         this.router.navigate(['/profile', this.auth.getId()])
       },
       error: (error: any) => {
+        this.loading = false
         console.log("error", error);
 
       },
@@ -151,5 +173,6 @@ export class ChangePasswordComponent {
         console.log("complete");
       }
     })
+  },400)
   }
 }

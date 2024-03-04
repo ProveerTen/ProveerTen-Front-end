@@ -14,7 +14,7 @@ import product from 'src/app/interfaces/product';
   styleUrls: ['./update-product.component.css']
 })
 export class UpdateProductComponent {
-
+  loading : boolean = false
   form: FormGroup;
   imageFile: any;
   imagePreview: any;
@@ -40,9 +40,11 @@ export class UpdateProductComponent {
   }
 
   ngOnInit(): void {
+      this.loading = true
     this.id = this.routerActivate.snapshot.params['id'];
     this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
+        this.loading = false
         this.data = response.categoriesByProducts[0];
         console.log(this.data);
         this.form.patchValue({
@@ -57,6 +59,7 @@ export class UpdateProductComponent {
         })
       },
       error: (error) => {
+        this.loading = false
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
@@ -64,6 +67,8 @@ export class UpdateProductComponent {
   }
 
   onSubmit() {
+    this.loading = true;
+    setTimeout (()=>{
     if (this.form.valid) {
       this.isValidImage = false;
       const formData = new FormData();
@@ -79,8 +84,12 @@ export class UpdateProductComponent {
       formData.append('content_product', this.form.value.content_product);
       formData.append('image_product', this.imageFile);
 
+
+
+
       this.client.postRequest(`${environment.url_logic}/product/update`, formData, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+          this.loading = false
           console.log(response);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El producto se ha sido actualizado exitosamente' });
           setTimeout(() => {
@@ -88,6 +97,7 @@ export class UpdateProductComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           this.isValidImage = true;
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error });
@@ -96,9 +106,11 @@ export class UpdateProductComponent {
       });
     } else {
       console.log('error');
+      this.loading = false
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  }, 400)
 
   }
 
