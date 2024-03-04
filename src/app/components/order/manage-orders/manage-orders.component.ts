@@ -19,16 +19,29 @@ export class ManageOrdersComponent {
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
   ngOnInit(): void {
-    this.client.getRequest(`${environment.url_logic}/order/provider`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.data_order = response.order;
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete'),
-    });
+    if (this.auth.getRole() === 'company') {
+      this.client.getRequest(`${environment.url_logic}/order/company`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.data_order = response.order;
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    } else {
+      this.client.getRequest(`${environment.url_logic}/order/provider`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.data_order = response.order;
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
   }
 
   deleteOrder(id: string) {
