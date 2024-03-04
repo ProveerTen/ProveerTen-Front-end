@@ -38,9 +38,7 @@ export class LoginGrocerComponent {
           this.loading = false
           this.auth.login(response.token);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
-          setTimeout(() => {
             this.router.navigate(["/"]);
-          }, 1500);
         },
         error: (error) => {
           console.log(error);

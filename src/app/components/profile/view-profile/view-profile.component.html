@@ -79,27 +79,20 @@
                             </div>
 
                         </div>
-
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush rounded-3">
-
-                                <div *ngFor="let red of dataSocialReds; let i = index">
-
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-
+                        <div class="card mb-4 mb-lg-0 p-3">
+                            <div class="d-flex justify-content-center">
+                                <h4>Redes sociales</h4>
+                            </div>
+                            <div class="d-flex justify-content-center flex-wrap gap-4">
+                                <div class="d-flex flex-column align-items-center" *ngFor="let red of dataSocialReds; let i = index">
+                                    <a [href]="red.link" target="_blank">
                                         <span class="span" [innerHTML]="red.icon" [style]="colorsOfIcons[i]"></span>
-
-                                        <a [href]="red.link" target="_blank">{{red.link}}</a>
-                                    </li>
+                                    </a>
                                     <i class="fa-regular fa-trash-can" (click)="onDeleteSocialRed(red.id)"></i>
-                                    <!-- <button >eliminar</button> -->
                                 </div>
-                            </ul>
+                            </div>
                         </div>
-
                     </div>
-                    <!--  -->
-
                 </div>
                 <div class="col-lg-8">
 

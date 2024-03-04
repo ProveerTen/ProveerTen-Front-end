@@ -13,6 +13,7 @@
     <div class="row" *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
         <router-outlet></router-outlet>
     </div>
+    <p-toast position="bottom-right" key="center"></p-toast>
 </div>
 
 <div *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
