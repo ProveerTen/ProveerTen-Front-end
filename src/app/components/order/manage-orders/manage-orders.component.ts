@@ -31,6 +31,24 @@ export class ManageOrdersComponent {
     });
   }
 
+  deleteOrder(id: string) {
+    let option = confirm('¿Seguro qué desea eliminar el pedido?');
+    if (option) {
+      this.client.postRequest(`${environment.url_logic}/order/delete`, { id_order: id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+  }
+
   viewOrder(id_order: string) {
     this.router.navigate(['view/order/', id_order]);
   }

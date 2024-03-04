@@ -19,6 +19,9 @@
                     <td>{{order.status}}</td>
                     <td>
                         <button (click)="viewOrder(order.id_order)">Ver pedido</button>
+                    <td *ngIf="order.status === 'Creado' && auth.isProvider() | async"
+                        (click)="deleteOrder(order.id_order)">
+                        <button>Eliminar pedido</button>
                     </td>
                 </tr>
             </tbody>
