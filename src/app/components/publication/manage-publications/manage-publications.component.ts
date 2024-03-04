@@ -14,7 +14,7 @@ export class ManagePublicationsComponent {
   viewProduct(arg0: any) {
     throw new Error('Method not implemented.');
   }
-
+  loading : boolean = false 
   publications: any;
   data: any;
 

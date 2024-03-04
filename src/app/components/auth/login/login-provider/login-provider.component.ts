@@ -19,7 +19,7 @@ export class LoginProviderComponent {
   constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService,
     private router: Router, private messageService: MessageService) {
     this.form = this.fb.group({
-      email_provider: ['', [Validators.email]],
+      email_provider: ['', [Validators.email, Validators.required]],
       password_provider: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
     });
   }
@@ -65,7 +65,7 @@ export class LoginProviderComponent {
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
-  },2000)
+  },300)
   }
 
 }
