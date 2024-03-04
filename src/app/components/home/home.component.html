@@ -18,9 +18,9 @@
             (click)="viewCompanies()">Encontrar Empresas</button>
         <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
             (click)="viewProducts()">Encontrar Productos</button>
-        <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        <button class="btn btn-warning" *ngIf="auth.isLoggedIn() | async"
             (click)="createOrder()">Crear pedido</button>
-        <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        <button class="btn btn-warning" *ngIf="auth.isLoggedIn() | async"
             (click)="viewOrders()">Ver pedidos</button>
     </div>
 
