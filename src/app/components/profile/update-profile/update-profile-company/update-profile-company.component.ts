@@ -18,6 +18,7 @@ export class UpdateProfileCompanyComponent {
   abc: string = "ana"
   form: FormGroup;
   dataUpdate: any = {};
+  loading : boolean = false
 
   constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router) {
 
@@ -54,6 +55,10 @@ export class UpdateProfileCompanyComponent {
   }
 
   onSubmitUpdate() {
+    this.loading = true
+
+      setTimeout (()=>{
+
 
     if (this.form.valid && !this.form.pristine) {
       this.form.updateValueAndValidity();
@@ -72,6 +77,7 @@ export class UpdateProfileCompanyComponent {
 
       this.client.patchRequest(`${environment.url_logic}/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+          this.loading = false
           console.log("response patch", response);
           Swal.fire({
             title: "Datos actualizados con éxito",
@@ -80,6 +86,7 @@ export class UpdateProfileCompanyComponent {
           this.router.navigate(['/profile'])
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           Swal.fire({
             title: error.error.errors[0].msg,
@@ -92,8 +99,10 @@ export class UpdateProfileCompanyComponent {
       })
 
     } else if (!this.form.valid) {
+       this.loading = false
       console.log("No se cumplen las validaciones");
     }
+  },400)
   }
 
   deleteField(deleteField: string) {
@@ -104,9 +113,9 @@ export class UpdateProfileCompanyComponent {
       this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("RESPOnse", response);
-  
+
           this.form.get(deleteField)!.setValue(null)
-  
+
           Swal.fire({
             title: "Dato Eliminado",
             icon: "success"
@@ -120,7 +129,7 @@ export class UpdateProfileCompanyComponent {
         }
       })
     }
-    
+
   }
 
 

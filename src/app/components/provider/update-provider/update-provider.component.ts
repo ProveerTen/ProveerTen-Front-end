@@ -14,7 +14,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./update-provider.component.css']
 })
 export class UpdateProviderComponent implements OnInit {
-
+  loading : boolean = false
   form: FormGroup;
   provider: provider = {} as provider;
   data: any;
@@ -67,6 +67,12 @@ export class UpdateProviderComponent implements OnInit {
   }
 
   onSubmit() {
+
+      this.loading = true
+
+      setTimeout (()=>{
+
+
     if (this.form.valid) {
       this.dataProvider = {
         document_provider: this.id,
@@ -84,6 +90,7 @@ export class UpdateProviderComponent implements OnInit {
 
       this.client.postRequest(`${environment.url_logic}/provider/update`, this.dataProvider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
+          this.loading = false
           console.log(response);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Actualización exitosa del trabajador' });
           setTimeout(() => {
@@ -91,6 +98,7 @@ export class UpdateProviderComponent implements OnInit {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           this.messageService.clear();
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
@@ -98,13 +106,17 @@ export class UpdateProviderComponent implements OnInit {
         complete: () => console.log('complete'),
       });
     } else {
+      this.loading = false
       console.log('error');
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },400)
   }
 
   onSubmitPassword() {
+    this.loading = true
+    setTimeout (()=>{
     if (this.formPassword.valid) {
       this.dataPassword = {
         password_provider: this.formPassword.value.password_provider,
@@ -113,6 +125,7 @@ export class UpdateProviderComponent implements OnInit {
       }
       this.client.postRequest(`${environment.url_logic}/provider/update/password`, this.dataPassword, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
+          this.loading = false
           console.log(response);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Actualización de la contraseña exitosa del trabajador' });
           setTimeout(() => {
@@ -120,6 +133,7 @@ export class UpdateProviderComponent implements OnInit {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           this.messageService.clear();
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
@@ -128,9 +142,11 @@ export class UpdateProviderComponent implements OnInit {
       });
 
     } else {
+      this.loading = false
       console.log('error');
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },400)
   }
 
   cancel() {

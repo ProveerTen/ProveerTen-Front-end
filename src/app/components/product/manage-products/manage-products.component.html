@@ -35,6 +35,14 @@
 
 
 
+<div class="modal" *ngIf="loading">
+  <div class="modal-content">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
+</div>
+
+
+
 <div class="container d-flex justify-content-center flex-column mt-5 gap-5">
 
     <div class="d-flex gap-2 justify-content-around mt-3">

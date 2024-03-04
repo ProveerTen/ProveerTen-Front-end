@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./create-provider.component.css']
 })
 export class CreateProviderComponent {
-
+  loading : boolean = false
   form: FormGroup;
   provider: provider = {} as provider;
 
@@ -34,6 +34,12 @@ export class CreateProviderComponent {
   }
 
   onSubmit() {
+
+  this.loading = true
+
+  setTimeout (()=>{
+
+
     if (this.form.valid) {
       this.provider = {
         document_provider: this.form.value.document_provider,
@@ -50,6 +56,7 @@ export class CreateProviderComponent {
       }
       this.client.postRequest(`${environment.url_auth}/register/provider`, this.provider, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response) => {
+          this.loading = false
           console.log(response);
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
           setTimeout(() => {
@@ -57,6 +64,7 @@ export class CreateProviderComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
           this.messageService.clear();
           this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
@@ -64,10 +72,12 @@ export class CreateProviderComponent {
         complete: () => console.log('complete'),
       });
     } else {
+      this.loading = false
       console.log("Error");
       this.messageService.clear();
       this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
     }
+  },400)
   }
 
   cancel() {

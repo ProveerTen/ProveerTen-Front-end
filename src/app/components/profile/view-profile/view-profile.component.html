@@ -1,3 +1,9 @@
+<div class="modal" *ngIf="loading">
+  <div class="modal-content">
+    <app-loader [loading]="loading"></app-loader>
+  </div>
+</div>
+
 <div class="div" *ngIf="auth.isCompany() | async">
     <section style="background-color: #eee;">
         <div class="container w-100 py-5">
@@ -45,7 +51,7 @@
                             <div class="d-flex justify-content-between">
 
                                 <input type="text" (input)="valueRed($event)" *ngIf="!inputLinkRed">
-                                
+
                                 <span [innerHTML]="iconSocialRed" [style]="colorIcon" *ngIf="iconSocialRed"></span>
 
                                 <div *ngIf="!inputLinkRed" >
@@ -70,7 +76,7 @@
                             <div *ngIf="!inputLinkRed">
 
                                 <p>Escoje un icono para tu red social</p>
-    
+
                                 <div class="modalIcons">
                                     <span class="span" *ngFor="let icon of OptionsIcons; let i = index"
                                         [innerHTML]="icon.value" (click)="iconRed(icon.value, icon.color)"

@@ -56,18 +56,24 @@
                                     <td>{{ product?.purchase_price_product }}</td>
                                     <td>{{ product?.stock_product }}</td>
                                     <td>
-                                        <div class="btn-modify d-flex justify-content-around">
-                                            <button (click)="increaseProduct(product)"
-                                                class="btn btn-sm btn-success">+</button>
-                                            <p (change)="product.product_quantity">{{product.product_quantity}}</p>
-                                            <button (click)="decreaseProduct(product)"
-                                                class="btn btn-sm btn-warning">-</button>
+
+                                        <div class="d-flex flex-column gap-2">
+                                            <div class="btn-modify d-flex justify-content-around">
+                                                <button (click)="increaseProduct(product)"
+                                                    class="btn btn-sm btn-outline-success">+</button>
+                                                <p (change)="product.product_quantity">{{product.product_quantity}}</p>
+                                                <button (click)="decreaseProduct(product)"
+                                                    class="btn btn-sm btn-outline-warning">-</button>
+                                            </div>
+                                            <div class="d-flex flex-column gap-2">
+                                                <button (click)="addProduct(product)"
+                                                    [disabled]="product.product_quantity === 0"
+                                                    class="btn btn-sm btn-outline-primary">Agregar</button>
+                                                <button (click)="removeProduct(product)" [disabled]="!(product.add_product)"
+                                                    class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                            </div>
+
                                         </div>
-                                        <button (click)="addProduct(product)"
-                                            [disabled]="product.product_quantity === 0"
-                                            class="btn btn-sm btn-primary">Agregar</button>
-                                        <button (click)="removeProduct(product)" [disabled]="!(product.add_product)"
-                                            class="btn btn-sm btn-danger">Eliminar</button>
                                         <!-- Agrega los botones o acciones que necesitas -->
                                         <!-- Agregar más botones según sea necesario -->
                                     </td>
@@ -81,11 +87,18 @@
 
                     <div *ngFor="let provider of providers">
                         <div class="card">
-                            <div class="card-body"
-                                (click)="getData(provider.document_provider, provider.name_provider, provider.last_name_provider)"
-                                style="cursor: pointer;">
-                                <p>{{provider.document_provider}}</p>
-                                <p>{{provider.name_provider}} {{provider.last_name_provider}}</p>
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div class="div">
+                                    <p>{{provider.document_provider}}</p>
+                                    <p><strong>{{provider.name_provider}} {{provider.last_name_provider}}</strong> </p>
+                                </div>
+                                <div>
+                                        <input (click)="getData(provider.document_provider, provider.name_provider, provider.last_name_provider)" class="form-check-input" style="cursor: pointer;" type="checkbox" value="" id="flexCheckIndeterminate">
+                                        <label class="form-check-label" for="flexCheckIndeterminate">
+                                          Confirmar
+                                        </label>
+                                     
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,13 +137,13 @@
                 <div class="div"
                     style="display: flex; flex-direction: column; align-items: end; border-top: 2px gray solid; padding-top: 5px;">
                     <div class="div">
-                        <p>Total: ${{total}} COP</p>
+                        <p><strong>Total:</strong>  ${{total}} COP</p>
                     </div>
                     <div class="buttons" style="display: flex; gap: 10px;">
-                        <button (click)="cancel()">Cancelar</button>
-                        <button *ngIf="indexPage !== 3" [disabled]="isData" (click)="nextPage()">Siguiente</button>
-                        <button (click)="confirm()" *ngIf="indexPage === 3">Confirmar</button>
-                        <button (click)="editOrder()" *ngIf="indexPage === 3">Editar</button>
+                        <button class="btn btn-outline-danger" (click)="cancel()">Cancelar</button>
+                        <button class="btn btn-outline-success" *ngIf="indexPage !== 3" [disabled]="isData" (click)="nextPage()">Siguiente</button>
+                        <button class="btn btn-outline-success" (click)="confirm()" *ngIf="indexPage === 3">Confirmar</button>
+                        <button class="btn btn-outline-primary" (click)="editOrder()" *ngIf="indexPage === 3">Editar</button>
                     </div>
                 </div>
             </div>

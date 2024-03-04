@@ -13,12 +13,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./delete-data-profile-grocer.component.css']
 })
 export class DeleteDataProfileGrocerComponent {
-
+  loading : boolean = false
   data: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
+
+
     this.client.getRequest(`${environment.url_logic}/profile/${this.auth.getRole()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.data = response.data;
@@ -31,15 +34,20 @@ export class DeleteDataProfileGrocerComponent {
   }
 
   deleteValue(value: string) {
+    this.loading = true
+    setTimeout (()=>{
     this.client.deleteRequest(`${environment.url_logic}/edit_profile/${this.auth.getRole()}`, { deleteField: value }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log(response);
+        this.loading = false
 
       },
       error: (error) => {
+        this.loading = false
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
+  },400)
   }
 }
