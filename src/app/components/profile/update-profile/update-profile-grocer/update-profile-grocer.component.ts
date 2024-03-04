@@ -17,6 +17,7 @@ export class UpdateProfileGrocerComponent {
   form: FormGroup;
   dataUpdate: any = {};
   err: any;
+  loading : boolean = false
 
   constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
     private messageService: MessageService) {
@@ -54,6 +55,11 @@ export class UpdateProfileGrocerComponent {
   }
 
   onSubmit() {
+
+      this.loading = true
+
+      setTimeout (()=>{
+
     if (this.form.valid && !this.form.pristine) {
       this.form.updateValueAndValidity();
 
@@ -71,12 +77,11 @@ export class UpdateProfileGrocerComponent {
         apartment: this.form.value.apartment,
         number_grocer: this.form.value.number_grocer
       }
-      console.log("data Update apartment", this.dataUpdate.apartment);
-      console.log(this.dataUpdate);
-
+     
 
       this.client.patchRequest(`${environment.url_logic}/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+          this.loading = false
           console.log("response patch", response);
 
           this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
@@ -85,6 +90,7 @@ export class UpdateProfileGrocerComponent {
           }, 1500);
         },
         error: (error) => {
+          this.loading = false
           this.err = error.error.errors[0];
           console.log(error);
           this.messageService.clear();
@@ -96,6 +102,7 @@ export class UpdateProfileGrocerComponent {
       })
 
     } else {
+       this.loading = false
       console.log("No se cumplen las validaciones");
       this.messageService.clear();
       this.messageService.add({
@@ -103,6 +110,7 @@ export class UpdateProfileGrocerComponent {
         detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
       });
     }
+  },400)
   }
 
   async deleteField(deleteField: string) {
@@ -152,7 +160,7 @@ export class UpdateProfileGrocerComponent {
   // console.log(result);
 
   // if (!result) {
-  //   this.router.navigate(['/login'])     
-  //   return 
+  //   this.router.navigate(['/login'])
+  //   return
   // }
 }

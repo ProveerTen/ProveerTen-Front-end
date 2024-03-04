@@ -12,7 +12,7 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrls: ['./view-profile-company.component.css']
 })
 export class ViewProfileCompanyComponent {
-
+  loading : boolean = false
   id!: string;
   data: any;
   publications: any;
@@ -29,10 +29,13 @@ export class ViewProfileCompanyComponent {
   }
 
   ngOnInit(): void {
+
+    this.loading = true
     this.id = this.routerActivate.snapshot.params['id'];
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.data = response.data;
           const foundationDate = new Date(this.data.foundation_company);
           this.data.foundation_company = foundationDate.toISOString().split('T')[0];
@@ -40,18 +43,22 @@ export class ViewProfileCompanyComponent {
           this.getSocialReds()
         },
         error: (error) => {
+          this.loading = false
           console.log(error.error.Status);
           this.router.navigate(['404']);
         },
         complete: () => console.log('complete'),
       });
+
       this.client.postRequest(`${environment.url_chat}/provider/city`, { companyId: this.id, grocerId: this.auth.getId() }, undefined, undefined).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.providers = response.providersbycity[0]
           console.log(this.providers);
 
         },
         error: (error) => {
+          this.loading = false
           console.log(error);
         }
       })
@@ -59,6 +66,7 @@ export class ViewProfileCompanyComponent {
     } else {
       this.client.getRequest(`${environment.url_logic}/profile/data/companies/${this.id}`, undefined, undefined).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.data = response.data;
           const foundationDate = new Date(this.data.foundation_company);
           this.data.foundation_company = foundationDate.toISOString().split('T')[0];
@@ -66,6 +74,7 @@ export class ViewProfileCompanyComponent {
           this.getSocialReds()
         },
         error: (error) => {
+          this.loading = false
           console.log(error.error.Status);
           this.router.navigate(['404']);
         },
@@ -75,6 +84,7 @@ export class ViewProfileCompanyComponent {
   }
 
   getSocialReds() {
+
     this.client.getRequest(`${environment.url_logic}/edit_profile/socialRed/${this.id}`, undefined, undefined).subscribe({
       next: (response: any) => {
         this.dataSocialReds = response.status.data;
@@ -126,9 +136,12 @@ export class ViewProfileCompanyComponent {
   }
 
   getPublications() {
+
+    this.loading = true
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+           this.loading = false
           this.publications = response.publications;
           console.log(this.publications);
 
@@ -145,6 +158,7 @@ export class ViewProfileCompanyComponent {
 
         },
         error: (error) => {
+          this.loading = false
           console.log(error.error.Status);
         },
         complete: () => console.log('complete'),
@@ -152,6 +166,7 @@ export class ViewProfileCompanyComponent {
     } else {
       this.client.getRequest(`${environment.url_logic}/publication/data/view/company/${this.id}`, undefined, undefined).subscribe({
         next: (response: any) => {
+          this.loading = false
           this.publications = response.publications;
 
           for (let k = 0; k < this.publications.length; k++) {
@@ -167,6 +182,7 @@ export class ViewProfileCompanyComponent {
 
         },
         error: (error) => {
+          this.loading = false
           console.log(error.error.Status);
         },
         complete: () => console.log('complete'),
