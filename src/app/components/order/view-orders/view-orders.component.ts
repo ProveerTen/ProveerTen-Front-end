@@ -37,4 +37,8 @@ export class ViewOrdersComponent {
     this.router.navigate(['view/order/', id_order]);
   }
 
+  goBack() {
+    this.router.navigate([''])
+  }
+
 }

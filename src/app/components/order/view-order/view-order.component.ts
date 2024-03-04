@@ -14,6 +14,7 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 export class ViewOrderComponent {
 
   data_order: any;
+  order: any;
   id: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
@@ -24,13 +25,33 @@ export class ViewOrderComponent {
       next: (response: any) => {
         console.log(response);
         this.data_order = response.order;
+        this.order = response.order_detail;
         console.log(this.data_order);
+        console.log(this.order);
+
       },
       error: (error) => {
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
+  }
+
+  deleteOrder() {
+    this.id = this.routerActivate.snapshot.params['id'];
+    let option = confirm('¿Seguro qué desea eliminar el pedido?');
+    if (option) {
+      this.client.postRequest(`${environment.url_logic}/order/delete`, { id_order: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.router.navigate(['view/orders'])
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
   }
 
   goBack() {
