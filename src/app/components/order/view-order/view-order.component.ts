@@ -54,8 +54,12 @@ export class ViewOrderComponent {
     }
   }
 
-  goBack() {
-    this.router.navigate(['view/orders'])
+  goBack(role: string) {
+    if (role === 'grocer') {
+      this.router.navigate(['view/orders'])
+      return;
+    }
+    this.router.navigate(['manage/orders'])
   }
 
 }

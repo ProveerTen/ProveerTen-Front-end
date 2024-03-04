@@ -69,7 +69,7 @@ import { CreateOrderComponent } from './components/order/create-order/create-ord
 import { LoaderComponent } from './components/loader/loader.component';
 import { ViewOrderComponent } from './components/order/view-order/view-order.component';
 import { ViewOrdersComponent } from './components/order/view-orders/view-orders.component';
-
+import { ManageOrdersComponent } from './components/order/manage-orders/manage-orders.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +120,8 @@ import { ViewOrdersComponent } from './components/order/view-orders/view-orders.
     CreateOrderComponent,
     LoaderComponent,
     ViewOrderComponent,
-    ViewOrdersComponent
+    ViewOrdersComponent,
+    ManageOrdersComponent,
   ],
   imports: [
     BrowserModule,

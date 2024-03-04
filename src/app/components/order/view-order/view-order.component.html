@@ -1,6 +1,6 @@
 <div class="container p-5">
 
-    <button (click)="goBack()">Regresar</button>
+    <button (click)="goBack(auth.getRole())">Regresar</button>
 
     <div style="max-height: 400px; overflow-y: auto;">
         <table class="table table-striped">
@@ -18,7 +18,9 @@
                     <td>{{order.order_date | date:'short'}}</td>
                     <td>{{order.total_ordered_price}}</td>
                     <td>{{order.status}}</td>
-                    <td *ngIf="order.status === 'Creado'" (click)="deleteOrder()"><button>Eliminar pedido</button></td>
+                    <td *ngIf="order.status === 'Creado' && auth.isGrocer() | async" (click)="deleteOrder()">
+                        <button>Eliminar pedido</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

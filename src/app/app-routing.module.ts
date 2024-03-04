@@ -66,6 +66,7 @@ import { CreateOrderComponent } from './components/order/create-order/create-ord
 import { LoaderComponent } from './components/loader/loader.component';
 import { ViewOrderComponent } from './components/order/view-order/view-order.component';
 import { ViewOrdersComponent } from './components/order/view-orders/view-orders.component';
+import { ManageOrdersComponent } from './components/order/manage-orders/manage-orders.component';
 
 const routes: Routes = [
   {
@@ -198,6 +199,10 @@ const routes: Routes = [
   {
     path: 'view/order/:id',
     component: ViewOrderComponent
+  },
+  {
+    path: 'manage/orders',
+    component: ManageOrdersComponent
   },
   {
     path: '404',
