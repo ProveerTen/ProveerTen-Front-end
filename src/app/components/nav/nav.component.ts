@@ -12,7 +12,7 @@ import { SharedService } from '../../services/shared/shared.service';
 export class NavComponent {
 
   form: FormGroup;
-  searchType: string = "products";
+  searchType: any = "products";
   searchTerm: string;
 
   constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private shared: SharedService) {
@@ -28,25 +28,29 @@ export class NavComponent {
 
   update_profile() {
     let id = this.auth.getId();
-    this.router.navigate(['update-profile/', id]);
+    this.router.navigate(['update-profile/', id])
   }
 
   allCompanies() {
-    this.router.navigate(['viewAllcompanies/']);
+    this.router.navigate(['viewAllcompanies/'])
   }
 
   deleteData_profile() {
     let id = this.auth.getId();
-    this.router.navigate(['deleteData-profile/', id]);
+    this.router.navigate(['deleteData-profile/', id])
   }
 
+
   search(): void {
+    this.searchType = this.form.get('searchType').value;
     this.searchTerm = this.form.get('searchTerm').value;
     if (this.searchTerm === "") {
       this.router.navigate(['search', this.searchType]);
+      this.shared.type.next(this.searchType)
     } else {
       this.router.navigate(['search', this.searchType, this.searchTerm]);
-      this.shared.searchTerm.next(this.searchTerm);
+      this.shared.type.next(this.searchType)
+      this.shared.searchTerm.next(this.searchTerm)
     }
   }
 
@@ -56,7 +60,8 @@ export class NavComponent {
   }
 
   onSearchTypeChange(newValue: string) {
-    this.shared.type.next(newValue);
+    this.shared.type.next(newValue)
+    const searchTerm = this.form.get('searchTerm').value;
+    this.shared.searchTerm.next(searchTerm);
   }
-
 }
