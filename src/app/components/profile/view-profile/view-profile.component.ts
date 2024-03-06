@@ -36,7 +36,7 @@ export class ViewProfileComponent {
     public auth: AuthService,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -56,6 +56,7 @@ export class ViewProfileComponent {
               .toISOString()
               .split('T')[0];
             this.getPublications();
+            this.getSocialReds();
           }
         },
         error: (error) => {
@@ -64,7 +65,7 @@ export class ViewProfileComponent {
         },
         complete: () => {
           console.log('complete');
-          this.getSocialReds();
+          // this.getSocialReds();
         },
       });
   }
@@ -73,35 +74,34 @@ export class ViewProfileComponent {
     this.loading = true;
     setTimeout(() => {
 
-    this.client
-      .getRequest(
-        `${
-          environment.url_logic
-        }/publication/view/company/${this.auth.getId()}`,
-        undefined,
-        { Authorization: `Bearer ${this.auth.getToken()}` }
-      )
-      .subscribe({
-        next: (response: any) => {
-          this.loading = false
-          this.publications = response.publications;
+      this.client
+        .getRequest(
+          `${environment.url_logic
+          }/publication/view/company/${this.auth.getId()}`,
+          undefined,
+          { Authorization: `Bearer ${this.auth.getToken()}` }
+        )
+        .subscribe({
+          next: (response: any) => {
+            this.loading = false
+            this.publications = response.publications;
 
-          for (let k = 0; k < this.publications.length; k++) {
-            const element = this.publications[k].date;
-            this.publications[k].date = new Date(element);
-          }
-          this.publications = this.orderByDate(this.publications);
+            for (let k = 0; k < this.publications.length; k++) {
+              const element = this.publications[k].date;
+              this.publications[k].date = new Date(element);
+            }
+            this.publications = this.orderByDate(this.publications);
 
-          if (this.publications == '') {
-            this.publications = false;
-          }
-        },
-        error: (error) => {
-          this.loading = false
-          console.log(error.error.Status);
-        },
-        complete: () => console.log('complete'),
-      });
+            if (this.publications == '') {
+              this.publications = false;
+            }
+          },
+          error: (error) => {
+            this.loading = false
+            console.log(error.error.Status);
+          },
+          complete: () => console.log('complete'),
+        });
     }, 400);
   }
 
