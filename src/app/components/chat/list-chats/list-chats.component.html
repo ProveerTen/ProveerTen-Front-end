@@ -39,13 +39,3 @@
         </div>
     </div>
 </div>
-
-<div class="chat-container">
-    <div *ngFor="let chatId of chats; let i = index" class="chat-item">
-        <a style="position: relative;
-    top: 42px;
-    z-index: 1;
-    left: 265px;" (click)="closeChat(i)"><i class="fas fa-times" style="cursor: pointer;"></i></a>
-        <app-chat [chatId]="chatId"></app-chat>
-    </div>
-</div>

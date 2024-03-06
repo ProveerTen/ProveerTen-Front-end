@@ -53,9 +53,7 @@ export class ListChatsComponent {
   }
 
   chatear(document: any) {
-
     let filterObject = this.auth.getRole() === 'grocer' ? { grocerId: this.auth.getId(), providerId: document } : { grocerId: document, providerId: this.auth.getId() }
-
     this.client.postRequest(`${environment.url_chat}/chat/find`, filterObject, undefined, undefined).subscribe({
       next: (response: any) => {
         if (this.chats.indexOf(response.chat[0]._id) === -1) {
@@ -73,18 +71,18 @@ export class ListChatsComponent {
     })
   }
 
-  closeChat(index: any) {
-    this.chats.splice(index, 1);
-    if (this.chats.length === 0) {
-      localStorage.removeItem('chats');
-    } else {
-      localStorage.setItem('chats', this.chats.toString())
+    closeChat(index: any) {
+      this.chats.splice(index, 1);
+      if (this.chats.length === 0) {
+        localStorage.removeItem('chats');
+      } else {
+        localStorage.setItem('chats', this.chats.toString())
+      }
+      console.log(this.chats);
     }
-    console.log(this.chats);
-  }
 
-  ngOnDestroy() {
-    this.chats = [];
-  }
+    ngOnDestroy() {
+      this.chats = [];
+    }
 
 }

@@ -5,10 +5,31 @@
         <div class="col-10">
             <router-outlet></router-outlet>
         </div>
-        <div class="col-2 bg-light" style="position: fixed;height:-webkit-fill-available;right: 0; top: 0;">
+        <!-- <div class="col-2 bg-light" style="position: fixed;height:-webkit-fill-available;right: 0; top: 0;">
+           <app-list-chats></app-list-chats>
+        </div> -->
+
+
+        <a class="w-auto position-fixed bottom-0 end-0 p-2" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i
+                class="fa-sharp fa-solid fa-message fa-flip-horizontal fa-2xl" style="color: #fab005;"></i></a>
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+            id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+            <a type="button" class="w-auto position-fixed bottom-0 p-2" data-bs-dismiss="offcanvas"
+                aria-label="Close"><i class="fa-regular fa-circle-xmark fa-2xl" style="color: #ffd43b;"></i></a>
             <app-list-chats></app-list-chats>
         </div>
 
+        <div class="chat-container">
+            <div *ngFor="let chatId of chats; let i = index" class="chat-item">
+                <a style="position: relative;
+            top: 42px;
+            z-index: 1;
+            left: 265px;" (click)="closeChat(i)"><i class="fas fa-times" style="cursor: pointer;"></i></a>
+                <app-chat [chatId]="chatId"></app-chat>
+            </div>
+        </div>
+        
     </div>
     <div class="row" *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
         <router-outlet></router-outlet>
