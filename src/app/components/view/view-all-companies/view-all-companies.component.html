@@ -41,7 +41,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 mb-4 w-50" *ngFor="let company of data">
+        <div class="col-md-4 mb-4 w-50" *ngFor="let company of companies">
             <div class="card h-100 border-0 shadow">
                 <img appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company"
                     class="card-img-top" alt="avatar" style="height: 200px;">
@@ -49,7 +49,6 @@
                     <h5 class="card-title">{{company.name_company}}</h5>
                     <div class="d-flex flex-column gap-2">
                         <button type="button" class="btn btn-primary" (click)="viewCompany(company.nit_company)">Ver compañia</button>
-    
                     </div>
                 </div>
             </div>

@@ -6,20 +6,22 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class SharedService {
 
-  public searchOption = new BehaviorSubject('products');
-  public valueRoute = new BehaviorSubject<any>(null);
+  public searchTerm = new BehaviorSubject('');
+  public type = new BehaviorSubject<string>('products');
   public chatList = new BehaviorSubject<string[]>([]);
   public companyOrder = new BehaviorSubject<object>(null);
+  public categoriesList = new BehaviorSubject<string[]>([]);
 
   constructor() { }
-
+  
   changeSearchOption(newValue: string): void {
-    this.searchOption.next(newValue);
+    this.searchTerm.next(newValue);
   }
 
-  changeValueRoute(newValue: string): void {
-    this.valueRoute.next(newValue);
+  changeType(newValue: string): void {
+    this.type.next(newValue);
   }
+
   changeChatList(list: string[]): void {
     this.chatList.next(list);
   }
@@ -28,7 +30,13 @@ export class SharedService {
     this.companyOrder.next(newValue);
   }
 
+  changeCategoriesList(list: string[]): void {
+    this.categoriesList.next(list);
+  }
+  
+  /*
   getSearchOption() {
     return this.searchOption.asObservable();
   }
+  */
 }

@@ -27,9 +27,8 @@
     top: 0;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><i class="fas fa-store me-2"></i> <strong>ProveerTen</strong></a>
-        <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
-
-            <div class="search">
+        <!--  <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+         <div class="search">
                 <form [formGroup]="form" (ngSubmit)="search()">
                     <div class="input-group">
                         <span class="input-group-text border-warning bg-warning text-white"><i class="fas fa-search"></i></span>
@@ -37,27 +36,73 @@
                         <button type="submit" class="btn btn-warning text-white">Enviar</button>
                     </div>
                 </form>
+            </div> 
+        </div>-->
+        <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+            <div class="search">
+                <form [formGroup]="form" (ngSubmit)="search()">
+                    <div class="input-group">
+                        <span class="input-group-text border-warning bg-warning text-white"><i class="fas fa-search"></i></span>
+                        <select formControlName="searchType" class="form-select border-warning" style="color:#7a7a7a"
+                            (ngModelChange)="onSearchTypeChange($event)">
+                            <option [value]="'products'" [selected]="searchType === 'products'">
+                                Productos
+                            </option>
+                            <option [value]="'companies'" [selected]="searchType === 'companies'">
+                                Compañías
+                            </option>
+                        </select>
+                        <input type="search" (input)="onSearchInput()" formControlName="searchTerm"
+                            class="form-control border-warning" placeholder="Buscar" style="color:#7a7a7a">
+                        <button type="submit" class="btn btn-warning text-white">Enviar</button>
+                    </div>
+                </form>
             </div>
-
         </div>
+
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <div class="ms-auto d-none d-lg-block">
-
+            <!-- <div class="ms-auto d-none d-lg-block">
                 <div class="search">
                     <form [formGroup]="form" (ngSubmit)="search()">
                         <div class="input-group">
-                            <span class="input-group-text border-warning bg-warning text-white"><i class="fas fa-search"></i></span>
-                            <input type="search" formControlName="searchTerm" class="form-control border-warning" placeholder="Buscar" style="color:#7a7a7a">
+                            <span class="input-group-text border-warning bg-warning text-white"><i
+                                    class="fas fa-search"></i></span>
+                            <input type="search" formControlName="searchTerm" class="form-control border-warning"
+                                placeholder="Buscar" style="color:#7a7a7a">
                             <button type="submit" class="btn btn-warning text-white">Enviar</button>
                         </div>
                     </form>
                 </div>
-                
+
+            </div> -->
+            <div class="ms-auto d-none d-lg-block">
+                <div class="search">
+                    <form [formGroup]="form" (ngSubmit)="search()">
+                        <div class="input-group">
+                            <span class="input-group-text border-warning bg-warning text-white"><i
+                                    class="fas fa-search"></i></span>
+                            <select formControlName="searchType" class="form-select border-warning"
+                                style="color:#7a7a7a" (ngModelChange)="onSearchTypeChange($event)">
+                                <option [value]="'products'" [selected]="form.get('searchType').value === 'products'">
+                                    Productos
+                                </option>
+                                <option [value]="'companies'" [selected]="form.get('searchType').value === 'companies'">
+                                    Compañías
+                                </option>
+                            </select>
+                            <input type="search" (input)="onSearchInput()" formControlName="searchTerm"
+                                class="form-control border-warning" placeholder="Buscar" style="color:#7a7a7a">
+                            <button type="submit" class="btn btn-warning text-white">Enviar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <div class="dropdown" *ngIf="auth.isLoggedIn() | async">
@@ -113,83 +158,3 @@
 
 
 
-
-
-
-
-<!-- Bootstrap Navigation -->
-<!-- <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><i class="fas fa-store me-2"></i> <strong>ProveerTen</strong></a>
-        <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
-            <div class="input-group">
-                <span class="border-warning input-group-text bg-warning text-white"><i class="fas fa-search"></i></span>
-                <input type="text" class="form-control border-warning" placeholder="..." style="color:#7a7a7a">
-                <button class="btn btn-warning text-white">Buscar</button>
-            </div>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <div class="ms-auto d-none d-lg-block">
-                <div class="input-group">
-                    <span class="border-warning input-group-text bg-warning text-white"><i
-                            class="fas fa-search"></i></span>
-                    <input type="text" class="form-control border-warning" placeholder="..." style="color:#7a7a7a">
-                    <button class="btn btn-warning text-white">Buscar</button>
-                </div>
-            </div>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <div class="dropdown" *ngIf="auth.isLoggedIn() | async">
-                        <button class="btn btn-secondary dropdown-toggle btn_drop" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
-                                    class="svg-icon">
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="white"
-                                        d="M1.97742 19.7776C4.45061 17.1544 7.80838 15.5423 11.5068 15.5423C15.2053 15.5423 18.5631 17.1544 21.0362 19.7776M16.2715 6.54229C16.2715 9.17377 14.1383 11.307 11.5068 11.307C8.87535 11.307 6.74212 9.17377 6.74212 6.54229C6.74212 3.91082 8.87535 1.77759 11.5068 1.77759C14.1383 1.77759 16.2715 3.91082 16.2715 6.54229Z">
-                                    </path>
-                                </svg></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-light">
-                            <li class="dropdown-item" style="cursor: pointer;" (click)="view_profile()">Ver perfil</li>
-                            <li class="dropdown-item" style="cursor: pointer;"
-                                *ngIf="(auth.isGrocer() | async) || (auth.isCompany() | async)"
-                                (click)="update_profile()">Actualizar
-                                perfil
-                            </li>
-                            <hr>
-                            <li class="dropdown-item" style="cursor: pointer;" (click)="auth.logout()">Cerrar sesión
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item" *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="/">Inicio</a>
-                </li>
-                <li class="nav-item" *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="panel">Panel</a>
-                </li>
-                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="login">Iniciar sesión</a>
-                </li>
-                <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="register">Crear cuenta</a>
-                </li>
-                <p-toast position="bottom-right" key="nav"></p-toast>
-                 <li class="nav-item" *ngIf="auth.isLoggedIn() | async">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="login" (click)="auth.logout()">Cerrar sesión</a>
-                </li> -->
-            <!-- </ul>
-        </div>
-    </div>
-    <div class="search">
-        <form [formGroup]="form" (ngSubmit)="search()">
-            <input type="search" formControlName="searchTerm" placeholder="Buscar">
-            <button>Enviar</button>
-        </form>
-    </div>
-    <button (click)="allCompanies()">ver compañias</button>
-</nav>  -->

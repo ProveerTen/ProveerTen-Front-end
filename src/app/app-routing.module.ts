@@ -185,7 +185,11 @@ const routes: Routes = [
     canActivate: [homeGuard]
   },
   {
-    path: 'search/:value',
+    path: 'search/:type',
+    component: SearchComponent
+  },
+  {
+    path: 'search/:type/:value',
     component: SearchComponent
   },
   {

@@ -12,28 +12,37 @@ import { SharedService } from '../../../services/shared/shared.service';
 })
 export class ViewAllCompaniesComponent {
 
-  companies: any;
-  value: any;
-  data: any;
+  companies: any; // Cambia 'any' por el tipo de dato Company
+  value: string;
+  filter: any[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
   ngOnInit() {
-    this.shared.valueRoute.subscribe(value => {
-      this.value = value;
-      if (this.value != null) {
-        this.getCompaniesByName();
-        return;
-      }
-    })
     this.getCompanies();
+
+    this.shared.searchTerm.subscribe(value => {
+      this.value = value;
+      if (this.value !== "") {
+        console.log(this.value);
+        this.getCompaniesByName();
+      } else {
+        this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
+      }
+    });
   }
 
   getCompanies() {
     this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined, undefined).subscribe({
       next: (response: any) => {
-        this.data = response.data;
-        if (this.data.length == 0) {
+        this.companies = response.data;
+        this.filter = this.companies.slice();
+        if (this.value !== "") {
+          this.getCompaniesByName();
+        } else {
+          this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
+        }
+        if (this.companies.length == 0) {
           console.log('No hay compañías por mostrar');
         }
       },
@@ -45,22 +54,29 @@ export class ViewAllCompaniesComponent {
   }
 
   getCompaniesByName() {
-    this.client.postRequest(`${environment.url_logic}/search/companies/value`, { value: this.value }, undefined, undefined).subscribe({
-      next: (response: any) => {
-        this.data = response.values;
-        if (this.data.length == 0) {
-          console.log('No hay compañías por mostrar');
-        }
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete'),
-    });
+    if (this.value !== "") {
+      this.companies = this.filter.filter((company: any) => {
+        return (
+          this.removeAccents(company.name_company).toLowerCase().includes(this.removeAccents(this.value).toLowerCase()) ||
+          this.removeAccents(company.description_company).toLowerCase().includes(this.removeAccents(this.value).toLowerCase())
+        );
+      });
+    }
   }
 
   viewCompany(id: string) {
     this.router.navigate(['profile/company/', id]);
   }
-  
+
+  removeAccents(text: string): string {
+    if (!text) {
+      return '';
+    }
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+  /*
+  ngOnDestroy() {
+    this.shared.searchTerm.unsubscribe();
+  }
+  */
 }

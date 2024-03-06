@@ -88,15 +88,11 @@ export class HomeComponent {
   }
 
   viewCompanies() {
-    // this.router.navigate(['viewAllcompanies'])
-    this.router.navigate(['search', 'companies'])
-    this.shared.changeSearchOption('companies');
+    this.router.navigate(['search', 'companies']);
   }
 
   viewProducts() {
-    // this.router.navigate(['viewAllProducts'])
-    this.router.navigate(['search', 'products'])
-    this.shared.changeSearchOption('products');
+    this.router.navigate(['search', 'products']);
   }
 
   createOrder() {

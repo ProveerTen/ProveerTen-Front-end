@@ -12,13 +12,15 @@ import { SharedService } from '../../services/shared/shared.service';
 export class NavComponent {
 
   form: FormGroup;
+  searchType: string = "products";
+  searchTerm: string;
 
   constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private shared: SharedService) {
     this.form = this.fb.group({
-      searchTerm: ['', Validators.required]
+      searchType: ['products'],
+      searchTerm: ['']
     });
   }
-
 
   view_profile() {
     this.router.navigate(['profile']);
@@ -26,28 +28,35 @@ export class NavComponent {
 
   update_profile() {
     let id = this.auth.getId();
-    this.router.navigate(['update-profile/', id])
+    this.router.navigate(['update-profile/', id]);
   }
 
   allCompanies() {
-    this.router.navigate(['viewAllcompanies/'])
+    this.router.navigate(['viewAllcompanies/']);
   }
 
   deleteData_profile() {
     let id = this.auth.getId();
-    this.router.navigate(['deleteData-profile/', id])
+    this.router.navigate(['deleteData-profile/', id]);
   }
 
-  search() {
-    if (this.form.valid) {
-      let value = this.form.value.searchTerm;
-      value = value.replace(/ /g, '_').toLowerCase();
-      this.shared.changeValueRoute(value);
-      // value = value.replace(/ /g, '_').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      this.form.patchValue({
-        searchTerm: ''
-      })
-      this.router.navigate(['search', value]);
+  search(): void {
+    this.searchTerm = this.form.get('searchTerm').value;
+    if (this.searchTerm === "") {
+      this.router.navigate(['search', this.searchType]);
+    } else {
+      this.router.navigate(['search', this.searchType, this.searchTerm]);
+      this.shared.searchTerm.next(this.searchTerm);
     }
   }
+
+  onSearchInput(): void {
+    const searchTerm = this.form.get('searchTerm').value;
+    this.shared.searchTerm.next(searchTerm);
+  }
+
+  onSearchTypeChange(newValue: string) {
+    this.shared.type.next(newValue);
+  }
+
 }
