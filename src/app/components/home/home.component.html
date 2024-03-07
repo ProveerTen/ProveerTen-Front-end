@@ -13,16 +13,18 @@
         </div>
     </div>
 
-    <div class="buttons d-flex gap-5">
-        <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
-            (click)="viewCompanies()">Encontrar Empresas</button>
-        <button class="btn btn-warning" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
-            (click)="viewProducts()">Encontrar Productos</button>
-        <button class="btn btn-warning" *ngIf="auth.isLoggedIn() | async"
-            (click)="createOrder()">Crear pedido</button>
-        <button class="btn btn-warning" *ngIf="auth.isLoggedIn() | async"
-            (click)="viewOrders()">Ver pedidos</button>
+    <div class="buttons d-flex flex-column flex-md-row gap-3 gap-md-5">
+        <!--   <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        (click)="viewCompanies()">Encontrar Empresas</button>
+    <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        (click)="viewProducts()">Encontrar Productos</button> -->
+
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="auth.isLoggedIn() | async" (click)="createOrder()">Crear
+            pedido</button>
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="auth.isLoggedIn() | async" (click)="viewOrders()">Ver
+            pedidos</button>
     </div>
+
 
     <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap" style="width: 60%;"
         *ngIf="publicaciones; else noPublications">

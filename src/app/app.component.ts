@@ -11,13 +11,17 @@ export class AppComponent {
   title = 'ProveerTen';
   chats: string[] = [];
   isLogin: any;
-  constructor(public auth: AuthService, private shared:SharedService) {
+  listChatsActive: boolean = true;
+
+  constructor(public auth: AuthService, private shared: SharedService) {
 
     this.auth.isLoggedIn().subscribe((value: any) => {
       this.isLogin = value;
     });
     this.shared.chatList.subscribe((value: any) => {
       this.chats = value;
+      console.log(this.chats);
+
 
       if (this.chats.length > 2) {
         this.chats.splice(0, 1);
@@ -42,6 +46,10 @@ export class AppComponent {
       localStorage.setItem('chats', this.chats.toString())
     }
     console.log(this.chats);
+  }
+
+  changeStyle() {
+    this.listChatsActive = !this.listChatsActive;
   }
 
   ngOnDestroy() {

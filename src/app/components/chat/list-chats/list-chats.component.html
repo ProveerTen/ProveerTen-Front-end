@@ -1,8 +1,8 @@
 <div *ngIf="auth.isGrocer() | async"
     class="container contenedor d-flex align-items-center flex-column justify-content-center"
-    style="padding-top: 150px;">
+    style="padding-top: 120px;">
     <h2>Chats</h2>
-    <div class="overflow-auto w-100" style="max-height: 55vh; padding: 20px; margin-top: 10px;">
+    <div class="overflow-auto w-100" style="max-height: 55vh">
         <div *ngFor="let chat of data" class="d-flex flex-column p-2 ">
             <div class="user_chat d-flex w-100 justify-content-center"
                 style="cursor: pointer; padding: 5px; border-radius: 5px;"

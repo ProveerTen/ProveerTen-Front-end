@@ -64,6 +64,7 @@ export class ListChatsComponent {
           }
           localStorage.setItem('chats', this.chats.toString())
         }
+        this.shared.chatList.next(this.chats)
       },
       error: (error) => {
         console.log(error);

@@ -15,7 +15,7 @@
     align-items: stretch;
     position: fixed;
     bottom: 0;
-    right: 387px;
+    right: 285px;
 }
 
 
@@ -23,3 +23,6 @@
     margin-right: 10px;
 }
 
+.offcanvas {
+    --bs-offcanvas-width: 300px;
+}
