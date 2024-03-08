@@ -38,6 +38,8 @@ export class CreateOrderComponent {
   orderProducts: any[] = [];
   total: number = 0;
   data_order: order;
+  selected_provider: boolean = false;
+  disabled_checkbox: boolean = false;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -71,14 +73,24 @@ export class CreateOrderComponent {
   updateSelection(company: any) {
     this.isData = false;
     if (this.companies) {
-      this.companies.forEach(c => {
-        if (c !== company) {
-          c.isSelected = false;
-        }
-      });
-      this.selectedCompany = this.companies.find(c => c.isSelected);
+      if (this.orderProducts.length === 0) {
+        this.companies.forEach(c => {
+          if (c !== company) {
+            c.isSelected = false;
+          } else {
+            c.isSelected = true;
+          }
+        });
+        this.selectedCompany = this.companies.find(c => c.isSelected);
+      } else {
+        alert('Para realizar un pedido con otra empresa, por favor termine de realizar el pedido actual o cáncelelo');
+      }
     } else {
-      this.selectedCompany = company;
+      if (this.orderProducts.length === 0) {
+        this.selectedCompany = company;
+      } else {
+        alert('Para realizar un pedido con otra empresa, por favor termine de realizar el pedido actual o cáncelelo');
+      }
     }
 
     this.showProducts();
@@ -133,8 +145,7 @@ export class CreateOrderComponent {
       last_name_provider: last_name,
       products: this.orderProducts
     }
-    console.log(this.data_order);
-
+    this.selected_provider = true;
   }
 
   editOrder() {
@@ -145,7 +156,13 @@ export class CreateOrderComponent {
     if (this.indexPage > 2) {
       return
     }
-    this.indexPage++;
+    if (this.indexPage === 1 && this.orderProducts.length > 0) {
+      this.indexPage++;
+    } else if (this.indexPage === 2 && this.selected_provider === true) {
+      this.indexPage++;
+    } else {
+      alert('Por favor ingrese los campos requeridos')
+    }
   }
 
   returnPage() {
@@ -159,14 +176,18 @@ export class CreateOrderComponent {
     this.indexPage = 1;
     this.orderProducts = [];
     this.data_order = null;
-    window.location.reload();
+    this.total = 0;
+    this.disabled_checkbox = false;
+    // window.location.reload();
   }
 
   finish() {
     this.indexPage = 1;
     this.orderProducts = [];
     this.data_order = null;
-    window.location.reload();
+    this.total = 0;
+    this.disabled_checkbox = false;
+    // window.location.reload();
   }
 
   confirm() {
@@ -204,6 +225,7 @@ export class CreateOrderComponent {
   }
 
   addProduct(product: any) {
+    this.disabled_checkbox = true;
     let pos = this.orderProducts.findIndex(p => p.id_product === product.id_product);
     if (pos !== -1) {
       this.orderProducts[pos].product_quantity += product.product_quantity;
@@ -221,6 +243,9 @@ export class CreateOrderComponent {
     product.stock_product += this.orderProducts[pos].product_quantity;
     this.orderProducts.splice(pos, 1);
     product.add_product = false;
+    if (this.orderProducts.length === 0) {
+      this.disabled_checkbox = false;
+    }
   }
 
 }
