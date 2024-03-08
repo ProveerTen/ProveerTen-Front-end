@@ -187,6 +187,9 @@ export class CreateOrderComponent {
     this.data_order = null;
     this.total = 0;
     this.disabled_checkbox = false;
+    this.products.forEach(product => {
+      product.add_product = false;
+    });
     // window.location.reload();
   }
 
