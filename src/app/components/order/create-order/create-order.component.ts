@@ -173,11 +173,18 @@ export class CreateOrderComponent {
   }
 
   cancel() {
-    this.indexPage = 1;
-    this.orderProducts = [];
-    this.data_order = null;
-    this.total = 0;
-    this.disabled_checkbox = false;
+    let option = confirm('¿Cancelar la realización del pedido?');
+    if (option) {
+      this.indexPage = 1;
+      this.orderProducts = [];
+      this.data_order = null;
+      this.total = 0;
+      this.disabled_checkbox = false;
+      this.products = null;
+      this.companies.forEach(c => {
+        c.isSelected = false;
+      })
+    }
     // window.location.reload();
   }
 

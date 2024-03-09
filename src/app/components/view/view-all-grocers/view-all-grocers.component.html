@@ -1,14 +1,11 @@
 <div class="container p-5">
     <div class="row">
         <div class="col-md-3">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control border-end-0 rounded-start" placeholder="Buscar" id="buscador"
-                    [(ngModel)]="value" (input)="filterGrocers()">
-                <div class="input-group-append">
-                    <span class="input-group-text bg-transparent border-start-0 rounded-end">
-                        <i class="fas fa-search align-middle"></i> <!-- Alinea verticalmente el icono -->
-                    </span>
-                </div>
+            <div class="input-group mb-3 d-flex  align-items-center">
+                <input type="search" id="buscador" [(ngModel)]="value" (input)="filterGrocers()"
+                    class="form-control border-warning" placeholder="Buscar" style="color:#7a7a7a">
+                <!-- <label type="submit" class="btn btn-warning text-white"> <i
+                        class="fas fa-search align-middle"></i></label> -->
             </div>
         </div>
         <div class="col-md-9">

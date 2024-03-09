@@ -144,7 +144,7 @@
                         <p><strong>Total:</strong> ${{total}} COP</p>
                     </div>
                     <div class="buttons" style="display: flex; gap: 10px;">
-                        <button class="btn btn-outline-danger" (click)="cancel()">Cancelar</button>
+                        <button class="btn btn-outline-danger" [disabled]="isData" (click)="cancel()">Cancelar</button>
                         <button class="btn btn-outline-success" *ngIf="indexPage !== 3" [disabled]="isData"
                             (click)="nextPage()">Siguiente</button>
                         <button class="btn btn-outline-success" (click)="confirm()"

@@ -39,10 +39,11 @@
             </div> 
         </div>-->
         <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
-            <div class="search">
+            <div *ngIf="auth.isGrocer() | async" class="search">
                 <form [formGroup]="form" (ngSubmit)="search()">
                     <div class="input-group">
-                        <span class="input-group-text border-warning bg-warning text-white"><i class="fas fa-search"></i></span>
+                        <span class="input-group-text border-warning bg-warning text-white"><i
+                                class="fas fa-search"></i></span>
                         <select formControlName="searchType" class="form-select border-warning" style="color:#7a7a7a"
                             (ngModelChange)="onSearchTypeChange($event)">
                             <option [value]="'products'" [selected]="searchType === 'products'">
@@ -80,7 +81,7 @@
                 </div>
 
             </div> -->
-            <div class="ms-auto d-none d-lg-block">
+            <div *ngIf="auth.isGrocer() | async" class="ms-auto d-none d-lg-block">
                 <div class="search">
                     <form [formGroup]="form" (ngSubmit)="search()">
                         <div class="input-group">
@@ -149,12 +150,3 @@
     </div>
     <!-- <button (click)="allCompanies()">ver compañias</button> -->
 </nav>
-
-
-
-
-
-
-
-
-
