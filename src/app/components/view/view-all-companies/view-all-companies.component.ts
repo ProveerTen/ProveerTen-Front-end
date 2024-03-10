@@ -16,6 +16,11 @@ export class ViewAllCompaniesComponent {
   value: string;
   filter: any[] = [];
 
+  id!: string;
+  description:any;
+  showModal:any = false;
+  companyInfo:any;
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
   ngOnInit() {
@@ -33,9 +38,15 @@ export class ViewAllCompaniesComponent {
   }
 
   getCompanies() {
-    this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined, undefined).subscribe({
+    this.client.getRequest(`${environment.url_logic}/view/companies`, undefined, undefined).subscribe({
       next: (response: any) => {
-        this.companies = response.data;
+        this.companies = response.categoriesByCompanies;;
+        console.log("COMPANIES",this.companies);
+        
+        this.companies.forEach(company => {
+          company.showMore = false 
+        });
+
         this.filter = this.companies.slice();
         if (this.value !== "") {
           this.getCompaniesByName();
@@ -47,7 +58,7 @@ export class ViewAllCompaniesComponent {
         }
       },
       error: (error) => {
-        console.log(error.error.Status);
+        console.log(error.error);
       },
       complete: () => console.log('complete'),
     });
@@ -79,4 +90,31 @@ export class ViewAllCompaniesComponent {
     this.shared.searchTerm.unsubscribe();
   }
   */
+
+  showModalInfo(i: number) {
+    this.showModal = true
+    this.companyInfo = this.companies[i]
+    console.log("compa info", this.companyInfo);
+    
+    // this.router.navigate(['profile/company', id])
+  }
+  hideModalInfo() {
+    this.showModal = false
+  }
+
+  toggleShowMore(company: any) {
+    console.log("toggle show more");
+    
+    company.showMore = !company.showMore;
+    event.stopPropagation();
+    // if (company.showMore) {
+    //   // Si showMore es true, muestra el mensaje completo
+    //   company.description_company = company?.description_company;
+    // } else {
+    //   // Si showMore es false, muestra solo los primeros 20 caracteres
+    //   company?.description_company.slice(0, 20) + '...';
+    // }
+  }
+    // company.description_company = company.description_company.slice(0,21)
+  // }
 }
