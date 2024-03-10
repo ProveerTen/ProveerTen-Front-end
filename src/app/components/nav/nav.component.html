@@ -39,7 +39,7 @@
             </div> 
         </div>-->
         <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
-            <div *ngIf="auth.isGrocer() | async" class="search">
+            <div *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" class="search">
                 <form [formGroup]="form" (ngSubmit)="search()">
                     <div class="input-group">
                         <span class="input-group-text border-warning bg-warning text-white"><i
@@ -81,7 +81,7 @@
                 </div>
 
             </div> -->
-            <div *ngIf="auth.isGrocer() | async" class="ms-auto d-none d-lg-block">
+            <div *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" class="ms-auto d-none d-lg-block">
                 <div class="search">
                     <form [formGroup]="form" (ngSubmit)="search()">
                         <div class="input-group">
