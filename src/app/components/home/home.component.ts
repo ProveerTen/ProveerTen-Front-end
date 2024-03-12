@@ -95,6 +95,10 @@ export class HomeComponent {
     this.router.navigate(['search', 'products']);
   }
 
+  viewPriceProducts() {
+    this.router.navigate(['view/price/products']);
+  }
+
   createOrder() {
     this.router.navigate(['create/order'])
   }

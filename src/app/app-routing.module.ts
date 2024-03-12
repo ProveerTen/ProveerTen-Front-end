@@ -67,6 +67,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ViewOrderComponent } from './components/order/view-order/view-order.component';
 import { ViewOrdersComponent } from './components/order/view-orders/view-orders.component';
 import { ManageOrdersComponent } from './components/order/manage-orders/manage-orders.component';
+import { SuggestedProductPricesComponent } from './components/view/suggested-product-prices/suggested-product-prices/suggested-product-prices.component';
 
 const routes: Routes = [
   {
@@ -207,6 +208,10 @@ const routes: Routes = [
   {
     path: 'manage/orders',
     component: ManageOrdersComponent
+  },
+  {
+    path: 'view/price/products',
+    component: SuggestedProductPricesComponent
   },
   {
     path: '404',
