@@ -27,6 +27,29 @@
     </div>
 
 
+    <div class="mt-4">
+        <div class="p-3">
+            <h1 style="font-size: 20px; color: orangered;"><strong>¡Conoce los productos!</strong></h1>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 p-3 overflow-x-auto" style="background-color: red;">
+            <div *ngFor="let producto of productos" class="mb-3" style="width: 15%;">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column gap-3">
+                        <div class="img">
+                            <img class="img-fluid" src="{{ producto.image_product }}" alt="">
+                        </div>
+                        <div class="d-flex flex-column gap-5">
+                            <h2 class="card-title" style="font-size: 15px;"><strong>{{ producto.name_product }}</strong></h2>
+                            <p class="card-text">Precio por unidad: ${{ producto.unit_purchase_price_product }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap" style="width: 60%;"
         *ngIf="publicaciones; else noPublications">
         <div class="card" style="width: 100%; height: 100%;" *ngFor="let publicacion of publicaciones; let i = index">
@@ -58,6 +81,9 @@
 <ng-template #noPublications>
     <p>No hay publicaciones por mostrar</p>
 </ng-template>
+
+
+
 
 <!-- Modals -->
 <div *ngFor="let publicacion of publicaciones; let i = index" class="modal fade" [id]="'imageModal_' + i" tabindex="-1"
