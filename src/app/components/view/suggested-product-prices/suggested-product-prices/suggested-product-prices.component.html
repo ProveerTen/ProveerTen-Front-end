@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-3 w-50" *ngFor="let product of products">
+            <div class="card h-100 border-0 shadow">
+                <img appBrokenImage loading="lazy" [src]="product.image_product" class="card-img-top"
+                    alt="{{product?.name_product}}" style="height: 200px; object-fit: cover; cursor: pointer;"
+                    (click)="viewProduct(product.id_product)">
+                <div class="card-body">
+                    <hr>
+                    <h5 class="card-title" (click)="viewProduct(product.id_product)" style="cursor: pointer;">
+                        {{product?.name_product}}</h5>
+                    <p class="card-text text-muted">Precio sugerido por la compañia:
+                        {{product?.suggested_unit_selling_price_product}}</p>
+                    <p class="card-text text-muted">Precio sugerido por tenderos: {{product?.suggested_price_product}}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <label for="precio_sugerido">Sugerir precio:</label>
+                    <input type="number" id="precio_sugerido" placeholder="Ingrese su sugerencia de precio"
+                        [(ngModel)]="suggestedPrice">
+                    <button (click)="suggestPrice()">Enviar sugerencia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,7 @@ export class HomeComponent {
   companies: any[] = []
   newDataPub: any[] = [];
   finish: any = false;
+  productos: any[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) { }
 
@@ -26,6 +27,16 @@ export class HomeComponent {
   // }
 
   ngOnInit(): void {
+
+    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
+      next: (response: any) =>{
+
+        this.productos = response.categoriesByProducts
+        console.log(this.productos  ,"PRODUCTOS");
+        
+      }
+      
+    })
 
     this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({
       next: (response: any) => {
@@ -101,6 +112,10 @@ export class HomeComponent {
     this.router.navigate(['search', 'products']);
   }
 
+  viewPriceProducts() {
+    this.router.navigate(['view/price/products']);
+  }
+
   createOrder() {
     this.router.navigate(['create/order'])
   }
@@ -112,5 +127,7 @@ export class HomeComponent {
   isVideo(url: string): boolean {
     return url.endsWith('.mp4'); // Cambia la condición según el formato del video
   }
+
+  
 }
 

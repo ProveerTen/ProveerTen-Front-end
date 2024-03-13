@@ -181,6 +181,7 @@ export class CreateOrderComponent {
       this.total = 0;
       this.disabled_checkbox = false;
       this.products = null;
+      this.isData = true;
       this.companies.forEach(c => {
         c.isSelected = false;
       })

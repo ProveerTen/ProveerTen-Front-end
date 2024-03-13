@@ -1,3 +1,29 @@
+<div class="buttons d-flex  align-items-center justify-content-center  bg-warning text-dark py-2 rounded-bottom gap-2" >
+    <button class="btn btn-warning " *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        (click)="viewCompanies()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings-fill" viewBox="0 0 16 16">
+            <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zM2 11h1v1H2zm2 0h1v1H4zm-1 2v1H2v-1zm1 0h1v1H4zm9-10v1h-1V3zM8 5h1v1H8zm1 2v1H8V7zM8 9h1v1H8zm2 0h1v1h-1zm-1 2v1H8v-1zm1 0h1v1h-1zm3-2v1h-1V9zm-1 2h1v1h-1zm-2-4h1v1h-1zm3 0v1h-1V7zm-2-2v1h-1V5zm1 0h1v1h-1z"/>
+          </svg> <strong> Encontrar empresas</strong> </button>
+    <button class="btn btn-warning " *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        (click)="viewProducts()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
+            <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z"/>
+          </svg> <strong> Encontrar productos</strong></button>
+    <button class="btn btn-warning " *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+        (click)="viewPriceProducts()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+            <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+            <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z"/>
+          </svg> <strong> Ver sugerencias de precios</strong></button>
+    <button class="btn btn-warning " *ngIf="auth.isLoggedIn() | async" (click)="createOrder()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-border-style" viewBox="0 0 16 16">
+        <path d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm8 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-4 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm8 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-4-4a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/>
+      </svg><strong> Crear
+        pedido</strong> </button>
+    <button class="btn btn-warning " *ngIf="auth.isLoggedIn() | async" (click)="viewOrders()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-border-width" viewBox="0 0 16 16">
+        <path d="M0 3.5A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5zm0 5A.5.5 0 0 1 .5 8h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5"/>
+      </svg> <strong> Ver
+        pedidos</strong> </button>
+</div>
+
+
+
 <div class="container d-flex flex-column gap-5 align-items-center">
 
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="margin-top: 50px;">
@@ -13,17 +39,50 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="buttons d-flex flex-column flex-md-row gap-3 gap-md-5">
         <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
             (click)="viewCompanies()">Encontrar Empresas</button>
         <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
             (click)="viewProducts()">Encontrar Productos</button>
 
+=======
+    <!-- <div class="buttons d-flex flex-column flex-md-row gap-3 gap-md-5">
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewCompanies()">Encontrar empresas</button>
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewProducts()">Encontrar productos</button>
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewPriceProducts()">Ver sugerencias de precios</button>
+>>>>>>> ebe5412610ac89aed726e849a6a5b3e28fb9a9e2
         <button class="btn btn-warning mb-3 mb-md-0" *ngIf="auth.isLoggedIn() | async" (click)="createOrder()">Crear
             pedido</button>
         <button class="btn btn-warning mb-3 mb-md-0" *ngIf="auth.isLoggedIn() | async" (click)="viewOrders()">Ver
             pedidos</button>
+    </div> -->
+
+
+    <div class="mt-4">
+        <div class="p-3">
+            <h1 style="font-size: 20px; color: orangered;"><strong>¡Conoce los productos!</strong></h1>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-3 p-3 overflow-x-auto" style="background-color: red;">
+            <div *ngFor="let producto of productos" class="mb-3" style="width: 15%;">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column gap-3">
+                        <div class="img">
+                            <img class="img-fluid" src="{{ producto.image_product }}" alt="">
+                        </div>
+                        <div class="d-flex flex-column gap-5">
+                            <h2 class="card-title" style="font-size: 15px;"><strong>{{ producto.name_product }}</strong></h2>
+                            <p class="card-text">Precio por unidad: ${{ producto.unit_purchase_price_product }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 
     <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap" style="width: 60%;"
@@ -58,6 +117,9 @@
 <ng-template #noPublications>
     <p>No hay publicaciones por mostrar</p>
 </ng-template>
+
+
+
 
 <!-- Modals -->
 <div *ngFor="let publicacion of publicaciones; let i = index" class="modal fade" [id]="'imageModal_' + i" tabindex="-1"
