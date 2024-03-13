@@ -1,5 +1,4 @@
 export default interface provider {
-    document_provider: string,
     name_provider: string,
     last_name_provider: string,
     email_provider: string,
@@ -9,5 +8,6 @@ export default interface provider {
     neighborhood: string,
     street: string,
     number_street: string,
-    number_provider: string
+    number_provider: string,
+    department: string
 }

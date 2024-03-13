@@ -13,8 +13,6 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
               <div class="row mb-4">
                 <div class="col-md-12">
-                  <input type="text" formControlName="document_provider" placeholder="Documento" class="form-control">
-
                   <input type="text" formControlName="name_provider" placeholder="Nombres">
                   <input type="text" formControlName="last_name_provider" placeholder="Apellidos">
                   <input type="email" formControlName="email_provider" placeholder="Correo electrónico">
@@ -22,9 +20,32 @@
                 <div class="col-md-6">
                   <input type="password" formControlName="password_provider" placeholder="Contraseña">
                   <input type="tel" formControlName="number_provider" placeholder="Número de celular">
-                  <input type="text" formControlName="city_provider" placeholder="Ciudad - Pueblo">
+                  <!-- <input type="text" formControlName="city_provider" placeholder="Ciudad - Pueblo"> -->
 
                 </div>
+
+                <div class="div">
+                  <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
+                  <select formControlName="department" class="form-control form-control-lg"
+                    (ngModelChange)="selected_department($event)">
+                    <option value="" disabled selected>Seleccione un departamento</option>
+                    <option *ngFor="let department of departments"
+                      [ngValue]="{id: department.id, name: department.name}">
+                      {{ department.name }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="div">
+                  <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+                  <select formControlName="city" class="form-control form-control-lg">
+                    <option value="" disabled selected>Seleccione el municipio</option>
+                    <option *ngFor="let city of cities" [value]="city.name">{{
+                      city.name }}</option>
+                  </select>
+                </div>
+
+
                 <div class="col-md-6">
                   <div class="d-flex flex-column">
                     <input type="text" formControlName="neighborhood" placeholder="Barrio">
