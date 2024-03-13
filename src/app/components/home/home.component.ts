@@ -16,7 +16,7 @@ export class HomeComponent {
   companies: any[] = []
   newDataPub: any[] = [];
   finish: any = false;
-  productos: any[] = [];
+  products: any[] = [];
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) { }
 
@@ -28,14 +28,14 @@ export class HomeComponent {
 
   ngOnInit(): void {
 
-    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
-      next: (response: any) =>{
+    this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
+      next: (response: any) => {
 
-        this.productos = response.categoriesByProducts
-        console.log(this.productos  ,"PRODUCTOS");
-        
+        this.products = response.categoriesByProducts
+        console.log(this.products, "PRODUCTOS");
+
       }
-      
+
     })
 
     this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({
@@ -128,6 +128,6 @@ export class HomeComponent {
     return url.endsWith('.mp4'); // Cambia la condición según el formato del video
   }
 
-  
+
 }
 

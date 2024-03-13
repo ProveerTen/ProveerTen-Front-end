@@ -17,9 +17,9 @@ export class ViewAllCompaniesComponent {
   filter: any[] = [];
 
   id!: string;
-  description:any;
-  showModal:any = false;
-  companyInfo:any;
+  description: any;
+  showModal: any = false;
+  companyInfo: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -38,13 +38,13 @@ export class ViewAllCompaniesComponent {
   }
 
   getCompanies() {
-    this.client.getRequest(`${environment.url_logic}/view/companies`, undefined, undefined).subscribe({
+    this.client.postRequest(`${environment.url_logic}/view/companies`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
       next: (response: any) => {
         this.companies = response.categoriesByCompanies;;
-        console.log("COMPANIES",this.companies);
-        
+        console.log("COMPANIES", this.companies);
+
         this.companies.forEach(company => {
-          company.showMore = false 
+          company.showMore = false
         });
 
         this.filter = this.companies.slice();
@@ -102,7 +102,7 @@ export class ViewAllCompaniesComponent {
 
   toggleShowMore(company: any) {
     console.log("toggle show more");
-    
+
     company.showMore = !company.showMore;
     event.stopPropagation();
     // if (company.showMore) {
@@ -113,6 +113,6 @@ export class ViewAllCompaniesComponent {
     //   company?.description_company.slice(0, 20) + '...';
     // }
   }
-    // company.description_company = company.description_company.slice(0,21)
+  // company.description_company = company.description_company.slice(0,21)
   // }
 }

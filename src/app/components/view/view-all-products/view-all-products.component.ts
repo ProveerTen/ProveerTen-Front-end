@@ -42,16 +42,16 @@ export class ViewAllProductsComponent {
       this.categoriesList = value;
       if (this.value === "" && this.categoriesList.length > 0) {
         this.getProductsByCategories();
-      } else if (this.value !== "" && this.categoriesList.length > 0){
+      } else if (this.value !== "" && this.categoriesList.length > 0) {
         this.getProductsByCategoriesAndName();
       } else {
         this.products = this.filter;
       }
     });
-  } 
+  }
 
   getProducts() {
-    this.client.getRequest(`${environment.url_logic}/view/products`, undefined, undefined).subscribe({
+    this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
       next: (response: any) => {
         this.products = response.categoriesByProducts;
         this.filter = this.products.slice();

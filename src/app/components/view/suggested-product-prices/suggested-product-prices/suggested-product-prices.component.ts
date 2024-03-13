@@ -22,8 +22,8 @@ export class SuggestedProductPricesComponent {
   }
 
   ngOnInit(): void {
-    this.client.getRequest(
-      `${environment.url_logic}/view/price/products`,
+    this.client.postRequest(
+      `${environment.url_logic}/view/price/products`, { document_grocer: this.auth.getId() },
       undefined,
       { "Authorization": `Bearer ${this.auth.getToken()}` }
     ).subscribe({
@@ -42,6 +42,6 @@ export class SuggestedProductPricesComponent {
 
   suggestPrice() {
     console.log(this.suggestedPrice);
-    
+
   }
 }
