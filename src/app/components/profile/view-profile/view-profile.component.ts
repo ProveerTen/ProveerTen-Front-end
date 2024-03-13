@@ -305,7 +305,9 @@ export class ViewProfileComponent {
   addSocialRed() {
     this.inputLinkRed = !this.inputLinkRed;
     this.estadoModalIcons = true;
-    this.iconSocialRed = false;
+    this.iconSocialRed = undefined;
+    this.valid = false
+    this.valueSocialRed = null
   }
 
   onSubmitSocialRed() {
@@ -364,10 +366,9 @@ export class ViewProfileComponent {
   }
 
   validOnSubmit() {
-    console.log(this.valueSocialRed.length > 4);
+    console.log(this.valueSocialRed);
     console.log(this.iconSocialRed);
 
-    // let valid = false
     if (this.iconSocialRed && this.valueSocialRed.length > 4) {
       this.valid = true;
     } else {

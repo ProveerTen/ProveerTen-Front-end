@@ -19,6 +19,12 @@ export class HomeComponent {
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) { }
 
+  // date_Hour_Pub(datePub: any) {
+  //   const format = (date:any, locale:any, options:any) =>
+  //     new Intl.DateTimeFormat(locale, options).format(date);
+  //   return format(datePub, 'es', { dateStyle: 'medium', timeStyle: "long", timeZone: 'America/Bogota', hour12: true }).slice(0,-5) 
+  // }
+
   ngOnInit(): void {
 
     this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({

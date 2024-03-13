@@ -14,10 +14,10 @@
     </div>
 
     <div class="buttons d-flex flex-column flex-md-row gap-3 gap-md-5">
-          <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
-        (click)="viewCompanies()">Encontrar Empresas</button>
-    <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
-        (click)="viewProducts()">Encontrar Productos</button>
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewCompanies()">Encontrar Empresas</button>
+        <button class="btn btn-warning mb-3 mb-md-0" *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
+            (click)="viewProducts()">Encontrar Productos</button>
 
         <button class="btn btn-warning mb-3 mb-md-0" *ngIf="auth.isLoggedIn() | async" (click)="createOrder()">Crear
             pedido</button>
@@ -37,7 +37,8 @@
                     <p (click)="viewProfile(publicacion.nit_company)"
                         style="cursor: pointer; padding: 0; margin: 0; font-size: 20px;">{{ newDataPub[i]?.name_company
                         }}</p>
-                    <p style="cursor: pointer; padding: 0; margin: 0;">{{ publicacion.date | date }} </p>
+                    <!-- <p style="cursor: pointer; padding: 0; margin: 0;">{{date_Hour_Pub( publicacion.date) }} </p> -->
+                    <p style="cursor: pointer; padding: 0; margin: 0;">{{publicacion.date | date }} </p>
                 </div>
             </div>
             <div class="card-body w-100 d-flex justify-content-center flex-column">

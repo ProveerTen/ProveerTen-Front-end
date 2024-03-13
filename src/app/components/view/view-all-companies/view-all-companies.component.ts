@@ -95,8 +95,6 @@ export class ViewAllCompaniesComponent {
     this.showModal = true
     this.companyInfo = this.companies[i]
     console.log("compa info", this.companyInfo);
-    
-    // this.router.navigate(['profile/company', id])
   }
   hideModalInfo() {
     this.showModal = false
