@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./register-company.component.css']
 })
 export class RegisterCompanyComponent {
-  loading : boolean = false
+  loading: boolean = false
   form: FormGroup;
   company: company = {} as company;
   fecha: any;
@@ -33,50 +33,59 @@ export class RegisterCompanyComponent {
 
   ngOnInit(): void {
     let datapipe = new DatePipe('en-US')
-    this.fecha = datapipe.transform(new Date(), 'yyyy-MM-dd')
+    this.fecha = datapipe.transform(new Date(), 'yyyy-MM-dd');
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
   }
 
   onSubmit() {
 
-      this.loading = true
+    this.loading = true
 
-      setTimeout (()=>{
+    setTimeout(() => {
 
 
-    if (this.form.valid) {
-      this.company = {
-        nit_company: this.form.value.nit_company,
-        name_company: this.form.value.name_company,
-        email_company: this.form.value.email_company,
-        password_company: this.form.value.password_company,
-        national_line_company: this.form.value.national_line_company,
-        foundation_company: this.form.value.foundation_company,
-        description_company: this.form.value.description_company,
+      if (this.form.valid) {
+        this.company = {
+          nit_company: this.form.value.nit_company,
+          name_company: this.form.value.name_company,
+          email_company: this.form.value.email_company,
+          password_company: this.form.value.password_company,
+          national_line_company: this.form.value.national_line_company,
+          foundation_company: this.form.value.foundation_company,
+          description_company: this.form.value.description_company,
+        }
+
+        this.client.postRequest(`${environment.url_auth}/register/company`, this.company).subscribe({
+          next: (response) => {
+            this.loading = false
+            console.log(response);
+            this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
+            setTimeout(() => {
+              this.router.navigate(["login"]);
+            }, 1500);
+          },
+          error: (error) => {
+            this.loading = false
+            console.log(error);
+            this.messageService.clear();
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
+          },
+          complete: () => console.log('complete'),
+        });
+      } else {
+        this.loading = false
+        console.log("Error");
+        this.messageService.clear();
+        this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
       }
-
-      this.client.postRequest(`${environment.url_auth}/register/company`, this.company).subscribe({
-        next: (response) => {
-          this.loading = false
-          console.log(response);
-          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'El registro se ha realizado correctamente.' });
-          setTimeout(() => {
-            this.router.navigate(["login"]);
-          }, 1500);
-        },
-        error: (error) => {
-          this.loading = false
-          console.log(error);
-          this.messageService.clear();
-          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: error.error.error });
-        },
-        complete: () => console.log('complete'),
-      });
-    } else {
-      this.loading = false
-      console.log("Error");
-      this.messageService.clear();
-      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.' });
-    }
-  },2000)
+    }, 2000)
   }
 }
