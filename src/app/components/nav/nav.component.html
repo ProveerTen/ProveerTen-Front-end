@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg bg-white navbar-light p-3 shadow-sm" style="z-index: 2; position: sticky;
+<nav class="navbar navbar-expand-lg  navbar-light p-3 shadow-sm" style="z-index: 2; position: sticky;
     top: 0;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><i class="fas fa-store me-2"></i> <strong>ProveerTen</strong></a>
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto ">
                 <li class="nav-item">
                     <div class="dropdown" *ngIf="auth.isLoggedIn() | async">
                         <button class="btn btn-secondary dropdown-toggle btn_drop" type="button"
@@ -129,17 +129,17 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item" *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="/">Inicio</a>
+                <li class="nav-item " *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))">
+                    <a class="nav-link mx-2 text-uppercase " routerLink="/"> <strong> Inicio </strong></a>
                 </li>
                 <li class="nav-item" *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="panel">Panel</a>
+                    <a class="nav-link mx-2 text-uppercase " routerLink="panel"><strong> Panel </strong></a>
                 </li>
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="login">Iniciar sesión</a>
+                    <a class="nav-link mx-2 text-uppercase "  routerLink="login"><strong> Iniciar sesión </strong></a>
                 </li>
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="register">Crear cuenta</a>
+                    <a class="nav-link mx-2 text-uppercase " routerLink="register"><strong> Crear cuenta </strong></a>
                 </li>
                 <p-toast position="bottom-right" key="nav"></p-toast>
                 <!-- <li class="nav-item" *ngIf="auth.isLoggedIn() | async">

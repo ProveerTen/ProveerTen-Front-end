@@ -157,3 +157,6 @@ input.search_input::placeholder {
 .navbar-toggler:focus {
     box-shadow: none;
 }
+.navbar{
+ background-color: #FE5115;
+}
