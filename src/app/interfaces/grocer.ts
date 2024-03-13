@@ -6,11 +6,12 @@ export default interface grocer {
     name_store: string,
     profile_photo_grocer?: string | null,
     cover_photo_grocer?: string | null,
-    city_grocer: string,
     password_grocer: string,
     neighborhood: string,
     street: string,
     number_street: string,
-    apartment: string,
-    number_grocer: string
+    // apartment: string,
+    number_grocer: string,
+    department: string,
+    city_grocer: string,
 }

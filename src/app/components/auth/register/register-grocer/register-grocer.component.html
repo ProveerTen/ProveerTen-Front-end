@@ -26,7 +26,8 @@
 
             <section class="">
                 <div class="container py-5">
-                    <div class="row d-flex align-items-center justify-content-center  rounded" style="background-color: white;">
+                    <div class="row d-flex align-items-center justify-content-center  rounded"
+                        style="background-color: white;">
                         <div class="col-md-8 col-lg-7 col-xl-6">
                             <img src="https://static.vecteezy.com/system/resources/previews/011/414/195/non_2x/bussines-rule-flat-style-illustratiion-design-free-vector.jpg"
                                 class="img-fluid" alt="Phone image">
@@ -57,10 +58,11 @@
                                         class="form-control form-control-lg" />
 
 
-                                        <div *ngIf="form.get('document_grocer')?.hasError('minlength') || form.get('document_grocer')?.hasError('maxlength')"
-                                            class="message-invalid">
-                                            <p style="color: red;">El documento debe tener entre 10 a maximo 15 carácteres</p>
-                                        </div>
+                                    <div *ngIf="form.get('document_grocer')?.hasError('minlength') || form.get('document_grocer')?.hasError('maxlength')"
+                                        class="message-invalid">
+                                        <p style="color: red;">El documento debe tener entre 10 a maximo 15 carácteres
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -78,16 +80,34 @@
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="form1Example13"><strong>Nombre del establecimiento</strong></label>
+                                    <label class="form-label" for="form1Example13"><strong>Nombre del
+                                            establecimiento</strong></label>
                                     <input type="text" formControlName="name_store"
                                         class="form-control form-control-lg" />
                                 </div>
                             </div>
                             <div class="d-flex gap-2">
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form1Example13"><strong>Ciudad - Pueblo</strong></label>
-                                    <input type="text" formControlName="city_grocer"
-                                        class="form-control form-control-lg" />
+                                <div class="div">
+                                    <label for="exampleFormControlTextarea1"
+                                        class="form-label"><strong>Departamento</strong></label>
+                                    <select formControlName="department" class="form-control form-control-lg"
+                                        (ngModelChange)="selected_department($event)">
+                                        <option value="" disabled selected>Seleccione un departamento</option>
+                                        <option *ngFor="let department of departments"
+                                            [ngValue]="{id: department.id, name: department.name}">
+                                            {{ department.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="div">
+                                    <label for="exampleFormControlTextarea1"
+                                        class="form-label"><strong>Municipio</strong></label>
+                                    <select formControlName="city" class="form-control form-control-lg">
+                                        <option value="" disabled selected>Seleccione el municipio</option>
+                                        <option *ngFor="let city of cities" [value]="city.name">{{
+                                            city.name }}</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -99,40 +119,35 @@
                             <div class="d-flex gap-2">
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form1Example13"><strong>Calle</strong></label>
-                                    <input type="text" formControlName="street"
-                                        class="form-control form-control-lg" />
+                                    <input type="text" formControlName="street" class="form-control form-control-lg" />
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="form1Example13"><strong> Numero de calle</strong></label>
+                                    <label class="form-label" for="form1Example13"><strong> Numero de
+                                            calle</strong></label>
                                     <input type="text" formControlName="number_street"
                                         class="form-control form-control-lg" />
                                 </div>
                             </div>
                             <div class="d-flex gap-2">
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form1Example13"><strong>Apartamento</strong></label>
-                                    <input type="text" formControlName="apartment"
-                                        class="form-control form-control-lg" />
-                                </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form1Example13"><strong> Cotraseña</strong></label>
                                     <input type="password" formControlName="password_grocer"
                                         class="form-control form-control-lg" />
 
-                                        <div *ngIf="form.get('password_grocer')?.hasError('minlength') || form.get('password_grocer')?.hasError('maxlength')"
-                                    class="message-invalid">
-                                    <p style="color: red;">La contraseña debe tener minimo 8 carácteres</p>
-                                </div>
+                                    <div *ngIf="form.get('password_grocer')?.hasError('minlength') || form.get('password_grocer')?.hasError('maxlength')"
+                                        class="message-invalid">
+                                        <p style="color: red;">La contraseña debe tener minimo 8 carácteres</p>
+                                    </div>
                                 </div>
                             </div>
 
                             <p-toast position="bottom-right" key="center"></p-toast>
                             <!-- Submit button -->
                             <button type="submit"
-                                class="btn btn-primary btn-lg btn-block d-grid gap-2 col-6 mx-auto border border-0" type="submit"
-                                style="background-color: orange;">Registrar</button>
+                                class="btn btn-primary btn-lg btn-block d-grid gap-2 col-6 mx-auto border border-0"
+                                type="submit" style="background-color: orange;">Registrar</button>
                         </div>
                     </div>
                 </div>
@@ -144,7 +159,7 @@
 
 
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>

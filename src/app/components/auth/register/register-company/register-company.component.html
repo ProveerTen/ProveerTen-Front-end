@@ -95,6 +95,28 @@
                                 </div>
                             </div>
 
+                            <!-- <div class="div">
+                                <label for="exampleFormControlTextarea1"
+                                    class="form-label"><strong>Departamento</strong></label>
+                                <select formControlName="department" class="form-control form-control-lg"
+                                    (ngModelChange)="selected_department($event)">
+                                    <option value="" disabled selected>Seleccione un departamento</option>
+                                    <option *ngFor="let department of departments"
+                                        [ngValue]="{id: department.id, name: department.name}">
+                                        {{ department.name }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="div">
+                                <label for="exampleFormControlTextarea1"
+                                    class="form-label"><strong>Municipio</strong></label>
+                                <select formControlName="city" class="form-control form-control-lg">
+                                    <option value="" disabled selected>Seleccione el municipio</option>
+                                    <option *ngFor="let city of cities" [value]="city.id">{{
+                                        city.name }}</option>
+                                </select>
+                            </div> -->
 
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label"><Strong>Breve
@@ -119,9 +141,7 @@
 
 
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>
-
-

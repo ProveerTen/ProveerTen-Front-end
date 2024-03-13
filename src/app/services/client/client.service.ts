@@ -33,7 +33,7 @@ export class ClientService {
       headers: reqHeaders,
       params: reqParams,
       responseType: "json",
-      withCredentials: true,
+      withCredentials: false,
     });
   }
 
@@ -57,7 +57,7 @@ export class ClientService {
       headers: reqHeaders,
       params: reqParams,
       responseType: "json",
-      withCredentials: true,
+      withCredentials: false,
     });
   }
 
@@ -81,7 +81,7 @@ export class ClientService {
       headers: reqHeaders,
       params: reqParams,
       responseType: "json",
-      withCredentials: true,
+      withCredentials: false,
     });
   }
 
@@ -105,7 +105,7 @@ export class ClientService {
       headers: reqHeaders,
       params: reqParams,
       responseType: "json",
-      withCredentials: true,
+      withCredentials: false,
     });
   }
 }

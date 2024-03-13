@@ -17,6 +17,9 @@ export class RegisterCompanyComponent {
   form: FormGroup;
   company: company = {} as company;
   fecha: any;
+  departments: any;
+  cities: any;
+  id_department: any;
 
   constructor(private fb: FormBuilder, private client: ClientService, private router: Router,
     private messageService: MessageService) {
@@ -27,23 +30,40 @@ export class RegisterCompanyComponent {
       password_company: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
       national_line_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
       foundation_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
-      description_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]]
+      description_company: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(255)]],
+      // department: ['', Validators.required],
+      // city: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
     let datapipe = new DatePipe('en-US')
     this.fecha = datapipe.transform(new Date(), 'yyyy-MM-dd');
-    this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => console.log('complete'),
-    });
+    // this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
+    //   next: (response) => {
+    //     this.departments = response;
+    //     console.log(this.departments);
+
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //   },
+    //   complete: () => console.log('complete'),
+    // });
   }
+
+  // selected_department(data: any) {
+  //   this.client.getRequest(`https://api-colombia.com/api/v1/Department/${data.id}/cities`, undefined, undefined).subscribe({
+  //     next: (response) => {
+  //       this.cities = response;
+  //       console.log(this.cities);
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     },
+  //     complete: () => console.log('complete'),
+  //   });
+  // }
 
   onSubmit() {
 
