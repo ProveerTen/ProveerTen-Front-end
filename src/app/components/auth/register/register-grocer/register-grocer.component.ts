@@ -63,6 +63,10 @@ export class RegisterGrocerComponent {
       },
       complete: () => console.log('complete'),
     });
+
+    this.form.patchValue({
+      city: ''
+    });
   }
 
   onSubmit() {

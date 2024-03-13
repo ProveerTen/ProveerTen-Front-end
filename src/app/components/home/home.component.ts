@@ -32,7 +32,7 @@ export class HomeComponent {
       next: (response: any) => {
 
         this.products = response.categoriesByProducts
-        console.log(this.products, "PRODUCTOS");
+        // console.log(this.products, "PRODUCTOS");
 
       }
 

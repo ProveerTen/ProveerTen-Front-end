@@ -61,6 +61,9 @@ export class CreateProviderComponent {
       },
       complete: () => console.log('complete'),
     });
+    this.form.patchValue({
+      city: ''
+    });
   }
 
   onSubmit() {
