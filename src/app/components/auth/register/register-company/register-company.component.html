@@ -45,7 +45,14 @@
                                     <label class="form-label" for="form1Example13"><strong>Nit</strong></label>
                                     <input type="text" formControlName="nit_company"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('nit_company').errors?.['required'] && form.get('nit_company').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El NIT es requerido.</p>
+                                    </div>
                                 </div>
+
+
 
                                 <div *ngIf="form.get('nit_company')?.hasError('minlength') || form.get('nit_company')?.hasError('maxlength')"
                                     class="message-invalid">
@@ -60,12 +67,22 @@
                                             empresa</strong></label>
                                     <input type="text" formControlName="name_company"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('name_company').errors?.['required'] && form.get('name_company').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El nombre de la compañia es requerido.</p>
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form1Example13"><strong>Correo</strong></label>
                                     <input type="email" formControlName="email_company"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('email_company').errors?.['email'] && form.get('email_company').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">Por favor, ingrese un correo electrónico válido.</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -74,6 +91,11 @@
                                     <label class="form-label" for="form1Example13"><strong>Telelfono</strong></label>
                                     <input type="tel" formControlName="national_line_company"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('national_line_company').errors?.['required'] && form.get('national_line_company').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El numero es requerido.</p>
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -81,6 +103,11 @@
                                             fundación</strong></label>
                                     <input type="date" formControlName="foundation_company" [max]="this.fecha"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('foundation_company').errors?.['required'] && form.get('foundation_company').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">La fecha es requerida.</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -88,6 +115,11 @@
                                 <label class="form-label" for="form1Example13"><strong>Contraseña</strong></label>
                                 <input type="password" formControlName="password_company"
                                     class="form-control form-control-lg" />
+
+                                <div *ngIf="form.get('password_company').errors?.['required'] && form.get('password_company').touched"
+                                    class="message-invalid">
+                                    <p style="color: red;">La Cotraseña es requerida.</p>
+                                </div>
 
                                 <div *ngIf="form.get('password_company')?.hasError('minlength') || form.get('password_company')?.hasError('maxlength')"
                                     class="message-invalid">
@@ -123,6 +155,12 @@
                                         descripción</Strong></label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="text"
                                     formControlName="description_company"></textarea>
+
+                                <div *ngIf="form.get('description_company').errors?.['required'] && form.get('description_company').touched"
+                                    class="message-invalid">
+                                    <p style="color: red;">La descripcion es requerida.</p>
+                                </div>
+
                             </div>
 
 

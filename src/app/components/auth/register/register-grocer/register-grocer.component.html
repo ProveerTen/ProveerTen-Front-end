@@ -42,12 +42,23 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example13"><strong>Nombres</strong></label>
                                 <input type="text" formControlName="name_grocer" class="form-control form-control-lg" />
+
+                                <div *ngIf="form.get('name_grocer').errors?.['required'] && form.get('name_grocer').touched"
+                                    class="message-invalid">
+                                    <p style="color: red;">El nombre es requerido.</p>
+                                </div>
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example13"><strong>Apellidos</strong></label>
                                 <input type="text" formControlName="last_name_grocer"
                                     class="form-control form-control-lg" />
+
+                                <div *ngIf="form.get('last_name_grocer').errors?.['required'] && form.get('last_name_grocer').touched"
+                                    class="message-invalid">
+                                    <p style="color: red;">El apellido es requerido.</p>
+                                </div>
                             </div>
 
 
@@ -56,6 +67,11 @@
                                     <label class="form-label" for="form1Example13"><strong>Documento</strong></label>
                                     <input type="text" formControlName="document_grocer"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('document_grocer').errors?.['required'] && form.get('document_grocer').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El documento es requerido.</p>
+                                    </div>
 
 
                                     <div *ngIf="form.get('document_grocer')?.hasError('minlength') || form.get('document_grocer')?.hasError('maxlength')"
@@ -69,6 +85,12 @@
                                     <label class="form-label" for="form1Example13"><strong>Correo</strong></label>
                                     <input type="email" formControlName="email_grocer"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('email_grocer').errors?.['email'] && form.get('email_grocer').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">Por favor, ingrese un correo electrónico válido.</p>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -77,6 +99,17 @@
                                     <label class="form-label" for="form1Example13"><strong>N. celular</strong></label>
                                     <input type="tel" formControlName="number_grocer"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('number_grocer').errors?.['required'] && form.get('number_grocer').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El numero es requerido.</p>
+                                    </div>
+
+                                    <div *ngIf="form.get('number_grocer')?.hasError('minlength') || form.get('number_grocer')?.hasError('maxlength')"
+                                        class="message-invalid">
+                                        <p style="color: red;">El numero debe tener entre 1 a maximo 15 carácteres
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -84,6 +117,18 @@
                                             establecimiento</strong></label>
                                     <input type="text" formControlName="name_store"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('name_store').errors?.['required'] && form.get('name_store').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El nombre del establecimiento es requerido.</p>
+                                    </div>
+
+                                    <div *ngIf="form.get('document_grocer')?.hasError('minlength') || form.get('document_grocer')?.hasError('maxlength')"
+                                        class="message-invalid">
+                                        <p style="color: red;">El nombre del establecimiento debe tener entre 10 a
+                                            máximo 50 carácteres
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="d-flex gap-2">
@@ -114,12 +159,30 @@
                                     <label class="form-label" for="form1Example13"><Strong>Barrio</Strong></label>
                                     <input type="text" formControlName="neighborhood"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('neighborhood').errors?.['required'] && form.get('neighborhood').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El Barrio es requerido.</p>
+                                    </div>
+
+                                    <div *ngIf="form.get('neighborhood')?.hasError('minlength') || form.get('neighborhood')?.hasError('maxlength')"
+                                        class="message-invalid">
+                                        <p style="color: red;">El nombre barrio debe tener entre 1 a
+                                            máximo 30 carácteres
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="d-flex gap-2">
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form1Example13"><strong>Calle</strong></label>
                                     <input type="text" formControlName="street" class="form-control form-control-lg" />
+
+
+                                    <div *ngIf="form.get('street').errors?.['required'] && form.get('street').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">La calle es requerida.</p>
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
@@ -127,6 +190,11 @@
                                             calle</strong></label>
                                     <input type="text" formControlName="number_street"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('number_street').errors?.['required'] && form.get('number_street').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El numero de calle es requerida.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="d-flex gap-2">
@@ -135,6 +203,11 @@
                                     <label class="form-label" for="form1Example13"><strong> Cotraseña</strong></label>
                                     <input type="password" formControlName="password_grocer"
                                         class="form-control form-control-lg" />
+
+                                    <div *ngIf="form.get('password_grocer').errors?.['required'] && form.get('password_grocer').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">La contraseña es requerida.</p>
+                                    </div>
 
                                     <div *ngIf="form.get('password_grocer')?.hasError('minlength') || form.get('password_grocer')?.hasError('maxlength')"
                                         class="message-invalid">
