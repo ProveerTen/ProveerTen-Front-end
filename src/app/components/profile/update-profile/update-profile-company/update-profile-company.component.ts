@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 
 import { environment } from 'src/environments/environment';
 
@@ -18,7 +17,7 @@ export class UpdateProfileCompanyComponent {
   abc: string = "ana"
   form: FormGroup;
   dataUpdate: any = {};
-  loading : boolean = false
+  loading: boolean = false
 
   constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router) {
 
@@ -57,69 +56,56 @@ export class UpdateProfileCompanyComponent {
   onSubmitUpdate() {
     this.loading = true
 
-      setTimeout (()=>{
+    setTimeout(() => {
 
 
-    if (this.form.valid && !this.form.pristine) {
-      this.form.updateValueAndValidity();
+      if (this.form.valid && !this.form.pristine) {
+        this.form.updateValueAndValidity();
 
-      console.log("validado", this.form.value.foundation_company, "ee");
+        console.log("validado", this.form.value.foundation_company, "ee");
 
-      this.dataUpdate = {
-        name_company: this.form.value.name_company,
-        email_company: this.form.value.email_company,
-        national_line_company: this.form.value.national_line_company,
-        foundation_company: this.form.value.foundation_company,
-        description_company: this.form.value.description_company
-      }
-      console.log("data Update", this.dataUpdate);
-
-
-      this.client.patchRequest(`${environment.url_logic}/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-        next: (response: any) => {
-          this.loading = false
-          console.log("response patch", response);
-          Swal.fire({
-            title: "Datos actualizados con éxito",
-            icon: "success"
-          });
-          this.router.navigate(['/profile'])
-        },
-        error: (error) => {
-          this.loading = false
-          console.log(error);
-          Swal.fire({
-            title: error.error.errors[0].msg,
-            icon: "error"
-          });
-        },
-        complete: () => {
-          console.log("complete update profile");
+        this.dataUpdate = {
+          name_company: this.form.value.name_company,
+          email_company: this.form.value.email_company,
+          national_line_company: this.form.value.national_line_company,
+          foundation_company: this.form.value.foundation_company,
+          description_company: this.form.value.description_company
         }
-      })
+        console.log("data Update", this.dataUpdate);
 
-    } else if (!this.form.valid) {
-       this.loading = false
-      console.log("No se cumplen las validaciones");
-    }
-  },400)
+
+        this.client.patchRequest(`${environment.url_logic}/edit_profile/company`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+          next: (response: any) => {
+            this.loading = false
+            console.log("response patch", response);
+            this.router.navigate(['/profile'])
+          },
+          error: (error) => {
+            this.loading = false
+            console.log(error);
+          },
+          complete: () => {
+            console.log("complete update profile");
+          }
+        })
+
+      } else if (!this.form.valid) {
+        this.loading = false
+        console.log("No se cumplen las validaciones");
+      }
+    }, 400)
   }
 
   deleteField(deleteField: string) {
     console.log("DELETE FIELD", deleteField);
     let res = confirm('¿Seguro qué desea eliminar esta información?');
 
-    if(res) {
+    if (res) {
       this.client.deleteRequest(`${environment.url_logic}/edit_profile/company`, { deleteField }, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("RESPOnse", response);
 
           this.form.get(deleteField)!.setValue(null)
-
-          Swal.fire({
-            title: "Dato Eliminado",
-            icon: "success"
-          });
         },
         error: (error: any) => {
           console.log(error);
