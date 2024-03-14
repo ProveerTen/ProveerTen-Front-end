@@ -11,9 +11,10 @@ export class SharedService {
   public chatList = new BehaviorSubject<string[]>([]);
   public companyOrder = new BehaviorSubject<object>(null);
   public categoriesList = new BehaviorSubject<string[]>([]);
+  public department_and_city = new BehaviorSubject<object>({ department: 'Armenia', city: 'Quindío' } as { department: string, city: string });
 
   constructor() { }
-  
+
   changeSearchOption(newValue: string): void {
     this.searchTerm.next(newValue);
   }
@@ -33,7 +34,7 @@ export class SharedService {
   changeCategoriesList(list: string[]): void {
     this.categoriesList.next(list);
   }
-  
+
   /*
   getSearchOption() {
     return this.searchOption.asObservable();

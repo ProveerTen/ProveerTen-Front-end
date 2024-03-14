@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared/shared.service';
+import { ClientService } from 'src/app/services/client/client.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,13 +13,40 @@ import { SharedService } from '../../services/shared/shared.service';
 export class NavComponent {
 
   form: FormGroup;
+  form_location: FormGroup;
   searchType: any = "products";
   searchTerm: string;
+  departments: any;
+  cities: any;
+  id_department: any;
 
-  constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private shared: SharedService) {
+  constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private client: ClientService, private shared: SharedService) {
     this.form = this.fb.group({
       searchType: ['products'],
-      searchTerm: ['']
+      searchTerm: [''],
+    });
+
+    this.form_location = this.fb.group({
+      department: ['Quindío'],
+      city: ['Armenia']
+    })
+
+    // this.form_location.patchValue({
+    //   department: 'Bogotá',
+    //   city: 'Bogotá D.C.'
+    // });
+  }
+
+  ngOnInit(): void {
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
+      next: (response) => {
+        this.departments = response;
+        console.log(this.departments);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
     });
   }
 
@@ -40,6 +68,23 @@ export class NavComponent {
     this.router.navigate(['deleteData-profile/', id])
   }
 
+  selected_department(data: any) {
+    console.log(data);
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${data.id}/cities`, undefined, undefined).subscribe({
+      next: (response) => {
+        this.cities = response;
+        console.log(this.cities);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
+
+    this.form.patchValue({
+      city: ''
+    });
+  }
 
   search(): void {
     this.searchType = this.form.get('searchType').value;

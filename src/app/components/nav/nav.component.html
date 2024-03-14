@@ -136,7 +136,7 @@
                     <a class="nav-link mx-2 text-uppercase " routerLink="panel"><strong> Panel </strong></a>
                 </li>
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase "  routerLink="login"><strong> Iniciar sesión </strong></a>
+                    <a class="nav-link mx-2 text-uppercase " routerLink="login"><strong> Iniciar sesión </strong></a>
                 </li>
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
                     <a class="nav-link mx-2 text-uppercase " routerLink="register"><strong> Crear cuenta </strong></a>
@@ -149,10 +149,25 @@
         </div>
     </div>
     <!-- <button (click)="allCompanies()">ver compañias</button> -->
+    <form [formGroup]="form_location">
+        <div class="div">
+            <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
+            <select formControlName="department" class="form-control form-control-lg"
+                (ngModelChange)="selected_department($event)">
+                <option value="" disabled selected>Seleccione un departamento</option>
+                <option *ngFor="let department of departments" [ngValue]="{id: department.id, name: department.name}">
+                    {{ department.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="div">
+            <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+            <select formControlName="city" class="form-control form-control-lg">
+                <option value="" disabled selected>Seleccione el municipio</option>
+                <option *ngFor="let city of cities" [value]="city.name">{{
+                    city.name }}</option>
+            </select>
+        </div>
+    </form>
 </nav>
-
-
-
-
-
-
