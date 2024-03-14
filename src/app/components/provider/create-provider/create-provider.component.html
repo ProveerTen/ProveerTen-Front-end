@@ -4,53 +4,156 @@
   </div>
 </div>
 
+
 <div class="container text-center h-auto">
   <div class="container h-auto">
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="content">
-          <div class="form">
+          <div class="mb-4">
+            <h1 style="font-size: 30px; color: orange;">¡Ingresa un trabajador a tu compañia!</h1>
+          </div>
+          <div class="form d-flex flex-column">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
               <div class="row mb-4">
                 <div class="col-md-12">
-                  <input type="text" formControlName="name_provider" placeholder="Nombres">
-                  <input type="text" formControlName="last_name_provider" placeholder="Apellidos">
-                  <input type="email" formControlName="email_provider" placeholder="Correo electrónico">
+                  ,<div>
+                    <input type="text" formControlName="name_provider" placeholder="Nombres">
+
+                    <div *ngIf="form.get('name_provider').errors?.['required'] && form.get('name_provider').touched"
+                      class="message-invalid">
+                      <p style="color: red;">El nombre es requerido.</p>
+                    </div>
+                  </div>
+                  <div class="div">
+                    <input type="text" formControlName="last_name_provider" placeholder="Apellidos">
+
+                    <div
+                      *ngIf="form.get('last_name_provider').errors?.['required'] && form.get('last_name_provider').touched"
+                      class="message-invalid">
+                      <p style="color: red;">El apellido es requerido.</p>
+                    </div>
+                  </div>
+
+                  <div class="div">
+                    <input type="email" formControlName="email_provider" placeholder="Correo electrónico">
+
+                    <div *ngIf="form.get('email_provider').errors?.['email'] && form.get('email_provider').touched"
+                      class="message-invalid">
+                      <p style="color: red;">Por favor, ingrese un correo electrónico válido.</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <input type="password" formControlName="password_provider" placeholder="Contraseña">
-                  <input type="tel" formControlName="number_provider" placeholder="Número de celular">
+                <div class="col-md-6 d-flex gap-2" style="width: 100%;">
+
+                  <div class="div" style="width: 100%;">
+                    <input type="password" formControlName="password_provider" placeholder="Contraseña">
+
+                    <div
+                      *ngIf="form.get('password_provider')?.hasError('minlength') || form.get('password_provider')?.hasError('maxlength')"
+                      class="message-invalid">
+                      <p style="color: red;">La contraseña debe tener de 1 a 40 carácteres</p>
+                    </div>
+
+                    <div
+                      *ngIf="form.get('password_provider').errors?.['required'] && form.get('password_provider').touched"
+                      class="message-invalid">
+                      <p style="color: red;">La contraseña es requerida.</p>
+
+                    </div>
+                  </div>
+
+                  <div class="div" style="width: 100%;">
+                    <input type="tel" formControlName="number_provider" placeholder="Número de celular">
+
+                    <div
+                      *ngIf="form.get('number_provider')?.hasError('minlength') || form.get('number_provider')?.hasError('maxlength')"
+                      class="message-invalid">
+                      <p style="color: red;">El numero debe tener de 1 a 15 carácteres.</p>
+                    </div>
+
+                    <div *ngIf="form.get('number_provider').errors?.['required'] && form.get('number_provider').touched"
+                      class="message-invalid">
+                      <p style="color: red;">El numero es requerido.</p>
+                    </div>
+
+                  </div>
                   <!-- <input type="text" formControlName="city_provider" placeholder="Ciudad - Pueblo"> -->
 
                 </div>
 
-                <div class="div">
-                  <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
-                  <select formControlName="department" class="form-control form-control-lg"
-                    (ngModelChange)="selected_department($event)">
-                    <option value="" disabled selected>Seleccione un departamento</option>
-                    <option *ngFor="let department of departments"
-                      [ngValue]="{id: department.id, name: department.name}">
-                      {{ department.name }}
-                    </option>
-                  </select>
+
+                <div class="d-flex gap-2 mb-3">
+                  <div class="div">
+                    <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
+                    <select formControlName="department" class="form-control form-control-lg"
+                      (ngModelChange)="selected_department($event)">
+                      <option value="" disabled selected>Seleccione un departamento</option>
+                      <option *ngFor="let department of departments"
+                        [ngValue]="{id: department.id, name: department.name}">
+                        {{ department.name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="div">
+                    <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+                    <select formControlName="city" class="form-control form-control-lg">
+                      <option value="" disabled selected>Seleccione el municipio</option>
+                      <option *ngFor="let city of cities" [value]="city.name">{{
+                        city.name }}</option>
+                    </select>
+                  </div>
                 </div>
 
-                <div class="div">
-                  <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
-                  <select formControlName="city" class="form-control form-control-lg">
-                    <option value="" disabled selected>Seleccione el municipio</option>
-                    <option *ngFor="let city of cities" [value]="city.name">{{
-                      city.name }}</option>
-                  </select>
-                </div>
 
-
-                <div class="col-md-6">
+                <div class="col-md-6" style="width: 100%;">
                   <div class="d-flex flex-column">
-                    <input type="text" formControlName="neighborhood" placeholder="Barrio">
-                    <input type="text" formControlName="street" placeholder="Calle">
-                    <input type="text" formControlName="number_street" placeholder="Número">
+                    <div class="d-flex gap-2">
+                      <div class="div" style="width: 100%;">
+                        <input type="text" formControlName="neighborhood" placeholder="Barrio">
+
+                        <div
+                          *ngIf="form.get('neighborhood')?.hasError('minlength') || form.get('neighborhood')?.hasError('maxlength')"
+                          class="message-invalid">
+                          <p style="color: red;">El barrio debe tener de 4 a 40 carácteres.</p>
+                        </div>
+
+                        <div *ngIf="form.get('neighborhood').errors?.['required'] && form.get('neighborhood').touched"
+                          class="message-invalid">
+                          <p style="color: red;">El barrio es requerido.</p>
+                        </div>
+                      </div>
+
+                      <div class="div" style="width: 100%;">
+                        <input type="text" formControlName="street" placeholder="Calle">
+
+                        <div
+                          *ngIf="form.get('street')?.hasError('minlength') || form.get('street')?.hasError('maxlength')"
+                          class="message-invalid">
+                          <p style="color: red;">La calle debe tener de 1 a 30 carácteres.</p>
+                        </div>
+
+                        <div *ngIf="form.get('street').errors?.['required'] && form.get('street').touched"
+                          class="message-invalid">
+                          <p style="color: red;">La calle es requerida.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="div">
+                      <input type="text" formControlName="number_street" placeholder="Número">
+
+                      <div
+                        *ngIf="form.get('number_street')?.hasError('minlength') || form.get('number_street')?.hasError('maxlength')"
+                        class="message-invalid">
+                        <p style="color: red;">el numero de calle debe tener de 1 a 25 carácteres.</p>
+                      </div>
+
+                      <div *ngIf="form.get('number_street').errors?.['required'] && form.get('number_street').touched"
+                        class="message-invalid">
+                        <p style="color: red;">El numero de calle es requerido.</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
