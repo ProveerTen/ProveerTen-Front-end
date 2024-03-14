@@ -51,25 +51,38 @@ export class ViewAllProductsComponent {
   }
 
   getProducts() {
-    this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
-      next: (response: any) => {
-        this.products = response.categoriesByProducts;
-        this.filter = this.products.slice();
+    if (this.auth.isLoggedIn()) {
+      this.client.postRequest(`${environment.url_logic}/view/products/location`, { city:'Armenia',deparment: "Quindío" }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.products = response.categoriesByProducts;
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    } else {
+      this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.products = response.categoriesByProducts;
+          this.filter = this.products.slice();
 
-        if (this.value !== "") {
-          this.getProductsByName();
-        } else {
-          this.products = this.filter;
-        }
-        if (this.products.length == 0) {
-          console.log('No hay productos por mostrar');
-        }
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete'),
-    });
+          if (this.value !== "") {
+            this.getProductsByName();
+          } else {
+            this.products = this.filter;
+          }
+          if (this.products.length == 0) {
+            console.log('No hay productos por mostrar');
+          }
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+
   }
 
   getProductsByName() {

@@ -51,7 +51,6 @@ export class HomeComponent {
         },
         complete: () => console.log('complete'),
       });
-
     }
  
     this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({
