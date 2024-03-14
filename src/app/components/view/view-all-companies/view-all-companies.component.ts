@@ -20,8 +20,14 @@ export class ViewAllCompaniesComponent {
   description: any;
   showModal: any = false;
   companyInfo: any;
+  isOffline: any;
+  data_location: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) {
+    auth.isLoggedIn().subscribe(value => {
+      this.isOffline = value;
+    });
+  }
 
   ngOnInit() {
     this.getCompanies();
@@ -38,30 +44,54 @@ export class ViewAllCompaniesComponent {
   }
 
   getCompanies() {
-    this.client.postRequest(`${environment.url_logic}/view/companies`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
-      next: (response: any) => {
-        this.companies = response.categoriesByCompanies;;
-        console.log("COMPANIES", this.companies);
-
-        this.companies.forEach(company => {
-          company.showMore = false
+    if (!(this.isOffline)) {
+      this.shared.department_and_city.subscribe(value => {
+        this.data_location = value;
+        this.client.postRequest(`${environment.url_logic}/view/companies/location`, this.data_location, undefined, undefined).subscribe({
+          next: (response: any) => {
+            this.companies = response.categoriesByCompanies;;
+            this.companies.forEach(company => {
+              company.showMore = false
+            });
+            this.filter = this.companies.slice();
+            if (this.value !== "") {
+              this.getCompaniesByName();
+            } else {
+              this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
+            }
+            if (this.companies.length == 0) {
+              console.log('No hay compañías por mostrar');
+            }
+          },
+          error: (error) => {
+            console.log(error.error);
+          },
+          complete: () => console.log('complete'),
         });
-
-        this.filter = this.companies.slice();
-        if (this.value !== "") {
-          this.getCompaniesByName();
-        } else {
-          this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
-        }
-        if (this.companies.length == 0) {
-          console.log('No hay compañías por mostrar');
-        }
-      },
-      error: (error) => {
-        console.log(error.error);
-      },
-      complete: () => console.log('complete'),
-    });
+      });
+    } else {
+      this.client.postRequest(`${environment.url_logic}/view/companies`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.companies = response.categoriesByCompanies;;
+          this.companies.forEach(company => {
+            company.showMore = false
+          });
+          this.filter = this.companies.slice();
+          if (this.value !== "") {
+            this.getCompaniesByName();
+          } else {
+            this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
+          }
+          if (this.companies.length == 0) {
+            console.log('No hay compañías por mostrar');
+          }
+        },
+        error: (error) => {
+          console.log(error.error);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
   }
 
   getCompaniesByName() {

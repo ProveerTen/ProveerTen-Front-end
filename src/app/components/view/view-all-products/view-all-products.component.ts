@@ -17,8 +17,14 @@ export class ViewAllProductsComponent {
   value: any;
   filter: any[] = [];
   categoriesList: any[] = [];
+  isOffline: any;
+  data_location: any;
 
-  constructor(public auth: AuthService, private router: Router, private client: ClientService, private shared: SharedService) { }
+  constructor(public auth: AuthService, private router: Router, private client: ClientService, private shared: SharedService) {
+    auth.isLoggedIn().subscribe(value => {
+      this.isOffline = value;
+    });
+  }
 
   ngOnInit() {
     this.getProducts();
@@ -51,15 +57,30 @@ export class ViewAllProductsComponent {
   }
 
   getProducts() {
-    if (this.auth.isLoggedIn()) {
-      this.client.postRequest(`${environment.url_logic}/view/products/location`, { city:'Armenia',deparment: "Quindío" }, undefined, undefined).subscribe({
-        next: (response: any) => {
-          this.products = response.categoriesByProducts;
-        },
-        error: (error) => {
-          console.log(error.error.Status);
-        },
-        complete: () => console.log('complete'),
+    if (!(this.isOffline)) {
+      this.shared.department_and_city.subscribe(value => {
+        this.data_location = value;
+        console.log(this.data_location);
+        this.client.postRequest(`${environment.url_logic}/view/products/location`, this.data_location, undefined, undefined).subscribe({
+          next: (response: any) => {
+            this.products = response.categoriesByProducts;
+            console.log(this.products);
+            this.filter = this.products.slice();
+
+            if (this.value !== "") {
+              this.getProductsByName();
+            } else {
+              this.products = this.filter;
+            }
+            if (this.products.length == 0) {
+              console.log('No hay productos por mostrar');
+            }
+          },
+          error: (error) => {
+            console.log(error.error.Status);
+          },
+          complete: () => console.log('complete'),
+        });
       });
     } else {
       this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({

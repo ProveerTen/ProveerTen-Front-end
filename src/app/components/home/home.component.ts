@@ -17,8 +17,14 @@ export class HomeComponent {
   newDataPub: any[] = [];
   finish: any = false;
   products: any[] = [];
+  isOffline: any;
+  data_location: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) {
+    auth.isLoggedIn().subscribe(value => {
+      this.isOffline = value;
+    });
+  }
 
   // date_Hour_Pub(datePub: any) {
   //   const format = (date:any, locale:any, options:any) =>
@@ -27,15 +33,21 @@ export class HomeComponent {
   // }
 
   ngOnInit(): void {
-    if(this.auth.isLoggedIn()){
-      this.client.postRequest(`${environment.url_logic}/view/products/location`, { city:'Armenia',deparment: "Quindío" }, undefined, undefined).subscribe({
-        next: (response: any) => {
-          this.products = response.categoriesByProducts;
-        },
-        error: (error) => {
-          console.log(error.error.Status);
-        },
-        complete: () => console.log('complete'),
+    if (!(this.isOffline)) {
+      this.shared.department_and_city.subscribe(value => {
+        this.data_location = value;
+        console.log(this.data_location);
+        this.client.postRequest(`${environment.url_logic}/view/products/location`, this.data_location, undefined, undefined).subscribe({
+          next: (response: any) => {
+            this.products = response.categoriesByProducts;
+            console.log(this.products);
+
+          },
+          error: (error) => {
+            console.log(error.error.Status);
+          },
+          complete: () => console.log('complete'),
+        });
       });
     } else {
       this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
@@ -52,7 +64,7 @@ export class HomeComponent {
         complete: () => console.log('complete'),
       });
     }
- 
+
     this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({
       next: (response: any) => {
         // console.log(response);

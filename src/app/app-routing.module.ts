@@ -37,7 +37,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 // Guards
 import { homeGuard } from 'src/app/guards/guards-components/home.guard';
-import { unsavedChanges } from './guards/guards-components/unsavedChanges';
+
 import { grocerGuard } from 'src/app/guards/role-guards/grocer.guard';
 import { offlineGuard } from 'src/app/guards/role-guards/offline.guard';
 import { providerGuard } from 'src/app/guards/role-guards/provider.guard';
@@ -99,7 +99,6 @@ const routes: Routes = [
     path: 'update-profile/:id',
     component: UpdateProfileComponent,
     canActivate: [update_profile_guard],
-    canDeactivate: [unsavedChanges]
   },
   {
     path: 'change-password-profile',

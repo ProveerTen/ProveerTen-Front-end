@@ -11,7 +11,7 @@ export class SharedService {
   public chatList = new BehaviorSubject<string[]>([]);
   public companyOrder = new BehaviorSubject<object>(null);
   public categoriesList = new BehaviorSubject<string[]>([]);
-  public department_and_city = new BehaviorSubject<object>({ department: 'Armenia', city: 'Quindío' } as { department: string, city: string });
+  public department_and_city = new BehaviorSubject<object>({ deparment: 'Quindío', city: 'Armenia' } as { deparment: string, city: string });
 
   constructor() { }
 
@@ -25,6 +25,11 @@ export class SharedService {
 
   changeChatList(list: string[]): void {
     this.chatList.next(list);
+  }
+
+  changeDepartmentCity(newValue: object): void {
+    console.log(newValue);
+    this.department_and_city.next(newValue);
   }
 
   changeCompanyOrder(newValue: object): void {

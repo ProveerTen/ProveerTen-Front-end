@@ -19,6 +19,8 @@ export class NavComponent {
   departments: any;
   cities: any;
   id_department: any;
+  department: any;
+  city: any;
 
   constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private client: ClientService, private shared: SharedService) {
     this.form = this.fb.group({
@@ -29,6 +31,9 @@ export class NavComponent {
       department: ['Quindío'],
       city: ['Armenia']
     });
+    this.department = { name: 'Quindío' };
+    this.city = 'Armenia';
+
     this.client.getRequest(`https://api-colombia.com/api/v1/Department/25/cities`, undefined, undefined).subscribe({
       next: (response) => {
         this.cities = response;
@@ -76,9 +81,9 @@ export class NavComponent {
 
   selected_department(nameDepartment: any) {
 
-    let department = this.departments.find(department => department.name === nameDepartment);
+    this.department = this.departments.find(department => department.name === nameDepartment);
 
-    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${department.id}/cities`, undefined, undefined).subscribe({
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${this.department.id}/cities`, undefined, undefined).subscribe({
       next: (response) => {
         this.cities = response;
         console.log(this.cities);
@@ -86,13 +91,23 @@ export class NavComponent {
       error: (error) => {
         console.log(error);
       },
-      complete: () => console.log('complete'),
+      complete: () => console.log('Complete'),
     });
 
-    this.form.patchValue({
+    this.form_location.patchValue({
       city: ''
     });
   }
+
+  selected_city(nameCity: any) {
+    this.city = nameCity;
+    console.log(this.department);
+
+    this.shared.changeDepartmentCity({ deparment: this.department.name, city: this.city });
+    localStorage.setItem('data_location_department', this.department.name);
+    localStorage.setItem('data_location_city', this.city);
+  }
+
 
   search(): void {
     this.searchType = this.form.get('searchType').value;
