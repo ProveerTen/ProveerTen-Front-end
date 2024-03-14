@@ -27,17 +27,33 @@ export class HomeComponent {
   // }
 
   ngOnInit(): void {
+    if(this.auth.isLoggedIn()){
+      this.client.postRequest(`${environment.url_logic}/view/products/location`, { city:'Armenia',deparment: "Quindío" }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.products = response.categoriesByProducts;
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    } else {
+      this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          this.products = response.categoriesByProducts;
 
-    this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
-      next: (response: any) => {
+          if (this.products.length == 0) {
+            console.log('No hay productos por mostrar');
+          }
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
 
-        this.products = response.categoriesByProducts
-        // console.log(this.products, "PRODUCTOS");
-
-      }
-
-    })
-
+    }
+ 
     this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({
       next: (response: any) => {
         // console.log(response);
