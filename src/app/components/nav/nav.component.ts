@@ -25,16 +25,21 @@ export class NavComponent {
       searchType: ['products'],
       searchTerm: [''],
     });
-
     this.form_location = this.fb.group({
       department: ['Quindío'],
       city: ['Armenia']
-    })
+    });
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/25/cities`, undefined, undefined).subscribe({
+      next: (response) => {
+        this.cities = response;
+        console.log(this.cities);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
 
-    // this.form_location.patchValue({
-    //   department: 'Bogotá',
-    //   city: 'Bogotá D.C.'
-    // });
   }
 
   ngOnInit(): void {
@@ -49,6 +54,7 @@ export class NavComponent {
       complete: () => console.log('complete'),
     });
   }
+
 
   view_profile() {
     this.router.navigate(['profile']);
@@ -68,9 +74,11 @@ export class NavComponent {
     this.router.navigate(['deleteData-profile/', id])
   }
 
-  selected_department(data: any) {
-    console.log(data);
-    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${data.id}/cities`, undefined, undefined).subscribe({
+  selected_department(nameDepartment: any) {
+
+    let department = this.departments.find(department => department.name === nameDepartment);
+
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${department.id}/cities`, undefined, undefined).subscribe({
       next: (response) => {
         this.cities = response;
         console.log(this.cities);
