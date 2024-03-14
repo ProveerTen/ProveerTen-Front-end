@@ -26,9 +26,9 @@
 </div> -->
 
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>
 
 
@@ -43,57 +43,134 @@
                 <div class="card-body">
                     <div class="mb-4 text-center">
                         <div *ngIf="imagePreview">
-                            <img appBrokenImage [src]="imagePreview" alt="Image Preview" class="img-fluid rounded-circle border border-warning" style="max-width: 200px;">
+                            <img appBrokenImage [src]="imagePreview" alt="Image Preview"
+                                class="img-fluid rounded-circle border border-warning" style="max-width: 200px;">
                         </div>
                     </div>
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="mb-3">
-                            <input type="text" class="form-control" formControlName="name_product" placeholder="Nombre del producto">
+                            <input type="text" class="form-control" formControlName="name_product"
+                                placeholder="Nombre del producto">
+
+                            <div *ngIf="form.get('name_product').errors?.['required'] && form.get('name_product').touched"
+                                class="message-invalid">
+                                <p style="color: red;">El nombre del producto es requerido es requerido.</p>
+                            </div>
+
+                            <div *ngIf="form.get('name_product')?.hasError('minlength') || form.get('name_product')?.hasError('maxlength')"
+                                class="message-invalid">
+                                <p style="color: red;">El nombre del producto debe tener entre 1 a maximo 100 carácteres
+                                </p>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" formControlName="description_product" placeholder="Descripción del producto">
+                            <input type="text" class="form-control" formControlName="description_product"
+                                placeholder="Descripción del producto">
+
+                            <div *ngIf="form.get('description_product').errors?.['required'] && form.get('description_product').touched"
+                                class="message-invalid">
+                                <p style="color: red;">La descripción del producto es requerido es requerido.</p>
+                            </div>
+
+                            <div *ngIf="form.get('description_product')?.hasError('minlength') || form.get('description_product')?.hasError('maxlength')"
+                                class="message-invalid">
+                                <p style="color: red;">La descripción del producto debe tener entre 1 a maximo 100
+                                    carácteres
+                                </p>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <input type="number" class="form-control" formControlName="purchase_price_product" placeholder="Precio de venta">
+                                    <input type="number" class="form-control" formControlName="purchase_price_product"
+                                        placeholder="Precio de venta">
+
+                                    <div *ngIf="form.get('purchase_price_product').errors?.['required'] && form.get('purchase_price_product').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El precio de venta del producto es requerido es
+                                            requerido.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <input type="number" class="form-control" formControlName="unit_purchase_price_product" placeholder="Precio unitario">
+                                    <input type="number" class="form-control"
+                                        formControlName="unit_purchase_price_product" placeholder="Precio unitario">
+
+
+                                    <div *ngIf="form.get('unit_purchase_price_product').errors?.['required'] && form.get('unit_purchase_price_product').touched"
+                                        class="message-invalid">
+                                        <p style="color: red;">El precio de venta unitario del producto es requerido es
+                                            requerido.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" formControlName="suggested_unit_selling_price_product" placeholder="Precio sugerido al tendero">
+                            <input type="number" class="form-control"
+                                formControlName="suggested_unit_selling_price_product"
+                                placeholder="Precio sugerido al tendero">
+
+                            <div *ngIf="form.get('suggested_unit_selling_price_product').errors?.['required'] && form.get('suggested_unit_selling_price_product').touched"
+                                class="message-invalid">
+                                <p style="color: red;">El precio sugerido del producto es requerido es
+                                    requerido.</p>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" formControlName="purchase_quantity" placeholder="Cantidad del paquete">
+                            <input type="number" class="form-control" formControlName="purchase_quantity"
+                                placeholder="Cantidad del paquete">
+
+                            <div *ngIf="form.get('purchase_quantity').errors?.['required'] && form.get('purchase_quantity').touched"
+                                class="message-invalid">
+                                <p style="color: red;">La cantidad es requerida.</p>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" formControlName="stock_product" placeholder="Cantidad">
+                            <input type="number" class="form-control" formControlName="stock_product"
+                                placeholder="Cantidad">
+
+                            <div *ngIf="form.get('stock_product').errors?.['required'] && form.get('stock_product').touched"
+                                class="message-invalid">
+                                <p style="color: red;">La cantidad del producto es requerida.</p>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" formControlName="content_product" placeholder="Contenido del producto">
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check" *ngFor="let category of dataCategories">
-                                <input type="checkbox" class="form-check-input" [value]="category.name_category" (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}">
-                                <label class="form-check-label" for="{{category.name_category}}">{{category.name_category}}</label>
+                            <input type="text" class="form-control" formControlName="content_product"
+                                placeholder="Contenido del producto">
+
+                            <div *ngIf="form.get('content_product').errors?.['required'] && form.get('content_product').touched"
+                                class="message-invalid">
+                                <p style="color: red;">La contenido del producto es requerida.</p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="file" class="form-control-file" formControlName="image_product" (change)="onFileSelected($event)">
+                            <div class="form-check" *ngFor="let category of dataCategories">
+                                <input type="checkbox" class="form-check-input" [value]="category.name_category"
+                                    (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}">
+                                <label class="form-check-label"
+                                    for="{{category.name_category}}">{{category.name_category}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" formControlName="image_product"
+                                (change)="onFileSelected($event)">
+
+                            <div *ngIf="form.get('image_product').errors?.['required'] && form.get('image_product').touched"
+                                class="message-invalid">
+                                <p style="color: red;">La imagen del producto es requerida.</p>
+                            </div>
                         </div>
                         <div class="mb-3" *ngIf="imagePreview">
-                            <img appBrokenImage [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
+                            <img appBrokenImage [src]="imagePreview" alt="Image Preview"
+                                style="max-width: 100px; height: auto;">
                         </div>
                         <div class="mb-3">
                             <p-toast position="bottom-right" key="center"></p-toast>
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-warning" [disabled]="!isValidImage">Crear producto</button>
+                            <button type="submit" class="btn btn-warning" [disabled]="!isValidImage">Crear
+                                producto</button>
                         </div>
                     </form>
                 </div>
