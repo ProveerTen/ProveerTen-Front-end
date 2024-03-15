@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import product from '../../../interfaces/product';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
 interface order {
@@ -47,7 +45,14 @@ export class CreateOrderComponent {
     this.client.getRequest(`${environment.url_logic}/order/companies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.companies = response.companies.map(company => ({ ...company, isSelected: false }));
+        console.log(this.companies);
         this.filteredCompanies = [...this.companies];
+        console.log(this.filteredCompanies);
+        this.shared.companyOrder.subscribe((company: any) => {
+          if (company !== null) {
+            this.updateSelection(company.nit_company);
+          }
+        })
       },
       error: (error) => {
         console.log(error.error.Status);
@@ -55,13 +60,6 @@ export class CreateOrderComponent {
       complete: () => console.log('complete'),
     });
 
-    this.shared.companyOrder.subscribe((company: any) => {
-      if (company !== null) {
-        company.isSelected = true;
-        this.updateSelection(company);
-        // this.showProducts();
-      }
-    })
   }
 
   filterCompanies() {
@@ -70,28 +68,26 @@ export class CreateOrderComponent {
     );
   }
 
-  updateSelection(company: any) {
+
+
+  updateSelection(nit_company: any) {
+
     this.isData = false;
     if (this.companies) {
       if (this.orderProducts.length === 0) {
-        this.companies.forEach(c => {
-          if (c !== company) {
-            c.isSelected = false;
+        this.companies.forEach(company => {
+          if (company.nit_company === nit_company) {
+            company.isSelected = true;
+            this.selectedCompany = nit_company;
           } else {
-            c.isSelected = true;
+            company.isSelected = false;
           }
         });
-        this.selectedCompany = this.companies.find(c => c.isSelected);
-      } else {
-        alert('Para realizar un pedido con otra empresa, por favor termine de realizar el pedido actual o cáncelelo');
-      }
-    } else {
-      if (this.orderProducts.length === 0) {
-        this.selectedCompany = company;
       } else {
         alert('Para realizar un pedido con otra empresa, por favor termine de realizar el pedido actual o cáncelelo');
       }
     }
+
 
     this.showProducts();
     this.getProviders();
@@ -103,7 +99,7 @@ export class CreateOrderComponent {
 
   showProducts() {
     if (this.selectedCompany) {
-      this.client.postRequest(`${environment.url_logic}/order/products`, { "nit_company": this.selectedCompany.nit_company }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.postRequest(`${environment.url_logic}/order/products`, { "nit_company": this.selectedCompany }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.products = response.products;
           this.products.forEach(product => {
@@ -121,7 +117,9 @@ export class CreateOrderComponent {
 
   getProviders() {
     if (this.selectedCompany) {
-      this.client.postRequest(`${environment.url_chat}/provider/city`, { companyId: this.selectedCompany.nit_company, grocerId: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      console.log(this.selectedCompany);
+
+      this.client.postRequest(`${environment.url_chat}/provider/city`, { companyId: this.selectedCompany, grocerId: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
           this.providers = response.providersbycity[0];
