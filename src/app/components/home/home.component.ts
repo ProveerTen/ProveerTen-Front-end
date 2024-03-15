@@ -36,7 +36,6 @@ export class HomeComponent {
     if (!(this.isOffline)) {
       this.shared.department_and_city.subscribe(value => {
         this.data_location = value;
-        console.log(this.data_location);
         this.client.postRequest(`${environment.url_logic}/view/products/location`, this.data_location, undefined, undefined).subscribe({
           next: (response: any) => {
             this.products = response.categoriesByProducts;

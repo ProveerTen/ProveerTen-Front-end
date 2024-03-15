@@ -174,8 +174,7 @@
                 <select formControlName="department" class="form-control form-control-lg"
                     (ngModelChange)="selected_department($event)">
                     <option value="" disabled selected>Seleccionar</option>
-                    <option *ngFor="let department of departments"
-                        [ngValue]="{id: department.id, name: department.name}">
+                    <option *ngFor="let department of departments" [ngValue]="department.name">
                         {{ department.name }}
                     </option>
                 </select>
