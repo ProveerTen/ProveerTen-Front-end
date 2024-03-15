@@ -11,7 +11,7 @@ export class SharedService {
   public chatList = new BehaviorSubject<string[]>([]);
   public companyOrder = new BehaviorSubject<object>(null);
   public categoriesList = new BehaviorSubject<string[]>([]);
-  public department_and_city = new BehaviorSubject<object>({ deparment: 'Quindío', city: 'Armenia' } as { deparment: string, city: string });
+  public department_and_city = new BehaviorSubject<object>({ deparment: localStorage.getItem('data_location_department_name'), city: localStorage.getItem('data_location_city') } as { deparment: string, city: string });
 
   constructor() { }
 

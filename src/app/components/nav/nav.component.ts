@@ -21,20 +21,42 @@ export class NavComponent {
   id_department: any;
   department: any;
   city: any;
+  id: any;
 
   constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private client: ClientService, private shared: SharedService) {
     this.form = this.fb.group({
       searchType: ['products'],
       searchTerm: [''],
     });
-    this.form_location = this.fb.group({
-      department: ['Quindío'],
-      city: ['Armenia']
-    });
-    this.department = { name: 'Quindío' };
-    this.city = 'Armenia';
 
-    this.client.getRequest(`https://api-colombia.com/api/v1/Department/25/cities`, undefined, undefined).subscribe({
+    this.form_location = this.fb.group({
+      department: ['Quindío', Validators.required],
+      city: ['Armenia', Validators.required]
+    });
+
+    if ((localStorage.getItem('data_location_department_name') && (localStorage.getItem('data_location_city') !== 'Armenia')) &&
+      (localStorage.getItem('data_location_department_name') !== 'Quindío' &&
+        localStorage.getItem('data_location_city') !== 'Armenia')) {
+      this.department = localStorage.getItem('data_location_department_name');
+      this.city = localStorage.getItem('data_location_city');
+      this.id = localStorage.getItem('data_location_department_id');
+      this.form_location.patchValue({
+        department: this.department,
+        city: this.city
+      });
+    } else {
+      this.department = "Quindío";
+      this.city = 'Armenia';
+      this.id = 25;
+      localStorage.setItem('data_location_department_name', this.department);
+      localStorage.setItem('data_location_city', this.city);
+      this.form_location.patchValue({
+        department: 'Quindío',
+        city: 'Armenia'
+      });
+    }
+
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${this.id}/cities`, undefined, undefined).subscribe({
       next: (response) => {
         this.cities = response;
         console.log(this.cities);
@@ -60,7 +82,6 @@ export class NavComponent {
     });
   }
 
-
   view_profile() {
     this.router.navigate(['profile']);
   }
@@ -79,11 +100,8 @@ export class NavComponent {
     this.router.navigate(['deleteData-profile/', id])
   }
 
-  selected_department(nameDepartment: any) {
-
-    this.department = this.departments.find(department => department.name === nameDepartment);
-
-    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${this.department.id}/cities`, undefined, undefined).subscribe({
+  selected_department(data_department: any) {
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${data_department.id}/cities`, undefined, undefined).subscribe({
       next: (response) => {
         this.cities = response;
         console.log(this.cities);
@@ -99,15 +117,17 @@ export class NavComponent {
     });
   }
 
-  selected_city(nameCity: any) {
-    this.city = nameCity;
-    console.log(this.department);
+  filter_location() {
+    if (this.form_location.valid) {
+      let department_name = this.form_location.value.department.name;
+      let department_id = this.form_location.value.department.id;
+      localStorage.setItem('data_location_department_name', department_name);
+      localStorage.setItem('data_location_department_id', department_id);
+      localStorage.setItem('data_location_city', this.form_location.value.city);
+      this.shared.changeDepartmentCity({ deparment: this.form_location.value.department.name, city: this.form_location.value.city });
 
-    this.shared.changeDepartmentCity({ deparment: this.department.name, city: this.city });
-    localStorage.setItem('data_location_department', this.department.name);
-    localStorage.setItem('data_location_city', this.city);
+    }
   }
-
 
   search(): void {
     this.searchType = this.form.get('searchType').value;

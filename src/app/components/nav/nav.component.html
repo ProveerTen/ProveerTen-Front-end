@@ -150,8 +150,8 @@
     </div>
     <!-- <button (click)="allCompanies()">ver compañias</button> -->
     <div class="div" *ngIf="!(auth.isLoggedIn() | async)">
-        <form class="d-flex gap-4" [formGroup]="form_location">
-            <div class="div">
+        <form class="d-flex gap-4" [formGroup]="form_location" (ngSubmit)="filter_location()">
+            <!-- <div class="div">
                 <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
                 <select formControlName="department" class="form-control form-control-lg"
                     (ngModelChange)="selected_department($event)">
@@ -163,13 +163,33 @@
             </div>
             <div class="div">
                 <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
-                <select formControlName="city" class="form-control form-control-lg"
-                    (ngModelChange)="selected_city($event)">
+                <select formControlName="city" class="form-control form-control-lg">
                     <option value="" disabled selected>Seleccione un municipio</option>
                     <option *ngFor="let city of cities" [value]="city.name">{{
                         city.name }}</option>
                 </select>
+            </div> -->
+            <div class="div">
+                <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
+                <select formControlName="department" class="form-control form-control-lg"
+                    (ngModelChange)="selected_department($event)">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option *ngFor="let department of departments"
+                        [ngValue]="{id: department.id, name: department.name}">
+                        {{ department.name }}
+                    </option>
+                </select>
             </div>
+
+            <div class="div">
+                <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+                <select formControlName="city" class="form-control form-control-lg">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option *ngFor="let city of cities" [value]="city.name">{{
+                        city.name }}</option>
+                </select>
+            </div>
+            <button type="submit" type="submit" style="background-color: orange;">Cambiar ubicación</button>
         </form>
     </div>
 </nav>
