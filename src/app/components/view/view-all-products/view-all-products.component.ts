@@ -115,7 +115,7 @@ export class ViewAllProductsComponent {
     });
   }
 
-  getProductsByCategories() {
+  getProductsByCategories() {  
     this.products = this.filter.filter((product: any) => {
       return product.categories.some((productCategory: any) => {
         return this.categoriesList.some((category: string) =>

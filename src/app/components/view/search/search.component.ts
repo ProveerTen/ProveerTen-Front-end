@@ -70,6 +70,8 @@ export class SearchComponent {
   filter: any;
   categories: any;
   categoriesCheckbox: string[] = []
+  selectedCategory: any;
+  subCategories: any;
 
   constructor(private client: ClientService, public auth: AuthService, public shared: SharedService, private routerActivate: ActivatedRoute, private router: Router) {
     this.shared.type.subscribe(type => {
@@ -84,10 +86,11 @@ export class SearchComponent {
     this.value = this.routerActivate.snapshot.params['value'];
     this.client.getRequest(`${environment.url_logic}/category/categories`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        this.categories = response.categories[0];
+        this.categories = response.categories[0].map(category => ({ ...category, isSelected: false }));;        
         console.log(this.categories);
-
         this.filter = this.categories.slice();
+        console.log(this.filter);
+        
       },
       error: (error) => {
         console.log(error.error.Status);
@@ -104,6 +107,47 @@ export class SearchComponent {
     }
     this.router.navigate(['search', this.type]);
   }
+
+  updateSelection(name_category: any) {
+
+    if (this.categories) {
+        this.categories.forEach(category => {
+          if (category.name_category === name_category) {
+            category.isSelected = true;
+            this.selectedCategory = name_category;
+          } else {
+            category.isSelected = false;
+          }
+        });
+
+        let pos = this.categoriesCheckbox.indexOf(name_category);
+    if (pos === -1) {
+      this.categoriesCheckbox.push(name_category);
+      this.shared.categoriesList.next(this.categoriesCheckbox)
+    } else {
+      this.categoriesCheckbox.splice(pos, 1)
+      this.shared.categoriesList.next(this.categoriesCheckbox)
+    }
+    }
+    this.showSubcategories();
+  }
+
+  showSubcategories () {
+    if (this.selectedCategory) {
+      this.client.postRequest(`${environment.url_logic}/view/subCategories`, { "name_category": this.selectedCategory }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          this.subCategories = response.categories;
+          console.log(this.subCategories);
+          
+        },
+        error: (error) => {
+          console.log(error.error.Status);
+        },
+        complete: () => console.log('complete'),
+      });
+    }
+  }
+
 
   verifyCheckbox(value: string) {
     let pos = this.categoriesCheckbox.indexOf(value);
@@ -127,8 +171,6 @@ export class SearchComponent {
       this.categories = this.filter;
     }
     console.log(this.categoriesCheckbox);
-
-
   }
 
   removeAccents(text: string): string {
