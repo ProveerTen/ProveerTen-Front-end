@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -119,7 +119,7 @@ export class CreateOrderComponent {
     if (this.selectedCompany) {
       console.log(this.selectedCompany);
 
-      this.client.postRequest(`${environment.url_chat}/provider/city`, { companyId: this.selectedCompany, grocerId: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      this.client.postRequest(`${environment.url_logic}/order/providers/location`, { companyId: this.selectedCompany, grocerId: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log(response);
           this.providers = response.providersbycity[0];

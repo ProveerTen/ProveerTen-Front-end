@@ -37,6 +37,10 @@ export class ViewOrdersComponent {
     this.router.navigate(['view/order/', id_order]);
   }
 
+  updateOrder(id_order: string) {
+    this.router.navigate(['update/order/', id_order]);
+  }
+
   goBack() {
     this.router.navigate([''])
   }

@@ -71,6 +71,7 @@ import { ViewOrderComponent } from './components/order/view-order/view-order.com
 import { ViewOrdersComponent } from './components/order/view-orders/view-orders.component';
 import { ManageOrdersComponent } from './components/order/manage-orders/manage-orders.component';
 import { SuggestedProductPricesComponent } from './components/view/suggested-product-prices/suggested-product-prices/suggested-product-prices.component';
+import { UpdateOrderComponent } from './components/order/update-order/update-order.component';
 
 
 @NgModule({
@@ -124,7 +125,8 @@ import { SuggestedProductPricesComponent } from './components/view/suggested-pro
     ViewOrderComponent,
     ViewOrdersComponent,
     ManageOrdersComponent,
-    SuggestedProductPricesComponent
+    SuggestedProductPricesComponent,
+    UpdateOrderComponent
   ],
   imports: [
     BrowserModule,
