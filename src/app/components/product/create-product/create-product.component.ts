@@ -20,8 +20,8 @@ export class CreateProductComponent {
   imagePreview: any;
   isValidImage: boolean = true;
   product: product = {} as product;
-  dataCategories: any;
-  categoriesCheckbox: string[] = [];
+  categories: any;
+  subcategories: any;
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +61,8 @@ export class CreateProductComponent {
         ],
       ],
       image_product: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      subcategory: ['', [Validators.required]],
     });
   }
 
@@ -71,8 +73,10 @@ export class CreateProductComponent {
       })
       .subscribe({
         next: (response: any) => {
-          this.dataCategories = response.categories[0];
-          console.log(this.dataCategories);
+          this.categories = response.categories[0];
+          console.log(this.categories);
+
+
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -88,7 +92,7 @@ export class CreateProductComponent {
       // const dateCreate: string = format(new Date(), 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'');
       console.log('currente date rr', dateCreate);
 
-      if (this.form.valid && this.categoriesCheckbox.length > 0) {
+      if (this.form.valid) {
         this.isValidImage = false;
 
         const formData = new FormData();
@@ -114,10 +118,8 @@ export class CreateProductComponent {
         formData.append('availability_product', 'Disponible');
         formData.append('content_product', this.form.value.content_product);
         formData.append('date_creation', dateCreate);
-
-        this.categoriesCheckbox.forEach((category) => {
-          formData.append('categories[]', category);
-        });
+        formData.append('category', this.form.value.category);
+        formData.append('subCategory', this.form.value.subcategory);
         formData.append('image_product', this.imageFile);
 
         this.client
@@ -169,6 +171,32 @@ export class CreateProductComponent {
     }, 300);
   }
 
+  selectedCategory(category: string) {
+    console.log(category);
+
+    this.client
+      .postRequest(
+        `${environment.url_logic}/view/subCategories`,
+        { name_category: category },
+        undefined,
+        { Authorization: `Bearer ${this.auth.getToken()}` }
+      )
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.subcategories = response.categories;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => console.log('complete'),
+      });
+
+    this.form.patchValue({
+      subcategory: ''
+    })
+  }
+
   onFileSelected(event: any) {
     this.imageFile = event.target.files[0];
     if (this.imageFile.type.startsWith('image/')) {
@@ -183,12 +211,4 @@ export class CreateProductComponent {
     }
   }
 
-  verifyCheckbox(value: string) {
-    let pos = this.categoriesCheckbox.indexOf(value);
-    if (pos === -1) {
-      this.categoriesCheckbox.push(value);
-    } else {
-      this.categoriesCheckbox.splice(pos, 1);
-    }
-  }
 }

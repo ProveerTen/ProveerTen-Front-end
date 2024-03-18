@@ -144,13 +144,27 @@
                                 <p style="color: red;">La contenido del producto es requerida.</p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check" *ngFor="let category of dataCategories">
-                                <input type="checkbox" class="form-check-input" [value]="category.name_category"
-                                    (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}">
-                                <label class="form-check-label"
-                                    for="{{category.name_category}}">{{category.name_category}}</label>
-                            </div>
+                        <div class="div">
+                            <label for="exampleFormControlTextarea1"
+                                class="form-label"><strong>Categoría</strong></label>
+                            <select formControlName="category" class=" form-control form-control-lg"
+                                (ngModelChange)="selectedCategory($event)">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option *ngFor="let category of categories" [ngValue]="category.name_category">
+                                    {{ category.name_category }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="div">
+                            <label for="exampleFormControlTextarea1"
+                                class="form-label"><strong>Subcategoría</strong></label>
+                            <select formControlName="subcategory" class="form-control form-control-lg">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option *ngFor="let subcategory of subcategories"
+                                    [value]="subcategory.name_subcategory">
+                                    {{subcategory.name_subcategory}}
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <input type="file" class="form-control-file" formControlName="image_product"
