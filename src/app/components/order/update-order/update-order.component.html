@@ -54,7 +54,14 @@
     </div>
 
     <div>
-        <button (click)="showProducts()">Agregar producto</button>
+        <button (click)="updateOrder()">Actualizar</button>
+        <button>Cancelar</button>
+    </div>
+
+    <br>
+
+    <div>
+        <button [disabled]="show_products" (click)="showProducts()">Agregar producto</button>
         <button *ngIf="show_products" (click)="closeProducts()">Cerrar</button>
     </div>
 
@@ -79,16 +86,13 @@
                         <td>{{ product?.name_product }}</td>
                         <td>{{ product?.purchase_price_product }}</td>
                         <td>{{ product?.stock_product }}</td>
-                        <td><button (click)="addProduct(product)">Agregar</button></td>
+                        <td><button [disabled]="product.stock_product === 0"
+                                (click)="addProduct(product)">Agregar</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div>
-        <button (click)="updateOrder()">Actualizar</button>
-        <button>Cancelar</button>
-    </div>
 
 </div>

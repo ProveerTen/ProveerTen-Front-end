@@ -6,14 +6,12 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { SharedService } from 'src/app/services/shared/shared.service';
 
-
 @Component({
   selector: 'app-update-order',
   templateUrl: './update-order.component.html',
   styleUrls: ['./update-order.component.css']
 })
 export class UpdateOrderComponent {
-
 
   data_order: any;
   order: any;
@@ -109,19 +107,14 @@ export class UpdateOrderComponent {
   // }
 
   addProduct(product: any) {
-    if (!this.list_products.find((p: any) => p.id_product === product.id_product)) {
-      product.quantity = 1;
-      product.individual_product_price = product.quantity * product.purchase_price_product;
-
-      product.isLocalAdd = true;
-
-      this.list_products.push(product);
-      const index = this.list_show_products.findIndex((p: any) => p.id_product === product.id_product);
-      if (index !== -1) {
-        this.list_show_products.splice(index, 1);
-      }
-    } else {
-      console.log("El producto ya está en la lista de productos.");
+    product.quantity = 1;
+    product.individual_product_price = product.quantity * product.purchase_price_product;
+    product.isLocalAdd = true;
+    this.list_products.push(product);
+    product.stock_product -= product.quantity;
+    const index = this.list_show_products.findIndex((p: any) => p.id_product === product.id_product);
+    if (index !== -1) {
+      this.list_show_products.splice(index, 1);
     }
   }
 
@@ -130,9 +123,9 @@ export class UpdateOrderComponent {
       const index = this.list_products.indexOf(product);
       this.list_products.splice(index, 1);
       this.list_show_products.push(product);
+      product.stock_product += product.quantity;
     } else {
       this.list_products_delete.push(product);
-
       const index = this.order.findIndex((p: any) => p.id_product === product.id_product);
       if (index !== -1) {
         const productToAddBack = this.order[index];
@@ -141,7 +134,9 @@ export class UpdateOrderComponent {
 
       const indexOriginal = this.list_products.findIndex((p: any) => p.id_product === product.id_product);
       if (indexOriginal !== -1) {
+        const productToDelete = this.list_products[indexOriginal];
         this.list_products.splice(indexOriginal, 1);
+        productToDelete.stock_product += productToDelete.quantity;
       }
     }
   }
