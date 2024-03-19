@@ -27,6 +27,7 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Nombre del Producto</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Stock del producto</th>
                     <th scope="col">Precio de compra</th>
@@ -36,6 +37,7 @@
             <tbody>
                 <tr *ngFor="let product of list_products">
                     <td>{{product.id_product}}</td>
+                    <td>{{ product.name_product }}</td>
                     <td>
                         <button (click)="increaseProduct(product)" class="btn btn-sm btn-outline-success">+</button>
                         {{product.quantity}} <button (click)="decreaseProduct(product)"

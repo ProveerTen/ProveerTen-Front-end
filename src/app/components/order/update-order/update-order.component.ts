@@ -36,6 +36,7 @@ export class UpdateOrderComponent {
           product.id_product = product.fk_id_product;
         });
         this.list_products = this.order.slice();
+        this.getProducts()
       },
       error: (error) => {
         console.log(error.error.Status);
@@ -62,8 +63,7 @@ export class UpdateOrderComponent {
     product.stock_product++;
   }
 
-  showProducts() {
-    this.show_products = true;
+  getProducts() {
     this.client.postRequest(`${environment.url_logic}/order/addproducts`, { id_order: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         // console.log(response);
@@ -77,6 +77,10 @@ export class UpdateOrderComponent {
       },
       complete: () => console.log('complete'),
     });
+  }
+
+  showProducts() {
+    this.show_products = true;
   }
 
   // addProduct(product: any) {
@@ -142,6 +146,9 @@ export class UpdateOrderComponent {
   }
 
   updateOrder() {
+    console.log(this.list_products);
+    console.log(this.list_products_delete);
+
     this.client.postRequest(`${environment.url_logic}/order/update`, { id_order: this.id, list_update: this.list_products, list_delete: this.list_products_delete }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log(response);
