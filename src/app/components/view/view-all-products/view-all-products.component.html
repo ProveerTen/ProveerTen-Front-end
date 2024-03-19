@@ -14,8 +14,8 @@
     </div>
 </div> -->
 
-
-<div class="container">
+<!--
+    <div class="container">
     <div class="row">
         <div class="col-md-4 mb-3 w-50" *ngFor="let product of products">
             <div class="card h-100 border-0 shadow" (click)="viewProduct(product.id_product)" style="cursor: pointer;">
@@ -26,6 +26,23 @@
                     <h5 class="card-title">{{product?.name_product}}</h5>
                     <p class="card-text text-muted">Precio de compra: {{product?.purchase_price_product}}</p>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+  -->
+
+<div class="container__cards">
+    <div *ngFor="let product of products">
+        <div class="card_products" (click)="viewProduct(product.id_product)" style="cursor: pointer;">
+            <div class="cover">
+                <img appBrokenImage loading="lazy" [src]="product.image_product" class="card-img-top"
+                    alt="{{product?.name_product}}">
+                <div class="img__back"></div>
+            </div>
+            <div class="description">
+                <h2>{{product?.name_product}}</h2>
+                <p class="card-text text-muted">Precio de compra: {{product?.purchase_price_product}}</p>
             </div>
         </div>
     </div>

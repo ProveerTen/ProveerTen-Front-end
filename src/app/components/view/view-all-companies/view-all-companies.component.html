@@ -38,8 +38,8 @@
         </div>
     </div>
 </div> -->
-
-<div class="container">
+<!-- 
+    <div class="container">
     <div class="row">
         <div class="col-md-4 mb-4 w-50" *ngFor="let company of companies; let i = index">
 
@@ -95,5 +95,21 @@
 
         <p class="viewProfile" (click)="viewCompany(companyInfo?.nit_company)">Ver perfil</p>
 
+    </div>
+</div>
+ -->
+
+<div class="container__cards">
+    <div *ngFor="let company of companies;">
+        <div class="card_companies">
+            <div class="cover">
+                <img appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt="">
+                <div class="img__back"></div>
+            </div>
+            <div class="description">
+                <h2>{{company.name_company}}</h2>
+                <button (click)="viewCompany(company.nit_company)">Ver perfil</button>
+            </div>
+        </div>
     </div>
 </div>
