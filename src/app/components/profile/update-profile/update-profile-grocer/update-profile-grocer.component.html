@@ -1,8 +1,7 @@
-
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>
 
 <div class="d-flex justify-content-center mt-4 flex-column align-items-center gap-3 mb-5">
@@ -113,20 +112,29 @@
                 </div>
 
                 <div class="d-flex gap-3">
-                    <div class="mb-3 w-50">
-                        <label class="form-label">Ciudad</label>
-                        <input type="text" class="form-control" formControlName="city_grocer"
-                            [value]="data?.city_grocer" placeholder="Ciudad"
-                            [ngClass]="{'message-valid': isvalid('city_grocer')}">
-
-                        <div *ngIf="form.get('city_grocer')?.hasError('required')" class="message-invalid">
-                            <p>La Ciudad es requerido.</p>
+                    <div class="mb-3 d-flex flex-end gap-2 align-items-center">
+                        <div class="div">
+                            <label for="exampleFormControlTextarea1"
+                                class="form-label"><strong>Departamento</strong></label>
+                            <select formControlName="department" (click)="click()" class="form-control form-control-lg"
+                                (ngModelChange)="selected_department($event)">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option *ngFor="let department of departments" [ngValue]="department.name">
+                                    {{ department.name }}
+                                </option>
+                            </select>
                         </div>
 
-                        <div *ngIf="form.get('city_grocer')?.hasError('minlength') || form.get('city_grocer')?.hasError('maxlength')"
-                            class="message-invalid">
-                            La Ciudad debe tener entre 1 a maximo 25 carácteres
+                        <div class="div">
+                            <label for="exampleFormControlTextarea1"
+                                class="form-label"><strong>Municipio</strong></label>
+                            <select formControlName="city_grocer" class="form-control form-control-lg">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option *ngFor="let city of cities" [value]="city.name">{{
+                                    city.name }}</option>
+                            </select>
                         </div>
+
                     </div>
 
                     <div class="mb-3 w-50">
@@ -179,30 +187,6 @@
                             El Número de calle debe tener entre 1 a maximo 25 carácteres
                         </div>
                     </div>
-                </div>
-
-
-                <div class="mb-3 d-flex flex-end gap-2 align-items-center">
-                    <div class="w-50">
-                        <label class="form-label">Apartamento</label>
-                        <div class="d-flex flex-row gap-2">
-                            <input type="text" class="form-control" formControlName="apartment"
-                                [value]="data?.apartment" placeholder="# de apartamento"
-                                [ngClass]="{'message-valid': isvalid('apartment')}">
-
-                            <button type="button" class="btn btn-danger" (click)="deleteField('apartment')"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                                </svg></button>
-                        </div>
-                    </div>
-
-                    <div *ngIf="form.get('apartment')?.hasError('maxlength')" class="message-invalid">
-                        El # Apartamento debe tener entre maximo 25 carácteres
-                    </div>
-
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center gap-2 mt-2">

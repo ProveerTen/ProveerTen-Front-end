@@ -17,7 +17,17 @@ export class UpdateProfileGrocerComponent {
   form: FormGroup;
   dataUpdate: any = {};
   err: any;
-  loading : boolean = false
+  loading: boolean = false
+
+  departments: any;
+  cities: any;
+  id_department: any;
+  department: any;
+  city: any;
+  id: any;
+
+  isSelected: boolean = false;
+
 
   constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
     private messageService: MessageService) {
@@ -28,13 +38,26 @@ export class UpdateProfileGrocerComponent {
       last_name_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
       email_grocer: ['', [Validators.required, Validators.email]],
       name_store: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      city_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
+      // city_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
       neighborhood: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
       street: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
       number_street: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
-      apartment: ['', [Validators.maxLength(25)]],
+      // apartment: ['', [Validators.maxLength(25)]],
       number_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(15)]],
+      department: ['', Validators.required],
+      city_grocer: ['', Validators.required]
     })
+
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
+      next: (response) => {
+        this.departments = response;
+        console.log(this.departments);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
   }
 
 
@@ -56,61 +79,63 @@ export class UpdateProfileGrocerComponent {
 
   onSubmit() {
 
-      this.loading = true
+    this.loading = true
 
-      setTimeout (()=>{
+    setTimeout(() => {
 
-    if (this.form.valid && !this.form.pristine) {
-      this.form.updateValueAndValidity();
+      if (this.form.valid && !this.form.pristine) {
+        this.form.updateValueAndValidity();
 
-      console.log("validado", this.form.value.name_grocer, "--");
+        console.log("validado", this.form.value.name_grocer, "--");
 
-      this.dataUpdate = {
-        name_grocer: this.form.value.name_grocer,
-        last_name_grocer: this.form.value.last_name_grocer,
-        email_grocer: this.form.value.email_grocer,
-        name_store: this.form.value.name_store,
-        city_grocer: this.form.value.city_grocer,
-        neighborhood: this.form.value.neighborhood,
-        street: this.form.value.street,
-        number_street: this.form.value.number_street,
-        apartment: this.form.value.apartment,
-        number_grocer: this.form.value.number_grocer
-      }
-     
-
-      this.client.patchRequest(`${environment.url_logic}/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-        next: (response: any) => {
-          this.loading = false
-          console.log("response patch", response);
-
-          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
-          setTimeout(() => {
-            this.router.navigate(['/profile'])
-          }, 1500);
-        },
-        error: (error) => {
-          this.loading = false
-          this.err = error.error.errors[0];
-          console.log(error);
-          this.messageService.clear();
-          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: this.err });
-        },
-        complete: () => {
-          console.log("complete update profile");
+        this.dataUpdate = {
+          name_grocer: this.form.value.name_grocer,
+          last_name_grocer: this.form.value.last_name_grocer,
+          email_grocer: this.form.value.email_grocer,
+          name_store: this.form.value.name_store,
+          // city_grocer: this.form.value.city_grocer,
+          neighborhood: this.form.value.neighborhood,
+          street: this.form.value.street,
+          number_street: this.form.value.number_street,
+          // apartment: this.form.value.apartment,
+          department: this.form.value.department,
+          city_grocer: this.form.value.city_grocer,
+          number_grocer: this.form.value.number_grocer
         }
-      })
 
-    } else {
-       this.loading = false
-      console.log("No se cumplen las validaciones");
-      this.messageService.clear();
-      this.messageService.add({
-        key: 'center', severity: 'warn', summary: 'Advertencia',
-        detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
-      });
-    }
-  },400)
+        console.log(this.dataUpdate);
+
+        this.client.patchRequest(`${environment.url_logic}/edit_profile/grocer`, this.dataUpdate, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+          next: (response: any) => {
+            this.loading = false
+            console.log("response patch", response);
+            this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'La informacion del perfil ha sido actualizado exitosamente' });
+            // setTimeout(() => {
+            //   this.router.navigate(['/profile'])
+            // }, 1500);
+          },
+          error: (error) => {
+            this.loading = false
+            this.err = error.error.errors[0];
+            console.log(error);
+            this.messageService.clear();
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: this.err });
+          },
+          complete: () => {
+            console.log("complete update profile");
+          }
+        })
+
+      } else {
+        this.loading = false
+        console.log("No se cumplen las validaciones");
+        this.messageService.clear();
+        this.messageService.add({
+          key: 'center', severity: 'warn', summary: 'Advertencia',
+          detail: 'Los campos ingresados son inválidos. Por favor, revise la información proporcionada.'
+        });
+      }
+    }, 400)
   }
 
   async deleteField(deleteField: string) {
@@ -130,6 +155,33 @@ export class UpdateProfileGrocerComponent {
           console.log("Complete delete data Profile");
         }
       })
+    }
+
+  }
+
+  click() {
+    this.isSelected = true;
+  }
+
+  selected_department(nameDepartment: any) {
+    this.department = this.departments.find(department => department.name === nameDepartment);
+    console.log(this.department);
+
+    this.client.getRequest(`https://api-colombia.com/api/v1/Department/${this.department.id}/cities`, undefined, undefined).subscribe({
+      next: (response) => {
+        this.cities = response;
+        console.log(this.cities);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('Complete'),
+    });
+
+    if (this.isSelected) {
+      this.form.patchValue({
+        city_grocer: ''
+      });
     }
 
   }
