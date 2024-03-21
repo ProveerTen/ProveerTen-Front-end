@@ -1,5 +1,5 @@
 <!-- Super Nav -->
-<div class="superNav border-bottom py-2  bg-warning " style="position: relative;
+<div class="superNav border-bottom   bg-warning " style="position: relative;
     z-index: 1;">
     <div class="container-fluid bg-warning text-dark">
         <div class="row align-items-center">
@@ -38,6 +38,57 @@
                 </form>
             </div> 
         </div>-->
+
+
+        <div class="div" *ngIf="!(auth.isLoggedIn() | async)">
+            <form class="d-flex gap-1 p-1 " [formGroup]="form_location" (ngSubmit)="filter_location()">
+                <!-- <div class="div">
+                    <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
+                    <select formControlName="department" class="form-control form-control-lg"
+                        (ngModelChange)="selected_department($event)">
+                        <option value="" disabled selected>Seleccione un departamento</option>
+                        <option *ngFor="let department of departments" [ngValue]="department.name">
+                            {{ department.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="div">
+                    <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+                    <select formControlName="city" class="form-control form-control-lg">
+                        <option value="" disabled selected>Seleccione un municipio</option>
+                        <option *ngFor="let city of cities" [value]="city.name">{{
+                            city.name }}</option>
+                    </select>
+                </div> -->
+                <div class="div">
+                    <label for="exampleFormControlTextarea1" class="form-label "><strong>Departamento</strong></label>
+                    <select formControlName="department" class="form-control form-control-lg"
+                        (ngModelChange)="selected_department($event)">
+                        <option value="" disabled selected>Seleccionar</option>
+                        <option *ngFor="let department of departments" [ngValue]="department.name">
+                            {{ department.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="div">
+                    <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+                    <select formControlName="city" class="form-control form-control-lg">
+                        <option value="" disabled selected>Seleccionar</option>
+                        <option *ngFor="let city of cities" [value]="city.name">{{
+                            city.name }}</option>
+                    </select>
+                </div>
+                <div class="d-flex align-items-end ">
+                <button type="submit" type="submit" class="btn btn-warning text-white">Cambiar ubicación</button>
+            </div>
+            </form>
+
+
+
+        </div>
+
+
         <div class="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
             <div *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)" class="search">
                 <form [formGroup]="form" (ngSubmit)="search()">
@@ -104,91 +155,37 @@
                 </div>
             </div>
 
-            <ul class="navbar-nav ms-auto ">
-                <li class="nav-item">
-                    <div class="dropdown" *ngIf="auth.isLoggedIn() | async">
-                        <button class="btn btn-secondary dropdown-toggle btn_drop" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
-                                    class="svg-icon">
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="white"
-                                        d="M1.97742 19.7776C4.45061 17.1544 7.80838 15.5423 11.5068 15.5423C15.2053 15.5423 18.5631 17.1544 21.0362 19.7776M16.2715 6.54229C16.2715 9.17377 14.1383 11.307 11.5068 11.307C8.87535 11.307 6.74212 9.17377 6.74212 6.54229C6.74212 3.91082 8.87535 1.77759 11.5068 1.77759C14.1383 1.77759 16.2715 3.91082 16.2715 6.54229Z">
-                                    </path>
-                                </svg></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-light">
-                            <li class="dropdown-item" style="cursor: pointer;" (click)="view_profile()">Ver perfil</li>
-                            <li class="dropdown-item" style="cursor: pointer;"
-                                *ngIf="(auth.isGrocer() | async) || (auth.isCompany() | async)"
-                                (click)="update_profile()">Actualizar
-                                perfil
-                            </li>
-                            <hr>
-                            <li class="dropdown-item" style="cursor: pointer;" (click)="auth.logout()">Cerrar sesión
-                            </li>
-                        </ul>
-                    </div>
+            <ul class="navbar-nav d-flex justify-content-center align-items-center">
+                <!-- <div class="col-md-6 text-center align-items-center d-flex justify-content-between">
+                    <a class="navbar-brand text-uppercase text-white" href="#"><i class="fas fa-store me-2"></i>
+                        <strong>ProveerTen</strong></a>
+                </div> -->
+                <li class="nav-item" *ngIf="auth.isLoggedIn() | async">
+                    <a class="nav-link mx-2 text-uppercase" (click)="view_profile()"><strong>Ver perfil</strong></a>
                 </li>
-                <li class="nav-item " *ngIf="(!(auth.isCompany() | async) && !(auth.isProvider() | async))">
-                    <a class="nav-link mx-2 text-uppercase " routerLink="/"> <strong> Inicio </strong></a>
+                <li class="nav-item" *ngIf="(auth.isGrocer() | async) || (auth.isCompany() | async)">
+                    <a class="nav-link mx-2 text-uppercase" (click)="update_profile()"><strong>Actualizar perfil</strong></a>
                 </li>
-                <li class="nav-item" *ngIf="((auth.isCompany() | async) || (auth.isProvider() | async))">
-                    <a class="nav-link mx-2 text-uppercase " routerLink="panel"><strong> Panel </strong></a>
+                
+                <li class="nav-item" *ngIf="!(auth.isCompany() | async) && !(auth.isProvider() | async)">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="/"><strong>Inicio</strong></a>
+                </li>
+                <li class="nav-item" *ngIf="(auth.isCompany() | async) || (auth.isProvider() | async)">
+                    <a class="nav-link mx-2 text-uppercase" routerLink="panel"><strong>Panel</strong></a>
+                </li>
+                <li class="nav-item" *ngIf="auth.isLoggedIn() | async">
+                    <a class="nav-link mx-2 text-uppercase" (click)="auth.logout()"><strong>Cerrar sesión</strong></a>
                 </li>
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase " routerLink="login"><strong> Iniciar sesión </strong></a>
+                    <a class="nav-link mx-2 text-uppercase" routerLink="login"><strong>Iniciar sesión</strong></a>
                 </li>
                 <li class="nav-item" *ngIf="!(auth.isLoggedIn() | async)">
-                    <a class="nav-link mx-2 text-uppercase " routerLink="register"><strong> Crear cuenta </strong></a>
+                    <a class="nav-link mx-2 text-uppercase" routerLink="register"><strong>Crear cuenta</strong></a>
                 </li>
                 <p-toast position="bottom-right" key="nav"></p-toast>
-                <!-- <li class="nav-item" *ngIf="auth.isLoggedIn() | async">
-                    <a class="nav-link mx-2 text-uppercase" routerLink="login" (click)="auth.logout()">Cerrar sesión</a>
-                </li> -->
             </ul>
         </div>
     </div>
     <!-- <button (click)="allCompanies()">ver compañias</button> -->
-    <div class="div" *ngIf="!(auth.isLoggedIn() | async)">
-        <form class="d-flex gap-4" [formGroup]="form_location" (ngSubmit)="filter_location()">
-            <!-- <div class="div">
-                <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
-                <select formControlName="department" class="form-control form-control-lg"
-                    (ngModelChange)="selected_department($event)">
-                    <option value="" disabled selected>Seleccione un departamento</option>
-                    <option *ngFor="let department of departments" [ngValue]="department.name">
-                        {{ department.name }}
-                    </option>
-                </select>
-            </div>
-            <div class="div">
-                <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
-                <select formControlName="city" class="form-control form-control-lg">
-                    <option value="" disabled selected>Seleccione un municipio</option>
-                    <option *ngFor="let city of cities" [value]="city.name">{{
-                        city.name }}</option>
-                </select>
-            </div> -->
-            <div class="div">
-                <label for="exampleFormControlTextarea1" class="form-label"><strong>Departamento</strong></label>
-                <select formControlName="department" class="form-control form-control-lg"
-                    (ngModelChange)="selected_department($event)">
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option *ngFor="let department of departments" [ngValue]="department.name">
-                        {{ department.name }}
-                    </option>
-                </select>
-            </div>
 
-            <div class="div">
-                <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
-                <select formControlName="city" class="form-control form-control-lg">
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option *ngFor="let city of cities" [value]="city.name">{{
-                        city.name }}</option>
-                </select>
-            </div>
-            <button type="submit" type="submit" style="background-color: orange;">Cambiar ubicación</button>
-        </form>
-    </div>
 </nav>

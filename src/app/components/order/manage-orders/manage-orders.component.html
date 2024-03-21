@@ -1,54 +1,66 @@
 <div class="container d-flex justify-content-center flex-column mt-5 gap-5 pb-5">
-
     <div class="d-flex gap-2 justify-content-left mt-3" style="padding-left: 180px;">
-        <button type=" button" class="btn btn-outline-warning" (click)="goBack()">Regresar al panel <svg
-                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-up"
+        <button type="button" class="btn btn-outline-warning" (click)="goBack()">
+            Regresar al panel
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-up"
                 viewBox="0 0 16 16">
                 <path
                     d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708z" />
                 <path
                     d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 1 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.707l1.5-1.5a.5.5 0 0 1 .708 0Z" />
-            </svg></button>
+            </svg>
+        </button>
     </div>
-
 
     <div style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Fecha de realización</th>
-                    <th scope="col">Valor del pedido</th>
-                    <th scope="col">Estado del pedido</th>
-                    <th scope="col"></th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order of data_order">
-                    <td>{{order.id_order}}</td>
-                    <td>{{order.order_date | date:'short'}}</td>
-                    <td>{{order.total_ordered_price}}</td>
-                    <td>{{order.status}}</td>
-                    <td>
-                        <button class="btn btn-outline-success" (click)="viewOrder(order.id_order)">Ver pedido <svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-                                <path
-                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-                            </svg></button>
-                    <td *ngIf="order.status === 'Creado' && auth.isProvider() | async"
-                        (click)="deleteOrder(order.id_order)">
-                        <button class="btn btn-outline-danger">Eliminar pedido <svg xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                <path
-                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                <path
-                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                            </svg></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-white">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Fecha de realización</th>
+                        <th scope="col">Valor del pedido</th>
+                        <th scope="col">Estado del pedido</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of data_order">
+                        <td>{{ order.id_order }}</td>
+                        <td>{{ order.order_date | date: 'short' }}</td>
+                        <td>{{ order.total_ordered_price }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>
+                            <button class="btn btn-outline-success me-2" (click)="viewOrder(order.id_order)">
+                                Ver pedido
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                    <path
+                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                                </svg>
+                            </button>
+                            <ng-container *ngIf="order.status === 'Creado' && (auth.isProvider() | async)">
+                                <button class="btn btn-outline-danger" (click)="deleteOrder(order.id_order)">
+                                    Eliminar pedido
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                        <path
+                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                    </svg>
+                                </button>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </div>
+
+
+
+
+
