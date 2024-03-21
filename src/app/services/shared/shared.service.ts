@@ -28,7 +28,7 @@ export class SharedService {
   }
 
   changeDepartmentCity(newValue: object): void {
-    console.log(newValue);
+    //console.log(newValue);
     this.department_and_city.next(newValue);
   }
 

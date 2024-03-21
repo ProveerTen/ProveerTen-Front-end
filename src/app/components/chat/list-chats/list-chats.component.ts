@@ -25,9 +25,9 @@ export class ListChatsComponent {
 
       this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-          console.log(response);
+          //console.log(response);
           this.data = response.chatData;
-          console.log(this.data);
+          //console.log(this.data);
 
         },
         error: (error) => {

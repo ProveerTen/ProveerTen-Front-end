@@ -61,7 +61,7 @@ export class NavComponent {
     this.client.getRequest(`https://api-colombia.com/api/v1/Department/${this.id}/cities`, undefined, undefined).subscribe({
       next: (response) => {
         this.cities = response;
-        console.log(this.cities);
+        //console.log(this.cities);
       },
       error: (error) => {
         console.log(error);
@@ -75,7 +75,7 @@ export class NavComponent {
     this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
       next: (response) => {
         this.departments = response;
-        console.log(this.departments);
+        //console.log(this.departments);
       },
       error: (error) => {
         console.log(error);

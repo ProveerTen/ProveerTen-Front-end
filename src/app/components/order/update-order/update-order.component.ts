@@ -120,6 +120,11 @@ export class UpdateOrderComponent {
     if (index !== -1) {
       this.list_show_products.splice(index, 1);
     }
+
+    const index_delete = this.list_products_delete.findIndex((p: any) => p.id_product === product.id_product);
+    if (index !== -1) {
+      this.list_products_delete.splice(index_delete, 1);
+    }
   }
 
   removeProduct(product: any) {
@@ -129,6 +134,7 @@ export class UpdateOrderComponent {
       this.list_show_products.push(product);
       product.stock_product += product.quantity;
     } else {
+      product.stock_product -= product.quantity;
       this.list_products_delete.push(product);
       const index = this.order.findIndex((p: any) => p.id_product === product.id_product);
       if (index !== -1) {
@@ -152,6 +158,7 @@ export class UpdateOrderComponent {
     this.client.postRequest(`${environment.url_logic}/order/update`, { id_order: this.id, list_update: this.list_products, list_delete: this.list_products_delete }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log(response);
+        window.location.reload();
       },
       error: (error) => {
         console.log(error.error.Status);

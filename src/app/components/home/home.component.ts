@@ -39,7 +39,7 @@ export class HomeComponent {
         this.client.postRequest(`${environment.url_logic}/view/products/location`, this.data_location, undefined, undefined).subscribe({
           next: (response: any) => {
             this.products = response.categoriesByProducts;
-            console.log(this.products);
+            //console.log(this.products);
 
           },
           error: (error) => {
@@ -69,7 +69,7 @@ export class HomeComponent {
         // console.log(response);
 
         this.publicaciones = response.publications
-        console.log(this.publicaciones);
+        //console.log(this.publicaciones);
 
 
         for (let k = 0; k < this.publicaciones.length; k++) {

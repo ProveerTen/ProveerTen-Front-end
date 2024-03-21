@@ -20,7 +20,7 @@ export class AppComponent {
     });
     this.shared.chatList.subscribe((value: any) => {
       this.chats = value;
-      console.log(this.chats);
+      //console.log(this.chats);
 
 
       if (this.chats.length > 2) {
