@@ -37,10 +37,28 @@
                         <label class="form-label" for="number_provider"><strong>Numero del proveedor</strong></label>
                         <input type="text" class="form-control" formControlName="number_provider" id="number_provider">
                     </div>
+
                     <div class="div">
-                        <label class="form-label" for="city_provider"><strong> Ciudad del proveedor</strong></label>
-                        <input type="text" class="form-control" formControlName="city_provider" id="city_provider">
+                        <label for="exampleFormControlTextarea1"
+                            class="form-label"><strong>Departamento</strong></label>
+                        <select formControlName="department" (click)="click()" class="form-control form-control-lg"
+                            (ngModelChange)="selected_department($event)">
+                            <option value="" disabled selected>Seleccionar</option>
+                            <option *ngFor="let department of departments" [ngValue]="department.name">
+                                {{ department.name }}
+                            </option>
+                        </select>
                     </div>
+
+                    <div class="div">
+                        <label for="exampleFormControlTextarea1" class="form-label"><strong>Municipio</strong></label>
+                        <select formControlName="city_provider" class="form-control form-control-lg">
+                            <option value="" disabled selected>Seleccionar</option>
+                            <option *ngFor="let city of cities" [value]="city.name">{{
+                                city.name }}</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="d-flex justify-content-between">

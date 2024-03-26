@@ -56,25 +56,34 @@ export class UpdateProfileGrocerComponent {
       error: (error) => {
         console.log(error);
       },
-      complete: () => console.log('complete'),
-    });
-  }
-
-
-  ngOnInit(): void {
-    this.client.getRequest(`${environment.url_logic}/profile/grocer`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        console.log("Response data oninit", response.data);
-        this.data = response.data;
-        this.form.get('document_grocer')!.disable();
-        this.form.patchValue(response.data);
+      complete: () => {
+        console.log('complete')
+        this.client.getRequest(`${environment.url_logic}/profile/grocer`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+          next: (response: any) => {
+            console.log("Response data oninit", response.data);
+            this.data = response.data;
+            this.form.get('document_grocer')!.disable();
+            this.form.patchValue({
+              document_grocer: response.data.document_grocer,
+              name_grocer: response.data.name_grocer,
+              last_name_grocer: response.data.last_name_grocer,
+              email_grocer: response.data.email_grocer,
+              name_store: response.data.name_store,
+              neighborhood: response.data.neighborhood,
+              street: response.data.street,
+              number_street: response.data.number_street,
+              number_grocer: response.data.number_grocer,
+              department: response.data.department,
+              city_grocer: response.data.city_grocer,
+            })
+          },
+          error: (error) => {
+            console.log(error.error.Status);
+          },
+          complete: () => console.log('complete grocer'),
+        });
       },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete grocer'),
     });
-
   }
 
   onSubmit() {
@@ -164,8 +173,8 @@ export class UpdateProfileGrocerComponent {
   }
 
   selected_department(nameDepartment: any) {
+
     this.department = this.departments.find(department => department.name === nameDepartment);
-    console.log(this.department);
 
     this.client.getRequest(`https://api-colombia.com/api/v1/Department/${this.department.id}/cities`, undefined, undefined).subscribe({
       next: (response) => {

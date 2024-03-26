@@ -19,37 +19,37 @@ export class ManageProductsComponent {
     public auth: AuthService,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
     setTimeout(() => {
-    this.client
-      .postRequest(
-        `${environment.url_logic}/order/products`,
-        { nit_company: this.auth.getId() },
-        undefined,
-        { Authorization: `Bearer ${this.auth.getToken()}` }
-      )
-      .subscribe({
-        next: (response: any) => {
-          this.loading = false
-          console.log(response);
-          this.data = response.products;
-          console.log('data', this.data);
+      this.client
+        .postRequest(
+          `${environment.url_logic}/order/products`,
+          { nit_company: this.auth.getId() },
+          undefined,
+          { Authorization: `Bearer ${this.auth.getToken()}` }
+        )
+        .subscribe({
+          next: (response: any) => {
+            this.loading = false
+            console.log(response);
+            this.data = response.products;
+            console.log('data', this.data);
 
-          for (let k = 0; k < this.data.length; k++) {
-            const element = this.data[k].date_creation;
-            this.data[k].date_creation = new Date(element);
-          }
-          this.data = this.orderByDate(this.data);
-        },
-        error: (error) => {
-          this.loading = false
-          console.log(error.error.Status);
-        },
-        complete: () => console.log('complete'),
-      });
+            for (let k = 0; k < this.data.length; k++) {
+              const element = this.data[k].date_creation;
+              this.data[k].date_creation = new Date(element);
+            }
+            this.data = this.orderByDate(this.data);
+          },
+          error: (error) => {
+            this.loading = false
+            console.log(error.error.Status);
+          },
+          complete: () => console.log('complete'),
+        });
     }, 400);
   }
 
@@ -60,8 +60,13 @@ export class ManageProductsComponent {
   updateProduct(id: string) {
     this.router.navigate(['update/product', id]);
   }
+
   createProduct() {
     this.router.navigate(['create/product']);
+  }
+
+  createProducts() {
+    this.router.navigate(['create/products']);
   }
 
   viewProduct(id: string) {
