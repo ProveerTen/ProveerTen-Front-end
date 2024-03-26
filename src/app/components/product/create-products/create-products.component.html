@@ -5,3 +5,39 @@
     </div>
     <button type="submit" class="button">Enviar</button>
 </form>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered text-center">
+        <thead class="table-white">
+            <tr>
+                <th scope="col">Imagen</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio de venta</th>
+                <th scope="col">Precio de venta unitaria</th>
+                <th scope="col">Precio sugerido</th>
+                <th scope="col">Cantidad mínima de compra</th>
+                <th scope="col">Cantidad disponible</th>
+                <th scope="col">Contenido del producto</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products_file">
+                <td><img appBrokenImage [src]="product.image_product" style="max-width: 100px;"></td>
+                <td>{{product.name_product}}</td>
+                <td>{{product.description_product}}</td>
+                <td>{{product.purchase_price_product}}</td>
+                <td>{{product.unit_purchase_price_product}}</td>
+                <td>{{product.suggested_unit_selling_price_product}}</td>
+                <td>{{product.purchase_quantity}}</td>
+                <td>{{product.stock_product}}</td>
+                <td>{{product.content_product}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<button (click)="confirm()">
+    Confirmar
+</button>
