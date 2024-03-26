@@ -14,7 +14,7 @@ import { MessageService } from 'primeng/api';
 export class CreateProductsComponent {
 
   form: FormGroup;
-  form_products: FormGroup;
+  // form_products: FormGroup;
   file: any;
   imagePreview: any;
   isValidFile: boolean = true;
@@ -32,40 +32,40 @@ export class CreateProductsComponent {
     this.form = this.fb.group({
       file: [null, [Validators.required]],
     });
-    this.form_products = this.fb.group({
-      name_product: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(100),
-        ],
-      ],
-      description_product: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(200),
-        ],
-      ],
-      purchase_price_product: ['', [Validators.required]],
-      unit_purchase_price_product: ['', [Validators.required]],
-      suggested_unit_selling_price_product: [''],
-      purchase_quantity: ['', [Validators.required]],
-      stock_product: ['', [Validators.required]],
-      content_product: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(1),
-          Validators.maxLength(50),
-        ],
-      ],
-      image_product: ['', [Validators.required]],
-      category: ['', [Validators.required]],
-      subcategory: ['', [Validators.required]],
-    });
+    // this.form_products = this.fb.group({
+    //   name_product: [
+    //     '',
+    //     [
+    //       Validators.required,
+    //       Validators.minLength(1),
+    //       Validators.maxLength(100),
+    //     ],
+    //   ],
+    //   description_product: [
+    //     '',
+    //     [
+    //       Validators.required,
+    //       Validators.minLength(1),
+    //       Validators.maxLength(200),
+    //     ],
+    //   ],
+    //   purchase_price_product: ['', [Validators.required]],
+    //   unit_purchase_price_product: ['', [Validators.required]],
+    //   suggested_unit_selling_price_product: [''],
+    //   purchase_quantity: ['', [Validators.required]],
+    //   stock_product: ['', [Validators.required]],
+    //   content_product: [
+    //     '',
+    //     [
+    //       Validators.required,
+    //       Validators.minLength(1),
+    //       Validators.maxLength(50),
+    //     ],
+    //   ],
+    //   image_product: ['', [Validators.required]],
+    //   category: ['', [Validators.required]],
+    //   subcategory: ['', [Validators.required]],
+    // });
   }
 
   onSubmit(): void {
