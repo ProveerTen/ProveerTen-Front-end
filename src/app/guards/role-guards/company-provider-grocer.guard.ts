@@ -2,30 +2,28 @@ import { AuthService } from "src/app/services/auth/auth.service"
 import { Router } from "@angular/router";
 import { inject } from "@angular/core";
 
-export const profileCompanyGuard = () => {
+export const companyProviderGrocerGuard = () => {
 
     const router = inject(Router);
     const auth = inject(AuthService);
 
-    let isGrocer;
+    let isCompany;
     let isProvider;
-    let isOffline;
+    let isGrocer;
 
-    auth.isGrocer().subscribe(value => {
-        isGrocer = value;
+    auth.isCompany().subscribe(value => {
+        isCompany = value;
     });
 
     auth.isProvider().subscribe(value => {
         isProvider = value;
     });
 
-    auth.isLoggedIn().subscribe(value => {
-        isOffline = value;
+    auth.isGrocer().subscribe(value => {
+        isGrocer = value;
     });
 
-    console.log(isGrocer || isProvider || !(isOffline));
-
-    if (isGrocer || isProvider || !(isOffline)) {
+    if (isCompany || isProvider || isGrocer) {
         return true;
     }
 

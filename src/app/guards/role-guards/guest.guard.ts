@@ -2,18 +2,18 @@ import { AuthService } from "src/app/services/auth/auth.service"
 import { Router } from "@angular/router";
 import { inject } from "@angular/core";
 
-export const profileGuard = () => {
+export const guestGuard = () => {
 
     const router = inject(Router);
     const auth = inject(AuthService);
 
-    let isOffline;
+    let guest;
 
     auth.isLoggedIn().subscribe(value => {
-        isOffline = value;
+        guest = value;
     });
 
-    if (isOffline) {
+    if (!(guest)) {
         return true;
     }
 

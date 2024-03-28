@@ -2,9 +2,9 @@
 
     <button class="btn btn-warning my-3" (click)="goBack(auth.getRole())">Regresar</button>
 
-    <div>
-        <h3>Cambiar estado del pedido</h3>
-        <div class="div d-flex align-items-center justify-content-between" *ngIf="(auth.isProvider() | async)">
+    <div *ngIf="(auth.isProvider() | async)">
+        <h3>Opciones del pedido</h3>
+        <div class="div d-flex align-items-center justify-content-between">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <label for="exampleFormControlTextarea1" class="form-label "><strong>Estado</strong></label>
                 <div class="d-flex">
@@ -17,7 +17,8 @@
                 </div>
             </form>
 
-            <button class="btn btn-outline-danger" (click)="deleteOrder()" *ngIf="data_order[0].status === 'Creado'">
+            <button class="btn btn-outline-danger" (click)="deleteOrder()"
+                *ngIf="data_order && data_order[0]?.status=== 'Creado'">
                 Eliminar pedido
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-trash3-fill" viewBox="0 0 16 16">
