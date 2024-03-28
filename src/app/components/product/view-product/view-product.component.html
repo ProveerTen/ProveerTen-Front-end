@@ -49,31 +49,36 @@
   </div>
 </div>
 
-
-<div class="d-flex justify-content-center m-5" style="gap: 8%;">
-    <div class="row">
-        <div class="col-10 d-flex gap-5">
-            <img appBrokenImage [src]="data?.image_product" class="shadow bg-body-tertiary rounded w-50">
-            <div class="right">
-                <h3 class="mt-3 fs-1 " style="color: #ffc107;">{{data?.name_product}}</h3>
-                <hr>
-                <p><strong>Disponibilidad:</strong> {{data?.availability_product}}</p>
-                <p><strong>Cont:</strong> {{data?.content_product}}</p>
-                <p><strong>Descrip:</strong> {{data?.description_product}}</p>
-                <p><strong>Precio de compra:</strong> {{data?.purchase_price_product}}</p>
-                <p><strong>Cant de compra:</strong> {{data?.purchase_quantity}}</p>
-                <p><strong>Stock:</strong> {{data?.stock_product}}</p>
-                <p><strong>Precio sugerido:</strong> {{data?.suggested_price_product}}</p>
-                <p><strong>Precio unitario sugerido:</strong> {{data?.suggested_unit_selling_price_product}}</p>
-            </div>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 d-flex align-items-center">
+            <img appBrokenImage [src]="data?.image_product" class="shadow bg-body-tertiary rounded w-100" style="max-height: 100%;">
         </div>
-        <div class="col-2">
-            <button class="btn btn-warning" (click)="viewCompany(data.fk_product_nit_company)"
-                *ngIf="auth.isGrocer() | async">Ver
-                compañía</button>
+        <div class="col-lg-6">
+            <div class="card border-0">
+                <div class="card-body ">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title text-warning ">{{data?.name_product}}</h3>
+                    <p class="fs-6"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                      </svg> Disponibilidad:</strong> {{data?.availability_product}}</p>
+                </div>
+                    <hr>
+                    <p class="card-text"><strong>Precio de compra:</strong> {{data?.purchase_price_product}}</p>
+                    <p class="card-text"><strong>Descripción:</strong> {{data?.description_product}}</p>
+                    <p class="card-text"><strong>Contenido:</strong> {{data?.content_product}}</p>
+                    <p class="card-text"><strong>Cantidad de compra:</strong> {{data?.purchase_quantity}}</p>
+                    <p class="card-text"><strong>Stock:</strong> {{data?.stock_product}}</p>
+                    <p class="card-text"><strong>Precio sugerido:</strong> {{data?.suggested_price_product}}</p>
+                    <p class="card-text"><strong>Precio unitario sugerido:</strong> {{data?.suggested_unit_selling_price_product}}</p>
+                    <button class="btn btn-warning w-100 mt-4" (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver compañía</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 
 
 

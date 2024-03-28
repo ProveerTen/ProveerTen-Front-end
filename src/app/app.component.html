@@ -1,4 +1,6 @@
-<app-nav></app-nav>
+<div class="container-fluid" id="nav">
+    <app-nav></app-nav>
+</div>
 
 <div class="container">
     <div class="row" *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
