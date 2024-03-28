@@ -4,6 +4,7 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>Ciudad</th>
+            <th></th>
         </tr>
         <tr>
             <td>
@@ -13,7 +14,10 @@
                 {{product?.name_product}}
             </td>
             <td>
-                <img appBrokenImage [src]="product.image_product" style="width: 100px; height: 100px;">
+                <img appBrokenImage [src]=" product.image_product" style="width: 100px; height: 100px;">
+            </td>
+            <td>
+                <button (click)="viewProduct(product.id_product)">Ver producto</button>
             </td>
         </tr>
     </table>
@@ -21,8 +25,8 @@
 
 
 
-<div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+<div class=" modal" *ngIf="loading">
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>

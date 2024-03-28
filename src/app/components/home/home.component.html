@@ -1,4 +1,3 @@
-<h2>Hola Azure</h2>
 <div class="buttons d-flex  align-items-center justify-content-center  bg-warning text-dark py-2 rounded-bottom gap-2">
     <button class="btn btn-warning " *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
         (click)="viewCompanies()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

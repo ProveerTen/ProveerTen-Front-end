@@ -12,7 +12,7 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrls: ['./view-profile-company.component.css']
 })
 export class ViewProfileCompanyComponent {
-  loading : boolean = false
+  loading: boolean = false
   id!: string;
   data: any;
   publications: any;
@@ -141,7 +141,7 @@ export class ViewProfileCompanyComponent {
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/publication/view/company/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-           this.loading = false
+          this.loading = false
           this.publications = response.publications;
           console.log(this.publications);
 
@@ -232,6 +232,10 @@ export class ViewProfileCompanyComponent {
   order() {
     this.shared.changeCompanyOrder(this.data);
     this.router.navigate(['create/order']);
+  }
+
+  viewProducts() {
+    this.router.navigate(['view/products/', this.id]);
   }
 }
 

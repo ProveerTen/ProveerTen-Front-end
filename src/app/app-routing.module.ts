@@ -70,6 +70,8 @@ import { ManageOrdersComponent } from './components/order/manage-orders/manage-o
 import { SuggestedProductPricesComponent } from './components/view/suggested-product-prices/suggested-product-prices/suggested-product-prices.component';
 import { UpdateOrderComponent } from './components/order/update-order/update-order.component';
 import { CreateProductsComponent } from './components/product/create-products/create-products.component';
+import { ViewProductsComponent } from './components/product/view-products/view-products.component';
+import { grocerGuestGuard } from './guards/role-guards/grocer-guest.guard';
 
 const routes: Routes = [
   {
@@ -133,7 +135,7 @@ const routes: Routes = [
   },
   {
     path: 'delete/data/grocer/:id',
-    component: DeleteDataProfileGrocerComponent // Eliminar
+    component: DeleteDataProfileGrocerComponent // Eliminar componente cuando se haga limpieza
   },
   {
     path: 'panel',
@@ -142,7 +144,8 @@ const routes: Routes = [
   },
   {
     path: 'manage/providers',
-    component: ManageProvidersComponent
+    component: ManageProvidersComponent,
+    canActivate: [companyGuard] // Testetar
   },
   {
     path: 'create/provider',
@@ -151,52 +154,66 @@ const routes: Routes = [
   },
   {
     path: 'update/provider/:id',
-    component: UpdateProviderComponent
+    component: UpdateProviderComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'manage/publications',
-    component: ManagePublicationsComponent
+    component: ManagePublicationsComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'create/publication',
-    component: CreatePublicationComponent
+    component: CreatePublicationComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'update/publication/:id',
-    component: UpdatePublicationComponent
+    component: UpdatePublicationComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'manage/products',
-    component: ManageProductsComponent
+    component: ManageProductsComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'create/product',
-    component: CreateProductComponent
+    component: CreateProductComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'create/products',
-    component: CreateProductsComponent
+    component: CreateProductsComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'update/product/:id',
-    component: UpdateProductComponent
+    component: UpdateProductComponent,
+    canActivate: [companyGuard]
   },
   {
     path: 'view/product/:id',
-    component: ViewProductComponent
+    component: ViewProductComponent // Revisar, todos pueden pero los trabajadores y empresas deben de tener un filtro de ver productos de su mismo dominio
+  },
+  {
+    path: 'view/products/:id',
+    component: ViewProductsComponent // Revisar, todos pueden pero los trabajadores y empresas deben de tener un filtro de ver productos de su mismo dominio
   },
   {
     path: 'viewAllProducts',
     component: ViewAllProductsComponent,
-    canActivate: [homeGuard]
+    canActivate: [homeGuard] // Revisar, probablemente se elimine esto, es similar a la implementación de productos del search
   },
   {
     path: 'search/:type',
-    component: SearchComponent
+    component: SearchComponent,
+    canActivate: [grocerGuestGuard]
   },
   {
     path: 'search/:type/:value',
-    component: SearchComponent
+    component: SearchComponent,
+    canActivate: [grocerGuestGuard]
   },
   {
     path: 'create/order',
