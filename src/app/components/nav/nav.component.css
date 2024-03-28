@@ -160,3 +160,135 @@ input.search_input::placeholder {
 .navbar{
  background-color: #FE5115;
 }
+
+
+
+a {
+    text-decoration: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.nav_text {
+    /* border: 2px black solid; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+    color: white;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.rows {
+    display: flex;
+    /* border: 2px yellow solid; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.elements {
+    display: flex;
+    /* border: 2px red solid; */
+    gap: 20px;
+    color: white;
+}
+
+#auth,
+.a_auth {
+    /* text-decoration: underline; */
+    font-size: 20px;
+}
+
+.logo a {
+    font-size: 40px;
+}
+
+.div_search {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 40px;
+    width: 600px;
+    justify-content: space-between;
+}
+
+.div_search select {
+    border: none;
+    padding: 0 10px;
+    width: 200px;
+    height: 40px;
+}
+
+.search {
+    display: flex;
+    width: 100%;
+    border: none;
+    border-left: 2px #FF5757 solid;
+    margin-left: 5px;
+}
+
+.search input {
+    width: 100%;
+    border: none;
+    appearance: none;
+    padding: 0 10px;
+}
+
+.search button i {
+    font-size: 20px;
+}
+
+.send_search {
+    border: none;
+    height: 40px;
+    background-color: #FF5757;
+    width: 50px;
+}
+
+.location {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.elements_location {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.location select {
+    border: none;
+    padding: 5px;
+    width: 150px;
+}
+
+.location button {
+    border: none;
+    height: 35px;
+    color: white;
+    padding: 0 8px;
+    background-color: #FF5757;
+}
+
+.location i {
+    font-size: 25px;
+}
+
+.location .city {
+    border-left: 2px #FF5757 solid;
+}
+
+.container {
+    padding: 0;
+}
