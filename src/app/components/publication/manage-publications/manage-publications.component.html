@@ -38,6 +38,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center"><span>Imagen</span></th>
+                                    <th class="text-center"><span>Descripción</span></th>
                                     <th class="text-center"><span>Acciones</span></th>
                                 </tr>
                             </thead>
@@ -54,6 +55,13 @@
                                             <ng-template #isImage>
                                                 <img [src]="publication.image_url" style="width: 100px; height: 100px;">
                                             </ng-template>
+                                        </td>
+                                        <td style="width:30px; display: flex; flex-wrap: wrap; ">
+                                            <p *ngIf="publication.text.length < 80; else textPublication">{{publication.text}} </p>
+                                            <ng-template #textPublication>
+                                                <p>{{publication.text.slice(0, 80)}}... </p>
+                                            </ng-template>
+                                            
                                         </td>
                                         <td class="text-center align-middle">
                                             <div class="d-flex justify-content-center">

@@ -36,9 +36,9 @@
                         <table class="table user-list">
                             <thead>
                                 <tr>
+                                    <th class="text-center"><span>Foto</span></th>
                                     <th class="text-center"><span>Nombre</span></th>
-                                    <th class="text-center"><span>Documento</span></th>
-                                    <th class="text-center"><span>Ciudad</span></th>
+                                    <th class="text-center"><span>Ciudad / Departamento</span></th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
@@ -46,17 +46,17 @@
                                 <tr *ngFor="let provider of data">
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            {{provider?.name_provider}}
+                                            <img appBrokenImageProfile [imageType]="'photo'" [src]="provider?.profile_photo_provider" [alt]="provider?.name_provider" width="80px">
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            {{provider?.document_provider}}
+                                            {{provider?.name_provider}} {{provider?.last_name_provider}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            {{provider?.city_provider}}
+                                            {{provider?.city_provider}}, {{provider?.department}}
                                         </div>
                                     </td>
                                     <td class="justify-content-center" style="width: 30%; ">
