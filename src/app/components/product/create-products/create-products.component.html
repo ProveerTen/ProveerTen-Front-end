@@ -25,14 +25,14 @@
         <tbody>
             <tr *ngFor="let product of products_file">
                 <td><img appBrokenImage [src]="product.image_product" style="max-width: 100px;"></td>
-                <td>{{product.name_product}}</td>
-                <td>{{product.description_product}}</td>
-                <td>{{product.purchase_price_product}}</td>
-                <td>{{product.unit_purchase_price_product}}</td>
-                <td>{{product.suggested_unit_selling_price_product}}</td>
-                <td>{{product.purchase_quantity}}</td>
-                <td>{{product.stock_product}}</td>
-                <td>{{product.content_product}}</td>
+                <td>{{product.Nombre}}</td>
+                <td>{{product['Descripción']}}</td>
+                <td>{{product['Precio de venta por paquete']}}</td>
+                <td>{{product['Precio de venta unitario']}}</td>
+                <td>{{product['Precio sugerido de venta']}}</td>
+                <td>{{product['Cantidad por paquete']}}</td>
+                <td>{{product['Cantidad en existencia']}}</td>
+                <td>{{product['Contenido del producto']}}</td>
             </tr>
         </tbody>
     </table>

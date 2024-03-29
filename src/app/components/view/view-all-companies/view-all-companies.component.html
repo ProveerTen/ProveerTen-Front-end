@@ -99,7 +99,8 @@
 </div>
  -->
 
-<div class="container__cards">
+
+<!-- <div class="container__cards">
     <div *ngFor="let company of companies;">
         <div class="card_companies">
             <div class="cover">
@@ -110,6 +111,28 @@
                 <h2>{{company.name_company}}</h2>
                 <button (click)="viewCompany(company.nit_company)">Ver perfil</button>
             </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container bootdey">
+    <div class="row product-list">
+        <div class="col-md-4" *ngFor="let company of companies;">
+            <section class="panel">
+                <div class="pro-img-box">
+                    <img appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt="">
+                    <a class="adtocart">
+                        <i class="fa-solid fa-building" style="color: #ffffff;"></i>
+                    </a>
+                </div>
+
+                <div class="panel-body text-center">
+                    <h4>
+                        <h2 class="pro-title">{{company.name_company}}</h2>
+                    </h4>
+                    <button (click)="viewCompany(company.nit_company)">Ver perfil</button>
+                </div>
+            </section>
         </div>
     </div>
 </div>
