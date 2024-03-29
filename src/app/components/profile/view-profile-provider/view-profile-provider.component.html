@@ -1,7 +1,7 @@
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>
 
 
@@ -28,6 +28,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
+                                    <p class="mb-0">Correo</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.email_provider}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
                                     <p class="mb-0">Número de teléfono</p>
                                 </div>
                                 <div class="col-sm-9">
@@ -40,7 +49,7 @@
                                     <p class="mb-0">Ciudad</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{data?.city_provider}}</p>
+                                    <p class="text-muted mb-0">{{data?.city_provider}}, {{data?.department}}</p>
                                 </div>
                             </div>
                             <hr>
