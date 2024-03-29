@@ -97,6 +97,18 @@ export class NavComponent {
     this.router.navigate(['viewAllcompanies/'])
   }
 
+  viewPriceProducts() {
+    this.router.navigate(['view/price/products']);
+  }
+
+  createOrder() {
+    this.router.navigate(['create/order'])
+  }
+
+  viewOrders() {
+    this.router.navigate(['view/orders'])
+  }
+
   deleteData_profile() {
     let id = this.auth.getId();
     this.router.navigate(['deleteData-profile/', id])

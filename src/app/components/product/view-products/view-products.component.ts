@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
@@ -11,14 +12,19 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./view-products.component.css'],
 })
 export class ViewProductsComponent {
+
   loading: boolean = false;
   data: any;
+  id!: string;
 
   constructor(
     private client: ClientService,
     public auth: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private routerActivate: ActivatedRoute
+  ) {
+    this.id = this.routerActivate.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
     this.loading = true;
@@ -26,7 +32,7 @@ export class ViewProductsComponent {
       this.client
         .postRequest(
           `${environment.url_logic}/order/products`,
-          { nit_company: this.auth.getId() },
+          { nit_company: this.id },
           undefined,
           { Authorization: `Bearer ${this.auth.getToken()}` }
         )
@@ -43,5 +49,9 @@ export class ViewProductsComponent {
           complete: () => console.log('complete'),
         });
     }, 400);
+  }
+
+  viewProduct(id: string) {
+    this.router.navigate(['view/product/', id]);
   }
 }

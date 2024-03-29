@@ -1,7 +1,7 @@
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>
 
 <div class="div">
@@ -20,20 +20,25 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center m-3">
-                        <button type="button" class="btn btn-warning"  (click)="order()">Realizar pedido</button>
+                    <div class="d-flex justify-content-center m-3" *ngIf="auth.isGrocer() | async">
+                        <button type="button" class="btn btn-warning" (click)="order()">Realizar pedido</button>
                     </div>
 
                     <div class="card mb-4 mb-lg-0 p-3">
                         <div class="d-flex justify-content-center">
-                             <h4>Redes sociales</h4>
-                         </div>
-                         <!-- <div> -->
-                          <div class="d-flex gap-3 gap-y-2 justify-content-center flex-wrap">
-                             <a *ngFor="let red of dataSocialReds; let i = index" [href]="red.link" target="_blank">
+                            <h4>Redes sociales</h4>
+                        </div>
+                        <!-- <div> -->
+                        <div class="d-flex gap-3 gap-y-2 justify-content-center flex-wrap">
+                            <a *ngFor="let red of dataSocialReds; let i = index" [href]="red.link" target="_blank">
                                 <span class="span" [innerHTML]="red.icon" [style]="colorsOfIcons[i]"></span>
-                             </a>
-                       </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div *ngIf="auth.isGrocer() | async">
+                        <h3>Productos</h3>
+                        <button (click)="viewProducts()">Ver productos</button>
                     </div>
 
                     <div class="card mb-4" *ngFor="let provider of providers">

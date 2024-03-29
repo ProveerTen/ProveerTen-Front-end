@@ -2,26 +2,27 @@ import { AuthService } from "src/app/services/auth/auth.service"
 import { Router } from "@angular/router";
 import { inject } from "@angular/core";
 
-export const panelGuard = () => {
+export const grocerGuestGuard = () => {
 
     const router = inject(Router);
     const auth = inject(AuthService);
 
-    let isCompany;
-    let isProvider;
+    let isGrocer;
+    let isOffline;
 
-    auth.isCompany().subscribe(value => {
-        isCompany = value;
+    auth.isGrocer().subscribe(value => {
+        isGrocer = value;
     });
 
-    auth.isProvider().subscribe(value => {
-        isProvider = value;
+    auth.isLoggedIn().subscribe(value => {
+        isOffline = value;
     });
 
-    if (isCompany || isProvider) {
+    if (isGrocer || !(isOffline)) {
         return true;
     }
 
     router.navigate(['404']);
+
     return false;
 }

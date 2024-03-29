@@ -154,6 +154,10 @@ export class HomeComponent {
     return url.endsWith('.mp4'); // Cambia la condición según el formato del video
   }
 
+  viewProduct(id: string) {
+    this.router.navigate(['view/product/', id]);
+  }
+
 
 }
 

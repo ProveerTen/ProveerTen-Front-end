@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class PanelComponent {
   // public chart: Chart;
   data: any;
+  id_company: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
 
@@ -72,7 +73,11 @@ export class PanelComponent {
   }
 
   viewGrocers() {
-    this.router.navigate(['viewAllGrocers/']);
+    this.router.navigate(['view/grocers']);
+  }
+
+  viewProducts(id: string) {
+    this.router.navigate(['view/products/', id]);
   }
 
 }

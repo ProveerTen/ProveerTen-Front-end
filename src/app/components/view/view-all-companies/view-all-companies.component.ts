@@ -49,7 +49,8 @@ export class ViewAllCompaniesComponent {
         this.data_location = value;
         this.client.postRequest(`${environment.url_logic}/view/companies/location`, this.data_location, undefined, undefined).subscribe({
           next: (response: any) => {
-            this.companies = response.categoriesByCompanies;;
+            this.companies = response.categoriesByCompanies;
+            console.log(this.companies);
             this.companies.forEach(company => {
               company.showMore = false
             });
@@ -72,7 +73,8 @@ export class ViewAllCompaniesComponent {
     } else {
       this.client.postRequest(`${environment.url_logic}/view/companies`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
         next: (response: any) => {
-          this.companies = response.categoriesByCompanies;;
+          this.companies = response.categoriesByCompanies;
+           console.log(this.companies);
           this.companies.forEach(company => {
             company.showMore = false
           });
