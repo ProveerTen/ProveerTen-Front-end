@@ -10,7 +10,9 @@ export class SharedService {
   public type = new BehaviorSubject<string>('products');
   public chatList = new BehaviorSubject<string[]>([]);
   public companyOrder = new BehaviorSubject<object>(null);
-  public categoriesList = new BehaviorSubject<string[]>([]);
+  public category = new BehaviorSubject<string>('');
+  public product_sub_category = new BehaviorSubject<string>('');
+  public company_sub_category = new BehaviorSubject<string[]>([]);
   public department_and_city = new BehaviorSubject<object>({ deparment: localStorage.getItem('data_location_department_name'), city: localStorage.getItem('data_location_city') } as { deparment: string, city: string });
 
   constructor() { }
@@ -31,18 +33,19 @@ export class SharedService {
     //console.log(newValue);
     this.department_and_city.next(newValue);
   }
-
   changeCompanyOrder(newValue: object): void {
     this.companyOrder.next(newValue);
   }
 
-  changeCategoriesList(list: string[]): void {
-    this.categoriesList.next(list);
+  changeCategory(category: string): void {
+    this.category.next(category);
   }
 
-  /*
-  getSearchOption() {
-    return this.searchOption.asObservable();
+  changeProduct_sub_category(sub_category: string): void {
+    this.product_sub_category.next(sub_category);
   }
-  */
+  changeCompany_sub_category(sub_category: string[]): void {
+    this.company_sub_category.next(sub_category);
+  }
+
 }
