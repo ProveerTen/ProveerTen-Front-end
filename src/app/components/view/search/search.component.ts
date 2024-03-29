@@ -70,7 +70,8 @@ export class SearchComponent {
   filter: any;
   categories: any;
   categoriesCheckbox: string[] = []
-  selectedCategory: any;
+  selectedCategory: any = '';
+  selectedSubCategory: any = '';
   subCategories: any;
 
   constructor(private client: ClientService, public auth: AuthService, public shared: SharedService, private routerActivate: ActivatedRoute, private router: Router) {
@@ -86,11 +87,9 @@ export class SearchComponent {
     this.value = this.routerActivate.snapshot.params['value'];
     this.client.getRequest(`${environment.url_logic}/category/categories`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        this.categories = response.categories[0].map(category => ({ ...category, isSelected: false }));;        
-        console.log(this.categories);
+        this.categories = response.categories[0].map(category => ({ ...category, isSelected: false }));
         this.filter = this.categories.slice();
-        console.log(this.filter);
-        
+
       },
       error: (error) => {
         console.log(error.error.Status);
@@ -108,9 +107,15 @@ export class SearchComponent {
     this.router.navigate(['search', this.type]);
   }
 
-  updateSelection(name_category: any) {
-
+  updateSelectionCategory(name_category: any) {
     if (this.categories) {
+      console.log(this.selectedCategory);
+
+      if (name_category === this.selectedCategory) {
+        console.log(name_category === this.selectedCategory);
+        name_category = "";
+        this.selectedCategory = "";
+      } else {
         this.categories.forEach(category => {
           if (category.name_category === name_category) {
             category.isSelected = true;
@@ -119,26 +124,41 @@ export class SearchComponent {
             category.isSelected = false;
           }
         });
-
-        let pos = this.categoriesCheckbox.indexOf(name_category);
-    if (pos === -1) {
-      this.categoriesCheckbox.push(name_category);
-      this.shared.categoriesList.next(this.categoriesCheckbox)
-    } else {
-      this.categoriesCheckbox.splice(pos, 1)
-      this.shared.categoriesList.next(this.categoriesCheckbox)
-    }
+      }
+      this.shared.category.next(name_category)
     }
     this.showSubcategories();
   }
 
-  showSubcategories () {
+  updateSelectionSubCategory(name_subCategory: any) {
+
+    if (name_subCategory === this.selectedSubCategory) {
+      name_subCategory = "";
+      this.selectedSubCategory = "";
+    } else {
+      this.subCategories.forEach(sub_category => {
+        if (sub_category.name_subcategory === name_subCategory) {
+          sub_category.isSelected = true;
+          this.selectedSubCategory = name_subCategory;
+        } else {
+          sub_category.isSelected = false;
+        }
+      });
+    }
+
+    this.shared.product_sub_category.next(name_subCategory)
+  }
+
+
+
+  showSubcategories() {
     if (this.selectedCategory) {
       this.client.postRequest(`${environment.url_logic}/view/subCategories`, { "name_category": this.selectedCategory }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-          this.subCategories = response.categories;
-          console.log(this.subCategories);
-          
+          console.log(response);
+          this.subCategories = response.categories.map(sub_category => ({ ...sub_category, isSelected: false }));
+
+
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -148,7 +168,7 @@ export class SearchComponent {
     }
   }
 
-
+  /*
   verifyCheckbox(value: string) {
     let pos = this.categoriesCheckbox.indexOf(value);
     if (pos === -1) {
@@ -159,6 +179,8 @@ export class SearchComponent {
       this.shared.categoriesList.next(this.categoriesCheckbox)
     }
   }
+*/
+
 
   searchCategory() {
     if (this.valueCategory !== "") {
@@ -179,5 +201,5 @@ export class SearchComponent {
     }
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
-  
+
 }

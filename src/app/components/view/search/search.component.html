@@ -83,13 +83,16 @@
 <div class="container mt-5 d-flex flex-column p-5">
 
     <div class="row d-flex justify-content-between">
-        <div class="col-md-4" style="width: 25.333333%;">
-            <div class="d-flex justify-content-center mb-3 gap-3">
+        <div class="col-md-4">
+            <!--
+                 <div class="d-flex justify-content-center mb-3 gap-3">
                 <button (click)="setOption('products')" type="button"
                     class="btn btn-outline-secondary btn-lg">Productos</button>
                 <button (click)="setOption('companies')" type="button"
                     class="btn btn-outline-secondary btn-lg">Compañías</button>
             </div>
+              -->
+
 
             <div class="card ">
                 <div class="card-header">
@@ -119,7 +122,8 @@
                         <div *ngFor="let category of categories">
                             <label class="d-block">
                                 <input type="checkbox" [ngModel]="category.isSelected"
-                                    (click)="updateSelection(category.name_category)">{{ category.name_category }}
+                                    (click)="updateSelectionCategory(category.name_category)">{{ category.name_category
+                                }}
                             </label>
                         </div>
                     </div>
@@ -132,19 +136,21 @@
 
             <div class="card" *ngIf="selectedCategory">
                 <div class="card-header">
-                    <h5 class="card-title">Categorías</h5>
+                    <h5 class="card-title">Sub categorías</h5>
                 </div>
 
                 <div class="card-body">
-                <div >
-                    <div *ngFor="let subCategory of subCategories">
-                        <label class="d-block">
-                            <input type="checkbox">{{ subCategory.name_subcategory }}
-                        </label>
+                    <div>
+                        <div *ngFor="let subCategory of subCategories">
+                            <label class="d-block">
+                                <input type="checkbox" [(ngModel)]="subCategories.isSelected"
+                                    (click)="updateSelectionSubCategory(subCategory.name_subcategory)">
+                                {{ subCategory.name_subcategory }}
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-                <div class="card-footer text-center">
+                <div class=" card-footer text-center">
                     <!-- <button class="btn btn-warning text-white">Filtrar</button> -->
                 </div>
             </div>
