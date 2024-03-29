@@ -13,7 +13,7 @@ export class BrokenImageProfileDirective {
   load_default_image() {
     const element = this.elementRef.nativeElement;
     if (this.imageType === 'photo') {
-      element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1710821228/b8ybskmfd6uhlidvfvm9.png';
+      element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707880169/Photo_default_hvdpl7.png';
     } else if (this.imageType === 'cover') {
       element.src = 'https://res.cloudinary.com/ddio1oisb/image/upload/v1707880170/Cover_default_nbahdp.jpg';
     }
