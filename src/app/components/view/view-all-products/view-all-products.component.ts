@@ -16,7 +16,8 @@ export class ViewAllProductsComponent {
   products: any;
   value: any;
   filter: any[] = [];
-  categoriesList: any[] = [];
+  category: string;
+  sub_category: string;
   isOffline: any;
   data_location: any;
 
@@ -32,24 +33,41 @@ export class ViewAllProductsComponent {
     this.shared.searchTerm.subscribe(value => {
       this.value = value;
       if (this.value !== "") {
-        if (this.categoriesList.length > 0) {
+        if (this.category !== "") {
           this.getProductsByCategoriesAndName();
         } else {
           this.getProductsByName();
         }
-      } else if (this.categoriesList.length > 0) {
+      } else if (this.category !== "") {
         this.getProductsByCategories();
       } else {
         this.products = this.filter;
       }
     });
 
-    this.shared.categoriesList.subscribe(value => {
-      this.categoriesList = value;
-      if (this.value === "" && this.categoriesList.length > 0) {
+    this.shared.category.subscribe(value => {
+      this.category = value;
+      console.log(this.category);
+      if (this.value === "" && this.category !== "") {
         this.getProductsByCategories();
-      } else if (this.value !== "" && this.categoriesList.length > 0) {
+      } else if (this.value !== "" && this.category !== "") {
         this.getProductsByCategoriesAndName();
+      } else {
+        this.products = this.filter;
+      }
+    });
+
+    this.shared.product_sub_category.subscribe(value => {
+      this.sub_category = value;
+      console.log(value);
+
+      if (this.value === "" && this.category !== "" && this.sub_category.length > 0) {
+        this.getProductsByCategoriesAndSubCategories();
+        console.log("1");
+
+      } else if (this.value !== "" && this.category !== "" && this.sub_category.length > 0) {
+        this.getProductsByCategoriesAndSubCategoriesAndName();
+        console.log("2");
       } else {
         this.products = this.filter;
       }
@@ -86,6 +104,7 @@ export class ViewAllProductsComponent {
       this.client.postRequest(`${environment.url_logic}/view/products`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
         next: (response: any) => {
           this.products = response.categoriesByProducts;
+          console.log(this.products);
           this.filter = this.products.slice();
 
           if (this.value !== "") {
@@ -115,13 +134,11 @@ export class ViewAllProductsComponent {
     });
   }
 
-  getProductsByCategories() {  
+  getProductsByCategories() {
     this.products = this.filter.filter((product: any) => {
-      return product.categories.some((productCategory: any) => {
-        return this.categoriesList.some((category: string) =>
-          this.removeAccents(productCategory.fk_product_category_name_category).toLowerCase().includes(this.removeAccents(category).toLowerCase())
-        );
-      });
+      return (
+        product.fk_product_category_name_category.includes(this.category)
+      );
     });
   }
 
@@ -129,13 +146,26 @@ export class ViewAllProductsComponent {
     this.products = this.filter.filter((product: any) => {
       const nameMatch = this.removeAccents(product.name_product).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
       const descriptionMatch = this.removeAccents(product.description_product).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
-      const categoryMatch = product.categories.some((productCategory: any) => {
-        return this.categoriesList.some((category: string) =>
-          this.removeAccents(productCategory.fk_product_category_name_category).toLowerCase().includes(this.removeAccents(category).toLowerCase())
-        );
-      });
+      const categoryMatch = product.fk_product_category_name_category === this.category;
 
       return (nameMatch || descriptionMatch) && categoryMatch;
+    });
+  }
+
+ 
+  getProductsByCategoriesAndSubCategories() {
+    this.products = this.filter.filter((product: any) => {
+      return (
+        product.fk_product_category_name_category.includes(this.category) &&
+        product.fk_product_sub_category_name_sub_category.includes(this.sub_category)
+      );
+    });
+
+  }
+
+  getProductsByCategoriesAndSubCategoriesAndName() {
+    this.products = this.filter.filter((product: any) => {
+
     });
   }
 
