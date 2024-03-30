@@ -130,13 +130,6 @@ export class HomeComponent {
     this.router.navigate(['profile/company', id])
   }
 
-  viewCompanies() {
-    this.router.navigate(['search', 'companies']);
-  }
-
-  viewProducts() {
-    this.router.navigate(['search', 'products']);
-  }
 
   viewPriceProducts() {
     this.router.navigate(['view/price/products']);
@@ -160,7 +153,8 @@ export class HomeComponent {
 
   viewCategory(name_category: string) {
     this.shared.changeHomeCategory(name_category);
-    this.router.navigate(['search', 'products']);
+    this.shared.type.next('products')
+    this.router.navigate(['search','products']);
   }
 }
 
