@@ -77,9 +77,11 @@
 
             <div class="col-auto elements d-flex gap-5" *ngIf="!(auth.isLoggedIn() | async)">
                 <a routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Inicio</a>
-                <a routerLink="/search/companies"><i class="fa-solid fa-building" style="color: #ffffff;"></i>
+                <a (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i class="fa-solid fa-building"
+                        style="color: #ffffff;"></i>
                     Encontrar empresas</a>
-                <a routerLink="/search/products"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                <a (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
+                        class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                     Encontrar productos</a>
             </div>
 

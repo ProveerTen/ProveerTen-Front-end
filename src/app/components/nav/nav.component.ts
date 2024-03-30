@@ -118,6 +118,16 @@ export class NavComponent {
     this.router.navigate(['deleteData-profile/', id])
   }
 
+  searchProducts() {
+    this.router.navigate(['search/', 'products'])
+    this.shared.type.next('products')
+  }
+
+  searchCompanies() {
+    this.router.navigate(['search/', 'companies'])
+    this.shared.type.next('companies')
+  }
+
   selected_department(nameDepartment: any) {
     console.log(nameDepartment);
 

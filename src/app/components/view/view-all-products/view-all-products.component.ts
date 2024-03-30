@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ClientService } from 'src/app/services/client/client.service';
 import { environment } from 'src/environments/environment';
 import { SharedService } from '../../../services/shared/shared.service';
-import product from '../../../interfaces/product';
 
 @Component({
   selector: 'app-view-all-products',
@@ -28,74 +27,46 @@ export class ViewAllProductsComponent {
   }
 
   ngOnInit() {
-    this.getProducts();
-
+    // Suscripción a cambios en el término de búsqueda
     this.shared.searchTerm.subscribe(value => {
       this.value = value;
-
-      //en caso el valor sea diferente a vacio 
-      if (this.value !== "" && this.category === "" && this.sub_category === "") {
-        this.getProductsByName();
-      }
-      //en caso el valor sea diferente a vacio y las categorias no sean vacio 
-      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
-        this.getProductsByCategoriesAndName();
-      }
-
-      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
-        this.getProductsByCategoriesAndSubCategoriesAndName();
-      }
-      //en caso que todos las posibles opciones sean vacio
-      if (this.value === "" && this.category === "" && this.sub_category === "") {
-        this.products = this.filter;
-      }
+      this.handleProductFiltering();
     });
 
+    // Suscripción a cambios en la categoría
     this.shared.category.subscribe(value => {
       this.category = value;
-
-      if (this.value !== "" && this.category === "" && this.sub_category === "") {
-        this.getProductsByName();
-      }
-
-      //en caso que las categorias no sean vacio
-      if (this.value === "" && this.category !== "" && this.sub_category === "") {
-        this.getProductsByCategories();
-      }
-
-      //en caso que que el valor de busqueda sea diferente a vacio y las categorias
-      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
-        this.getProductsByCategoriesAndName();
-      }
-
-      //en caso que todos las posibles opciones sean vacio
-      if (this.value === "" && this.category === "" && this.sub_category === "") {
-        this.products = this.filter;
-      }
-
+      this.handleProductFiltering();
     });
 
+    // Suscripción a cambios en la subcategoría
     this.shared.sub_category.subscribe(value => {
       this.sub_category = value;
-
-      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
-        this.getProductsByCategoriesAndName();
-      }
-
-      if (this.value === "" && this.category !== "" && this.sub_category !== "") {
-        this.getProductsByCategoriesAndSubCategories();
-      }
-      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
-        this.getProductsByCategoriesAndSubCategoriesAndName();
-      }
-
-      if (this.value === "" && this.category === "" && this.sub_category === "") {
-        this.products = this.filter;
-      }
-
-
+      this.handleProductFiltering();
     });
+
+    // Obtener los productos inicialmente
+    this.getProducts();
   }
+
+  handleProductFiltering() {
+    if (this.value !== "" && this.category === "" && this.sub_category === "") {
+      this.getProductsByName();
+    } else if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+      this.getProductsByCategoriesAndName();
+    } else if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
+      this.getProductsByCategoriesAndSubCategoriesAndName();
+    } else if (this.value === "" && this.category === "" && this.sub_category === "") {
+      this.products = this.filter;
+    } else if (this.value === "" && this.category !== "" && this.sub_category === "") {
+      this.getProductsByCategories();
+    } else if (this.value === "" && this.category !== "" && this.sub_category !== "") {
+      this.getProductsByCategoriesAndSubCategories();
+    }
+  }
+
+
+
 
   getProducts() {
     if (!(this.isOffline)) {
@@ -107,15 +78,7 @@ export class ViewAllProductsComponent {
             this.products = response.categoriesByProducts;
             console.log(this.products);
             this.filter = this.products.slice();
-
-            if (this.value !== "") {
-              this.getProductsByName();
-            } else {
-              this.products = this.filter;
-            }
-            if (this.products.length == 0) {
-              console.log('No hay productos por mostrar');
-            }
+            this.handleProductFiltering();
           },
           error: (error) => {
             console.log(error.error.Status);
@@ -129,12 +92,8 @@ export class ViewAllProductsComponent {
           this.products = response.categoriesByProducts;
           console.log(this.products);
           this.filter = this.products.slice();
+          this.handleProductFiltering();
 
-          if (this.value !== "") {
-            this.getProductsByName();
-          } else {
-            this.products = this.filter;
-          }
           if (this.products.length == 0) {
             console.log('No hay productos por mostrar');
           }

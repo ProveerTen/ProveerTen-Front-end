@@ -11,58 +11,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  /*
-  selectedOption: string;
-  value: string;
-  dataCategories: any;
-  categoriesCheckbox: string[] = []
-
-  constructor(private client: ClientService, public auth: AuthService, public shared: SharedService, private routerActivate: ActivatedRoute, private router: Router) {
-
-  }
-
-  ngOnInit(): void {
-    this.value = this.routerActivate.snapshot.params['value'];
-    // this.shared.changeValueRoute(this.value);
-    this.shared.searchOption.subscribe(option => {
-      this.selectedOption = option;
-    })
-    this.client.getRequest(`${environment.url_logic}/category/categories`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.dataCategories = response.categories[0];
-        console.log(this.dataCategories);
-      },
-      error: (error) => {
-        console.log(error.error.Status);
-      },
-      complete: () => console.log('complete'),
-    });
-  }
-
-  setOption(option: string): void {
-    this.selectedOption = option;
-    if (option === 'companies') {
-      this.shared.changeSearchOption('companies');
-      this.router.navigate(['search', 'companies']);
-      return;
-    }
-    this.shared.changeSearchOption('products');
-    this.router.navigate(['search', 'products']);
-  }
-
-  verifyCheckbox(value: string) {
-    let pos = this.categoriesCheckbox.indexOf(value);
-    if (pos === -1) {
-      this.categoriesCheckbox.push(value);
-    } else {
-      this.categoriesCheckbox.splice(pos, 1)
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.shared.changeValueRoute(null);
-  }
-  */
 
   type: string;
   value: string;
@@ -76,7 +24,8 @@ export class SearchComponent {
 
   constructor(private client: ClientService, public auth: AuthService, public shared: SharedService, private routerActivate: ActivatedRoute, private router: Router) {
     this.shared.type.subscribe(type => {
-      this.type = type
+      this.type = type;
+      this.setOption(type);
     })
 
 
@@ -116,9 +65,6 @@ export class SearchComponent {
 
   updateSelectionCategory(name_category: any) {
     if (this.categories) {
-      console.log(this.selectedCategory);
-      console.log(name_category);
-
       if (name_category === this.selectedCategory) {
         name_category = "";
         this.selectedCategory = "";
@@ -127,7 +73,6 @@ export class SearchComponent {
           if (category.name_category === name_category) {
             category.isSelected = true;
             this.selectedCategory = name_category;
-         
           } else {
             category.isSelected = false;
           }
@@ -163,10 +108,7 @@ export class SearchComponent {
     if (this.selectedCategory) {
       this.client.postRequest(`${environment.url_logic}/view/subCategories`, { "name_category": this.selectedCategory }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-          console.log(response);
           this.subCategories = response.categories.map(sub_category => ({ ...sub_category, isSelected: false }));
-
-
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -174,20 +116,8 @@ export class SearchComponent {
         complete: () => console.log('complete'),
       });
     }
+    this.shared.sub_category.next('');
   }
-
-  /*
-  verifyCheckbox(value: string) {
-    let pos = this.categoriesCheckbox.indexOf(value);
-    if (pos === -1) {
-      this.categoriesCheckbox.push(value);
-      this.shared.categoriesList.next(this.categoriesCheckbox)
-    } else {
-      this.categoriesCheckbox.splice(pos, 1)
-      this.shared.categoriesList.next(this.categoriesCheckbox)
-    }
-  }
-*/
 
 
   searchCategory() {

@@ -37,72 +37,36 @@ export class ViewAllCompaniesComponent {
 
     this.shared.searchTerm.subscribe(value => {
       this.value = value;
-
-      //en caso el valor sea diferente a vacio 
-      if (this.value !== "" && this.category === "" && this.sub_category === "") {
-        this.getCompaniesByName()
-      }
-      //en caso el valor sea diferente a vacio y las categorias no sean vacio 
-      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
-        this.getCompaniesByCategoriesAndName();
-      }
-
-      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
-        this.getCompaniesByCategoriesAndSubCategoriesAndName();
-      }
-      //en caso que todos las posibles opciones sean vacio
-      if (this.value === "" && this.category === "" && this.sub_category === "") {
-        this.companies = this.filter;
-      }
+      this.handleCompanyFiltering();
     });
 
     this.shared.category.subscribe(value => {
       this.category = value;
-      
-      if (this.value !== "" && this.category === "" && this.sub_category === "") {
-        this.getCompaniesByName()
-      }
-
-      //en caso que las categorias no sean vacio
-      if (this.value === "" && this.category !== "" && this.sub_category === "") {
-        this.getCompaniesByCategories();
-      }
-
-      //en caso que que el valor de busqueda sea diferente a vacio y las categorias
-      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
-        this.getCompaniesByCategoriesAndName();
-      }
-
-      //en caso que todos las posibles opciones sean vacio
-      if (this.value === "" && this.category === "" && this.sub_category === "") {
-        this.companies = this.filter;
-      }
-
+      this.handleCompanyFiltering();
     });
 
     this.shared.sub_category.subscribe(value => {
       this.sub_category = value;
-
-      //en caso que que el valor de busqueda sea diferente a vacio y las categorias
-      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
-        this.getCompaniesByCategoriesAndName();
-      }
-
-      if (this.value === "" && this.category !== "" && this.sub_category !== "") {
-        this.getCompaniesByCategoriesAndSubCategories();
-      }
-      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
-        this.getCompaniesByCategoriesAndSubCategoriesAndName();
-      }
-
-      if (this.value === "" && this.category === "" && this.sub_category === "") {
-        this.companies = this.filter;
-      }
-
-
+      this.handleCompanyFiltering();
     });
-
   }
+
+  handleCompanyFiltering() {
+    if (this.value !== "" && this.category === "" && this.sub_category === "") {
+      this.getCompaniesByName();
+    } else if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+      this.getCompaniesByCategoriesAndName();
+    } else if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
+      this.getCompaniesByCategoriesAndSubCategoriesAndName();
+    } else if (this.value === "" && this.category === "" && this.sub_category === "") {
+      this.companies = this.filter;
+    } else if (this.value === "" && this.category !== "" && this.sub_category === "") {
+      this.getCompaniesByCategories();
+    } else if (this.value === "" && this.category !== "" && this.sub_category !== "") {
+      this.getCompaniesByCategoriesAndSubCategories();
+    }
+  }
+
 
   getCompanies() {
     if (!(this.isOffline)) {
@@ -116,11 +80,8 @@ export class ViewAllCompaniesComponent {
               company.showMore = false
             });
             this.filter = this.companies.slice();
-            if (this.value !== "") {
-              this.getCompaniesByName();
-            } else {
-              this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
-            }
+            this.handleCompanyFiltering() 
+
             if (this.companies.length == 0) {
               console.log('No hay compañías por mostrar');
             }
@@ -140,11 +101,8 @@ export class ViewAllCompaniesComponent {
             company.showMore = false
           });
           this.filter = this.companies.slice();
-          if (this.value !== "") {
-            this.getCompaniesByName();
-          } else {
-            this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
-          }
+          this.handleCompanyFiltering() 
+
           if (this.companies.length == 0) {
             console.log('No hay compañías por mostrar');
           }
@@ -193,12 +151,10 @@ export class ViewAllCompaniesComponent {
 
   getCompaniesByCategoriesAndSubCategories() {
     this.companies = this.filter.filter((company: any) => {
-      // Verificar si la compañía tiene productos en la categoría seleccionada
       const hasMatchingCategory = company.categories.some((category: any) => {
         return category.fk_product_category_name_category === this.category;
       });
 
-      // Verificar si la compañía tiene productos en la subcategoría seleccionada
       const hasMatchingSubCategory = company.subcategories.some((subcategory: any) => {
         return subcategory.fk_subcategory_name_subcategory === this.sub_category;
       });
@@ -237,11 +193,6 @@ export class ViewAllCompaniesComponent {
     }
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
-  /*
-  ngOnDestroy() {
-    this.shared.searchTerm.unsubscribe();
-  }
-  */
 
   showModalInfo(i: number) {
     this.showModal = true
