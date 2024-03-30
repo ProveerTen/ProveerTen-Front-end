@@ -23,7 +23,11 @@ export class NavComponent {
   city: any;
   id: any;
 
+  city_local: any;
+  department_local: any;
+
   constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private client: ClientService, private shared: SharedService) {
+
     this.form = this.fb.group({
       searchType: ['products'],
       searchTerm: [''],
@@ -95,6 +99,18 @@ export class NavComponent {
 
   allCompanies() {
     this.router.navigate(['viewAllcompanies/'])
+  }
+
+  viewPriceProducts() {
+    this.router.navigate(['view/price/products']);
+  }
+
+  createOrder() {
+    this.router.navigate(['create/order'])
+  }
+
+  viewOrders() {
+    this.router.navigate(['view/orders'])
   }
 
   deleteData_profile() {
