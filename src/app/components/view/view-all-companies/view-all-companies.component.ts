@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { SharedService } from '../../../services/shared/shared.service';
+import company from '../../../interfaces/company';
 
 @Component({
   selector: 'app-view-all-companies',
@@ -19,6 +20,8 @@ export class ViewAllCompaniesComponent {
   id!: string;
   description: any;
   showModal: any = false;
+  category: string;
+  sub_category: string;
   companyInfo: any;
   isOffline: any;
   data_location: any;
@@ -34,13 +37,71 @@ export class ViewAllCompaniesComponent {
 
     this.shared.searchTerm.subscribe(value => {
       this.value = value;
-      if (this.value !== "") {
-        console.log(this.value);
-        this.getCompaniesByName();
-      } else {
-        this.companies = this.filter; // Restablecer la lista de compañías si el término de búsqueda está vacío
+
+      //en caso el valor sea diferente a vacio 
+      if (this.value !== "" && this.category === "" && this.sub_category === "") {
+        this.getCompaniesByName()
+      }
+      //en caso el valor sea diferente a vacio y las categorias no sean vacio 
+      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+        this.getCompaniesByCategoriesAndName();
+      }
+
+      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
+        this.getCompaniesByCategoriesAndSubCategoriesAndName();
+      }
+      //en caso que todos las posibles opciones sean vacio
+      if (this.value === "" && this.category === "" && this.sub_category === "") {
+        this.companies = this.filter;
       }
     });
+
+    this.shared.category.subscribe(value => {
+      this.category = value;
+      
+      if (this.value !== "" && this.category === "" && this.sub_category === "") {
+        this.getCompaniesByName()
+      }
+
+      //en caso que las categorias no sean vacio
+      if (this.value === "" && this.category !== "" && this.sub_category === "") {
+        this.getCompaniesByCategories();
+      }
+
+      //en caso que que el valor de busqueda sea diferente a vacio y las categorias
+      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+        this.getCompaniesByCategoriesAndName();
+      }
+
+      //en caso que todos las posibles opciones sean vacio
+      if (this.value === "" && this.category === "" && this.sub_category === "") {
+        this.companies = this.filter;
+      }
+
+    });
+
+    this.shared.sub_category.subscribe(value => {
+      this.sub_category = value;
+
+      //en caso que que el valor de busqueda sea diferente a vacio y las categorias
+      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+        this.getCompaniesByCategoriesAndName();
+      }
+
+      if (this.value === "" && this.category !== "" && this.sub_category !== "") {
+        this.getCompaniesByCategoriesAndSubCategories();
+      }
+      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
+        this.getCompaniesByCategoriesAndSubCategoriesAndName();
+      }
+
+      if (this.value === "" && this.category === "" && this.sub_category === "") {
+        this.companies = this.filter;
+      }
+
+
+    });
+
   }
 
   getCompanies() {
@@ -74,7 +135,7 @@ export class ViewAllCompaniesComponent {
       this.client.postRequest(`${environment.url_logic}/view/companies`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
         next: (response: any) => {
           this.companies = response.categoriesByCompanies;
-           console.log(this.companies);
+          console.log(this.companies);
           this.companies.forEach(company => {
             company.showMore = false
           });
@@ -106,6 +167,65 @@ export class ViewAllCompaniesComponent {
       });
     }
   }
+
+  getCompaniesByCategoriesAndName() {
+    this.companies = this.filter.filter((company: any) => {
+      const nameMatch = this.removeAccents(company.name_company).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
+      const descriptionMatch = this.removeAccents(company.description_company).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
+      const hasMatchingCategory = company.categories.some((category: any) => {
+        return category.fk_product_category_name_category === this.category;
+      });
+
+      return (nameMatch || descriptionMatch) && hasMatchingCategory;
+    });
+  }
+
+  getCompaniesByCategories() {
+    this.companies = this.filter.filter((company: any) => {
+      // Verificar si la compañía tiene productos en la categoría seleccionada
+      const hasMatchingCategory = company.categories.some((category: any) => {
+        return category.fk_product_category_name_category === this.category;
+      });
+
+      return hasMatchingCategory;
+    });
+  }
+
+  getCompaniesByCategoriesAndSubCategories() {
+    this.companies = this.filter.filter((company: any) => {
+      // Verificar si la compañía tiene productos en la categoría seleccionada
+      const hasMatchingCategory = company.categories.some((category: any) => {
+        return category.fk_product_category_name_category === this.category;
+      });
+
+      // Verificar si la compañía tiene productos en la subcategoría seleccionada
+      const hasMatchingSubCategory = company.subcategories.some((subcategory: any) => {
+        return subcategory.fk_subcategory_name_subcategory === this.sub_category;
+      });
+
+      return hasMatchingCategory && hasMatchingSubCategory;
+    });
+  }
+
+
+  getCompaniesByCategoriesAndSubCategoriesAndName() {
+    this.companies = this.filter.filter((company: any) => {
+      const nameMatch = this.removeAccents(company.name_company).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
+      const descriptionMatch = this.removeAccents(company.description_company).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
+
+
+      const hasMatchingCategory = company.categories.some((category: any) => {
+        return category.fk_product_category_name_category === this.category;
+      });
+
+      const hasMatchingSubCategory = company.subcategories.some((subcategory: any) => {
+        return subcategory.fk_subcategory_name_subcategory === this.sub_category;
+      });
+
+      return (nameMatch || descriptionMatch) && hasMatchingCategory && hasMatchingSubCategory;
+    });
+  }
+
 
   viewCompany(id: string) {
     this.router.navigate(['profile/company/', id]);

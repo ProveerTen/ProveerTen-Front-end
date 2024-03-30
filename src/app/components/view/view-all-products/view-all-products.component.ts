@@ -32,45 +32,68 @@ export class ViewAllProductsComponent {
 
     this.shared.searchTerm.subscribe(value => {
       this.value = value;
-      if (this.value !== "") {
-        if (this.category !== "") {
-          this.getProductsByCategoriesAndName();
-        } else {
-          this.getProductsByName();
-        }
-      } else if (this.category !== "") {
-        this.getProductsByCategories();
-      } else {
+
+      //en caso el valor sea diferente a vacio 
+      if (this.value !== "" && this.category === "" && this.sub_category === "") {
+        this.getProductsByName();
+      }
+      //en caso el valor sea diferente a vacio y las categorias no sean vacio 
+      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+        this.getProductsByCategoriesAndName();
+      }
+
+      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
+        this.getProductsByCategoriesAndSubCategoriesAndName();
+      }
+      //en caso que todos las posibles opciones sean vacio
+      if (this.value === "" && this.category === "" && this.sub_category === "") {
         this.products = this.filter;
       }
     });
 
     this.shared.category.subscribe(value => {
       this.category = value;
-      console.log(this.category);
-      if (this.value === "" && this.category !== "") {
+
+      if (this.value !== "" && this.category === "" && this.sub_category === "") {
+        this.getProductsByName();
+      }
+
+      //en caso que las categorias no sean vacio
+      if (this.value === "" && this.category !== "" && this.sub_category === "") {
         this.getProductsByCategories();
-      } else if (this.value !== "" && this.category !== "") {
+      }
+
+      //en caso que que el valor de busqueda sea diferente a vacio y las categorias
+      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
         this.getProductsByCategoriesAndName();
-      } else {
+      }
+
+      //en caso que todos las posibles opciones sean vacio
+      if (this.value === "" && this.category === "" && this.sub_category === "") {
         this.products = this.filter;
       }
+
     });
 
-    this.shared.product_sub_category.subscribe(value => {
+    this.shared.sub_category.subscribe(value => {
       this.sub_category = value;
-      console.log(value);
 
-      if (this.value === "" && this.category !== "" && this.sub_category.length > 0) {
+      if (this.value !== "" && this.category !== "" && this.sub_category === "") {
+        this.getProductsByCategoriesAndName();
+      }
+
+      if (this.value === "" && this.category !== "" && this.sub_category !== "") {
         this.getProductsByCategoriesAndSubCategories();
-        console.log("1");
-
-      } else if (this.value !== "" && this.category !== "" && this.sub_category.length > 0) {
+      }
+      if (this.value !== "" && this.category !== "" && this.sub_category !== "") {
         this.getProductsByCategoriesAndSubCategoriesAndName();
-        console.log("2");
-      } else {
+      }
+
+      if (this.value === "" && this.category === "" && this.sub_category === "") {
         this.products = this.filter;
       }
+
+
     });
   }
 
@@ -152,20 +175,25 @@ export class ViewAllProductsComponent {
     });
   }
 
- 
+
   getProductsByCategoriesAndSubCategories() {
     this.products = this.filter.filter((product: any) => {
       return (
         product.fk_product_category_name_category.includes(this.category) &&
-        product.fk_product_sub_category_name_sub_category.includes(this.sub_category)
+        product.fk_subcategory_name_subcategory.includes(this.sub_category)
       );
     });
+    console.log(this.products);
 
   }
 
   getProductsByCategoriesAndSubCategoriesAndName() {
     this.products = this.filter.filter((product: any) => {
-
+      const nameMatch = this.removeAccents(product.name_product).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
+      const descriptionMatch = this.removeAccents(product.description_product).toLowerCase().includes(this.removeAccents(this.value).toLowerCase());
+      const categoryMatch = product.fk_product_category_name_category === this.category;
+      const subCategoryMatch = this.sub_category.includes(product.fk_subcategory_name_subcategory);
+      return (nameMatch || descriptionMatch) && categoryMatch && subCategoryMatch;
     });
   }
 

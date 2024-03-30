@@ -146,7 +146,7 @@ export class SearchComponent {
       });
     }
 
-    this.shared.product_sub_category.next(name_subCategory)
+    this.shared.sub_category.next(name_subCategory)
   }
 
 
