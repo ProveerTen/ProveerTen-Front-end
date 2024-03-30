@@ -156,7 +156,6 @@ nav {
     display: none; /* Ocultar el menú desplegable por defecto */
     width: auto;
   }
-}
 
 /* iPhone XR, 12 Pro */
 @media screen and (min-width: 414px) and (max-width: 896px) {
@@ -181,9 +180,6 @@ nav {
     /* Estilos para el texto en iPhone 14 */
   }
 
-  /* Agrega estilos adicionales según sea necesario */
-}
-
 /* Google Pixel 7 */
 @media screen and (min-width: 411px) and (max-width: 823px) {
   .button {
@@ -194,8 +190,6 @@ nav {
     /* Estilos para el texto en Google Pixel 7 */
   }
 
-  /* Agrega estilos adicionales según sea necesario */
-}
 
 /* Samsung Galaxy S8+, S20 Ultra */
 @media screen and (min-width: 360px) and (max-width: 1024px) {
@@ -207,9 +201,6 @@ nav {
     /* Estilos para el texto en Samsung Galaxy S8+, S20 Ultra */
   }
 
-  /* Agrega estilos adicionales según sea necesario */
-}
-
 /* iPad Mini, iPad Air, iPad Pro */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .button {
@@ -220,9 +211,6 @@ nav {
     /* Estilos para el texto en iPad Mini, iPad Air, iPad Pro */
   }
 
-  /* Agrega estilos adicionales según sea necesario */
-}
-
 /* Surface Pro 7, Surface Duo */
 @media screen and (min-width: 540px) and (max-width: 1024px) {
   .button {
@@ -232,10 +220,7 @@ nav {
   .lable {
     /* Estilos para el texto en Surface Pro 7, Surface Duo */
   }
-
-  /* Agrega estilos adicionales según sea necesario */
-}
-
+  
 /* Galaxy Fold, Asus Zenbook Fold */
 @media screen and (min-width: 280px) and (max-width: 1536px) {
   .button {
@@ -245,9 +230,6 @@ nav {
   .lable {
     /* Estilos para el texto en Galaxy Fold, Asus Zenbook Fold */
   }
-
-  /* Agrega estilos adicionales según sea necesario */
-}
 
 /* Samsung Galaxy A51/A71 */
 @media screen and (min-width: 360px) and (max-width: 800px) {
@@ -263,8 +245,6 @@ height: 100%;
 display: flex
   }
 
-  /* Agrega estilos adicionales según sea necesario */
-}
 
 /* Nest Hub, Nest Hub Max */
 @media screen and (min-width: 480px) and (max-width: 1280px) {
@@ -276,10 +256,6 @@ display: flex
     /* Estilos para el texto en Nest Hub, Nest Hub Max */
   }
 
-  /* Agrega estilos adicionales según sea necesario */
-}
-
-} 
 
 a {
     text-decoration: none;
