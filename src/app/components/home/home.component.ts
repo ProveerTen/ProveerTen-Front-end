@@ -158,6 +158,9 @@ export class HomeComponent {
     this.router.navigate(['view/product/', id]);
   }
 
-
+  viewCategory(name_category: string) {
+    this.shared.changeHomeCategory(name_category);
+    this.router.navigate(['search', 'products']);
+  }
 }
 

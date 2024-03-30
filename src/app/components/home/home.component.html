@@ -1,30 +1,31 @@
-<<<<<<< HEAD
-
-      <div class="buttons d-flex align-items-center justify-content-center text-dark rounded-bottom p-0 gap-2">
-        <div class="w-100 py-0">
-          <div id="carouselExampleDark" class="carousel carousel-dark slide custom-slider" data-bs-ride="carousel">
+<div class="buttons d-flex align-items-center justify-content-center text-dark rounded-bottom p-0 gap-2">
+    <div class="w-100 py-0">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide custom-slider" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://res.cloudinary.com/dl0dgsxb7/image/upload/v1711764000/proveertenBanner/nsldnvd5twajvzim42hs.png" class="" alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img src="..." class="" alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img src="https://via.placeholder.com/1920x1080" class="" alt="Third slide">
-              </div>
+                <div class="carousel-item active">
+                    <img src="https://res.cloudinary.com/dl0dgsxb7/image/upload/v1711764000/proveertenBanner/nsldnvd5twajvzim42hs.png"
+                        class="" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/1920x1080" class="" alt="Third slide">
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
 <!--<div id="bannerCarousel" class="carousel slide py-2 h-30vh" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -67,7 +68,6 @@
   </div>
 </div>
 -->
-=======
 <!-- <div class="buttons d-flex  align-items-center justify-content-center  bg-warning text-dark py-2 rounded-bottom gap-2">
     <button class="btn btn-warning " *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)"
         (click)="viewCompanies()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -106,8 +106,6 @@
 </div> -->
 
 
->>>>>>> 4ae263c660c351dd9a230147829f781f64c4940f
-
 <div class="container d-flex flex-column gap-5 align-items-center">
 
 
@@ -125,111 +123,176 @@
             <hr>
         </div>
 
-        <div class="d-flex flex-wrap gap-3 p-1">
-            <div class="kind card d-flex flex-row" style="width: 290px;">
+        <div class="d-flex flex-wrap gap-3 p-1 justify-content-center">
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Aseo para el hogar')">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/f1a377c7-2221-4854-b3e7-498cbc7189c9___8d58559ab606d29bf990bc0ffa1fd9ac.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/f1a377c7-2221-4854-b3e7-498cbc7189c9___8d58559ab606d29bf990bc0ffa1fd9ac.png"
+                        alt="">
                 </div>
                 <div class="d-flex justify-content-center align-items-center p-3">
-                    <a class="category" style="cursor: pointer;"><strong>Aseo</strong></a>
+                    <a class="category" style="cursor: pointer;"><strong>Aseo para el hogar</strong></a>
                 </div>
             </div>
 
             <div class="kind card d-flex flex-row" style="width: 290px;">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/a0dd10af-8fc3-42cc-bb60-5e4c659f42db___fb9ba46776d0f6d2faf74af364002eeb.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/a0dd10af-8fc3-42cc-bb60-5e4c659f42db___fb9ba46776d0f6d2faf74af364002eeb.png"
+                        alt="">
                 </div>
-                <div class="d-flex justify-content-center align-items-center p-3">
+                <div class="d-flex justify-content-center align-items-center p-3" (click)="viewCategory('Licores')">
                     <a class="category" style="cursor: pointer;"><strong>Licores</strong></a>
                 </div>
             </div>
 
-            <div class="kind card d-flex flex-row" style="width: 290px;">
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Despensa')">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/efffd64a-bf59-485e-a2d0-6346bf34eae3___46431a7cbf1af9552c33576052ead1ca.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/efffd64a-bf59-485e-a2d0-6346bf34eae3___46431a7cbf1af9552c33576052ead1ca.png"
+                        alt="">
                 </div>
                 <div class="d-flex justify-content-center align-items-center p-3">
                     <a class="category" style="cursor: pointer;"><strong>Despensa</strong></a>
                 </div>
             </div>
 
-            <div class="kind card d-flex flex-row" style="width: 290px;">
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Comida para mascotas')">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/57813c20-a945-4b52-a737-87a3302bddae___4a3229c03797c38923d0c7f9cb965365.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/57813c20-a945-4b52-a737-87a3302bddae___4a3229c03797c38923d0c7f9cb965365.png"
+                        alt="">
                 </div>
                 <div class="d-flex justify-content-center align-items-center p-3">
-                    <a class="category" style="cursor: pointer;"><strong>Mascotas</strong></a>
+                    <a class="category" style="cursor: pointer;"><strong>Comida para mascotas</strong></a>
                 </div>
             </div>
 
-            <div class="kind card d-flex flex-row" style="width: 290px;">
+            <!-- 
+                Aseo para el hogar
+    Aseo personal
+Bebidas
+Comida para mascotas
+Despensa
+Drogueria
+Licores
+Panadería
+Papelería
+Pasabocas
+             -->
+
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Panadería')">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/eeee6505-6e86-491c-8f89-3a8e010a15c5___083daae9d36c1c9af6e8de0888a49856.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/eeee6505-6e86-491c-8f89-3a8e010a15c5___083daae9d36c1c9af6e8de0888a49856.png"
+                        alt="">
                 </div>
                 <div class="d-flex justify-content-center align-items-center p-3">
-                    <a class="category" style="cursor: pointer;"><strong>Panaderia</strong></a>
+                    <a class="category" style="cursor: pointer;"><strong>Panadería</strong></a>
                 </div>
             </div>
 
-            <div class="kind card d-flex flex-row" style="width: 290px;">
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Aseo personal')">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/488112be-62a3-4d30-a9ff-a50cfc0c0734___8c117b96891b4a65071741d8389eec21.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/488112be-62a3-4d30-a9ff-a50cfc0c0734___8c117b96891b4a65071741d8389eec21.png"
+                        alt="">
                 </div>
                 <div class="d-flex justify-content-center align-items-center p-3">
                     <a class="category" style="cursor: pointer;"><strong>Aseo personal</strong></a>
                 </div>
             </div>
 
-            <div class="kind card d-flex flex-row" style="width: 290px;">
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Bebidas')">
                 <div class="" style="background-color: rgb(228, 228, 228);">
-                    <img style="width: 115px;" class="p-3" src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/53f54853-25a0-49d4-b33c-1dfd2c663df8___a4d5705e6a04adec2a265e8a8570dfaa.png" alt="">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/53f54853-25a0-49d4-b33c-1dfd2c663df8___a4d5705e6a04adec2a265e8a8570dfaa.png"
+                        alt="">
                 </div>
                 <div class="d-flex justify-content-center align-items-center p-3">
                     <a class="category" style="cursor: pointer;"><strong>Bebidas</strong></a>
                 </div>
             </div>
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Drogueria')">
+                <div class="" style="background-color: rgb(228, 228, 228);">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/c67996a9-9aa9-4dc8-87e8-8abfa31d7cf0___356ee3de8366aa06cf37dd96cd1f51c0.png"
+                        alt="">
+                </div>
+                <div class="d-flex justify-content-center align-items-center p-3">
+                    <a class="category" style="cursor: pointer;"><strong>Drogueria</strong></a>
+                </div>
+            </div>
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Papelería')">
+                <div class="" style="background-color: rgb(228, 228, 228);">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/c67996a9-9aa9-4dc8-87e8-8abfa31d7cf0___356ee3de8366aa06cf37dd96cd1f51c0.png"
+                        alt="">
+                </div>
+                <div class="d-flex justify-content-center align-items-center p-3">
+                    <a class="category" style="cursor: pointer;"><strong>Papelería</strong></a>
+                </div>
+            </div>
+            <div class="kind card d-flex flex-row" style="width: 290px;" (click)="viewCategory('Pasabocas')">
+                <div class="" style="background-color: rgb(228, 228, 228);">
+                    <img style="width: 115px;" class="p-3"
+                        src="https://olimpica.vtexassets.com/assets/vtex.file-manager-graphql/images/c67996a9-9aa9-4dc8-87e8-8abfa31d7cf0___356ee3de8366aa06cf37dd96cd1f51c0.png"
+                        alt="">
+                </div>
+                <div class="d-flex justify-content-center align-items-center p-3">
+                    <a class="category" style="cursor: pointer;"><strong>Pasabocas</strong></a>
+                </div>
+            </div>
         </div>
+
+
     </div>
 
 
     <div class="w-100">
         <div class="p-3">
-          <h1 style="font-size: 20px; color: orangered;" class="p-3"><strong>¡Conoce los productos!</strong></h1>
-          <hr>
+            <h1 style="font-size: 20px; color: orangered;" class="p-3"><strong>¡Conoce los productos!</strong></h1>
+            <hr>
         </div>
-        <div id="itemslider" class="carousel slide d-flex flex-column p-3" data-bs-ride="carousel" style="height: 500px;">
-          <div class="carousel-inner d-flex flex-nowrap">
-            <div *ngFor="let product of products; let i = index" class="carousel-item gap-3" [ngClass]="{'active': i === 0}">
-              <div class="d-flex flex-wrap justify-content-center gap-5">
-                <div *ngFor="let product of products.slice(i, i + 4)" class="mb-3 shadow" style="width: 200px; height: 450px;">
-                  <div class="card h-100">
-                    <div class="card-body d-flex flex-column gap-3">
-                      <div class="img">
-                        <img class="img-fluid" src="{{ product.image_product }}" alt="">
-                      </div>
-                      <div class="d-flex flex-column gap-5">
-                        <h2 class="card-title" style="font-size: 15px;"><strong>{{ product.name_product }}</strong></h2>
-                        <p class="card-text">Precio por unidad: ${{ product.unit_purchase_price_product }}</p>
-                      </div>
+        <div id="itemslider" class="carousel slide d-flex flex-column p-3" data-bs-ride="carousel"
+            style="height: 500px;">
+            <div class="carousel-inner d-flex flex-nowrap">
+                <div *ngFor="let product of products; let i = index" class="carousel-item gap-3"
+                    [ngClass]="{'active': i === 0}">
+                    <div class="d-flex flex-wrap justify-content-center gap-5">
+                        <div *ngFor="let product of products.slice(i, i + 4)" class="mb-3 shadow"
+                            style="width: 200px; height: 450px;">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column gap-3">
+                                    <div class="img">
+                                        <img class="img-fluid" src="{{ product.image_product }}" alt="">
+                                    </div>
+                                    <div class="d-flex flex-column gap-5">
+                                        <h2 class="card-title" style="font-size: 15px;"><strong>{{ product.name_product
+                                                }}</strong></h2>
+                                        <p class="card-text">Precio por unidad: ${{ product.unit_purchase_price_product
+                                            }}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center mb-3">
+                                    <button class="btn btn-outline-warning " style="width: 150px;"
+                                        (click)="viewProduct(product.id_product)">Ver</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-center mb-3">
-                        <button class="btn btn-outline-warning " style="width: 150px;" (click)="viewProduct(product.id_product)">Ver</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#itemslider" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <!--<button class="carousel-control-next" type="button" data-bs-target="#itemslider" data-bs-slide="next">
+            <button class="carousel-control-prev" type="button" data-bs-target="#itemslider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <!--<button class="carousel-control-next" type="button" data-bs-target="#itemslider" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button> !-->
         </div>
-      </div>
+    </div>
 
 
     <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap" style="width: 60%;"

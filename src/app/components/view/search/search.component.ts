@@ -90,6 +90,13 @@ export class SearchComponent {
         this.categories = response.categories[0].map(category => ({ ...category, isSelected: false }));
         this.filter = this.categories.slice();
 
+        this.shared.home_category.subscribe((category: any) => {
+          if (category !== null) {
+            this.updateSelectionCategory(category)
+          }
+        })
+
+
       },
       error: (error) => {
         console.log(error.error.Status);
@@ -110,9 +117,9 @@ export class SearchComponent {
   updateSelectionCategory(name_category: any) {
     if (this.categories) {
       console.log(this.selectedCategory);
+      console.log(name_category);
 
       if (name_category === this.selectedCategory) {
-        console.log(name_category === this.selectedCategory);
         name_category = "";
         this.selectedCategory = "";
       } else {
@@ -120,6 +127,7 @@ export class SearchComponent {
           if (category.name_category === name_category) {
             category.isSelected = true;
             this.selectedCategory = name_category;
+         
           } else {
             category.isSelected = false;
           }
