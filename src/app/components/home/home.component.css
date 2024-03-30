@@ -1,72 +1,111 @@
-.img-modal-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo para el contenedor del slider */
+.custom-slider {
+  width: 100%;
+  height: 30vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  flex: 1;
+}
+
+/* Estilo para las imágenes dentro del carrusel */
+.custom-carousel-item img {
   height: 100%;
-}
-
-.img-modal-body img {
-  max-width: 100%;
-  max-height: 100%;
   width: auto;
-  height: auto;
+  display: flex;
 }
 
-.img-modal-body {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100%;
+@media screen and (max-width: 768px) {
+  .custom-slider {
+    height: 20vh;
+  }
+
+  .custom-carousel-item img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 
-.img-modal-body img {
-max-width: 100%;
-max-height: 100%;
-width: auto;
-height: auto;
-}
-#bannerCarousel {
-position: relative;
+
+@media screen and (max-width: 320px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-#bannerCarousel::after {
-content: "";
-position: absolute;
-bottom: 0;
-left: 0;
-width: 100%;
-height: 90px; /* Altura del difuminado, ajusta según tus necesidades */
-background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Degradado blanco-transparente */
+/* iPhone XR, 12 Pro */
+@media screen and (min-width: 414px) and (max-width: 896px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-.carousel-item img {
-max-width: 100%; /* Limita el ancho máximo de la imagen al 100% del contenedor */
-max-height: calc(100% - 50px); /* Limita la altura máxima de la imagen al 100% de la altura de la ventana menos el tamaño del difuminado */
-margin: 0 auto; /* Centra la imagen horizontalmente dentro del contenedor */
-object-fit: contain; /* Mantiene la proporción de aspecto de la imagen sin distorsionarla */
+/* iPhone 14 */
+@media screen and (min-width: 428px) and (max-width: 926px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-.carr{
-background-color: #EEE8E8;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3CradialGradient id='a' gradientUnits='objectBoundingBox'%3E%3Cstop offset='0' stop-color='%23FFFFFF'/%3E%3Cstop offset='1' stop-color='%23EEE8E8'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='750' x2='1550' y2='750'%3E%3Cstop offset='0' stop-color='%23f7f4f4'/%3E%3Cstop offset='1' stop-color='%23EEE8E8'/%3E%3C/linearGradient%3E%3Cpath id='s' fill='url(%23b)' d='M1549.2 51.6c-5.4 99.1-20.2 197.6-44.2 293.6c-24.1 96-57.4 189.4-99.3 278.6c-41.9 89.2-92.4 174.1-150.3 253.3c-58 79.2-123.4 152.6-195.1 219c-71.7 66.4-149.6 125.8-232.2 177.2c-82.7 51.4-170.1 94.7-260.7 129.1c-90.6 34.4-184.4 60-279.5 76.3C192.6 1495 96.1 1502 0 1500c96.1-2.1 191.8-13.3 285.4-33.6c93.6-20.2 185-49.5 272.5-87.2c87.6-37.7 171.3-83.8 249.6-137.3c78.4-53.5 151.5-114.5 217.9-181.7c66.5-67.2 126.4-140.7 178.6-218.9c52.3-78.3 96.9-161.4 133-247.9c36.1-86.5 63.8-176.2 82.6-267.6c18.8-91.4 28.6-184.4 29.6-277.4c0.3-27.6 23.2-48.7 50.8-48.4s49.5 21.8 49.2 49.5c0 0.7 0 1.3-0.1 2L1549.2 51.6z'/%3E%3Cg id='g'%3E%3Cuse href='%23s' transform='scale(0.12) rotate(60)'/%3E%3Cuse href='%23s' transform='scale(0.2) rotate(10)'/%3E%3Cuse href='%23s' transform='scale(0.25) rotate(40)'/%3E%3Cuse href='%23s' transform='scale(0.3) rotate(-20)'/%3E%3Cuse href='%23s' transform='scale(0.4) rotate(-30)'/%3E%3Cuse href='%23s' transform='scale(0.5) rotate(20)'/%3E%3Cuse href='%23s' transform='scale(0.6) rotate(60)'/%3E%3Cuse href='%23s' transform='scale(0.7) rotate(10)'/%3E%3Cuse href='%23s' transform='scale(0.835) rotate(-40)'/%3E%3Cuse href='%23s' transform='scale(0.9) rotate(40)'/%3E%3Cuse href='%23s' transform='scale(1.05) rotate(25)'/%3E%3Cuse href='%23s' transform='scale(1.2) rotate(8)'/%3E%3Cuse href='%23s' transform='scale(1.333) rotate(-60)'/%3E%3Cuse href='%23s' transform='scale(1.45) rotate(-30)'/%3E%3Cuse href='%23s' transform='scale(1.6) rotate(10)'/%3E%3C/g%3E%3C/defs%3E%3Cg transform='rotate(0 0 0)'%3E%3Cg transform='rotate(0 0 0)'%3E%3Ccircle fill='url(%23a)' r='3000'/%3E%3Cg opacity='0.5'%3E%3Ccircle fill='url(%23a)' r='2000'/%3E%3Ccircle fill='url(%23a)' r='1800'/%3E%3Ccircle fill='url(%23a)' r='1700'/%3E%3Ccircle fill='url(%23a)' r='1651'/%3E%3Ccircle fill='url(%23a)' r='1450'/%3E%3Ccircle fill='url(%23a)' r='1250'/%3E%3Ccircle fill='url(%23a)' r='1175'/%3E%3Ccircle fill='url(%23a)' r='900'/%3E%3Ccircle fill='url(%23a)' r='750'/%3E%3Ccircle fill='url(%23a)' r='500'/%3E%3Ccircle fill='url(%23a)' r='380'/%3E%3Ccircle fill='url(%23a)' r='250'/%3E%3C/g%3E%3Cg transform='rotate(0 0 0)'%3E%3Cuse href='%23g' transform='rotate(10)'/%3E%3Cuse href='%23g' transform='rotate(120)'/%3E%3Cuse href='%23g' transform='rotate(240)'/%3E%3C/g%3E%3Ccircle fill-opacity='0.1' fill='url(%23a)' r='3000'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: cover;
+/* Google Pixel 7 */
+@media screen and (min-width: 411px) and (max-width: 823px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-.category{
-  color: black;
-  text-decoration: none;
+/* Samsung Galaxy S8+ */
+@media screen and (min-width: 360px) and (max-width: 740px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-.category:hover{
-  color: orangered;
+/* Samsung Galaxy S20 Ultra */
+@media screen and (min-width: 480px) and (max-width: 1000px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-.kind {
-  transition: transform 0.3s ease;
+/* iPad mini */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Ajustes de estilos para el nav y el slicer */
 }
 
-.kind:hover {
-  transform: scale(1.05);
-  border-color: orangered;
-}  
+/* iPad Air, iPad Pro */
+@media screen and (min-width: 834px) and (max-width: 1112px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Surface Pro 7 */
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Surface Duo */
+@media screen and (min-width: 540px) and (max-width: 720px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Samsung Galaxy Fold */
+@media screen and (min-width: 280px) and (max-width: 560px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Asus Zenbook Fold */
+@media screen and (min-width: 500px) and (max-width: 1000px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Samsung Galaxy A51/A71 */
+@media screen and (min-width: 360px) and (max-width: 780px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Google Nest Hub */
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Google Nest Hub Max */
+@media screen and (min-width: 1280px) and (max-width: 1920px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+

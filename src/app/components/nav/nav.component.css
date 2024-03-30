@@ -1,178 +1,11 @@
-.button {
-    background-color: red;
-    color: black;
-}
-
-.lable {
-    line-height: 22px;
-    font-size: 17px;
-    color: #fff;
-    margin-left: 20px;
-    font-family: sans-serif;
-    letter-spacing: 1px;
-}
-
-/* .button .span {
-    border-radius: 50%;
-    background-color: orange;
-    padding: 10px;
-    position: absolute;
-    left: 0;
-}
-
-.button:hover {
-    background: orange;
-} */
-
-.button:hover .svg-icon {
-    animation: slope 0.8s linear infinite;
-}
-
-@keyframes slope {
-    0% {}
-
-    50% {
-        transform: rotate(15deg);
-    }
-
-    100% {}
-}
-
-.container {
-    overflow: hidden;
-
-    .slider {
-        animation: slidein 30s linear infinite;
-        white-space: nowrap;
-
-        .phrases {
-            width: auto;
-            display: inline-block;
-            margin: 0px 0;
-        }
-
-    }
-}
-
-
-.phrase {
-    padding: 0 50px;
-}
-
-@keyframes slidein {
-    from {
-        transform: translate3d(0, 0, 0);
-    }
-
-    to {
-        transform: translate3d(-75%, 0, 0);
-    }
-}
-
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.btn_drop {
-    background-color: orange;
-    border: none;
-}
-
-
-
-
-.nav_left {
-    background-color: #f19159;
-    border-top-left-radius: 48px;
-    border-bottom-left-radius: 48px;
-}
-
-.nav-tabs .nav-link.active {
-    background-color: transparent;
-    border-color: transparent;
-    border-top: 4px solid #fff;
-    color: #fff;
-}
-
-.nav-tabs .nav-link {
-    border: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin: 0 30px 0 40px;
-}
-
-.nav-tabs {
-    border-bottom: none;
-}
-
-.nav-link {
-    padding: 1rem 0.5rem;
-    color: #fff;
-    cursor: pointer;
-}
-
-.nav-link:focus,
-.nav-link:hover {
-    color: #fff;
-}
-
-.search_input {
-    width:100%;
-    border-radius: 10px;
-    border: none;
-    line-height: initial;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    color: #f19159;
-}
-
-.search_input:focus-visible {
-    outline: none;
-}
-
-input.search_input::placeholder {
-    color: #cfd2ec;
-    vertical-align: middle;
-}
-
-.search_img {
-    top: 7px;
-    right: 8px;
-}
-
-.navbar-toggler {
-    border: 3px solid #f19159;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(35, 76, 203, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.navbar-toggler:focus {
-    box-shadow: none;
-}
-.navbar{
- background-color: #FE5115;
-}
-
-
-
-a {
+/* a {
     text-decoration: none;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    cursor: pointer;
+    font-size: 18px;
 }
 
 .nav_text {
-    /* border: 2px black solid; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -189,22 +22,14 @@ nav {
 
 .rows {
     display: flex;
-    /* border: 2px yellow solid; */
     justify-content: space-between;
     align-items: center;
 }
 
 .elements {
     display: flex;
-    /* border: 2px red solid; */
     gap: 20px;
     color: white;
-}
-
-#auth,
-.a_auth {
-    /* text-decoration: underline; */
-    font-size: 20px;
 }
 
 .logo a {
@@ -286,10 +111,208 @@ nav {
     font-size: 25px;
 }
 
-.location .city {
-    border-left: 2px #FF5757 solid;
-}
-
 .container {
     padding: 0;
+<<<<<<< HEAD
 }
+
+@media screen and (max-width: 768px) {
+  .superNav .container-fluid {
+    padding: 0;
+    width: 100%;
+  }
+  .superNav .slider .phrases {
+    padding: 0;
+    width: 100%;
+  }
+  .superNav .slider {
+    animation: none;
+    width: 100%;
+  }
+  .superNav .container {
+    max-width: 100%;
+    padding: 0;
+    width: 100%;
+  }
+  .nav_text {
+    justify-content: center;
+    width: 100%;
+  }
+}
+/* iPhone SE */
+@media screen and (max-width: 320px) {
+  .nav-tabs .nav-link {
+    margin: 0 10px; /* Reducir el espaciado entre los elementos */
+    font-size: 14px; /* Reducir el tamaño del texto */
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    display: block; /* Mostrar el botón de menú desplegable */
+    width: auto
+  }
+
+  .navbar-collapse {
+    display: none; /* Ocultar el menú desplegable por defecto */
+    width: auto;
+  }
+}
+
+/* iPhone XR, 12 Pro */
+@media screen and (min-width: 414px) and (max-width: 896px) {
+  .button {
+    /* Estilos para el botón en iPhone XR, 12 Pro */
+  }
+
+  .lable {
+    /* Estilos para el texto en iPhone XR, 12 Pro */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* iPhone 14 */
+@media screen and (min-width: 428px) and (max-width: 926px) {
+  .button {
+    /* Estilos para el botón en iPhone 14 */
+  }
+
+  .lable {
+    /* Estilos para el texto en iPhone 14 */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* Google Pixel 7 */
+@media screen and (min-width: 411px) and (max-width: 823px) {
+  .button {
+    /* Estilos para el botón en Google Pixel 7 */
+  }
+
+  .lable {
+    /* Estilos para el texto en Google Pixel 7 */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* Samsung Galaxy S8+, S20 Ultra */
+@media screen and (min-width: 360px) and (max-width: 1024px) {
+  .button {
+    /* Estilos para el botón en Samsung Galaxy S8+, S20 Ultra */
+  }
+
+  .lable {
+    /* Estilos para el texto en Samsung Galaxy S8+, S20 Ultra */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* iPad Mini, iPad Air, iPad Pro */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .button {
+    /* Estilos para el botón en iPad Mini, iPad Air, iPad Pro */
+  }
+
+  .lable {
+    /* Estilos para el texto en iPad Mini, iPad Air, iPad Pro */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* Surface Pro 7, Surface Duo */
+@media screen and (min-width: 540px) and (max-width: 1024px) {
+  .button {
+    /* Estilos para el botón en Surface Pro 7, Surface Duo */
+  }
+
+  .lable {
+    /* Estilos para el texto en Surface Pro 7, Surface Duo */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* Galaxy Fold, Asus Zenbook Fold */
+@media screen and (min-width: 280px) and (max-width: 1536px) {
+  .button {
+    /* Estilos para el botón en Galaxy Fold, Asus Zenbook Fold */
+  }
+
+  .lable {
+    /* Estilos para el texto en Galaxy Fold, Asus Zenbook Fold */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* Samsung Galaxy A51/A71 */
+@media screen and (min-width: 360px) and (max-width: 800px) {
+  .button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  }
+
+  .lable {
+width: 100%;
+height: 100%;
+display: flex
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+
+/* Nest Hub, Nest Hub Max */
+@media screen and (min-width: 480px) and (max-width: 1280px) {
+  .button {
+    /* Estilos para el botón en Nest Hub, Nest Hub Max */
+  }
+
+  .lable {
+    /* Estilos para el texto en Nest Hub, Nest Hub Max */
+  }
+
+  /* Agrega estilos adicionales según sea necesario */
+}
+=======
+} */
+
+a {
+    text-decoration: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.logo a {
+    font-size: 40px;
+}
+
+.div_search select {
+    width: 150px;
+}
+
+.btn-bg {
+    background-color: #ff3636;
+    border: none;
+}
+
+.fa-location-dot {
+    font-size: 25px;
+}
+
+.row_one a,
+p {
+    font-size: 20px;
+}
+
+.location select {
+    border: none;
+    padding: 5px;
+    width: 150px;
+}
+>>>>>>> 4ae263c660c351dd9a230147829f781f64c4940f
