@@ -1,5 +1,5 @@
-/* Reset de estilos */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
 }
@@ -7,45 +7,105 @@ body, html {
 /* Estilo para el contenedor del slider */
 .custom-slider {
   width: 100%;
-  max-width: 100vw;
   height: 30vh;
   overflow: hidden;
   position: relative;
-  width: calc(100vw - 100 * margin-left);
+  width: 100%;
   margin: 0;
   flex: 1;
 }
 
-/* Estilo para el carrusel */
-.custom-carousel {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  transition: transform 0.5s ease;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: flex; /* Añadir posición absoluta */
-  left: 0; /* Colocar a la izquierda */
-  right: 0; /* Colocar a la derecha */
-}
-
-/* Estilo para los elementos del carrusel */
-.custom-carousel-item {
-  flex: 0 0 auto;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-basis: 100%;
-}
-
 /* Estilo para las imágenes dentro del carrusel */
 .custom-carousel-item img {
-  max-width: 100%;
-  height: auto;
-  max-height: 100%; /* Añadir máximo de altura */
+  height: 100%;
+  width: auto;
+  display: flex;
 }
 
+@media screen and (max-width: 768px) {
+  .custom-slider {
+    height: 20vh;
+  }
+
+  .custom-carousel-item img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* iPhone XR, 12 Pro */
+@media screen and (min-width: 414px) and (max-width: 896px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* iPhone 14 */
+@media screen and (min-width: 428px) and (max-width: 926px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Google Pixel 7 */
+@media screen and (min-width: 411px) and (max-width: 823px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Samsung Galaxy S8+ */
+@media screen and (min-width: 360px) and (max-width: 740px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Samsung Galaxy S20 Ultra */
+@media screen and (min-width: 480px) and (max-width: 1000px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* iPad mini */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* iPad Air, iPad Pro */
+@media screen and (min-width: 834px) and (max-width: 1112px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Surface Pro 7 */
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Surface Duo */
+@media screen and (min-width: 540px) and (max-width: 720px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Samsung Galaxy Fold */
+@media screen and (min-width: 280px) and (max-width: 560px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Asus Zenbook Fold */
+@media screen and (min-width: 500px) and (max-width: 1000px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Samsung Galaxy A51/A71 */
+@media screen and (min-width: 360px) and (max-width: 780px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Google Nest Hub */
+@media screen and (min-width: 640px) and (max-width: 1024px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
+
+/* Google Nest Hub Max */
+@media screen and (min-width: 1280px) and (max-width: 1920px) {
+  /* Ajustes de estilos para el nav y el slicer */
+}
 

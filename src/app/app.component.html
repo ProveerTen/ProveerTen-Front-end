@@ -2,8 +2,8 @@
     <app-nav></app-nav>
 </div>
 
-<div class="container">
-    <div class="row" *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
+<div class="containers">
+    <div class=" row" *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
         <div [ngClass]="{'col-12': listChatsActive, 'col-9': !listChatsActive}">
             <router-outlet></router-outlet>
         </div>
@@ -34,7 +34,7 @@
         </div>
 
     </div>
-    <div class="row" *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
+    <div class="" *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
         <router-outlet></router-outlet>
     </div>
     <p-toast position="bottom-right" key="center"></p-toast>
