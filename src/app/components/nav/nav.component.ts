@@ -23,7 +23,11 @@ export class NavComponent {
   city: any;
   id: any;
 
+  city_local: any;
+  department_local: any;
+
   constructor(public auth: AuthService, private router: Router, private fb: FormBuilder, private client: ClientService, private shared: SharedService) {
+
     this.form = this.fb.group({
       searchType: ['products'],
       searchTerm: [''],

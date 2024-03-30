@@ -40,3 +40,60 @@
     padding: 0;
     margin: 0; */
 }
+
+/* */
+
+/* .button:hover .svg-icon {
+    animation: slope 0.8s linear infinite;
+}
+
+@keyframes slope {
+    0% {}
+
+    50% {
+        transform: rotate(15deg);
+    }
+
+    100% {}
+}
+
+.container {
+    overflow: hidden;
+
+    .slider {
+        animation: slidein 30s linear infinite;
+        white-space: nowrap;
+
+        .phrases {
+            width: auto;
+            display: inline-block;
+            margin: 0px 0;
+        }
+
+    }
+}
+
+.phrase {
+    padding: 0 50px;
+}
+
+@keyframes slidein {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-75%, 0, 0);
+    }
+}
+
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+} */
