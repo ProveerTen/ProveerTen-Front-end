@@ -63,44 +63,88 @@ export class HomeComponent {
         complete: () => console.log('complete'),
       });
     }
+    if (this.isOffline) {
 
-    this.client.getRequest(`${environment.url_logic}/publication/view`, undefined).subscribe({
-      next: (response: any) => {
-        // console.log(response);
+      this.client.postRequest(`${environment.url_logic}/publication/view`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
+        next: (response: any) => {
+          // console.log(response);
 
-        this.publicaciones = response.publications
-        //console.log(this.publicaciones);
+          this.publicaciones = response.publications
+          //console.log(this.publicaciones);
 
 
-        for (let k = 0; k < this.publicaciones.length; k++) {
-          const element = this.publicaciones[k].date;
-          this.publicaciones[k].date = new Date(element)
+          for (let k = 0; k < this.publicaciones.length; k++) {
+            const element = this.publicaciones[k].date;
+            this.publicaciones[k].date = new Date(element)
+          }
+
+          this.publicaciones = this.orderByDate(this.publicaciones)
+          // console.log("despues deordenar", this.publicaciones);
+
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+        complete: () => {
+
+          this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined).subscribe({
+            next: (response: any) => {
+              // console.log(response.data);
+              this.companies = response.data
+            },
+            error: (error: any) => {
+              console.log(error);
+            },
+            complete: () => {
+              console.log("complete");
+              this.newData();
+            }
+          });
         }
-
-        this.publicaciones = this.orderByDate(this.publicaciones)
-        // console.log("despues deordenar", this.publicaciones);
-
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-      complete: () => {
-
-        this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined).subscribe({
+      });
+    } else {
+      this.shared.department_and_city.subscribe(value => {
+        let data_publication = value
+        this.client.postRequest(`${environment.url_logic}/publication/view/location`, data_publication, undefined, undefined).subscribe({
           next: (response: any) => {
-            // console.log(response.data);
-            this.companies = response.data
+            // console.log(response);
+
+            this.publicaciones = response.publications
+            //console.log(this.publicaciones);
+
+
+            for (let k = 0; k < this.publicaciones.length; k++) {
+              const element = this.publicaciones[k].date;
+              this.publicaciones[k].date = new Date(element)
+            }
+
+            this.publicaciones = this.orderByDate(this.publicaciones)
+            // console.log("despues deordenar", this.publicaciones);
+
           },
           error: (error: any) => {
             console.log(error);
           },
           complete: () => {
-            console.log("complete");
-            this.newData();
+
+            this.client.getRequest(`${environment.url_logic}/profile/allCompaniesUserCero`, undefined).subscribe({
+              next: (response: any) => {
+                // console.log(response.data);
+                this.companies = response.data
+              },
+              error: (error: any) => {
+                console.log(error);
+              },
+              complete: () => {
+                console.log("complete");
+                this.newData();
+              }
+            });
           }
         });
-      }
-    });
+      })
+    }
+
   }
 
   orderByDate(publications: any[]) {
@@ -154,7 +198,7 @@ export class HomeComponent {
   viewCategory(name_category: string) {
     this.shared.changeHomeCategory(name_category);
     this.shared.type.next('products')
-    this.router.navigate(['search','products']);
+    this.router.navigate(['search', 'products']);
   }
 }
 

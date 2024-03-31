@@ -42,6 +42,8 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center">Imagen</th>
+                                        <th class="text-center">Texto</th>
+                                        <th class="text-center">Acción</th>
                                         
                                     </tr>
                                 </thead>
@@ -61,6 +63,12 @@
                                                     </ng-template>
                                                 </div>
                                             </td>
+                                            <td style="width:300px;">
+                                                <p *ngIf="publication.text.length <= 90; else textPublication">{{publication.text}} </p>
+                                                <ng-template #textPublication>
+                                                    <p>{{publication.text.slice(0, 90)}}... </p>
+                                                </ng-template>                                              
+                                            </td>    
                                             <td class="text-center align-middle">
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-outline-success btn-sm rounded-pill" (click)="updatePublication(publication._id)">
