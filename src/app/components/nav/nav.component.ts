@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared/shared.service';
 import { ClientService } from 'src/app/services/client/client.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -22,6 +24,8 @@ export class NavComponent {
   department: any;
   city: any;
   id: any;
+
+  data: any;
 
   city_local: any;
   department_local: any;
@@ -76,6 +80,11 @@ export class NavComponent {
   }
 
   ngOnInit(): void {
+
+    if (this.auth.getRole() === 'provider') {
+      this.getDataProvider();
+    }
+
     this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
       next: (response) => {
         this.departments = response;
@@ -83,6 +92,19 @@ export class NavComponent {
       },
       error: (error) => {
         console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
+  }
+
+  getDataProvider() {
+    this.client.getRequest(`${environment.url_logic}/profile/${this.auth.getRole()}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        this.data = response.data;
+        console.log(this.data);
+      },
+      error: (error) => {
+        console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
@@ -185,5 +207,35 @@ export class NavComponent {
     this.shared.type.next(newValue)
     const searchTerm = this.form.get('searchTerm').value;
     this.shared.searchTerm.next(searchTerm);
+  }
+
+  manageProviders() {
+    this.router.navigate(['manage/providers']);
+  }
+
+  managePublications() {
+    this.router.navigate(['manage/publications']);
+  }
+
+  manageProducts() {
+    this.router.navigate(['manage/products']);
+  }
+
+  viewCompany(id: string) {
+    console.log(id);
+
+    this.router.navigate(['profile/company', id]);
+  }
+
+  manageOrders() {
+    this.router.navigate(['manage/orders']);
+  }
+
+  viewGrocers() {
+    this.router.navigate(['view/grocers']);
+  }
+
+  viewProducts(id: string) {
+    this.router.navigate(['view/products/', id]);
   }
 }
