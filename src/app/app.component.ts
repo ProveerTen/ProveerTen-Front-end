@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
 import { SharedService } from './services/shared/shared.service';
 
@@ -12,6 +12,7 @@ export class AppComponent {
   chats: string[] = [];
   isLogin: any;
   listChatsActive: boolean = true;
+  showScrollButton: boolean = false;
 
   constructor(public auth: AuthService, private shared: SharedService) {
 
@@ -29,6 +30,21 @@ export class AppComponent {
       }
     });
   }
+
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      this.showScrollButton = true;
+    } else {
+      this.showScrollButton = false;
+    }
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   ngOnInit(): void {
     if (this.isLogin) {
       let localchats = localStorage.getItem('chats');

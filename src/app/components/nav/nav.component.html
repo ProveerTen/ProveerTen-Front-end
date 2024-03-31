@@ -10,8 +10,8 @@
                 <i class="fa-solid fa-x" style="color: #ffffff;"></i>
             </button>
         </div>
-        <div class="offcanvas-body pt-5">
-            <div *ngIf="!(auth.isLoggedIn() | async)" class="d-flex flex-column gap-5">
+        <div class="offcanvas-body">
+            <div *ngIf="!(auth.isLoggedIn() | async)" class="d-flex flex-column">
                 <div class="d-flex flex-column align-items-left gap-3">
                     <a routerLink="login" class="text-light">Iniciar sesión</a>
                     <a routerLink="register" class="text-light">Registrarse</a>
@@ -44,6 +44,45 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <div *ngIf="auth.isLoggedIn() | async" class="d-flex flex-column gap-5">
+                <div class="" *ngIf="auth.isLoggedIn() | async">
+                    <div class="d-flex flex-column align-items-left gap-3">
+                        <a routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Inicio</a>
+                        <a routerLink="/search/companies"><i class="fa-solid fa-building" style="color: #ffffff;"></i>
+                            Ver empresas</a>
+                        <a routerLink="/search/products"><i class="fa-solid fa-basket-shopping"
+                                style="color: #ffffff;"></i>
+                            Ver productos</a>
+                        <a routerLink="/view/price/products"><i class="fa-solid fa-dollar-sign"
+                                style="color: #ffffff;"></i>
+                            Ver precios sugeridos</a>
+                        <a routerLink="/create/order"><i class="fa-solid fa-clipboard" style="color: #fcfcfc;"></i>
+                            Crear pedido</a>
+                        <a routerLink="/view/orders"><i class="fa-solid fa-book" style="color: #ffffff;"></i>
+                            Ver pedidos</a>
+                    </div>
+                    <hr class="text-light">
+                    <div class="d-flex flex-column align-items-left gap-3">
+                        <!-- <h5 class="text-light">Perfil</h5> -->
+                        <a class="text-light" routerLink="profile">Ver
+                            perfil</a>
+                        <a class="text-light" role="button" (click)="update_profile()">Editar perfil</a>
+                        <a class="text-light" role="button" (click)="auth.logout()">Cerrar sesión</a>
+                    </div>
+                    <hr class="text-light">
+                    <div *ngIf="auth.isLoggedIn() | async" class="col-auto d-lg-inline">
+                        <div class="location d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
+                            <div class=" d-flex gap-3 text-light">
+                                <span>Departamento</span>
+                                <span>|</span>
+                                <span>Ciudad</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,7 +139,7 @@
                 <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="login" class="text-light">Iniciar sesión</a>
                 <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="register" class="text-light">Registrarse</a>
                 <div class="dropdown d-none d-lg-inline" *ngIf="auth.isLoggedIn() | async">
-                    <button class="btn btn-bg text-light dropdown-toggle" type="button" id="profileMenuButton"
+                    <button class="btn bg-danger text-light dropdown-toggle" type="button" id="profileMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
                                 class="svg-icon">
@@ -114,10 +153,10 @@
                                 routerLink="profile">Ver
                                 perfil</a></li>
                         <li *ngIf="auth.isGrocer() | async"><a class="dropdown-item text-black"
-                                (click)="update_profile()">Editar perfil</a></li>
+                                (click)="update_profile()" role="button">Editar perfil</a></li>
                         <hr>
                         <li *ngIf="auth.isLoggedIn() | async"><a class="dropdown-item text-danger"
-                                (click)="auth.logout()">Cerrar sesión</a></li>
+                                (click)="auth.logout()" role="button">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -178,6 +217,18 @@
                     </div>
                 </form>
             </div>
+
+            <div *ngIf="auth.isLoggedIn() | async" class="col-auto d-lg-inline">
+                <div class="location d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
+                    <div class=" d-flex gap-3 text-light">
+                        <span>Departamento</span>
+                        <span>|</span>
+                        <span>Ciudad</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 

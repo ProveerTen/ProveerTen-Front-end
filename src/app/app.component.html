@@ -28,6 +28,7 @@
 </div>
 
 <div class="containers">
+
     <div class=" row" *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
         <div [ngClass]="{'col-12': listChatsActive, 'col-9': !listChatsActive}">
             <router-outlet></router-outlet>
@@ -67,12 +68,14 @@
 
 <div *ngIf="!(auth.isLoggedIn() | async) || (auth.isCompany() | async)">
     <div class="col-12">
+        <button *ngIf="showScrollButton" (click)="scrollToTop()" class="btn btn-primary btn-floating">Subir</button>
         <app-footer></app-footer>
     </div>
 </div>
 
 <div *ngIf="(auth.isLoggedIn() | async) && !(auth.isCompany() | async)">
     <div [ngClass]="{'col-12': listChatsActive, 'col-10': !listChatsActive}">
+        <button *ngIf="showScrollButton" (click)="scrollToTop()" class="btn btn-primary btn-floating">Subir</button>
         <app-footer></app-footer>
     </div>
 </div>
