@@ -6,8 +6,8 @@ html {
 
 /* Estilo para el contenedor del slider */
 .custom-slider {
-  width: 100%;
-  height: 30vh;
+  width: 1000px;
+  height: 20vh;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -18,7 +18,7 @@ html {
 /* Estilo para las imágenes dentro del carrusel */
 .custom-carousel-item img {
   height: 100%;
-  width: auto;
+  width: 100%;
   display: flex;
 }
 
