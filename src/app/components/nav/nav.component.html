@@ -1,16 +1,73 @@
 <div class="container">
 
-    <nav class="navbar navbar-expand-lg navbar-light flex-column gap-4"
-        *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)">
-        <div class="row w-100 justify-content-between align-items-center gap-4">
-            <div class="col-auto logo">
-                <a routerLink="">ProveerTen</a>
+    <div class="offcanvas offcanvas-end btn-bg bg_color" tabindex=" -1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header bg-danger d-flex justify-content-end">
+            <!-- <button type=" button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="fa-solid fa-x" style="color: #ffffff;"></i>
+            </button> -->
+            <button type=" button" class="bg-transparent border-0" data-bs-dismiss="offcanvas">
+                <i class="fa-solid fa-x" style="color: #ffffff;"></i>
+            </button>
+        </div>
+        <div class="offcanvas-body pt-5">
+            <div *ngIf="!(auth.isLoggedIn() | async)" class="d-flex flex-column gap-5">
+                <div class="d-flex flex-column align-items-left gap-3">
+                    <a routerLink="login" class="text-light">Iniciar sesión</a>
+                    <a routerLink="register" class="text-light">Registrarse</a>
+                </div>
+                <hr class="text-light">
+                <div *ngIf="!(auth.isLoggedIn() | async)" class="col-auto">
+                    <form class="d-flex gap-4" [formGroup]="form_location" (ngSubmit)="filter_location()">
+                        <div class="location d-flex flex-column align-items-start gap-2">
+                            <!-- <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i> -->
+                            <h6 class="text-light">Ubicación</h6>
+                            <div class="d-flex bg-light">
+                                <div class="department">
+                                    <select formControlName="department" (ngModelChange)="selected_department($event)"
+                                        class="form-select">
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option *ngFor="let department of departments" [ngValue]="department.name">
+                                            {{ department.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="city">
+                                    <select formControlName="city" class="form-select">
+                                        <option value="" disabled selected>Seleccionar</option>
+                                        <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn bg-danger text-light rounded-0">
+                                    Cambiar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light flex-column gap-2">
+
+        <div class="row w-100 justify-content-between align-items-center gap-4">
 
             <div class="col-auto">
-                <form [formGroup]="form" (ngSubmit)="search()" class="d-flex">
-                    <div class="div_search me-2 d-flex bg-light">
-                        <div class="selection">
+                <a class="fs-2 text-light" routerLink="">ProveerTen</a>
+            </div>
+
+            <div class="col-1 d-sm-flex d-md-none">
+                <button class="bg-transparent border-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"
+                        style="color: #ffffff;"></i>
+                </button>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center bg-light p-0 col-md-7 col-lg-5">
+                <form [formGroup]="form" (ngSubmit)="search()" class="w-100">
+                    <div class="div_search d-flex">
+                        <div class="selection w-50">
                             <select formControlName="searchType" class="form-select border-0 border-warning"
                                 (ngModelChange)="onSearchTypeChange($event)">
                                 <option [value]="'products'" [selected]="form.get('searchType').value === 'products'">
@@ -21,10 +78,10 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="search d-flex">
+                        <div class="search d-flex w-100">
                             <input type="search" placeholder="Buscar..." (input)="onSearchInput()"
                                 formControlName="searchTerm" class="form-control">
-                            <button class="btn btn-bg send_search rounded-0" type="submit">
+                            <button class="btn bg-danger send_search rounded-0" type="submit">
                                 <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
                             </button>
                         </div>
@@ -32,11 +89,16 @@
                 </form>
             </div>
 
-            <div class="col-auto d-none d-lg-inline">
-                <div class="elements row_one d-flex align-items-center gap-3">
-                    <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="login" class="text-light">Iniciar sesión</a>
-                    <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="register" class="text-light">Registrarse</a>
-                </div>
+            <div class="col-1 d-none d-md-flex d-lg-none">
+                <button class="bg-transparent border-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-bars"
+                        style="color: #ffffff;"></i>
+                </button>
+            </div>
+
+            <div class="col-2 d-none d-lg-flex col-lg-3 justify-content-between">
+                <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="login" class="text-light">Iniciar sesión</a>
+                <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="register" class="text-light">Registrarse</a>
                 <div class="dropdown d-none d-lg-inline" *ngIf="auth.isLoggedIn() | async">
                     <button class="btn btn-bg text-light dropdown-toggle" type="button" id="profileMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,7 +111,8 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="profileMenuButton">
                         <li *ngIf="auth.isLoggedIn() | async"><a class="dropdown-item text-black"
-                                routerLink="profile">Ver perfil</a></li>
+                                routerLink="profile">Ver
+                                perfil</a></li>
                         <li *ngIf="auth.isGrocer() | async"><a class="dropdown-item text-black"
                                 (click)="update_profile()">Editar perfil</a></li>
                         <hr>
@@ -58,9 +121,10 @@
                     </ul>
                 </div>
             </div>
+
         </div>
 
-        <div class="row w-100 justify-content-center d-flex pb-2 border-bottom align-items-center gap-4">
+        <div class="row w-100 justify-content-left align-items-center gap-4 d-none d-lg-flex pt-2">
             <div class="col-auto elements d-flex gap-4 flex-wrap" *ngIf="auth.isLoggedIn() | async">
                 <a routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Inicio</a>
                 <a routerLink="/search/companies"><i class="fa-solid fa-building" style="color: #ffffff;"></i>
@@ -75,7 +139,7 @@
                     Ver pedidos</a>
             </div>
 
-            <div class="col-auto elements d-flex gap-5" *ngIf="!(auth.isLoggedIn() | async)">
+            <div class="col-auto elements d-flex gap-5 d-none d-lg-flex" *ngIf="!(auth.isLoggedIn() | async)">
                 <a routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Inicio</a>
                 <a (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i class="fa-solid fa-building"
                         style="color: #ffffff;"></i>
@@ -84,13 +148,10 @@
                         class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                     Encontrar productos</a>
             </div>
-
-            <!-- <hr style="color: #ffffff;"> -->
         </div>
 
-        <div class="row w-100 justify-content-between d-flex align-items-center gap-4">
-
-            <div *ngIf="!(auth.isLoggedIn() | async)" class="col-auto d-lg-inline">
+        <div class=" row w-100 justify-content-end align-items-center gap-4 d-none d-lg-flex">
+            <div *ngIf="!(auth.isLoggedIn() | async)" class="col-auto">
                 <form class="d-flex gap-4" [formGroup]="form_location" (ngSubmit)="filter_location()">
                     <div class="location d-flex align-items-center gap-2">
                         <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
@@ -110,88 +171,15 @@
                                     <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-bg text-light rounded-0">
+                            <button type="submit" class="btn bg-danger text-light rounded-0">
                                 Cambiar
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
-
-            <div *ngIf="auth.isLoggedIn() | async" class="col-auto d-lg-inline">
-                <div class="location d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i>
-                    <div class=" d-flex gap-3 text-light">
-                        <span>Departamento</span>
-                        <span>|</span>
-                        <span>Ciudad</span>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-auto d-lg-none">
-                <div *ngIf="!(auth.isLoggedIn() | async)" class="elements d-flex align-items-center gap-3">
-                    <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="login" class="text-light">Iniciar sesión</a>
-                    <a *ngIf="!(auth.isLoggedIn() | async)" routerLink="register" class="text-light">Registrarse</a>
-                </div>
-
-                <div class="dropdown" *ngIf="auth.isLoggedIn() | async">
-                    <button class="btn btn-bg text-light dropdown-toggle" type="button" id="profileMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
-                                class="svg-icon">
-                                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="white"
-                                    d="M1.97742 19.7776C4.45061 17.1544 7.80838 15.5423 11.5068 15.5423C15.2053 15.5423 18.5631 17.1544 21.0362 19.7776M16.2715 6.54229C16.2715 9.17377 14.1383 11.307 11.5068 11.307C8.87535 11.307 6.74212 9.17377 6.74212 6.54229C6.74212 3.91082 8.87535 1.77759 11.5068 1.77759C14.1383 1.77759 16.2715 3.91082 16.2715 6.54229Z">
-                                </path>
-                            </svg></span> Perfil
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="profileMenuButton">
-                        <li *ngIf="auth.isLoggedIn() | async"><a class="dropdown-item text-black"
-                                routerLink="profile">Ver
-                                perfil</a></li>
-                        <li *ngIf="auth.isGrocer() | async"><a class="dropdown-item text-black"
-                                (click)="update_profile()">Editar perfil</a></li>
-                        <hr>
-                        <li *ngIf="auth.isLoggedIn() | async"><a class="dropdown-item text-danger"
-                                (click)="auth.logout()">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
-    </nav>
 
-    <nav *ngIf="(auth.isCompany() | async) || (auth.isProvider() | async)"
-        class="navbar navbar-expand-lg navbar-light flex-column gap-5">
-        <div class="row w-100 justify-content-between align-items-center gap-2">
-            <div class="col-auto logo">
-                <a href="#">ProveerTen</a>
-            </div>
-            <div class=" col-auto elements d-flex gap-4 align-items-center">
-                <a routerLink="/panel"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Panel</a>
-                <div class="dropdown">
-                    <button class="btn btn-bg text-light dropdown-toggle" type="button" id="profileMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="span"><svg xmlns="" fill="none" viewBox="0 0 23 21" height="21" width="23"
-                                class="svg-icon">
-                                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="white"
-                                    d="M1.97742 19.7776C4.45061 17.1544 7.80838 15.5423 11.5068 15.5423C15.2053 15.5423 18.5631 17.1544 21.0362 19.7776M16.2715 6.54229C16.2715 9.17377 14.1383 11.307 11.5068 11.307C8.87535 11.307 6.74212 9.17377 6.74212 6.54229C6.74212 3.91082 8.87535 1.77759 11.5068 1.77759C14.1383 1.77759 16.2715 3.91082 16.2715 6.54229Z">
-                                </path>
-                            </svg></span> Perfil
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="profileMenuButton">
-                        <li *ngIf="auth.isLoggedIn() | async"><a class="dropdown-item text-black"
-                                routerLink="profile">Ver
-                                perfil</a></li>
-                        <li *ngIf="auth.isCompany() | async"><a class="dropdown-item text-black"
-                                (click)="update_profile()">Editar perfil</a></li>
-                        <hr>
-                        <li *ngIf="auth.isLoggedIn() | async"><a class="dropdown-item text-danger"
-                                (click)="auth.logout()">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
 
+    </nav>
 </div>
