@@ -206,6 +206,7 @@ export class ViewProfileCompanyComponent {
               this.chats.push(response.chat._id);
               this.shared.changeChatList(this.chats);
               localStorage.setItem('chats', this.chats.toString());
+              this.router.navigate(['chat']);
             },
             error: (error) => {
               console.log(error);
@@ -220,6 +221,7 @@ export class ViewProfileCompanyComponent {
             this.chats.push(response.chat[0]._id);
             this.shared.changeChatList(this.chats);
             localStorage.setItem('chats', this.chats.toString());
+            this.router.navigate(['chat']);
           }
         }
       },

@@ -11,18 +11,75 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  @Input() chatId: string;
-  @Input() value: number;
-  messages: any[] = [];
-  messageText: string = '';
+
+  list_chat: any;
+  isLogin: any;
   chats: string[] = [];
+
   data: any;
   nameSender: any = '';
-  @ViewChild('messageContainer') messageContainer: ElementRef;
+  messages: any[] = [];
+  messageText: string = '';
 
-  constructor(private chatService: ChatService, public auth: AuthService, private client: ClientService, public shared: SharedService) { }
+  chatId: any;
+
+  constructor(private client: ClientService, private chatService: ChatService, public auth: AuthService, public shared: SharedService) {
+
+    this.auth.isLoggedIn().subscribe((value: any) => {
+      this.isLogin = value;
+    });
+    this.shared.chatList.subscribe((value: any) => {
+      this.chats = value;
+
+      this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          this.list_chat = response.chatData;
+          console.log(this.list_chat);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => console.log('complete'),
+      });
+
+      if (this.chats.length > 2) {
+        this.chats.splice(0, 1);
+        localStorage.setItem('chats', this.chats.toString())
+      }
+    });
+  }
 
   ngOnInit(): void {
+    if (this.isLogin) {
+      let localchats = localStorage.getItem('chats');
+      if (localchats) {
+        this.chats = localchats.split(',');
+      }
+    }
+  }
+
+  chatear(data: any) {
+
+    console.log(data);
+
+    this.chatId = data._id;
+
+    // console.log(document);
+
+    let filterObject = this.auth.getRole() === 'grocer' ? { grocerId: this.auth.getId(), providerId: data.participants.providerId } : { grocerId: data.participants.grocerId, providerId: this.auth.getId() }
+    this.client.postRequest(`${environment.url_chat}/chat/find`, filterObject, undefined, undefined).subscribe({
+      next: (response: any) => {
+        if (this.chats.indexOf(response.chat[0]._id) === -1) {
+          this.chats.push(response.chat[0]._id);
+          localStorage.setItem('chats', this.chats.toString())
+        }
+        this.shared.chatList.next(this.chats)
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+
     this.client.postRequest(`${environment.url_chat}/chat/chatunic`, { chatId: this.chatId }, undefined, undefined).subscribe({
       next: (response: any) => {
         console.log(response);
@@ -32,15 +89,26 @@ export class ChatComponent implements OnInit {
         console.log(error);
       }
     });
+
     this.loadMessages();
+
     this.chatService.joinChat(this.auth.getId(), this.chatId);
     this.chatService.getMessages(this.chatId).subscribe(
       (message: any) => {
         console.log(message);
         this.messages.push(message);
-        this.scrollToBottom();
       }
     );
+  }
+
+  closeChat(index: any) {
+    this.chats.splice(index, 1);
+    if (this.chats.length === 0) {
+      localStorage.removeItem('chats');
+    } else {
+      localStorage.setItem('chats', this.chats.toString())
+    }
+    console.log(this.chats);
   }
 
   loadMessages() {
@@ -48,7 +116,6 @@ export class ChatComponent implements OnInit {
       next: (response: any) => {
         console.log(response.chat.messages);
         this.messages = response.chat.messages;
-        this.scrollToBottom();
       },
       error: (error) => {
         console.log(error);
@@ -64,7 +131,6 @@ export class ChatComponent implements OnInit {
       };
       this.chatService.sendMessage(messageData, this.chatId);
       this.messageText = '';
-      this.scrollToBottom();
     }
   }
 
@@ -90,11 +156,7 @@ export class ChatComponent implements OnInit {
   ngOnDestroy() {
     this.messages = [];
     this.nameSender = '';
+    this.chats = [];
   }
 
-  private scrollToBottom(): void {
-    setTimeout(() => {
-      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
-    });
-  }
 }

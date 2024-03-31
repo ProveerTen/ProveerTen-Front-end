@@ -52,6 +52,7 @@ import { grocerGuestGuard } from './guards/role-guards/grocer-guest.guard';
 import { userGuard } from './guards/role-guards/user.guard';
 import { grocerCompanyGuard } from './guards/role-guards/grocer-company.guard';
 import { grocerProviderGuestGuard } from './guards/role-guards/grocer-provider-guest.guard';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -226,6 +227,10 @@ const routes: Routes = [
     path: 'view/price/products',
     component: SuggestedProductPricesComponent,
     canActivate: [grocerGuard]
+  },
+  {
+    path: 'chat',
+    component: ChatComponent
   },
   {
     path: '404',

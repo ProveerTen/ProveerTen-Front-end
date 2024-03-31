@@ -21,11 +21,11 @@
                     <div class="d-flex flex-column align-items-left gap-3">
                         <a target="_top" routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
                             Inicio</a>
-                        <a target="_top" routerLink="/search/companies"><i class="fa-solid fa-building"
-                                style="color: #ffffff;"></i>
+                        <a target="_top" (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i
+                                class="fa-solid fa-building" style="color: #ffffff;"></i>
                             Ver empresas</a>
-                        <a target="_top" routerLink="/search/products"><i class="fa-solid fa-basket-shopping"
-                                style="color: #ffffff;"></i>
+                        <a target="_top" (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
+                                class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                             Ver productos</a>
                     </div>
                     <hr class="text-light">
@@ -65,11 +65,11 @@
                         <div class="d-flex flex-column align-items-left gap-3">
                             <a target="_top" routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
                                 Inicio</a>
-                            <a target="_top" routerLink="/search/companies"><i class="fa-solid fa-building"
-                                    style="color: #ffffff;"></i>
+                            <a target="_top" (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i
+                                    class="fa-solid fa-building" style="color: #ffffff;"></i>
                                 Ver empresas</a>
-                            <a target="_top" routerLink="/search/products"><i class="fa-solid fa-basket-shopping"
-                                    style="color: #ffffff;"></i>
+                            <a target="_top" (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
+                                    class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                                 Ver productos</a>
                             <a target="_top" routerLink="/view/price/products"><i class="fa-solid fa-dollar-sign"
                                     style="color: #ffffff;"></i>
@@ -231,9 +231,11 @@
         <div class="row w-100 justify-content-left align-items-center gap-4 d-none d-lg-flex pt-2">
             <div class="col-auto elements d-flex gap-4 flex-wrap" *ngIf="auth.isLoggedIn() | async">
                 <a routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Inicio</a>
-                <a routerLink="/search/companies"><i class="fa-solid fa-building" style="color: #ffffff;"></i>
+                <a (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i class="fa-solid fa-building"
+                        style="color: #ffffff;"></i>
                     Ver empresas</a>
-                <a routerLink="/search/products"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                <a (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
+                        class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                     Ver productos</a>
                 <a routerLink="/view/price/products"><i class="fa-solid fa-dollar-sign" style="color: #ffffff;"></i>
                     Ver precios sugeridos</a>
