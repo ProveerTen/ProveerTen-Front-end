@@ -134,8 +134,10 @@
                     <div class="col-md-4 mb-4" *ngFor="let product of data">
                         <div class="card h-100">
                             <img appBrokenImage [src]="product.image_product" class="card-img-top" alt="Product Image" style="max-width: 100%; max-height: 200px; object-fit: contain;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ product?.name_product }}</h5>
+                            <div class="card-body d-flex flex-column align-items-center">
+                                <h4 class="card-title">{{ product?.name_product }}</h4>
+                                <h5 class="card-title">$ {{ product?.purchase_price_product }}</h5>
+                                <h5 class="card-title">Stock: {{ product?.stock_product }}</h5>
                             </div>
                             <div class="card-footer d-flex justify-content-center flex-wrap">
                                 <button type="button" class="btn btn-outline-success mr-2 mb-2" (click)="viewProduct(product.id_product)">

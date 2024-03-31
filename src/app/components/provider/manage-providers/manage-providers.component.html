@@ -43,8 +43,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let provider of data">
-                                    <td>
+                                <tr *ngFor="let provider of data; let even = even; let odd">
+                                    <td [ngClass]="{'even': even, 'odd': odd}">
                                         <div class="d-flex justify-content-center">
                                             <img appBrokenImageProfile [imageType]="'photo'" [src]="provider?.profile_photo_provider" [alt]="provider?.name_provider" width="80px">
                                         </div>
