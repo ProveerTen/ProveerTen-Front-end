@@ -64,7 +64,6 @@ export class HomeComponent {
       });
     }
     if (this.isOffline) {
-
       this.client.postRequest(`${environment.url_logic}/publication/view`, { document_grocer: this.auth.getId() }, undefined, undefined).subscribe({
         next: (response: any) => {
           // console.log(response);
