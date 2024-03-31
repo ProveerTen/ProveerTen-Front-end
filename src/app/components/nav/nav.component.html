@@ -18,6 +18,17 @@
                         <a routerLink="register" class="text-light">Registrarse</a>
                     </div>
                     <hr class="text-light">
+                    <div class="d-flex flex-column align-items-left gap-3">
+                        <a target="_top" routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
+                            Inicio</a>
+                        <a target="_top" routerLink="/search/companies"><i class="fa-solid fa-building"
+                                style="color: #ffffff;"></i>
+                            Ver empresas</a>
+                        <a target="_top" routerLink="/search/products"><i class="fa-solid fa-basket-shopping"
+                                style="color: #ffffff;"></i>
+                            Ver productos</a>
+                    </div>
+                    <hr class="text-light">
                     <div *ngIf="!(auth.isLoggedIn() | async)" class="col-auto">
                         <form class="d-flex gap-4" [formGroup]="form_location" (ngSubmit)="filter_location()">
                             <div class="location d-flex flex-column align-items-start gap-2">
@@ -52,28 +63,32 @@
                 <div *ngIf="auth.isLoggedIn() | async" class="d-flex flex-column gap-5">
                     <div class="" *ngIf="auth.isLoggedIn() | async">
                         <div class="d-flex flex-column align-items-left gap-3">
-                            <a routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i> Inicio</a>
-                            <a routerLink="/search/companies"><i class="fa-solid fa-building"
+                            <a target="_top" routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
+                                Inicio</a>
+                            <a target="_top" routerLink="/search/companies"><i class="fa-solid fa-building"
                                     style="color: #ffffff;"></i>
                                 Ver empresas</a>
-                            <a routerLink="/search/products"><i class="fa-solid fa-basket-shopping"
+                            <a target="_top" routerLink="/search/products"><i class="fa-solid fa-basket-shopping"
                                     style="color: #ffffff;"></i>
                                 Ver productos</a>
-                            <a routerLink="/view/price/products"><i class="fa-solid fa-dollar-sign"
+                            <a target="_top" routerLink="/view/price/products"><i class="fa-solid fa-dollar-sign"
                                     style="color: #ffffff;"></i>
                                 Ver precios sugeridos</a>
-                            <a routerLink="/create/order"><i class="fa-solid fa-clipboard" style="color: #fcfcfc;"></i>
+                            <a target="_top" routerLink="/create/order"><i class="fa-solid fa-clipboard"
+                                    style="color: #fcfcfc;"></i>
                                 Crear pedido</a>
-                            <a routerLink="/view/orders"><i class="fa-solid fa-book" style="color: #ffffff;"></i>
+                            <a target="_top" routerLink="/view/orders"><i class="fa-solid fa-book"
+                                    style="color: #ffffff;"></i>
                                 Ver pedidos</a>
                         </div>
                         <hr class="text-light">
                         <div class="d-flex flex-column align-items-left gap-3">
                             <!-- <h5 class="text-light">Perfil</h5> -->
-                            <a class="text-light" routerLink="profile">Ver
+                            <a target="_top" class="text-light" routerLink="profile">Ver
                                 perfil</a>
-                            <a class="text-light" role="button" (click)="update_profile()">Editar perfil</a>
-                            <a class="text-light" role="button" (click)="auth.logout()">Cerrar sesión</a>
+                            <a target="_top" class="text-light" role="button" (click)="update_profile()">Editar
+                                perfil</a>
+                            <a target="_top" class="text-light" role="button" (click)="auth.logout()">Cerrar sesión</a>
                         </div>
                         <hr class="text-light">
                         <div *ngIf="auth.isLoggedIn() | async" class="col-auto d-lg-inline">
@@ -94,26 +109,29 @@
             <div *ngIf="(auth.isCompany() | async) || (auth.isProvider() | async)" class="d-flex flex-column gap-5">
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-column align-items-left gap-3">
-                        <a routerLink="/panel"><i class="fa-solid fa-table-columns" style="color: #ffffff;"></i>
-                            Panel</a>
-                        <a *ngIf="auth.isCompany() | async" routerLink="/manage/products"><i class="fa-solid fa-house"
+                        <a target="_top" routerLink="/panel"><i class="fa-solid fa-table-columns"
                                 style="color: #ffffff;"></i>
+                            Panel</a>
+                        <a target="_top" *ngIf="auth.isCompany() | async" routerLink="/manage/products"><i
+                                class="fa-solid fa-house" style="color: #ffffff;"></i>
                             Productos</a>
-                        <a routerLink="/manage/orders"><i class="fa-solid fa-book" style="color: #ffffff;"></i>
+                        <a target="_top" routerLink="/manage/orders"><i class="fa-solid fa-book"
+                                style="color: #ffffff;"></i>
                             Pedidos</a>
-                        <a *ngIf="auth.isCompany() | async" routerLink="manage/providers"><i
+                        <a target="_top" *ngIf="auth.isCompany() | async" routerLink="manage/providers"><i
                                 class="fa-solid fa-people-group" style="color: #ffffff;"></i>
                             Trabajadores</a>
-                        <a *ngIf="auth.isCompany() | async" routerLink="/manage/publications"><i
+                        <a target="_top" *ngIf="auth.isCompany() | async" routerLink="/manage/publications"><i
                                 class="fa-solid fa-image" style="color: #ffffff;"></i>
                             Publicaciones</a>
-                        <a *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i
+                        <a target="_top" *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i
                                 class="fa-solid fa-people-line" style="color: #ffffff;"></i>
                             Ver tenderos</a>
-                        <a *ngIf="auth.isProvider() | async" role="button" (click)="viewCompany(data.fk_nit_company)"><i
-                                class="fa-solid fa-building" style="color: #ffffff;"></i>
+                        <a target="_top" *ngIf="auth.isProvider() | async" role="button"
+                            (click)="viewCompany(data.fk_nit_company)"><i class="fa-solid fa-building"
+                                style="color: #ffffff;"></i>
                             Ver empresa</a>
-                        <a *ngIf="auth.isProvider() | async" role="button"
+                        <a target="_top" *ngIf="auth.isProvider() | async" role="button"
                             (click)="viewProducts(data.fk_nit_company)"><i class="fa-solid fa-basket-shopping"
                                 style="color: #ffffff;"></i>
                             Ver productos</a>
@@ -121,12 +139,12 @@
                     <hr class="text-light">
                     <div class="d-flex flex-column align-items-left gap-3">
                         <!-- <h5 class="text-light">Perfil</h5> -->
-                        <a class="text-light" routerLink="profile">Ver
+                        <a target="_top" class="text-light" routerLink="profile">Ver
                             perfil</a>
-                        <a class="text-light" *ngIf="auth.isCompany() | async" role="button"
+                        <a target="_top" class="text-light" *ngIf="auth.isCompany() | async" role="button"
                             (click)="update_profile()">Editar
                             perfil</a>
-                        <a class="text-light" role="button" (click)="auth.logout()">Cerrar sesión</a>
+                        <a target="_top" class="text-light" role="button" (click)="auth.logout()">Cerrar sesión</a>
                     </div>
                 </div>
             </div>
