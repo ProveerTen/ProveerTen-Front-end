@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ViewAllGrocersComponent {
   grocers: any;
   filter: any[] = [];
-  value: any;
+  value: any = '';
   neighborhoods: any;
   selectedNeighborhood: string = '';
   constructor(private client: ClientService, public auth: AuthService, private router: Router) {
@@ -65,12 +65,16 @@ export class ViewAllGrocersComponent {
     } else if (this.selectedNeighborhood !== '' && this.value !== '') {
       this.grocers = this.filter.filter((grocer: any) => {
         return (
-          this.removeAccents(grocer.name_grocer).toLowerCase().includes(this.removeAccents(this.value).toLowerCase()) ||
-          this.removeAccents(grocer.last_name_grocer).toLowerCase().includes(this.removeAccents(this.value).toLowerCase())
-          || this.removeAccents(grocer.name_store).toLowerCase().includes(this.removeAccents(this.value).toLowerCase()) ||
+          (
+            this.removeAccents(grocer.name_grocer).toLowerCase().includes(this.removeAccents(this.value).toLowerCase()) ||
+            this.removeAccents(grocer.last_name_grocer).toLowerCase().includes(this.removeAccents(this.value).toLowerCase()) ||
+            this.removeAccents(grocer.name_store).toLowerCase().includes(this.removeAccents(this.value).toLowerCase())
+          ) &&
           this.removeAccents(grocer.neighborhood).toLowerCase().includes(this.removeAccents(this.selectedNeighborhood).toLowerCase())
         );
       });
+    } else if (this.selectedNeighborhood !== '' && this.value === '') {
+      this.grocers = this.filter.filter(grocer => grocer.neighborhood === this.selectedNeighborhood);
     } else if (this.selectedNeighborhood === '' && this.value === '') {
       this.grocers = this.filter;
     }
@@ -78,10 +82,9 @@ export class ViewAllGrocersComponent {
 
 
   filterByNeighborhood() {
-
     if (this.selectedNeighborhood !== '' && this.value === '') {
       this.grocers = this.filter.filter(grocer => grocer.neighborhood === this.selectedNeighborhood);
-    }else if (this.selectedNeighborhood === '' && this.value === '') {
+    } else if (this.selectedNeighborhood === '' && this.value === '') {
       this.grocers = this.filter;
     }
   }
