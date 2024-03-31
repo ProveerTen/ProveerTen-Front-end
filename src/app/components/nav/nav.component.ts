@@ -26,6 +26,7 @@ export class NavComponent {
   id: any;
 
   data: any;
+  is_online: any;
 
   city_local: any;
   department_local: any;
@@ -81,9 +82,14 @@ export class NavComponent {
 
   ngOnInit(): void {
 
-    if (this.auth.getRole() === 'provider') {
-      this.getDataProvider();
-    }
+    this.auth.isLoggedIn().subscribe(value => {
+      this.is_online = value;
+      if (this.is_online) {
+        if (this.auth.getRole() === "provider") {
+          this.getDataProvider();
+        }
+      }
+    });
 
     this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
       next: (response) => {
