@@ -14,8 +14,8 @@
             <div *ngIf="(auth.isGrocer() | async) || !(auth.isLoggedIn() | async)">
                 <div *ngIf="!(auth.isLoggedIn() | async)" class="d-flex flex-column">
                     <div class="d-flex flex-column align-items-left gap-3">
-                        <a routerLink="login" class="text-light">Iniciar sesión</a>
-                        <a routerLink="register" class="text-light">Registrarse</a>
+                        <a target="_top" routerLink="login" class="text-light">Iniciar sesión</a>
+                        <a target="_top" routerLink="register" class="text-light">Registrarse</a>
                     </div>
                     <hr class="text-light">
                     <div class="d-flex flex-column align-items-left gap-3">
