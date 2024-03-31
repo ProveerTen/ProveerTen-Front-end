@@ -94,27 +94,27 @@
             <div *ngIf="(auth.isCompany() | async) || (auth.isProvider() | async)" class="d-flex flex-column gap-5">
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-column align-items-left gap-3">
-                        <a routerLink="/panel"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
+                        <a routerLink="/panel"><i class="fa-solid fa-table-columns" style="color: #ffffff;"></i>
                             Panel</a>
                         <a *ngIf="auth.isCompany() | async" routerLink="/manage/products"><i class="fa-solid fa-house"
                                 style="color: #ffffff;"></i>
                             Productos</a>
-                        <a routerLink="/manage/orders"><i class="fa-solid fa-building" style="color: #ffffff;"></i>
+                        <a routerLink="/manage/orders"><i class="fa-solid fa-book" style="color: #ffffff;"></i>
                             Pedidos</a>
                         <a *ngIf="auth.isCompany() | async" routerLink="manage/providers"><i
-                                class=" fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                                class="fa-solid fa-people-group" style="color: #ffffff;"></i>
                             Trabajadores</a>
                         <a *ngIf="auth.isCompany() | async" routerLink="/manage/publications"><i
-                                class="fa-solid fa-dollar-sign" style="color: #ffffff;"></i>
+                                class="fa-solid fa-image" style="color: #ffffff;"></i>
                             Publicaciones</a>
-                        <a *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i class="fa-solid fa-book"
-                                style="color: #ffffff;"></i>
+                        <a *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i
+                                class="fa-solid fa-people-line" style="color: #ffffff;"></i>
                             Ver tenderos</a>
                         <a *ngIf="auth.isProvider() | async" role="button" (click)="viewCompany(data.fk_nit_company)"><i
-                                class="fa-solid fa-book" style="color: #ffffff;"></i>
+                                class="fa-solid fa-building" style="color: #ffffff;"></i>
                             Ver empresa</a>
                         <a *ngIf="auth.isProvider() | async" role="button"
-                            (click)="viewProducts(data.fk_nit_company)"><i class="fa-solid fa-book"
+                            (click)="viewProducts(data.fk_nit_company)"><i class="fa-solid fa-basket-shopping"
                                 style="color: #ffffff;"></i>
                             Ver productos</a>
                     </div>
@@ -282,7 +282,7 @@
     <nav class="navbar navbar-expand-lg navbar-light flex-column gap-4"
         *ngIf="((auth.isCompany() | async ) || (auth.isProvider() | async))">
         <div class="row w-100 justify-content-between align-items-center gap-4">
-            <div class="col-auto">
+            <div class="col-2">
                 <a class="fs-2 text-light" routerLink="">ProveerTen</a>
             </div>
 
@@ -317,33 +317,33 @@
             </div>
 
             <div class="col-auto d-none d-md-flex">
-                <div class="col-auto elements d-flex gap-4 flex-wrap" *ngIf="auth.isLoggedIn() | async">
-                    <a routerLink="/panel"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
+                <div class="d-flex gap-4 flex-wrap" *ngIf="auth.isLoggedIn() | async">
+                    <a routerLink="/panel"><i class="fa-solid fa-table-columns" style="color: #ffffff;"></i>
                         Panel</a>
-                    <a *ngIf="auth.isCompany() | async" routerLink="/manage/products"><i class="fa-solid fa-house"
-                            style="color: #ffffff;"></i>
+                    <a *ngIf="auth.isCompany() | async" routerLink="/manage/products"><i
+                            class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         Productos</a>
-                    <a routerLink="/manage/orders"><i class="fa-solid fa-building" style="color: #ffffff;"></i>
+                    <a routerLink="/manage/orders"><i class="fa-solid fa-book" style="color: #ffffff;"></i>
                         Pedidos</a>
                     <a *ngIf="auth.isCompany() | async" routerLink="manage/providers"><i
-                            class=" fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                            class="fa-solid fa-people-group" style="color: #ffffff;"></i>
                         Trabajadores</a>
-                    <a *ngIf="auth.isCompany() | async" routerLink="/manage/publications"><i
-                            class="fa-solid fa-dollar-sign" style="color: #ffffff;"></i>
+                    <a *ngIf="auth.isCompany() | async" routerLink="/manage/publications"><i class="fa-solid fa-image"
+                            style="color: #ffffff;"></i>
                         Publicaciones</a>
-                    <a *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i class="fa-solid fa-book"
+                    <a *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i class="fa-solid fa-people-line"
                             style="color: #ffffff;"></i>
                         Ver tenderos</a>
                     <a *ngIf="auth.isProvider() | async" role="button" (click)="viewCompany(data.fk_nit_company)"><i
-                            class="fa-solid fa-book" style="color: #ffffff;"></i>
+                            class="fa-solid fa-building" style="color: #ffffff;"></i>
                         Ver empresa</a>
                     <a *ngIf="auth.isProvider() | async" role="button" (click)="viewProducts(data.fk_nit_company)"><i
-                            class="fa-solid fa-book" style="color: #ffffff;"></i>
+                            class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         Ver productos</a>
                 </div>
             </div>
 
-            <div class="col-auto d-none  d-lg-flex">
+            <div class="col-auto d-none d-lg-flex">
                 <div class="dropdown" *ngIf="auth.isLoggedIn() | async">
                     <button class="btn bg-danger text-light dropdown-toggle" type="button" id="profileMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -365,6 +365,7 @@
                     </ul>
                 </div>
             </div>
+
         </div>
     </nav>
 </div>
