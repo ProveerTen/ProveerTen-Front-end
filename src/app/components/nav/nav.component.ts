@@ -28,6 +28,9 @@ export class NavComponent {
   data: any;
   is_online: any;
 
+  data_user: any;
+  is_grocer: any;
+
   city_local: any;
   department_local: any;
 
@@ -90,6 +93,32 @@ export class NavComponent {
         }
       }
     });
+
+    this.auth.isGrocer().subscribe(value => {
+      this.is_grocer = value;
+    });
+
+    if (this.is_grocer) {
+      this.client
+        .getRequest(
+          `${environment.url_logic}/profile/${this.auth.getRole()}`,
+          undefined,
+          { Authorization: `Bearer ${this.auth.getToken()}` }
+        )
+        .subscribe({
+          next: (response: any) => {
+            this.data_user = response.data;
+            console.log(this.data_user);
+          },
+          error: (error) => {
+
+            console.log(error.error.Status);
+          },
+          complete: () => {
+            console.log('complete');
+          },
+        });
+    }
 
     this.client.getRequest(`https://api-colombia.com/api/v1/Department`, undefined, undefined).subscribe({
       next: (response) => {
