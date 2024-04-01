@@ -44,15 +44,31 @@
                     </div>
                     <!--  -->
                     <div class="card mb-4 mb-lg-0">
-                        <div>
-                            <button (click)="addSocialRed()" *ngIf="inputLinkRed">Agregar red social</button>
+                        <div class="d-flex justify-content-center p-3">
+
+                            <button type="button" class="button" (click)="addSocialRed()" *ngIf="inputLinkRed">
+                                <span class="button__text">Red social</span>
+                                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round"
+                                        stroke-linecap="round" stroke="currentColor" height="24" fill="none"
+                                        class="svg">
+                                        <line y2="19" y1="5" x2="12" x1="12"></line>
+                                        <line y2="12" y1="12" x2="19" x1="5"></line>
+                                    </svg></span>
+                            </button>
+
                             <!-- <button (click)="updateSocialRed()" *ngIf="dataSocialReds.length > 0" >Actualizar red social</button> -->
 
                             <div class="d-flex justify-content-between">
-
-                                <input type="text" (input)="valueRed($event)" *ngIf="!inputLinkRed">
-
-                                <span [innerHTML]="iconSocialRed" [style]="colorIcon" *ngIf="iconSocialRed"></span>
+                                  
+                                <div class="d-flex flex-column">
+                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (input)="valueRed($event)" *ngIf="!inputLinkRed">
+                                
+                                    <div class="d-flex justify-content-center">
+                                        <span [innerHTML]="iconSocialRed" [style]="colorIcon" *ngIf="iconSocialRed"></span>
+                                    </div>
+                                    
+                                </div>
 
                                 <div *ngIf="!inputLinkRed">
                                     <button (click)="showModalIcons()" *ngIf="estadoModalIcons"><i
@@ -65,10 +81,12 @@
                         </div>
                         <form (ngSubmit)="onSubmitSocialRed()">
 
-                            <div class="d-flex">
-                                <button (click)="addSocialRed()" *ngIf="!inputLinkRed">Cancelar</button>
+                            <div class="d-flex justify-content-center gap-2 p-2">
 
-                                <button type="submit" *ngIf="!inputLinkRed" (input)="!validOnSubmit()"
+
+                                <button class="btn btn-outline-danger" (click)="addSocialRed()" *ngIf="!inputLinkRed">Cancelar</button>
+
+                                <button class="btn btn-outline-second" type="submit" *ngIf="!inputLinkRed" (input)="!validOnSubmit()"
                                     [disabled]="!valid">Enviar</button>
                             </div>
 
@@ -76,13 +94,14 @@
 
                         <div *ngIf="!estadoModalIcons">
                             <div *ngIf="!inputLinkRed">
-
-                                <p>Escoje un icono para tu red social</p>
-
-                                <div class="modalIcons">
-                                    <span class="span" *ngFor="let icon of OptionsIcons; let i = index"
-                                        [innerHTML]="icon.value" (click)="iconRed(icon.value, icon.color)"
-                                        [style]="icon.color"></span>
+                                <div class="d-flex flex-column p-3">
+                                    <p><strong>Escoje un icono para tu red social</strong></p>
+    
+                                    <div class="modalIcons">
+                                        <span class="span" *ngFor="let icon of OptionsIcons; let i = index"
+                                            [innerHTML]="icon.value" (click)="iconRed(icon.value, icon.color)"
+                                            [style]="icon.color"></span>
+                                    </div>
                                 </div>
                             </div>
 
