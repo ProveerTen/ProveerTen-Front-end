@@ -15,6 +15,11 @@ export class ManageOrdersComponent {
 
   data_order: any;
   order: any;
+  selectedStatus: any = '';
+  selectedDate: any;
+  minPrice: any;
+  maxPrice: any;
+  filter: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -24,6 +29,7 @@ export class ManageOrdersComponent {
         next: (response: any) => {
           console.log(response);
           this.data_order = response.order;
+          this.filter = this.data_order.slice();
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -35,6 +41,7 @@ export class ManageOrdersComponent {
         next: (response: any) => {
           console.log(response);
           this.data_order = response.order;
+
         },
         error: (error) => {
           console.log(error.error.Status);
@@ -69,4 +76,27 @@ export class ManageOrdersComponent {
   goBack() {
     this.router.navigate(['panel'])
   }
+
+  applyFilters() {
+    if (this.selectedStatus !== "") {
+      this.data_order = this.filter.filter(order => { return order.status === this.selectedStatus })
+    } else {
+      this.data_order = this.filter
+    }
+    console.log(this.selectedDate);
+
+    if (this.selectedDate) {
+      const selectedDateISO = new Date(this.selectedDate).toISOString();
+      this.data_order = this.data_order.filter(order => {
+        return new Date(order.order_delivery_date).toISOString().slice(0, 10) === selectedDateISO.slice(0, 10);
+      });
+    }
+    else {
+      this.data_order = this.filter
+    }
+
+  }
+
+
+
 }
