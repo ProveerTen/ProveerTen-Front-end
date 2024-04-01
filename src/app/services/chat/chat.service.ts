@@ -19,11 +19,13 @@ export class ChatService {
     this.socket.emit('message', message, chatId);
   }
 
-  getMessages(chatId: string): Observable<any> {
-    return new Observable<any>(observer => {
+  async getMessages(chatId: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       this.socket.on(`message:${chatId}`, (data: any) => {
-        observer.next(data);
+        resolve(data);
+        console.log(data, 'chat service', 1);
       });
     });
   }
+
 }

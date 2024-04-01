@@ -7,8 +7,8 @@
             <div class="overflow-auto w-100" style="max-height: 55vh">
                 <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
                     <div class="user_chat d-flex w-100 justify-content-center"
-                        style="cursor: pointer; padding: 5px; border-radius: 5px;" (click)="chatear(chat)">
-                        <div class="d-flex align-items-center gap-2">
+                        style="cursor: pointer; padding: 5px; border-radius: 5px;">
+                        <div class="d-flex align-items-center gap-2" (click)="chatear(chat)">
                             <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider"
                                 [imageType]="'photo'" width="40px" height="40px" class="mr-2">
                             <p class="mb-0">
@@ -21,8 +21,8 @@
         </div>
         <div class="col-12 border border-dark col-md-8">
             <div class="row border border-warning d-flex align-items-center">
-                <p class="mb-0 fw-bold" *ngIf="data && data.provider">{{
-                    data.provider[0].name_provider }}</p>
+                <!-- <p class="mb-0 fw-bold" *ngIf="data && data.provider">{{
+                    data.provider[0].name_provider }}</p> -->
             </div>
             <div class="row">
                 <div class="overflow-auto" style="height: 400px" #messageContainer>
@@ -44,9 +44,9 @@
                 </div>
             </div>
             <div class="row d-flex border border-danger">
-                <input class="col-10" type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje...">
+                <input class="col-10" type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje..."
+                    (keyup.enter)="sendMessage()">
                 <button type="button" class="btn btn-outline-primary col-2" (click)="sendMessage()">Enviar</button>
             </div>
         </div>
     </div>
-</div>

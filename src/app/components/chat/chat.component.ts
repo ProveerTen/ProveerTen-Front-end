@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent {
 
   list_chat: any;
   isLogin: any;
@@ -25,97 +25,29 @@ export class ChatComponent implements OnInit {
 
   constructor(private client: ClientService, private chatService: ChatService, public auth: AuthService, public shared: SharedService) {
 
-    this.auth.isLoggedIn().subscribe((value: any) => {
-      this.isLogin = value;
+    this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        this.list_chat = response.chatData;
+        console.log(this.list_chat);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
     });
-    this.shared.chatList.subscribe((value: any) => {
-      this.chats = value;
-
-      this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-        next: (response: any) => {
-          this.list_chat = response.chatData;
-          console.log(this.list_chat);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => console.log('complete'),
-      });
-
-      if (this.chats.length > 2) {
-        this.chats.splice(0, 1);
-        localStorage.setItem('chats', this.chats.toString())
-      }
-    });
-  }
-
-  ngOnInit(): void {
-    if (this.isLogin) {
-      let localchats = localStorage.getItem('chats');
-      if (localchats) {
-        this.chats = localchats.split(',');
-      }
-    }
   }
 
   chatear(data: any) {
-
-    console.log(data);
-
     this.chatId = data._id;
-
-    // console.log(document);
-
-    let filterObject = this.auth.getRole() === 'grocer' ? { grocerId: this.auth.getId(), providerId: data.participants.providerId } : { grocerId: data.participants.grocerId, providerId: this.auth.getId() }
-    this.client.postRequest(`${environment.url_chat}/chat/find`, filterObject, undefined, undefined).subscribe({
-      next: (response: any) => {
-        if (this.chats.indexOf(response.chat[0]._id) === -1) {
-          this.chats.push(response.chat[0]._id);
-          localStorage.setItem('chats', this.chats.toString())
-        }
-        this.shared.chatList.next(this.chats)
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-
-    this.client.postRequest(`${environment.url_chat}/chat/chatunic`, { chatId: this.chatId }, undefined, undefined).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.data = response
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-
-    this.loadMessages();
-
     this.chatService.joinChat(this.auth.getId(), this.chatId);
-    this.chatService.getMessages(this.chatId).subscribe(
-      (message: any) => {
-        console.log(message);
-        this.messages.push(message);
-      }
-    );
-  }
-
-  closeChat(index: any) {
-    this.chats.splice(index, 1);
-    if (this.chats.length === 0) {
-      localStorage.removeItem('chats');
-    } else {
-      localStorage.setItem('chats', this.chats.toString())
-    }
-    console.log(this.chats);
+    this.loadMessages();
   }
 
   loadMessages() {
     this.client.postRequest(`${environment.url_chat}/chat/getmessages`, { chatId: this.chatId }, undefined, undefined).subscribe({
       next: (response: any) => {
-        console.log(response.chat.messages);
         this.messages = response.chat.messages;
+        console.log(this.messages);
       },
       error: (error) => {
         console.log(error);
@@ -131,7 +63,14 @@ export class ChatComponent implements OnInit {
       };
       this.chatService.sendMessage(messageData, this.chatId);
       this.messageText = '';
+
+      setTimeout(() => {
+        this.chatService.getMessages(this.chatId).then(data => {
+          this.messages.push(data);
+        });
+      }, 1000)
     }
+
   }
 
   isMyMessage(sender: string): boolean {
@@ -151,12 +90,6 @@ export class ChatComponent implements OnInit {
     }
 
     return sender === this.auth.getId();
-  }
-
-  ngOnDestroy() {
-    this.messages = [];
-    this.nameSender = '';
-    this.chats = [];
   }
 
 }
