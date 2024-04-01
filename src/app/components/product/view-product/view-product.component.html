@@ -48,7 +48,7 @@
     <app-loader [loading]="loading"></app-loader>
   </div>
 </div>
-
+<!--
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 d-flex align-items-center">
@@ -81,7 +81,50 @@
             </div>
         </div>
     </div>
+</div> -->
+
+
+<div class = "main-wrapper">
+  <div class = "container">
+      <div class = "product-div">
+          <div class = "product-div-left">
+              <div class = "img-container">
+                  <img [src]="data?.image_product">
+              </div>
+          </div>
+          <div class = "product-div-right">
+            <p  id="disponibilidad" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </svg> Disponibilidad:  <strong class="disponibilidad"> {{data?.availability_product}}</strong> </p>
+
+              <span class = "product-name">{{data?.name_product | uppercase}}</span>
+              <span class = "product-price">$ {{data?.purchase_price_product}} </span>
+              <span class = "product-info"><strong>Precio sugerido de venta:</strong>       {{data?.suggested_price_product}}</span>
+              <span class = "product-info"><strong>Peso neto total:</strong>      {{data?.content_product}} g/ml</span>
+              <span class = "product-info"><strong>Unidades por paquete:</strong>     {{data?.purchase_quantity}} </span>
+              <span class = "product-info"><strong>Precio por unidad:</strong>      {{data?.unit_purchase_price_product}}</span>
+              <span class = "product-info"><strong>Precio sugerido de venta por unidad:</strong>     {{data?.suggested_unit_selling_price_product}}</span>
+              <span class = "product-info"><strong>Stock:</strong>     {{data?.stock_product}}</span>
+              <!-- <div class = "product-rating">
+                  <span><i class = "fas fa-star"></i></span>
+                  <span><i class = "fas fa-star"></i></span>
+                  <span><i class = "fas fa-star"></i></span>
+                  <span><i class = "fas fa-star"></i></span>
+                  <span><i class = "fas fa-star-half-alt"></i></span>
+                  <span>(350 ratings)</span>
+              </div> -->
+              <p class = "product-description"><strong>Descripción:</strong> {{data?.description_product}}</p>
+              <!-- <div class = "btn-groups">
+                  <button type = "button" class = "add-cart-btn"><i class = "fas fa-shopping-cart"></i>add to cart</button>
+                  <button type = "button" class = "buy-now-btn"><i class = "fas fa-wallet"></i>buy now</button>
+              </div> -->
+          </div>
+      </div>
+  </div>
 </div>
+
+
+
 
 
 

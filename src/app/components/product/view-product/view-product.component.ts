@@ -14,6 +14,8 @@ export class ViewProductComponent {
   loading : boolean = false
   data: any;
   id!: string;
+  availability:string;
+  p:any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
@@ -34,6 +36,18 @@ export class ViewProductComponent {
         this.data = response.categoriesByProducts[0];
         console.log(this.data);
 
+        this.p = document.querySelector('.disponibilidad');
+        this.availability = this.data.availability_product;
+
+        if (this.availability == "Disponible"){
+
+          this.p.classList.add('disponible');
+        }
+        else{
+          this.p.classList.add('no-disponible');
+        }
+
+
       },
       error: (error) => {
         this.loading = false
@@ -42,6 +56,14 @@ export class ViewProductComponent {
       complete: () => console.log('complete'),
     });
   },400)
+
+
+  }
+
+
+  disponible(){
+
+
 
   }
 
