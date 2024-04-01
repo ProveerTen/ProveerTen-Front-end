@@ -44,6 +44,7 @@
                                     <th scope="col">Imagen</th>
                                     <th scope="col">Nombre del Producto</th>
                                     <th scope="col">Precio de Compra</th>
+                                    <th scope="col">peso neto del producto</th>
                                     <th scope="col">Stock</th>
                                     <th scope="col">Opciones</th>
                                 </tr>
@@ -54,9 +55,13 @@
                                         <img appBrokenImage loading="lazy" [src]="product.image_product"
                                             alt="{{ product?.name_product }}" class="product-image">
                                     </td>
+
                                     <td>{{ product?.name_product }}</td>
                                     <td>{{ product?.purchase_price_product }}</td>
-                                    <td>{{ product?.stock_product }}</td>
+                                    <td>{{ product?.content_product}}</td>
+                                    <td>{{ product?.stock_product}}</td>
+
+                                    
                                     <td>
 
                                         <div class="d-flex flex-column gap-2">
@@ -95,7 +100,7 @@
                         <div class="card">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div class="div">
-                                    <p>{{provider.document_provider}}</p>
+                                    <!-- <p>{{provider.document_provider}}</p> -->
                                     <p><strong>{{provider.name_provider}} {{provider.last_name_provider}}</strong> </p>
                                 </div>
                                 <div>
@@ -116,7 +121,7 @@
 
                 <div *ngIf="indexPage === 3">
                     <h2>Confirm</h2>
-                    <div style="max-height: 400px; overflow-y: auto;">
+                    <div style="max-height: 400px; overflow-y: auto; background-color: aqua;">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -124,8 +129,8 @@
                                     <th scope="col">Nombre del Producto</th>
                                     <th scope="col">Precio de Compra</th>
                                     <th scope="col">Cantidad Pedida</th>
-                                    <!-- <th scope="col">Stock</th> -->
-                                    <th scope="col">Trabajador</th>
+                                    <th scope="col">Stock</th>
+                                    <!-- <th scope="col">Trabajador</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -137,10 +142,17 @@
                                     <td>{{ product?.name_product }}</td>
                                     <td>{{ product?.purchase_price_product }}</td>
                                     <td>{{ product?.product_quantity}}</td>
-                                    <td>{{ data_order?.name_provider}} {{ data_order?.last_name_provider}}</td>
+                                    <td>{{ product?.stock_product}}</td>
+                                    <!-- <td>{{ data_order?.name_provider}} {{ data_order?.last_name_provider}}</td> -->
                                 </tr>
                             </tbody>
+                            
+                            
                         </table>
+                        <div style="display: flex; align-items: end;">
+                            <th scope="col">Trabajador</th>
+                            <td>{{ data_order?.name_provider}} {{ data_order?.last_name_provider}}</td>
+                        </div>
                     </div>
                 </div>
                 <div class="div"

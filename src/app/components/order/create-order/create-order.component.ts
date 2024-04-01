@@ -101,6 +101,8 @@ export class CreateOrderComponent {
     if (this.selectedCompany) {
       this.client.postRequest(`${environment.url_logic}/order/products`, { "nit_company": this.selectedCompany }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
+          console.log("EEE", response);
+          
           this.products = response.products;
           this.products.forEach(product => {
             product.product_quantity = 0;
