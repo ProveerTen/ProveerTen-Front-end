@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap');
+
 button {
     cursor: pointer;
     padding: 20px;
     background-color: orange;
     color: black;
+
+
 
     border: none;
     border-radius: 5px;
@@ -103,4 +107,15 @@ button {
     width: 220px;
     height: 220px;
     opacity: 1;
+}
+
+
+
+p{
+
+
+font-family: "Catamaran", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 350;
+  font-style: normal;
 }

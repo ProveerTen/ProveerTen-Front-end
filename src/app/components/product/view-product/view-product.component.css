@@ -46,7 +46,9 @@ html, body{
 
   text-align: right;
  padding-bottom: 35px;
+
 }
+
 .main-wrapper{
     min-height: 100vh;
     background-color: #f1f1f1;
@@ -73,6 +75,10 @@ html, body{
 }
 .product-div-right{
     padding: 20px;
+}
+
+.description_product p{
+    font-size: 20px;
 }
 .img-container img{
 
@@ -156,6 +162,12 @@ html, body{
 @media screen and (max-width: 992px){
     .product-div{
         grid-template-columns: 100%;
+    }
+    #disponibilidad{
+        text-align: center;
+    }   
+    .product-name{
+        font-size: 30px;
     }
     .product-div-right{
         text-align: center;
