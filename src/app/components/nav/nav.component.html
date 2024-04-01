@@ -21,10 +21,10 @@
                     <div class="d-flex flex-column align-items-left gap-3">
                         <a target="_top" routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
                             Inicio</a>
-                        <a target="_top" (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i
+                        <a target="_parent" (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i
                                 class="fa-solid fa-building" style="color: #ffffff;"></i>
                             Ver empresas</a>
-                        <a target="_top" (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
+                        <a target="_parent" (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
                                 class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                             Ver productos</a>
                     </div>
@@ -65,10 +65,10 @@
                         <div class="d-flex flex-column align-items-left gap-3">
                             <a target="_top" routerLink="/"><i class="fa-solid fa-house" style="color: #ffffff;"></i>
                                 Inicio</a>
-                            <a target="_top" (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i
+                            <a target="_parent" (click)="searchCompanies()" style="color: #ffffff; cursor: pointer;"><i
                                     class="fa-solid fa-building" style="color: #ffffff;"></i>
                                 Ver empresas</a>
-                            <a target="_top" (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
+                            <a target="_parent" (click)="searchProducts()" style="color: #ffffff; cursor: pointer;"><i
                                     class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                                 Ver productos</a>
                             <a target="_top" routerLink="/view/price/products"><i class="fa-solid fa-dollar-sign"
@@ -127,13 +127,11 @@
                         <a target="_top" *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i
                                 class="fa-solid fa-people-line" style="color: #ffffff;"></i>
                             Ver tenderos</a>
-                        <a target="_top" *ngIf="auth.isProvider() | async" role="button"
-                            (click)="viewCompany(data.fk_nit_company)"><i class="fa-solid fa-building"
-                                style="color: #ffffff;"></i>
+                        <a target="_top" *ngIf="auth.isProvider() | async" role="button" style="color: #ffffff;"
+                            (click)="viewCompany(data.fk_nit_company)"><i class="fa-solid fa-building"></i>
                             Ver empresa</a>
-                        <a target="_top" *ngIf="auth.isProvider() | async" role="button"
-                            (click)="viewProducts(data.fk_nit_company)"><i class="fa-solid fa-basket-shopping"
-                                style="color: #ffffff;"></i>
+                        <a target="_top" *ngIf="auth.isProvider() | async" role="button" style="color: #ffffff;"
+                            (click)="viewProducts(data.fk_nit_company)"><i class="fa-solid fa-basket-shopping"></i>
                             Ver productos</a>
                     </div>
                     <hr class="text-light">
@@ -354,11 +352,11 @@
                     <a *ngIf="auth.isProvider() | async" routerLink="/view/grocers"><i class="fa-solid fa-people-line"
                             style="color: #ffffff;"></i>
                         Ver tenderos</a>
-                    <a *ngIf="auth.isProvider() | async" role="button" (click)="viewCompany(data.fk_nit_company)"><i
-                            class="fa-solid fa-building" style="color: #ffffff;"></i>
+                    <a *ngIf="auth.isProvider() | async" role="button" style="color: #ffffff;"
+                        (click)="viewCompany(data.fk_nit_company)"><i class="fa-solid fa-building"></i>
                         Ver empresa</a>
-                    <a *ngIf="auth.isProvider() | async" role="button" (click)="viewProducts(data.fk_nit_company)"><i
-                            class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <a *ngIf="auth.isProvider() | async" role="button" style="color: #ffffff;"
+                        (click)="viewProducts(data.fk_nit_company)"><i class="fa-solid fa-basket-shopping"></i>
                         Ver productos</a>
                 </div>
             </div>
