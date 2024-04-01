@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { SharedService } from 'src/app/services/shared/shared.service';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-update-order',
@@ -22,13 +23,13 @@ export class UpdateOrderComponent {
   list_products_delete: any[] = [];
   list_show_products: any[] = [];
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.id = this.routerActivate.snapshot.params['id'];
     this.client.postRequest(`${environment.url_logic}/order/detail`, { id_order: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        // console.log(response);
         this.data_order = response.order;
         this.order = response.order_detail;
         this.order.forEach(product => {
@@ -157,11 +158,14 @@ export class UpdateOrderComponent {
 
     this.client.postRequest(`${environment.url_logic}/order/update`, { id_order: this.id, list_update: this.list_products, list_delete: this.list_products_delete }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
-        console.log(response);
-        window.location.reload();
+        this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Pedido actualizado exitosamente!' });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       },
       error: (error) => {
         console.log(error.error.Status);
+        this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la actualización del pedido!' });
       },
       complete: () => console.log('complete'),
     });

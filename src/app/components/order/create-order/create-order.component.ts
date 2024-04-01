@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { SharedService } from 'src/app/services/shared/shared.service';
+import { MessageService } from 'primeng/api';
 
 interface order {
   order_delivery_date: Date,
@@ -39,7 +40,8 @@ export class CreateOrderComponent {
   selected_provider: boolean = false;
   disabled_checkbox: boolean = false;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.client.getRequest(`${environment.url_logic}/order/companies`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -93,16 +95,13 @@ export class CreateOrderComponent {
     this.getProviders();
   }
 
-  // viewCompany() {
-  //   console.log(this.selectedCompany);
-  // }
 
   showProducts() {
     if (this.selectedCompany) {
       this.client.postRequest(`${environment.url_logic}/order/products`, { "nit_company": this.selectedCompany }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           console.log("EEE", response);
-          
+        
           this.products = response.products;
           this.products.forEach(product => {
             product.product_quantity = 0;
@@ -186,7 +185,6 @@ export class CreateOrderComponent {
         c.isSelected = false;
       })
     }
-    // window.location.reload();
   }
 
   finish() {
@@ -198,7 +196,6 @@ export class CreateOrderComponent {
     this.products.forEach(product => {
       product.add_product = false;
     });
-    // window.location.reload();
   }
 
   confirm() {
@@ -206,11 +203,12 @@ export class CreateOrderComponent {
     if (option) {
       this.client.postRequest(`${environment.url_logic}/order/create`, this.data_order, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-          console.log(response);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Pedido creado exitosamente!' });
           this.finish();
         },
         error: (error) => {
           console.log(error.error.Status);
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la creación del pedido!' });
         },
         complete: () => console.log('complete'),
       });

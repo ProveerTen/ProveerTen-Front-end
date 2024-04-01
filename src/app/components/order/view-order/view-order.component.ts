@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { SharedService } from 'src/app/services/shared/shared.service';
+import { SharedService } from 'src/app/services/shared/shared.service'; 
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-view-order',
@@ -28,7 +28,8 @@ export class ViewOrderComponent implements OnInit {
     { id: 3, name: 'Finalizado' }
   ]
 
-  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) {
+  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService,
+    private messageService: MessageService) {
     this.form = this.fb.group({
       option: ['', Validators.required]
     });
@@ -79,11 +80,12 @@ export class ViewOrderComponent implements OnInit {
     if (option) {
       this.client.postRequest(`${environment.url_logic}/order/delete`, { id_order: this.id }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
-          console.log(response);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Pedido eliminado exitosamente!' });
           this.router.navigate(['view/orders'])
         },
         error: (error) => {
-          console.log(error.error.Status);
+          console.log(error.error.Status);  
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la eliminación del pedido!' });
         },
         complete: () => console.log('complete'),
       });

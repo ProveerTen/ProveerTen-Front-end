@@ -110,7 +110,7 @@ export class AuthService {
     this.isLoggin.next(false);
     this.logoutRole();
     this.router.navigate(['login']);
-    this.messageService.add({ key: 'nav', severity: 'success', summary: 'Éxito', detail: 'Cierre de sesión exitoso' });
+    this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Cierre de sesión exitoso' });
     localStorage.removeItem('chats')
     this.shared.changeChatList([])
   }

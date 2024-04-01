@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { environment } from 'src/environments/environment';
 
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -15,7 +17,8 @@ export class ChangePasswordComponent {
   form: FormGroup;
   data: any;
   isGrocer: any;
-  constructor(public auth: AuthService, private fb: FormBuilder, private client: ClientService, private router: Router) {
+  constructor(public auth: AuthService, private fb: FormBuilder, private client: ClientService, private router: Router,
+    private messageService: MessageService) {
 
     this.form = this.fb.group({
       old_password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
@@ -56,13 +59,18 @@ export class ChangePasswordComponent {
       this.client.postRequest(`${environment.url_logic}/password/changePassword/company`, this.data, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {
           this.loading = false
-          console.log("response", response);
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Contraseña actualizada exitosamente!' });
           this.form.reset()
           this.router.navigate(['/profile'])
         },
         error: (error: any) => {
           this.loading = false
-          console.log("error", error);
+          console.log("error", error);  
+          if (error.error.error.includes('la contraseña antigua no coincide')) {
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error la contraseña ingresada no coindice con la contraseña antigua!' });
+          } else {
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la actualizacion de contraseña!' });
+          }
         },
         complete: () => {
           console.log("complete");
@@ -93,12 +101,18 @@ export class ChangePasswordComponent {
           this.loading = false
 
           this.form.reset()
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Contraseña actualizada exitosamente!' });
           // this.router.navigate(['/profile', this.auth.getId()])
           this.router.navigate(['/update-profile', this.auth.getRole()]);
         },
         error: (error: any) => {
           this.loading = false
           console.log("error", error);
+          if (error.error.error.includes('la contraseña antigua no coincide')) {
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error la contraseña ingresada no coindice con la contraseña antigua!' });
+          } else {
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la actualizacion de contraseña!' });
+          }
 
         },
         complete: () => {
@@ -160,13 +174,18 @@ export class ChangePasswordComponent {
       next: (response: any) => {
         this.loading = false
         console.log("response", response);
-
+        this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Contraseña actualizada exitosamente!' });
 
         this.router.navigate(['/profile', this.auth.getId()])
       },
       error: (error: any) => {
         this.loading = false
         console.log("error", error);
+        if (error.error.error.includes('la contraseña antigua no coincide')) {
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error la contraseña ingresada no coindice con la contraseña antigua!' });
+        } else {
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la actualizacion de contraseña!' });
+        }
 
       },
       complete: () => {

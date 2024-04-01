@@ -43,7 +43,6 @@
                           <img appBrokenImage [src]="imagePreview" alt="Image Preview" style="max-width: 100px; height: auto;">
                       </div>
                       <div class="text-center py-3">
-                          <p-toast position="bottom-right" key="center"></p-toast>
                           <button type="submit" class="btn btn-primary mr-2" [disabled]="!form.valid || !isValidImage">Actualizar publicación</button>
                           <button class="btn btn-danger" (click)="cancel()">Cancelar</button>
                       </div>
