@@ -1,10 +1,12 @@
 <div class="container p-3">
+
     <div class="row border border-dark">
         <h2>Chat</h2>
     </div>
     <div class="row border border-dark">
         <div class="col-4 border border-dark d-none d-md-flex">
-            <div class="overflow-auto w-100" style="max-height: 55vh">
+
+            <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isGrocer() | async">
                 <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
                     <div class="user_chat d-flex w-100 justify-content-center"
                         style="cursor: pointer; padding: 5px; border-radius: 5px;">
@@ -18,24 +20,43 @@
                     </div>
                 </div>
             </div>
+
+            <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isProvider() | async">
+                <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
+                    <div class="user_chat d-flex w-100 justify-content-center"
+                        style="cursor: pointer; padding: 5px; border-radius: 5px;" (click)="chatear(chat)">
+                        <div class="d-flex align-items-center gap-2">
+                            <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider"
+                                [imageType]="'photo'" width="40px" height="40px" class="mr-2">
+                            <p class="mb-0">
+                                {{chat.dataUser.name_grocer}} {{chat.dataUser.last_name_grocer}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="col-12 border border-dark col-md-8">
-            <div class="row border border-warning d-flex align-items-center">
-                <!-- <p class="mb-0 fw-bold" *ngIf="data && data.provider">{{
-                    data.provider[0].name_provider }}</p> -->
+            <div class="row border border-dark d-flex align-items-center">
+                <p class="mb-0 fw-bold" *ngIf="data_chat && data_chat.provider && auth.isGrocer() | async">{{
+                    data_chat.provider[0].name_provider }}</p>
+
+                <p class="mb-0 fw-bold" *ngIf="data_chat && data_chat.provider && auth.isProvider() | async">{{
+                    data_chat.grocer[0].name_grocer }}</p>
             </div>
             <div class="row">
                 <div class="overflow-auto" style="height: 400px" #messageContainer>
                     <div *ngFor="let message of messages" class="message">
                         <div *ngIf="isMyMessage(message.sender)" class="my-message d-flex flex-column"
                             style="text-align: right;">
-                            <!-- <p *ngIf="data">{{nameSender}}</p> -->
+                            <p *ngIf="data_chat">{{nameSender}}</p>
                             <span style="background-color: #ffc107; color: white; border-radius: 10px;" class="p-2">{{
                                 message.content }}</span>
                             <p style="font-size: 12px;">{{ message.timestamp | date:'short'}}</p>
                         </div>
                         <div *ngIf="!isMyMessage(message.sender)" class="their-message d-flex flex-column">
-                            <!-- <p *ngIf="data">{{nameSender}}</p> -->
+                            <p *ngIf="data_chat">{{nameSender}}</p>
                             <span style="background-color: rgb(219, 218, 218); border-radius: 10px;" class="p-2">{{
                                 message.content }}</span>
                             <p style="font-size: 12px;">{{ message.timestamp | date:'short'}}</p>
@@ -50,3 +71,5 @@
             </div>
         </div>
     </div>
+
+</div>

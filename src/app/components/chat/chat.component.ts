@@ -16,12 +16,16 @@ export class ChatComponent {
   isLogin: any;
   chats: string[] = [];
 
-  data: any;
+  // data: any;
   nameSender: any = '';
   messages: any[] = [];
   messageText: string = '';
 
+  data_chat: any;
+
   chatId: any;
+
+  is_chat: boolean = false;
 
   constructor(private client: ClientService, private chatService: ChatService, public auth: AuthService, public shared: SharedService) {
 
@@ -38,9 +42,23 @@ export class ChatComponent {
   }
 
   chatear(data: any) {
+
+    this.is_chat = true;
     this.chatId = data._id;
     this.chatService.joinChat(this.auth.getId(), this.chatId);
     this.loadMessages();
+
+    this.client.postRequest(`${environment.url_chat}/chat/chatunic`, { chatId: this.chatId }, undefined, undefined).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.data_chat = response;
+        console.log(this.data_chat);
+
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   loadMessages() {
@@ -74,18 +92,21 @@ export class ChatComponent {
   }
 
   isMyMessage(sender: string): boolean {
-    if (this.data && this.auth.getRole() === 'grocer') {
+
+    console.log(sender);
+
+    if (this.data_chat && this.auth.getRole() === 'grocer') {
       if (sender === this.auth.getId()) {
-        this.nameSender = this.data.grocer[0].name_grocer
+        this.nameSender = this.data_chat.grocer[0].name_grocer
       } else {
-        this.nameSender = this.data.provider[0].name_provider
+        this.nameSender = this.data_chat.provider[0].name_provider
       }
     }
-    if (this.data && this.auth.getRole() === 'provider') {
+    if (this.data_chat && this.auth.getRole() === 'provider') {
       if (sender === this.auth.getId()) {
-        this.nameSender = this.data.provider[0].name_provider
+        this.nameSender = this.data_chat.provider[0].name_provider
       } else {
-        this.nameSender = this.data.grocer[0].name_grocer
+        this.nameSender = this.data_chat.grocer[0].name_grocer
       }
     }
 
