@@ -47,7 +47,11 @@ export class ChatComponent {
     this.chatId = data._id;
     this.chatService.joinChat(this.auth.getId(), this.chatId);
     this.loadMessages();
-
+    this.chatService.getMessages(this.chatId).subscribe(
+      (message: any) => {
+        this.messages.push(message);
+      }
+    );
     this.client.postRequest(`${environment.url_chat}/chat/chatunic`, { chatId: this.chatId }, undefined, undefined).subscribe({
       next: (response: any) => {
         console.log(response);
@@ -82,19 +86,11 @@ export class ChatComponent {
       this.chatService.sendMessage(messageData, this.chatId);
       this.messageText = '';
 
-      setTimeout(() => {
-        this.chatService.getMessages(this.chatId).then(data => {
-          this.messages.push(data);
-        });
-      }, 1000)
     }
 
   }
 
   isMyMessage(sender: string): boolean {
-
-    console.log(sender);
-
     if (this.data_chat && this.auth.getRole() === 'grocer') {
       if (sender === this.auth.getId()) {
         this.nameSender = this.data_chat.grocer[0].name_grocer

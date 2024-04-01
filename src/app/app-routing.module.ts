@@ -33,6 +33,8 @@ import { SuggestedProductPricesComponent } from './components/view/suggested-pro
 import { UpdateOrderComponent } from './components/order/update-order/update-order.component';
 import { CreateProductsComponent } from './components/product/create-products/create-products.component';
 import { ViewProductsComponent } from './components/product/view-products/view-products.component';
+import { ChatComponent } from './components/chat/chat.component';
+
 import { LoaderComponent } from './components/loader/loader.component';
 import { DeleteDataProfileGrocerComponent } from './components/profile/delete-data-profile/delete-data-profile-grocer/delete-data-profile-grocer.component';
 import { ViewAllCompaniesComponent } from './components/view/view-all-companies/view-all-companies.component';
@@ -52,7 +54,7 @@ import { grocerGuestGuard } from './guards/role-guards/grocer-guest.guard';
 import { userGuard } from './guards/role-guards/user.guard';
 import { grocerCompanyGuard } from './guards/role-guards/grocer-company.guard';
 import { grocerProviderGuestGuard } from './guards/role-guards/grocer-provider-guest.guard';
-import { ChatComponent } from './components/chat/chat.component';
+import { grocerProviderGuard } from './guards/role-guards/grocer-provider.guard';
 
 const routes: Routes = [
   {
@@ -230,7 +232,8 @@ const routes: Routes = [
   },
   {
     path: 'chat',
-    component: ChatComponent
+    component: ChatComponent,
+    canActivate: [grocerProviderGuard]
   },
   {
     path: '404',
