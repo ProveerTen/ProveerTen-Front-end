@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-
+import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,7 +19,8 @@ export class UpdateProfileCompanyComponent {
   dataUpdate: any = {};
   loading: boolean = false
 
-  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router
+    , private messageService: MessageService) {
 
     this.form = this.fb.group({
       nit_company: [''],
@@ -78,11 +79,13 @@ export class UpdateProfileCompanyComponent {
           next: (response: any) => {
             this.loading = false
             console.log("response patch", response);
+            this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Informacion actualizada exitosamente!' });
             this.router.navigate(['/profile'])
           },
           error: (error) => {
             this.loading = false
             console.log(error);
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la actualización de la información!' });
           },
           complete: () => {
             console.log("complete update profile");

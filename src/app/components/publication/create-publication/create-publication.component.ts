@@ -108,6 +108,7 @@ export class CreatePublicationComponent {
       reader.readAsDataURL(this.imageFile);
       this.isValidImage = true;
     } else {
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los tipo de archivo ingresado es inválido. Por favor, revise la información proporcionada.' });
       this.isValidImage = false;
     }
   }

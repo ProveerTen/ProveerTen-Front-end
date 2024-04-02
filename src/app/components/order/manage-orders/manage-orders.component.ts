@@ -16,7 +16,7 @@ export class ManageOrdersComponent {
   data_order: any;
   order: any;
   selectedStatus: any = '';
-  selectedDate: any;
+  selectedDate: any = '';
   minPrice: any;
   maxPrice: any;
   filter: any;
@@ -78,21 +78,26 @@ export class ManageOrdersComponent {
   }
 
   applyFilters() {
-    if (this.selectedStatus !== "") {
-      this.data_order = this.filter.filter(order => { return order.status === this.selectedStatus })
-    } else {
-      this.data_order = this.filter
-    }
-    console.log(this.selectedDate);
 
-    if (this.selectedDate) {
+    if (this.selectedStatus !== "" && this.selectedDate === "") {
+      this.data_order = this.filter.filter(order => { return order.status === this.selectedStatus })
+    } else if (this.selectedDate !== "" && this.selectedStatus === "") {
       const selectedDateISO = new Date(this.selectedDate).toISOString();
-      this.data_order = this.data_order.filter(order => {
-        return new Date(order.order_delivery_date).toISOString().slice(0, 10) === selectedDateISO.slice(0, 10);
+      this.data_order = this.filter.filter(order => {
+        return new Date(order.order_date).toISOString().slice(0, 10) === selectedDateISO.slice(0, 10);
+      });
+    } else if (this.selectedStatus !== "" && this.selectedDate !== "") {
+      const selectedDateISO = new Date(this.selectedDate).toISOString();
+      this.data_order = this.filter.filter(order => {
+        return (new Date(order.order_date).toISOString().slice(0, 10) === selectedDateISO.slice(0, 10)
+          &&
+          order.status === this.selectedStatus
+        );
       });
     }
-    else {
-      this.data_order = this.filter
+
+    if (this.selectedDate === "" && this.selectedStatus === "") {
+      this.data_order = this.filter;
     }
 
   }

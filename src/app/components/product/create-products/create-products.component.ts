@@ -81,9 +81,12 @@ export class CreateProductsComponent {
           console.log(response.data);
           this.products_file = response.data;
           this.list_products = this.products_file;
+          this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Archivo cargado exitosamente!' });
+
         },
         error: (error) => {
           console.log(error);
+          this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error al cargar el archivo!' });
         },
         complete: () => console.log('complete'),
       });
@@ -99,6 +102,7 @@ export class CreateProductsComponent {
     } else {
       console.log('Archivo no válido');
       this.isValidFile = false;
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los tipo de archivo ingresado es inválido. Por favor, revise la información proporcionada.' });
     }
   }
 

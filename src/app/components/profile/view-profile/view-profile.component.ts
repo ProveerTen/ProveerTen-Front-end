@@ -333,12 +333,14 @@ export class ViewProfileComponent {
         .subscribe({
           next: (response: any) => {
             this.loading = false
+            this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Red social agregada exitosamente!' });
             console.log(response);
             this.addSocialRed();
           },
           error: (error: any) => {
             this.loading = false
             console.log(error);
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error al agregar la red social!' });
           },
           complete: () => {
             console.log('Complete');
@@ -485,12 +487,14 @@ export class ViewProfileComponent {
           next: (response: any) => {
             this.loading = false
             this.dataSocialReds = response.status.data;
+            this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Red social eliminada exitosamente!' });
             console.log('datos de las redes sociales', this.dataSocialReds);
             console.log(this.dataSocialReds.length);
           },
           error: (error) => {
             this.loading = false
             console.log(error.error.Status);
+            this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la eliminación de la red social!'});
           },
           complete: () => {
             console.log('complete');

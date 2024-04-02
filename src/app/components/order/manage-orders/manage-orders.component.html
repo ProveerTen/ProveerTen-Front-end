@@ -1,4 +1,4 @@
-  <!-- 
+<!-- 
     <div style="max-height: 400px; overflow-y: auto;">
         <div class="table-responsive">
             <table class="table table-bordered table-striped text-center">
@@ -48,84 +48,72 @@
     -->
 
 
-    <div class="container d-flex justify-content-center flex-column mt-5 gap-5 pb-5">
-        <div class="d-flex gap-2 justify-content-left mt-3" style="padding-left: 180px;">
-            <button type="button" class="btn btn-outline-warning" (click)="goBack()">
-                Regresar al panel
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-up"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708z" />
-                    <path
-                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 1 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.707l1.5-1.5a.5.5 0 0 1 .708 0Z" />
-                </svg>
-            </button>
+<div class="container d-flex justify-content-center flex-column mt-5 gap-5 pb-5">
+    <div class="d-flex gap-2 justify-content-left mt-3" style="padding-left: 180px;">
+        <button type="button" class="btn btn-outline-warning" (click)="goBack()">
+            Regresar al panel
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-up"
+                viewBox="0 0 16 16">
+                <path
+                    d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708z" />
+                <path
+                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 1 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.707l1.5-1.5a.5.5 0 0 1 .708 0Z" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <!-- Selector de Estado -->
+            <label for="statusSelector" class="form-label">Seleccionar Estado:</label>
+            <select class="form-select" id="statusSelector" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+                <option value="">Todos</option>
+                <option value="Creado">Creado</option>
+                <option value="En proceso">En proceso</option>
+                <option value="En reparto">En reparto</option>
+                <option value="Finalizado">Finalizado</option>
+            </select>
         </div>
-    
-        <div class="row mt-3">
-            <div class="col-md-3">
-                <!-- Selector de Estado -->
-                <label for="statusSelector" class="form-label">Seleccionar Estado:</label>
-                <select class="form-select" id="statusSelector" [(ngModel)]="selectedStatus" (change)="applyFilters()">
-                    <option value="">Todos</option>
-                    <option value="Creado">Creado</option>
-                    <option value="En proceso">En proceso</option>
-                    <option value="En reparto">En reparto</option>
-                    <option value="Finalizado">Finalizado</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <!-- Selector de Fecha -->
-                <label for="datePicker" class="form-label">Seleccionar Fecha:</label>
-                <input type="date" class="form-control" id="datePicker" [(ngModel)]="selectedDate"
-                    (change)="applyFilters()">
-            </div>
-            <div class="col-md-3">
-                <!-- Selector de Precio -->
-                <label for="priceRange" class="form-label">Rango de Precio:</label>
-                <div class="input-group">
-                    <span class="input-group-text">$</span>
-                    <input type="number" class="form-control" id="minPrice" placeholder="Mínimo" [(ngModel)]="minPrice"
-                        (change)="applyFilters()">
-                    <span class="input-group-text">-</span>
-                    <input type="number" class="form-control" id="maxPrice" placeholder="Máximo" [(ngModel)]="maxPrice"
-                        (change)="applyFilters()">
-                </div>
-            </div>
-        </div>
-    
-        <div class="container">
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <ng-container *ngFor="let order of data_order">
-                    <div class="col">
-                        <div class="card border border-primary rounded-3 shadow">
-                            <div class="card-body">
-                                <h5 class="card-title mb-3">Pedido #{{ order.id_order }}</h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item bg-transparent">
-                                        <strong>Fecha de realización:</strong> {{ order.order_date | date: 'short' }}
-                                    </li>
-                                    <li class="list-group-item bg-transparent">
-                                        <strong>Valor del pedido:</strong> {{ order.total_ordered_price }}
-                                    </li>
-                                    <li class="list-group-item bg-transparent">
-                                        <strong>Estado del pedido:</strong> {{ order.status }}
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-footer bg-transparent border-top-0 d-flex justify-content-end">
-                                <button class="btn btn-outline-primary me-2" (click)="viewOrder(order.id_order)">
-                                    <i class="bi bi-eye"></i> Ver pedido
-                                </button>
-                                <ng-container *ngIf="order.status === 'Creado' && (auth.isProvider() | async)">
-                                    <button class="btn btn-outline-danger" (click)="deleteOrder(order.id_order)">
-                                        <i class="bi bi-trash"></i> Eliminar pedido
-                                    </button>
-                                </ng-container>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
-            </div>
+        <div class="col-md-3">
+            <!-- Selector de Fecha -->
+            <label for="datePicker" class="form-label">Seleccionar Fecha:</label>
+            <input type="date" class="form-control" id="datePicker" [(ngModel)]="selectedDate"
+                (change)="applyFilters()">
         </div>
     </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <ng-container *ngFor="let order of data_order">
+                <div class="col">
+                    <div class="card border border-primary rounded-3 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Pedido #{{ order.id_order }}</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-transparent">
+                                    <strong>Fecha de realización:</strong> {{ order.order_date | date: 'short' }}
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    <strong>Valor del pedido:</strong> {{ order.total_ordered_price }}
+                                </li>
+                                <li class="list-group-item bg-transparent">
+                                    <strong>Estado del pedido:</strong> {{ order.status }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-end">
+                            <button class="btn btn-outline-primary me-2" (click)="viewOrder(order.id_order)">
+                                <i class="bi bi-eye"></i> Ver pedido
+                            </button>
+                            <ng-container *ngIf="order.status === 'Creado' && (auth.isProvider() | async)">
+                                <button class="btn btn-outline-danger" (click)="deleteOrder(order.id_order)">
+                                    <i class="bi bi-trash"></i> Eliminar pedido
+                                </button>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
