@@ -72,6 +72,7 @@ import { ManageOrdersComponent } from './components/order/manage-orders/manage-o
 import { SuggestedProductPricesComponent } from './components/view/suggested-product-prices/suggested-product-prices/suggested-product-prices.component';
 import { UpdateOrderComponent } from './components/order/update-order/update-order.component';
 import { CreateProductsComponent } from './components/product/create-products/create-products.component';
+import { ViewPublicationComponent } from './components/publication/view-publication/view-publication.component';
 
 
 @NgModule({
@@ -126,7 +127,8 @@ import { CreateProductsComponent } from './components/product/create-products/cr
     ManageOrdersComponent,
     SuggestedProductPricesComponent,
     UpdateOrderComponent,
-    CreateProductsComponent
+    CreateProductsComponent,
+    ViewPublicationComponent
   ],
   imports: [
     BrowserModule,

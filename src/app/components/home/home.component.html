@@ -19,10 +19,10 @@
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden" >Previous</span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-                    data-bs-slide="next" >
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true" style="color: black;"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -283,7 +283,8 @@ Pasabocas
                                 </div>
                                 <div class="d-flex justify-content-center mb-3">
                                     <button class="btn btn-outline-warning " style="width: 150px;"
-                                        (click)="viewProduct(product.id_product)">Ver</button>
+                                        (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" style="cursor:pointer">Ver</button>
                                 </div>
                             </div>
                         </div>
@@ -321,13 +322,11 @@ Pasabocas
             <div class="card-body w-100 d-flex justify-content-center flex-column">
                 <p class="fs-3 bg-light" style="color: black">{{ publicacion.text }}</p>
                 <img src="{{ publicacion.secure_url }}" class="img-fluid" style="cursor: pointer;"
-                    data-bs-toggle="modal" [attr.data-bs-target]="'#imageModal_' + i">
+                    (click)="viewPublicationModal(publicacion._id)" data-bs-toggle="modal"
+                    data-bs-target="#publicationModal" style="cursor:pointer">
             </div>
         </div>
     </div>
-
-
-
 
     <div class="finishedMessage" *ngIf="finish">
         <div class="d-flex justify-content-center">
@@ -341,32 +340,31 @@ Pasabocas
 </ng-template>
 
 
-
-
-<!-- Modals -->
-<div *ngFor="let publicacion of publicaciones; let i = index" class="modal fade" [id]="'imageModal_' + i" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ publicacion.text }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detalles del producto</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body img-modal-body">
-                <img src="{{ publicacion.secure_url }}" class="img-fluid">
+            <div class="modal-body">
+                <app-view-product [productModal]="product_modal"></app-view-product>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="contenedor">
-    <div class="clip"></div>
-    <div class="lista">
-        <ul>
-            <li>Elemento 1</li>
-            <li>Elemento 2</li>
-            <li>Elemento 3</li>
-        </ul>
+<div class="modal fade" id="publicationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Detalles de la publicación</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <app-view-product [productModal]="product_modal"></app-view-product> -->
+                <app-view-publication [publicationModal]="publication_modal"></app-view-publication>
+            </div>
+        </div>
     </div>
 </div>

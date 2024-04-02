@@ -20,6 +20,9 @@ export class HomeComponent {
   isOffline: any;
   data_location: any;
 
+  product_modal: any;
+  publication_modal: any;
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private shared: SharedService) {
     auth.isLoggedIn().subscribe(value => {
       this.isOffline = value;
@@ -144,6 +147,14 @@ export class HomeComponent {
       })
     }
 
+  }
+
+  viewProductModal(id: string) {
+    this.product_modal = id;
+  }
+
+  viewPublicationModal(id: string) {
+    this.publication_modal = id;
   }
 
   orderByDate(publications: any[]) {
