@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -10,64 +10,63 @@ import { environment } from 'src/environments/environment';
   templateUrl: './view-product.component.html',
   styleUrls: ['./view-product.component.css']
 })
-export class ViewProductComponent {
-  loading : boolean = false
-  data: any;
+export class ViewProductComponent implements OnInit, OnChanges {
+  loading: boolean = false;
+  data: any = null;
   id!: string;
-  availability:string;
-  p:any;
+  availability: string;
+  p: any;
 
-  constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
+  @Input() productModal: any;
+
+  constructor(private client: ClientService, public auth: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.params['id']) {
+      this.id = this.route.snapshot.params['id'];
+      this.fetchProductDetails();
+    }
+  }
 
-      this.loading = true
+  ngOnChanges(): void {
+    if (this.productModal) {
+      this.id = this.productModal;
+      this.fetchProductDetails();
+    }
+  }
 
-      setTimeout (()=>{
-
-
-    this.id = this.routerActivate.snapshot.params['id'];
-    console.log(this.id);
-
+  fetchProductDetails() {
+    this.loading = true;
+    this.data = null;
     this.client.postRequest(`${environment.url_logic}/product/detail`, { id_product: this.id }, undefined, undefined).subscribe({
       next: (response: any) => {
         console.log(response);
-        this.loading = false
+        this.loading = false;
         this.data = response.categoriesByProducts[0];
         console.log(this.data);
 
         this.p = document.querySelector('.disponibilidad');
         this.availability = this.data.availability_product;
 
-        if (this.availability == "Disponible"){
-
+        if (this.availability == "Disponible") {
           this.p.classList.add('disponible');
-        }
-        else{
+        } else {
           this.p.classList.add('no-disponible');
         }
-
-
       },
       error: (error) => {
-        this.loading = false
+        this.loading = false;
         console.log(error.error.Status);
       },
       complete: () => console.log('complete'),
     });
-  },400)
-
-
   }
 
-
-  disponible(){
-
-
-
+  disponible() {
+    // Lógica para disponibilidad
   }
 
   viewCompany(id: string) {
-    this.router.navigate(['profile/company', id])
+    this.router.navigate(['profile/company', id]);
   }
 }

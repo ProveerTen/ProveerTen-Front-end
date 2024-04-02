@@ -130,9 +130,25 @@
                     <h4>
                         <h2 class="pro-title">{{company.name_company}}</h2>
                     </h4>
-                    <button (click)="viewCompany(company.nit_company)">Ver perfil</button>
+                    <button (click)="viewCompanyModal(company.nit_company)" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" style="cursor:pointer">Ver perfil</button>
                 </div>
             </section>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles del producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-view-profile-company [companyModal]="company_modal"></app-view-profile-company>
+            </div>
         </div>
     </div>
 </div>

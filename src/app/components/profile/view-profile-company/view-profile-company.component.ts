@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +22,8 @@ export class ViewProfileCompanyComponent {
   dataSocialReds: any[]
   colorsOfIcons: any[] = [];
 
+  @Input() companyModal: any;
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) {
     this.auth.isLoggedIn().subscribe((value: any) => {
       this.isLogin = value;
@@ -29,9 +31,23 @@ export class ViewProfileCompanyComponent {
   }
 
   ngOnInit(): void {
+    if (this.routerActivate.snapshot.params['id']) {
+      this.id = this.routerActivate.snapshot.params['id'];
+      this.fetchDataCompany();
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.companyModal) {
+      this.id = this.companyModal;
+      this.fetchDataCompany();
+    }
+  }
+
+  fetchDataCompany() {
 
     this.loading = true
-    this.id = this.routerActivate.snapshot.params['id'];
+    this.data = null;
     if (this.isLogin) {
       this.client.getRequest(`${environment.url_logic}/profile/companies/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
         next: (response: any) => {

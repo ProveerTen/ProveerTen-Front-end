@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
-import { SharedService } from './services/shared/shared.service';
+
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,28 +10,15 @@ import { SharedService } from './services/shared/shared.service';
 })
 export class AppComponent {
   title = 'ProveerTen';
-  chats: string[] = [];
-  isLogin: any;
-  listChatsActive: boolean = true;
   showScrollButton: boolean = false;
 
-  constructor(public auth: AuthService, private shared: SharedService) {
-
-    this.auth.isLoggedIn().subscribe((value: any) => {
-      this.isLogin = value;
-    });
-    this.shared.chatList.subscribe((value: any) => {
-      this.chats = value;
-      //console.log(this.chats);
-
-
-      if (this.chats.length > 2) {
-        this.chats.splice(0, 1);
-        localStorage.setItem('chats', this.chats.toString())
+  constructor(public auth: AuthService, private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
       }
     });
   }
-
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -41,34 +29,4 @@ export class AppComponent {
     }
   }
 
-  scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  ngOnInit(): void {
-    if (this.isLogin) {
-      let localchats = localStorage.getItem('chats');
-      if (localchats) {
-        this.chats = localchats.split(',');
-      }
-    }
-  }
-
-  closeChat(index: any) {
-    this.chats.splice(index, 1);
-    if (this.chats.length === 0) {
-      localStorage.removeItem('chats');
-    } else {
-      localStorage.setItem('chats', this.chats.toString())
-    }
-    console.log(this.chats);
-  }
-
-  changeStyle() {
-    this.listChatsActive = !this.listChatsActive;
-  }
-
-  ngOnDestroy() {
-    this.chats = [];
-  }
 }

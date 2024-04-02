@@ -19,6 +19,7 @@ export class ViewAllProductsComponent {
   sub_category: string;
   isOffline: any;
   data_location: any;
+  product_modal: any;
 
   constructor(public auth: AuthService, private router: Router, private client: ClientService, private shared: SharedService) {
     auth.isLoggedIn().subscribe(value => {
@@ -64,9 +65,6 @@ export class ViewAllProductsComponent {
       this.getProductsByCategoriesAndSubCategories();
     }
   }
-
-
-
 
   getProducts() {
     if (!(this.isOffline)) {
@@ -158,6 +156,10 @@ export class ViewAllProductsComponent {
 
   viewProduct(id: string) {
     this.router.navigate(['view/product/', id]);
+  }
+
+  viewProductModal(id: string) {
+    this.product_modal = id;
   }
 
   removeAccents(text: string): string {

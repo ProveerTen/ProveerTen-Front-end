@@ -26,6 +26,8 @@ export class ViewAllCompaniesComponent {
   isOffline: any;
   data_location: any;
 
+  company_modal: any;
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) {
     auth.isLoggedIn().subscribe(value => {
       this.isOffline = value;
@@ -67,7 +69,6 @@ export class ViewAllCompaniesComponent {
     }
   }
 
-
   getCompanies() {
     if (!(this.isOffline)) {
       this.shared.department_and_city.subscribe(value => {
@@ -80,7 +81,7 @@ export class ViewAllCompaniesComponent {
               company.showMore = false
             });
             this.filter = this.companies.slice();
-            this.handleCompanyFiltering() 
+            this.handleCompanyFiltering()
 
             if (this.companies.length == 0) {
               console.log('No hay compañías por mostrar');
@@ -101,7 +102,7 @@ export class ViewAllCompaniesComponent {
             company.showMore = false
           });
           this.filter = this.companies.slice();
-          this.handleCompanyFiltering() 
+          this.handleCompanyFiltering()
 
           if (this.companies.length == 0) {
             console.log('No hay compañías por mostrar');
@@ -199,8 +200,13 @@ export class ViewAllCompaniesComponent {
     this.companyInfo = this.companies[i]
     console.log("compa info", this.companyInfo);
   }
+
   hideModalInfo() {
     this.showModal = false
+  }
+
+  viewCompanyModal(id: string) {
+    this.company_modal = id;
   }
 
   toggleShowMore(company: any) {
