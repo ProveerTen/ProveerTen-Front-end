@@ -55,12 +55,13 @@ import { userGuard } from './guards/role-guards/user.guard';
 import { grocerCompanyGuard } from './guards/role-guards/grocer-company.guard';
 import { grocerProviderGuestGuard } from './guards/role-guards/grocer-provider-guest.guard';
 import { grocerProviderGuard } from './guards/role-guards/grocer-provider.guard';
+import { homeGuard } from './guards/guards-components/home.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [grocerGuestGuard]
+    canActivate: [homeGuard]
   },
   {
     path: 'register',
