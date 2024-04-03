@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 export class ManageProductsComponent {
   data: any;
   loading: boolean = false;
+  product_modal:string;
 
   constructor(
     private client: ClientService,
@@ -69,8 +70,8 @@ export class ManageProductsComponent {
     this.router.navigate(['create/products']);
   }
 
-  viewProduct(id: string) {
-    this.router.navigate(['view/product/', id]);
+  viewProductModal(id: string) {
+    this.product_modal = id
   }
 
   deleteProduct(id: string) {

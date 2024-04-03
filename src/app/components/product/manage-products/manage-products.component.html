@@ -142,7 +142,8 @@
                             </div>
                             <div class="card-footer d-flex justify-content-center flex-wrap">
                                 <button type="button" class="btn btn-primary r-2 mb-2"
-                                    (click)="viewProduct(product.id_product)">
+                                    (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
+                                    data-bs-target="#productModal" style="cursor:pointer">
                                     Ver
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -179,3 +180,19 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModal">Detalles del producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <app-view-product [productModal]="product_modal"></app-view-product>
+                </div>
+            </div>
+        </div>
+    </div>
+    

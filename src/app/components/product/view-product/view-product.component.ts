@@ -28,6 +28,8 @@ export class ViewProductComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    console.log("modal");
+    
     if (this.productModal) {
       this.id = this.productModal;
       this.fetchProductDetails();
