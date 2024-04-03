@@ -31,7 +31,6 @@ export class LoginGrocerComponent {
     this.authGoogleService.getTokenId().subscribe(tokenId => {
       this.tokenId = tokenId;
       if (this.tokenId) {
-        /*
         this.loading = true;
         this.client.postRequest(`${environment.url_auth}/login/google/grocer`, { "token": this.tokenId }).subscribe({
           next: (response: any) => {
@@ -61,7 +60,6 @@ export class LoginGrocerComponent {
           complete: () => console.log('complete'),
           
         });
-        */
       }
     });
   }
