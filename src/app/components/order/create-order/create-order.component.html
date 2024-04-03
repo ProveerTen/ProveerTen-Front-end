@@ -111,7 +111,7 @@
 
                 <div *ngIf="indexPage === 3">
                     <h2>Confirm</h2>
-                    <div style="max-height: 400px; overflow-y: auto; background-color: aqua;">
+                    <div style="max-height: 400px; overflow-y: auto;">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -124,7 +124,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let product of data_order.products">
+                                <tr (click)="viewProductModal(product.id_product)" data-bs-toggle="modal" data-bs-target="#productModal" style="cursor: pointer;" *ngFor="let product of data_order.products">
                                     <td>
                                         <img appBrokenImage loading="lazy" [src]="product.image_product"
                                             alt="{{ product?.name_product }}" class="product-image">
@@ -140,7 +140,7 @@
 
                         </table>
                         <div style="display: flex; align-items: end;">
-                            <th scope="col">Trabajador</th>
+                            <th scope="col">Trabajador: </th>
                             <td>{{ data_order?.name_provider}} {{ data_order?.last_name_provider}}</td>
                         </div>
                     </div>
