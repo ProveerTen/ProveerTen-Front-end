@@ -1,15 +1,17 @@
 <div class="container p-5">
 
-    <button class="btn btn-warning my-3" (click)="goBack(auth.getRole())">Regresar</button>
+    <button class="btn btn-warning mb-3" (click)="goBack(auth.getRole())">Regresar</button>
 
-    <div style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-striped">
-            <thead>
+    <h3 class="text-center mb-4">Pedidos</h3>
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="thead-light">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Fecha de realización</th>
-                    <th scope="col">Valor del pedido</th>
-                    <th scope="col">Estado del pedido</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">FECHA DE REALIZACIÓN</th>
+                    <th scope="col">VALOR DEL PEDIDO</th>
+                    <th scope="col">ESTADO DEL PEDIDO</th>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let order of data_order">
@@ -22,79 +24,79 @@
         </table>
     </div>
 
-    <div style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-striped">
-            <thead>
+    <h3 class="text-center mb-4">Productos en el Pedido</h3>
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="thead-light">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre del Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Stock del producto</th>
-                    <th scope="col">Precio de compra</th>
-                    <th scope="col">Total del producto</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE DEL PRODUCTO</th>
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">STOCK DEL PRODUCTO</th>
+                    <th scope="col">PRECIO DE COMPRA</th>
+                    <th scope="col">TOTAL DEL PRODUCTO</th>
                     <th scope="col"></th>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let product of list_products">
                     <td>{{product.id_product}}</td>
                     <td>{{ product.name_product }}</td>
-                    <td>
-                        <button (click)="increaseProduct(product)" class="btn btn-sm btn-outline-success">+</button>
-                        {{product.quantity}} <button (click)="decreaseProduct(product)"
-                            class="btn btn-sm btn-outline-warning">-</button>
+                    <td class="text-center">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button (click)="increaseProduct(product)" class="btn btn-sm btn-success mr-2">+</button>
+                            <span>{{product.quantity}}</span>
+                            <button (click)="decreaseProduct(product)"
+                                class="btn btn-sm btn-warning ml-2">-</button>
+                        </div>
                     </td>
                     <td>{{product.stock_product}}</td>
                     <td>{{product.purchase_price_product}}</td>
                     <td>{{product.individual_product_price}}</td>
                     <td>
                         <button [disabled]="list_products.length === 1" (click)="removeProduct(product)"
-                            class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            class="btn btn-sm btn-danger">Eliminar</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div>
-        <button (click)="updateOrder()">Actualizar</button>
-        <button>Cancelar</button>
+    <div class="text-center mb-4">
+        <button (click)="updateOrder()" class="btn btn-primary mr-3 mx-3">Actualizar</button>
+        <button class="btn btn-danger">Cancelar</button>
     </div>
 
-    <br>
-
-    <div>
-        <button [disabled]="show_products" (click)="showProducts()">Agregar producto</button>
-        <button *ngIf="show_products" (click)="closeProducts()">Cerrar</button>
+    <div class="text-center mb-4">
+        <button [disabled]="show_products" (click)="showProducts()" class="btn btn-success mr-3 mx-3">Agregar producto</button>
+        <button *ngIf="show_products" (click)="closeProducts()" class="btn btn-secondary">Cerrar</button>
     </div>
 
     <div *ngIf="show_products">
-        <div style="max-height: 400px; overflow-y: auto;">
-            <table class="table table-striped">
-                <thead>
+        <h3 class="text-center mb-3">Agregar Producto</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="thead-light">
                     <tr>
-                        <!-- <th scope="col">Imagen</th> -->
-                        <th scope="col">Nombre del Producto</th>
-                        <th scope="col">Precio de Compra</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Opciones</th>
+                        <th scope="col">NOMBRE DEL PRODUCTO</th>
+                        <th scope="col">PRECIO DE COMPRA</th>
+                        <th scope="col">STOCK</th>
+                        <th scope="col">OPCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let product of list_show_products">
-                        <!-- <td>
-                            <img appBrokenImage loading="lazy" [src]="product.image_product"
-                                alt="{{ product?.name_product }}" class="product-image">
-                        </td> -->
                         <td>{{ product?.name_product }}</td>
                         <td>{{ product?.purchase_price_product }}</td>
                         <td>{{ product?.stock_product }}</td>
-                        <td><button [disabled]="product.stock_product === 0"
-                                (click)="addProduct(product)">Agregar</button></td>
+                        <td class="text-center">
+                            <button [disabled]="product.stock_product === 0"
+                                (click)="addProduct(product)" class="btn btn-sm btn-primary">Agregar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
 
 </div>
