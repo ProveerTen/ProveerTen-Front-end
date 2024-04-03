@@ -89,7 +89,7 @@
       <div class = "product-div">
           <div class = "product-div-left">
               <div class = "img-container">
-                  <img [src]="data?.image_product">
+                <img appBrokenImage loading="lazy" [src]="data?.image_product" class="img-fluid" alt="{{data?.name_product}}">
               </div>
 
               <div class="description_product">

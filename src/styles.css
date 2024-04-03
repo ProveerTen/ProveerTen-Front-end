@@ -23,3 +23,30 @@ body {
   font-weight: 500;
   font-style: normal;
 }
+
+:root {
+  --bs-primary: #E66D3D;
+  --bs-primary-rgb: 230, 109, 61;
+}
+
+.btn.btn-primary {
+  background: #ec8f6a;
+  border-color: #ec8f6a;
+  color: #fff;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus {
+
+  border-color: #e66d3d !important;
+  background: #e66d3d !important;
+}
+
+.btn-block {
+  display: block;
+  width: 35%;
+}
+
+.btn-block+.btn-block {
+  margin-top: 0.5rem;
+}

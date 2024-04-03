@@ -11,7 +11,7 @@
       <div class="col-md-6 offset-md-3">
         <div class="content">
           <div class="mb-4">
-            <h1 style="font-size: 30px; color: orange;">¡Ingresa un trabajador a tu compañia!</h1>
+            <h1 style="font-size: 30px; color: #e66d3d ">¡Ingresa un trabajador a tu compañia!</h1>
           </div>
           <div class="form d-flex flex-column">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -158,9 +158,9 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Enviar</button>
+              <button class="btn btn-primary" (click)="cancel()">Cancelar</button>
             </form>
-            <div class="button-container">
-              <button (click)="cancel()">Cancelar</button>
+            <div>
             </div>
           </div>
         </div>
