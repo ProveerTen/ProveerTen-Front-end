@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ManageProvidersComponent {
   loading : boolean = false
   data: any;
+  modalProfile:string
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
 
@@ -48,5 +49,11 @@ export class ManageProvidersComponent {
 
   goBack() {
     this.router.navigate(['panel']);
+  }
+
+  viewModalProfile(id:string) {
+    console.log("eee", id);
+    
+    this.modalProfile = id
   }
 }

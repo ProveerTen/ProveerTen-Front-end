@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -16,12 +16,25 @@ export class ViewProfileProviderComponent {
   id!: string;
   data: any;
 
+  @Input() modalProfile_:string
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    console.log("modal");
+    
+    if (this.modalProfile_) {
+      console.log("uuuu");
+      
+      this.id = this.modalProfile_;
+      this.getDataProvider();
+    }
+  }
+
+  getDataProvider(): void {
       this.loading = true
 
-    this.id = this.routerActivate.snapshot.params['id'];
+    // this.id = this.routerActivate.snapshot.params['id'];
     this.client.getRequest(`${environment.url_logic}/profile/providers/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         this.loading = false
