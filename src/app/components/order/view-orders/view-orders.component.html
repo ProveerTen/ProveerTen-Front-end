@@ -1,9 +1,8 @@
 <div class="container p-5">
 
-    <button class="btn btn-warning my-3" (click)="goBack()">Regresar</button>
+    <button class="btn btn-primary my-3" (click)="goBack()">Regresar</button>
 
-
-    <div style="max-height: 400px; overflow-y: auto;">
+    <!-- <div style="max-height: 400px; overflow-y: auto;">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,7 +22,7 @@
                     <td>{{order.total_ordered_price}}</td>
                     <td>{{order.status}}</td>
                     <td>
-                        <button (click)="viewOrder(order.id_order)" class="btn btn-outline-success">Ver pedido <svg
+                        <button (click)="viewOrder(order.id_order)" class="btn btn-primary">Ver pedido <svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-eye-fill" viewBox="0 0 16 16">
                                 <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
@@ -33,7 +32,7 @@
                     </td>
                     <td *ngIf="order.status === 'Creado' && auth.isGrocer() | async"
                         (click)="updateOrder(order.id_order)">
-                        <button class="btn btn-outline-warning">Actualizar pedido <svg
+                        <button class="btn btn-primary">Actualizar pedido <svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                 <path
@@ -43,5 +42,66 @@
                 </tr>
             </tbody>
         </table>
+    </div> -->
+
+    <div class="container">
+        <div class="row">
+            <ng-container *ngFor="let order of data_orders">
+                <div class="col-md-3 mb-4">
+                    <div class="position-relative d-flex flex-column justify-content-center align-items-center"
+                        style="top: 10px; z-index: 1;">
+                        <div class="box-up"
+                            style="height: 20px; width: 36px; border-top-left-radius: 69px;border-top-right-radius: 69px; background-color: rgba(255, 145, 77, 1);">
+                        </div>
+                        <div class="box " style="height: 30px;  width: 110px; border-top-left-radius: 62px;border-top-right-radius: 62px;border-bottom-left-radius: 14px; border-bottom-right-radius: 14px;
+                                background-color: rgba(255, 145, 77, 1);">
+                        </div>
+                    </div>
+                    <div class="card rounded-3 shadow" style="border: rgba(255, 145, 77, 1) 2px solid;">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Pedido #{{ order.id_order }}</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>Fecha de realización:</strong> {{ order.order_date | date: 'short' }}
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Valor del pedido:</strong> {{ order.total_ordered_price }}
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Estado del pedido:</strong> {{ order.status }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex flex-column justify-content-center gap-2">
+                            <!--  <button class="btn btn-primary me-2" (click)="viewOrder(order.id_order)">
+                                <i class="bi bi-eye"></i> Ver pedido
+                            </button>
+                            <ng-container *ngIf="order.status === 'Creado' && (auth.isProvider() | async)">
+                                <button class="btn btn-outline-danger" (click)="deleteOrder(order.id_order)">
+                                    <i class="bi bi-trash"></i> Eliminar pedido
+                                </button>
+                            </ng-container> -->
+
+                            <button (click)="viewOrder(order.id_order)" class="btn btn-primary">Ver pedido <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                    <path
+                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                                </svg></button>
+
+                            <button *ngIf="order.status === 'Creado' && auth.isGrocer() | async" class="btn btn-primary"
+                                (click)="updateOrder(order.id_order)">Actualizar pedido <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
     </div>
+
 </div>

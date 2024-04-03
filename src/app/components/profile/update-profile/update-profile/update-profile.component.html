@@ -1,6 +1,5 @@
 <div *ngIf="auth.isCompany() | async">
     <app-update-profile-company></app-update-profile-company>
-    <a href="change-password-profile">Cambiar Contraseña</a>
 </div>
 
 <div *ngIf="auth.isGrocer() | async">
