@@ -39,6 +39,7 @@ export class CreateOrderComponent {
   data_order: order;
   selected_provider: boolean = false;
   disabled_checkbox: boolean = false;
+  product_modal:string = "";
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService,
     private messageService: MessageService) { }
@@ -257,5 +258,8 @@ export class CreateOrderComponent {
     }
   }
 
+  viewProductModal(id:string) {
+    this.product_modal = id
+  }
 }
 

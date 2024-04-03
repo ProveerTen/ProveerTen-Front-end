@@ -41,7 +41,7 @@
             <div class="" style="height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
                 <div *ngIf="indexPage === 1">
                     <div class="all d-flex flex-md-wrap gap-2 overflow-auto" style=" height: 450px;">
-                        <div class="card d-flex flex-column " *ngFor="let product of products" style="width: 30%; height: 420px;">
+                        <div (click)="viewProductModal(product.id_product)" data-bs-toggle="modal" data-bs-target="#productModal" class="card d-flex flex-column" *ngFor="let product of products" style="width: 30%; height: 420px;">
             
                             <div class="d-flex align-items-center">
                                 <img appBrokenImage loading="lazy" [src]="product.image_product" alt="{{ product?.name_product }}"
@@ -155,6 +155,21 @@
                             *ngIf="indexPage === 3">Confirmar</button>
                         <button class="btn btn-outline-primary" (click)="editOrder()"
                             *ngIf="indexPage === 3">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModal">Detalle del Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <app-view-product [productModal]="product_modal"></app-view-product> -->
+                        <app-view-product [productModal]="product_modal"></app-view-product>
                     </div>
                 </div>
             </div>
