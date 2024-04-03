@@ -17,6 +17,7 @@ export class ManagePublicationsComponent {
   loading : boolean = false
   publications: any;
   data: any;
+  publicationModal:string;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router,
     private messageService: MessageService) { }
@@ -92,5 +93,9 @@ export class ManagePublicationsComponent {
 
   isVideo(url: string): boolean {
     return url.endsWith('.mp4'); 
+  }
+
+  viewPublicationModal(id:string) {
+    this.publicationModal = id
   }
 }

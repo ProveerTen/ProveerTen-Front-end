@@ -16,6 +16,7 @@ export class ViewPublicationComponent {
   id!: string;
 
   @Input() publicationModal: any;
+  @Input() showModal: boolean = false;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
 
@@ -23,6 +24,9 @@ export class ViewPublicationComponent {
     if (this.publicationModal) {
       this.id = this.publicationModal;
       this.fetchPublicationDetails();
+    }
+    if (this.showModal) {
+      this.showModal = true;
     }
   }
 

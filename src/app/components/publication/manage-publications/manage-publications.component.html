@@ -48,7 +48,7 @@
                                 </thead>
                                 <tbody>
                                     <ng-container *ngIf="publications; else noPublications">
-                                        <tr *ngFor="let publication of publications">
+                                        <tr (click)="viewPublicationModal(publication._id)" data-bs-toggle="modal" data-bs-target="#publicationModal" style="cursor:pointer" *ngFor="let publication of publications">
                                             <td class="text-center align-middle">
                                                 <div class="thumbnail">
                                                     <ng-container *ngIf="isVideo(publication.image_url); else isImage">
@@ -110,3 +110,16 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="publicationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <app-view-publication [publicationModal]="publicationModal" [showModal]="true"></app-view-publication>
+                </div>
+            </div>
+        </div>
+    </div> 
