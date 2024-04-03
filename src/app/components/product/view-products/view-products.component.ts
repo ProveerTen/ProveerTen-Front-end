@@ -16,6 +16,7 @@ export class ViewProductsComponent {
   loading: boolean = false;
   data: any;
   id!: string;
+  product_modal:string;
 
   constructor(
     private client: ClientService,
@@ -51,7 +52,7 @@ export class ViewProductsComponent {
     }, 400);
   }
 
-  viewProduct(id: string) {
-    this.router.navigate(['view/product/', id]);
+  viewProductModal(id: string) {
+   this.product_modal = id
   }
 }
