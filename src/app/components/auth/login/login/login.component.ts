@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -6,9 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  selectedRole: string;
 
-  selectedRole = "grocer";
+  constructor(private shared: SharedService) {
+    this.shared.selectedRole.subscribe(value => {
+      console.log(value);
+      this.setRole(value)
+    })
+  }
 
+  
   setRole(role: string): void {
     this.selectedRole = role;
   }
@@ -16,4 +24,5 @@ export class LoginComponent {
   isRole(role: string): boolean {
     return this.selectedRole === role;
   }
+
 }

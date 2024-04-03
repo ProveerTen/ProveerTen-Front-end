@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { SharedService } from '../shared/shared.service';
+import { AuthGoogleService } from '../auth-google/auth-google.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class AuthService {
   private data!: dataDecoded;
   private helper = new JwtHelperService();
 
-  constructor(private router: Router, private messageService: MessageService, private shared: SharedService) {
+  constructor(private router: Router, private messageService: MessageService, private shared: SharedService,
+    private authGoogleService: AuthGoogleService) {
     this.checkAuth();
   }
 
@@ -109,6 +111,7 @@ export class AuthService {
     localStorage.removeItem('token');
     this.isLoggin.next(false);
     this.logoutRole();
+    this.authGoogleService.logout();
     this.router.navigate(['login']);
     this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Cierre de sesión exitoso' });
     localStorage.removeItem('chats')

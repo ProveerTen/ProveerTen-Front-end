@@ -73,6 +73,7 @@ import { SuggestedProductPricesComponent } from './components/view/suggested-pro
 import { UpdateOrderComponent } from './components/order/update-order/update-order.component';
 import { CreateProductsComponent } from './components/product/create-products/create-products.component';
 import { ViewPublicationComponent } from './components/publication/view-publication/view-publication.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 
 @NgModule({
@@ -137,7 +138,8 @@ import { ViewPublicationComponent } from './components/publication/view-publicat
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    OAuthModule.forRoot(),
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
