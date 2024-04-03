@@ -14,6 +14,7 @@ export class ViewProductComponent implements OnInit, OnChanges {
   loading: boolean = false;
   data: any = null;
   id!: string;
+  availability_product:string
 
   @Input() productModal: any;
 
@@ -42,6 +43,12 @@ export class ViewProductComponent implements OnInit, OnChanges {
         this.loading = false;
         this.data = response.categoriesByProducts[0];
         console.log(this.data);
+
+        if (this.data.stock_product == "0") {
+          this.availability_product = "No Disponible"
+        } else {
+          this.availability_product ="Disponible"
+        }
       },
       error: (error) => {
         this.loading = false;
