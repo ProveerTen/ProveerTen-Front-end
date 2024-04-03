@@ -25,7 +25,7 @@ export class RegisterGrocerComponent {
       document_grocer: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
       name_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
       last_name_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
-      email_grocer: ['', [Validators.email]],
+      email_grocer: ['', [Validators.required, Validators.email]],
       name_store: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       // city_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
       password_grocer: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],

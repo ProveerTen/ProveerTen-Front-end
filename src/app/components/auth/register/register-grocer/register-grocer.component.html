@@ -85,8 +85,10 @@
                                     <label class="form-label" for="form1Example13"><strong>Correo</strong></label>
                                     <input type="email" formControlName="email_grocer"
                                         class="form-control form-control-lg" />
-
-                                    <div *ngIf="form.get('email_grocer').errors?.['email'] && form.get('email_grocer').touched"
+                                    <div *ngIf="form.get('email_grocer').errors?.['required'] && form.get('email_grocer').touched" class="message-invalid">
+                                        <p style="color: red;">El correo electrónico es requerido.</p>
+                                    </div>
+                                    <div *ngIf="form.get('email_grocer').errors?.['email'] && form.get('email_grocer').touched && form.get('document_grocer').errors?.['required']"
                                         class="message-invalid">
                                         <p style="color: red;">Por favor, ingrese un correo electrónico válido.</p>
                                     </div>
@@ -200,7 +202,7 @@
                             <div class="d-flex gap-2">
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="form1Example13"><strong> Cotraseña</strong></label>
+                                    <label class="form-label" for="form1Example13"><strong> Contraseña</strong></label>
                                     <input type="password" formControlName="password_grocer"
                                         class="form-control form-control-lg" />
 
