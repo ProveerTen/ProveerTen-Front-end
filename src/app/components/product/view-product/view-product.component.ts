@@ -14,8 +14,6 @@ export class ViewProductComponent implements OnInit, OnChanges {
   loading: boolean = false;
   data: any = null;
   id!: string;
-  availability: string;
-  p: any;
 
   @Input() productModal: any;
 
@@ -44,15 +42,6 @@ export class ViewProductComponent implements OnInit, OnChanges {
         this.loading = false;
         this.data = response.categoriesByProducts[0];
         console.log(this.data);
-
-        this.p = document.querySelector('.disponibilidad');
-        this.availability = this.data.availability_product;
-
-        if (this.availability == "Disponible") {
-          this.p.classList.add('disponible');
-        } else {
-          this.p.classList.add('no-disponible');
-        }
       },
       error: (error) => {
         this.loading = false;
@@ -60,10 +49,6 @@ export class ViewProductComponent implements OnInit, OnChanges {
       },
       complete: () => console.log('complete'),
     });
-  }
-
-  disponible() {
-    // Lógica para disponibilidad
   }
 
   viewCompany(id: string) {
