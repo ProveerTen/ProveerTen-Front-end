@@ -181,7 +181,7 @@ ul {
 
 
 
-
+/* 
 footer {
   border-top: 2px solid orange;
   display: flex;
@@ -199,11 +199,9 @@ ul {
   width: 25%;
 }
 
-/* .footer-col ul li a{
-  color: black;
-} */
+
 .footer-col h4 {
-  /* position: relative; */
+  
   margin-bottom: 30px;
   font-weight: 400;
   font-size: 22px;
@@ -213,7 +211,7 @@ ul {
 
 .footer-col h4::before {
   content: '';
-  /* position: absolute; */
+  
   left: 0;
   bottom: -6px;
   background-color: #ffa500;
@@ -273,4 +271,4 @@ ul li a:hover {
   .footer-col {
     width: 100%;
   }
-}
+} */
