@@ -6,7 +6,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class SharedService {
 
-  public selectedRole = new BehaviorSubject('grocer');
   public searchTerm = new BehaviorSubject('');
   public type = new BehaviorSubject<string>('products');
   public chatList = new BehaviorSubject<string[]>([]);
@@ -48,8 +47,4 @@ export class SharedService {
   changeProduct_sub_category(sub_category: string): void {
     this.sub_category.next(sub_category);
   }
-  changeselectedrole(role: string): void {
-    this.selectedRole.next(role);
-  }
-
 }

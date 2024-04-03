@@ -7,13 +7,12 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  selectedRole: string;
+  selectedRole: string = "grocer";
 
-  constructor(private shared: SharedService) {
-    this.shared.selectedRole.subscribe(value => {
-      console.log(value);
-      this.setRole(value)
-    })
+  constructor() {
+    if (localStorage.getItem('role')) {
+      this.setRole(localStorage.getItem('role'))
+    }
   }
 
   

@@ -39,6 +39,7 @@ export class LoginGrocerComponent {
             this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
             this.router.navigate(["/"]);
             this.authGoogleService.logout();
+            localStorage.removeItem('role');
           },
           error: (error) => {
             console.log(error);
@@ -47,14 +48,20 @@ export class LoginGrocerComponent {
               this.loading = false
               this.messageService.clear();
               this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Error en al iniciar sesion con google' });
+              localStorage.removeItem('role');
+              this.authGoogleService.logout();
             } else if (error.status === 500) {
               this.loading = false
               this.messageService.clear();
               this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Se ha producido un error. Por favor, inténtelo de nuevo más tarde' });
+              localStorage.removeItem('role');
+              this.authGoogleService.logout();
             } else if (error.status === 409) {
               this.loading = false
               this.messageService.clear();
               this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'El usuario no existe en el sistema.' });
+              localStorage.removeItem('role');
+              this.authGoogleService.logout();
             }
           },
           complete: () => console.log('complete'),
@@ -109,6 +116,7 @@ export class LoginGrocerComponent {
   }
 
   loginGoogle() {
+    localStorage.setItem('role', 'grocer')
     this.authGoogleService.login();
   }
 

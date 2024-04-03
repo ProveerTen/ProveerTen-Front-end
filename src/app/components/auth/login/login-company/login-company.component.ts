@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { MessageService } from 'primeng/api';
 import { AuthGoogleService } from 'src/app/services/auth-google/auth-google.service';
-import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-login-company',
@@ -20,8 +19,7 @@ export class LoginCompanyComponent {
   tokenId: string | null = null;
 
   constructor(private fb: FormBuilder, private client: ClientService, public auth: AuthService,
-    private router: Router, private messageService: MessageService, private authGoogleService: AuthGoogleService,
-  private shared :SharedService) {
+    private router: Router, private messageService: MessageService, private authGoogleService: AuthGoogleService) {
     this.form = this.fb.group({
       email_company: ['', [Validators.email, Validators.required]],
       password_company: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
@@ -29,7 +27,6 @@ export class LoginCompanyComponent {
   }
 
   ngOnInit(): void {
-    this.shared.selectedRole.next('company');
     this.authGoogleService.getTokenId().subscribe(tokenId => {
       this.tokenId = tokenId;
       if (this.tokenId) {
@@ -41,6 +38,7 @@ export class LoginCompanyComponent {
             this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
             this.router.navigate(['panel']);
             this.authGoogleService.logout();
+            localStorage.removeItem('role');
           },
           error: (error) => {
             console.log(error);
@@ -49,14 +47,20 @@ export class LoginCompanyComponent {
               this.loading = false
               this.messageService.clear();
               this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Error en al iniciar sesion con google' });
+              localStorage.removeItem('role');
+              this.authGoogleService.logout();
             } else if (error.status === 500) {
               this.loading = false
               this.messageService.clear();
               this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'Se ha producido un error. Por favor, inténtelo de nuevo más tarde' });
+              localStorage.removeItem('role');
+              this.authGoogleService.logout();
             } else if (error.status === 409) {
               this.loading = false
               this.messageService.clear();
               this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: 'El usuario no existe en el sistema.' });
+              localStorage.removeItem('role');
+              this.authGoogleService.logout();
             }
           },
           complete: () => console.log('complete'),
@@ -109,7 +113,7 @@ export class LoginCompanyComponent {
   }
 
   loginGoogle() {
-    this.shared.selectedRole.next('company');
+    localStorage.setItem('role','company')
     this.authGoogleService.login();
   }
 }
