@@ -48,8 +48,8 @@
                                 </thead>
                                 <tbody>
                                     <ng-container *ngIf="publications; else noPublications">
-                                        <tr (click)="viewPublicationModal(publication._id)" data-bs-toggle="modal" data-bs-target="#publicationModal" style="cursor:pointer" *ngFor="let publication of publications">
-                                            <td class="text-center align-middle">
+                                        <tr *ngFor="let publication of publications">
+                                            <td (click)="viewPublicationModal(publication._id)" data-bs-toggle="modal" data-bs-target="#publicationModal" style="cursor:pointer" class="text-center align-middle">
                                                 <div class="thumbnail">
                                                     <ng-container *ngIf="isVideo(publication.image_url); else isImage">
                                                         <video controls class="img-fluid rounded"
@@ -64,7 +64,7 @@
                                                     </ng-template>
                                                 </div>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            <td (click)="viewPublicationModal(publication._id)" data-bs-toggle="modal" data-bs-target="#publicationModal" style="cursor:pointer" class="align-middle text-center">
                                                 <p>{{ publication.text }}</p>
                                             </td>
                                             <td class="text-center align-middle ">
