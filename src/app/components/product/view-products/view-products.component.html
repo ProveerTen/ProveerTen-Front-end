@@ -1,3 +1,4 @@
+
 <div class="d-flex flex-wrap m-4 gap-3">
     <div *ngFor="let product of data" class="card d-flex flex-column">
         <div class="d-flex justify-content-center p-3">
@@ -7,13 +8,27 @@
             <div class="p-3">
                 <h1 class="fs-5"><strong>{{product?.name_product}}</strong></h1>
                 <div class="d-flex justify-content-center mt-4">
-                    <button (click)="viewProduct(product.id_product)" class="btn btn-outline-warning">Ver producto</button>
+                    <button (click)="viewProductModal(product.id_product)" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#productModal">Ver producto</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Detalles de la publicación</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- <app-view-product [productModal]="product_modal"></app-view-product> -->
+                <app-view-product [productModal]="product_modal"></app-view-product>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

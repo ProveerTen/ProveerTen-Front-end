@@ -1,100 +1,133 @@
 <div class="container p-5">
 
-    <button class="btn btn-warning my-3" (click)="goBack(auth.getRole())">Regresar</button>
+    <button class="btn btn-primary mb-3" (click)="goBack(auth.getRole())"><svg xmlns="http://www.w3.org/2000/svg"
+        width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z" />
+        <path fill-rule="evenodd"
+            d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+    </svg> Regresar</button>
 
-    <div style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Fecha de realización</th>
-                    <th scope="col">Valor del pedido</th>
-                    <th scope="col">Estado del pedido</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order of data_order">
-                    <td>{{order.id_order}}</td>
-                    <td>{{order.order_date | date:'short'}}</td>
-                    <td>{{order.total_ordered_price}}</td>
-                    <td>{{order.status}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre del Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Stock del producto</th>
-                    <th scope="col">Precio de compra</th>
-                    <th scope="col">Total del producto</th>
-                    <th scope="col"></th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of list_products">
-                    <td>{{product.id_product}}</td>
-                    <td>{{ product.name_product }}</td>
-                    <td>
-                        <button (click)="increaseProduct(product)" class="btn btn-sm btn-outline-success">+</button>
-                        {{product.quantity}} <button (click)="decreaseProduct(product)"
-                            class="btn btn-sm btn-outline-warning">-</button>
-                    </td>
-                    <td>{{product.stock_product}}</td>
-                    <td>{{product.purchase_price_product}}</td>
-                    <td>{{product.individual_product_price}}</td>
-                    <td>
-                        <button [disabled]="list_products.length === 1" (click)="removeProduct(product)"
-                            class="btn btn-sm btn-outline-danger">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div>
-        <button (click)="updateOrder()">Actualizar</button>
-        <button>Cancelar</button>
-    </div>
-
-    <br>
-
-    <div>
-        <button [disabled]="show_products" (click)="showProducts()">Agregar producto</button>
-        <button *ngIf="show_products" (click)="closeProducts()">Cerrar</button>
-    </div>
-
-    <div *ngIf="show_products">
-        <div style="max-height: 400px; overflow-y: auto;">
-            <table class="table table-striped">
-                <thead>
+    <div class="mb-4">
+        <div class="bg-primary text-white p-3 rounded-top">
+            <h3 class="text-center">Pedidos</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered border-primary table-hover text-center">
+                <thead class="table-primary">
                     <tr>
-                        <!-- <th scope="col">Imagen</th> -->
-                        <th scope="col">Nombre del Producto</th>
-                        <th scope="col">Precio de Compra</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Opciones</th>
+                        <th scope="col"><strong>ID</strong></th>
+                        <th scope="col"><strong>FECHA DE REALIZACIÓN</strong></th>
+                        <th scope="col"><strong>VALOR DEL PEDIDO</strong></th>
+                        <th scope="col"><strong>ESTADO DEL PEDIDO</strong></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of list_show_products">
-                        <!-- <td>
-                            <img appBrokenImage loading="lazy" [src]="product.image_product"
-                                alt="{{ product?.name_product }}" class="product-image">
-                        </td> -->
-                        <td>{{ product?.name_product }}</td>
-                        <td>{{ product?.purchase_price_product }}</td>
-                        <td>{{ product?.stock_product }}</td>
-                        <td><button [disabled]="product.stock_product === 0"
-                                (click)="addProduct(product)">Agregar</button></td>
+                    <tr *ngFor="let order of data_order">
+                        <td>{{order.id_order}}</td>
+                        <td>{{order.order_date | date:'short'}}</td>
+                        <td>{{order.total_ordered_price}}</td>
+                        <td>{{order.status}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <div class="mb-4">
+        <div class="bg-primary text-white p-3 rounded-top">
+            <h3 class="text-center">Productos en el Pedido</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered border-primary table-hover text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col"><strong>ID</strong></th>
+                        <th scope="col"><strong>NOMBRE DEL PRODUCTO</strong></th>
+                        <th scope="col"><strong>CANTIDAD</strong></th>
+                        <th scope="col"><strong>STOCK DEL PRODUCTO</strong></th>
+                        <th scope="col"><strong>PRECIO DE COMPRA</strong></th>
+                        <th scope="col"><strong>TOTAL DEL PRODUCTO</strong></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of list_products">
+                        <td>{{product.id_product}}</td>
+                        <td>{{ product.name_product }}</td>
+                        <td class="text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <button (click)="increaseProduct(product)" class="btn btn-sm btn-success mr-2">+</button>
+                                <span>{{product.quantity}}</span>
+                                <button (click)="decreaseProduct(product)"
+                                    class="btn btn-sm btn-warning ml-2">-</button>
+                            </div>
+                        </td>
+                        <td>{{product.stock_product}}</td>
+                        <td>{{product.purchase_price_product}}</td>
+                        <td>{{product.individual_product_price}}</td>
+                        <td>
+                            <button [disabled]="list_products.length === 1" (click)="removeProduct(product)"
+                                class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                  </svg> Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <button (click)="updateOrder()" class="btn btn-primary mr-3 mx-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383"/>
+            <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708z"/>
+          </svg> Actualizar</button>
+        <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon" viewBox="0 0 16 16">
+            <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg> Cancelar</button>
+    </div>
+
+    <div class="text-center mb-4">
+        <button [disabled]="show_products" (click)="showProducts()" class="btn btn-success mr-3 mx-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+            <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5"/>
+            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+          </svg> Agregar producto</button>
+        <button *ngIf="show_products" (click)="closeProducts()" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon" viewBox="0 0 16 16">
+            <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg> Cerrar</button>
+    </div>
+
+    <div *ngIf="show_products">
+        <div class="bg-primary text-white p-3 rounded-top">
+            <h3 class="text-center mb-3">Agregar Producto</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered border-primary table-hover text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">NOMBRE DEL PRODUCTO</th>
+                        <th scope="col">PRECIO DE COMPRA</th>
+                        <th scope="col">STOCK</th>
+                        <th scope="col">OPCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of list_show_products">
+                        <td>{{ product?.name_product }}</td>
+                        <td>{{ product?.purchase_price_product }}</td>
+                        <td>{{ product?.stock_product }}</td>
+                        <td class="text-center">
+                            <button [disabled]="product.stock_product === 0"
+                                (click)="addProduct(product)" class="btn btn-sm btn-primary">Agregar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
