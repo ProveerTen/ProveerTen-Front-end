@@ -15,9 +15,18 @@
 
 .offcanvas {
     --bs-offcanvas-height: none;
+    width: 100%;
 }
 
 .offcanvas-body {
     overflow-y: hidden;
     padding: 0px;
+}
+
+@media (min-width: 768px) {
+
+    .offcanvas {
+        width: 50%;
+    }
+
 }
