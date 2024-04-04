@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ClientService } from 'src/app/services/client/client.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { SharedService } from 'src/app/services/shared/shared.service';
   styleUrls: ['./view-profile-grocer.component.css']
 })
 export class ViewProfileGrocerComponent {
-  loading : boolean = false
+  loading: boolean = false
   id!: string;
   data: any;
   chat: any;
@@ -22,26 +22,36 @@ export class ViewProfileGrocerComponent {
   messages: any[] = [];
   chats: string[] = [];
 
+  @Input() modalProfile: string;
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute,
     private shared: SharedService) { }
 
-  ngOnInit(): void {  
+  ngOnChanges(): void {
+   
+    if (this.modalProfile) {
+      this.id = this.modalProfile;
+      this.dataProfielGrocer()
+    }
+  }
+
+  dataProfielGrocer(): void {
     this.loading = true
-    setTimeout (()=>{
-    this.id = this.routerActivate.snapshot.params['id'];
-    this.client.getRequest(`${environment.url_logic}/profile/grocers/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.loading = false
-        this.data = response.data;
-      },
-      error: (error) => {
-        this.loading = false
-        console.log(error.error.Status);
-        this.router.navigate(['404']);
-      },
-      complete: () => console.log('complete'),
-    });
-  },400)
+    setTimeout(() => {
+      // this.id = this.routerActivate.snapshot.params['id'];
+      this.client.getRequest(`${environment.url_logic}/profile/grocers/${this.id}`, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+        next: (response: any) => {
+          this.loading = false
+          this.data = response.data;
+        },
+        error: (error) => {
+          this.loading = false
+          console.log(error.error.Status);
+          this.router.navigate(['404']);
+        },
+        complete: () => console.log('complete'),
+      });
+    }, 400)
   }
 
   chatear() {

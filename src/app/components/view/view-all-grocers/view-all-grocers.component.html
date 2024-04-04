@@ -1,12 +1,13 @@
 <div class="container p-5">
     <div class="row">
         <div class="col-md-3">
+            <p>Busca por nombre, apellido o tienda!!!</p>
             <div class="input-group mb-3 d-flex align-items-center">
                 <input type="search" id="buscador" [(ngModel)]="value" (input)="filterGrocers()"
                     class="form-control border-warning" placeholder="Buscar" style="color:#7a7a7a">
             </div>
             <div class="form-group" *ngIf="neighborhoods">
-                <label for="barrio">Barrio:</label>
+                <label for="barrio">Busca por Barrio:</label>
                 <select class="form-control" id="barrio" [(ngModel)]="selectedNeighborhood"
                     (change)="filterByNeighborhood()">
                     <option value="">Todos</option>
@@ -19,7 +20,8 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-4 mb-4" *ngFor="let grocer of grocers">
-                    <div class="card h-100 border-0 shadow" (click)="viewProfile(grocer.document_grocer)">
+                    <div class="card h-100 border-0 shadow" (click)="viewModalProfile(grocer.document_grocer, grocer.name_grocer)" data-bs-toggle="modal"
+                    data-bs-target="#modalProfileGrocer">
                         <img appBrokenImageProfile [imageType]="'photo'" [src]="grocer?.profile_photo_grocer"
                             class="card-img-top" alt="avatar" style="height: 200px;">
                         <div class="card-body d-flex flex-column p-4">
@@ -29,6 +31,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalProfileGrocer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProfileGrocer">Perfil de {{nameGrocer}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-view-profile-grocer [modalProfile]="modalProfile"></app-view-profile-grocer>
             </div>
         </div>
     </div>

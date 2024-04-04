@@ -20,12 +20,8 @@ export class ViewProfileProviderComponent {
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute) { }
 
-  ngOnChanges(): void {
-    console.log("modal");
-    
-    if (this.modalProfile_) {
-      console.log("uuuu");
-      
+  ngOnChanges(): void {    
+    if (this.modalProfile_) {     
       this.id = this.modalProfile_;
       this.getDataProvider();
     }
