@@ -1,109 +1,23 @@
 .offcanvas {
-    --bs-offcanvas-zindex: 0;
+    max-width: none;
+    width: 50%;
 }
 
-/* .contenedor{
-    position: sticky;
-} */
-
-
-.chat-container {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    position: fixed;
-    bottom: 0;
-    right: 285px;
+.offcanvas.offcanvas-bottom {
+    left: auto;
+    border-top: none;
 }
-
-
-.chat-item {
-    margin-right: 10px;
-}
-
-.offcanvas {
-    --bs-offcanvas-width: 300px;
-}
-
 
 #nav {
     background: rgb(255, 49, 49);
     background: linear-gradient(40deg, rgba(255, 49, 49, 1) 0%, rgba(255, 145, 77, 1) 100%);
-    /* background: rgb(242, 183, 5);
-    background: linear-gradient(261deg, rgba(242, 183, 5, 1) 28%, rgba(242, 92, 5, 1) 82%); */
-    /* z-index: 2;
-    position: sticky;
-    top: 0; */
-    /* 
-    padding: 0;
-    margin: 0; */
 }
 
-/* .row {
-    height: 1px;
+.offcanvas {
+    --bs-offcanvas-height: 78vh;
 }
 
-.bg_svg {
-    height: 20px;
-    background: rgb(255, 49, 49);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg stroke='%23CCC' stroke-width='0' %3E%3Crect fill='%23EDEDED' x='-60' y='-60' width='110' height='240'/%3E%3C/g%3E%3C/svg%3E");
-} */
-
-/* */
-
-/* .button:hover .svg-icon {
-    animation: slope 0.8s linear infinite;
+.offcanvas-body {
+    overflow-y: hidden;
+    padding: 0px;
 }
-
-@keyframes slope {
-    0% {}
-
-    50% {
-        transform: rotate(15deg);
-    }
-
-    100% {}
-}
-
-.container {
-    overflow: hidden;
-
-    .slider {
-        animation: slidein 30s linear infinite;
-        white-space: nowrap;
-
-        .phrases {
-            width: auto;
-            display: inline-block;
-            margin: 0px 0;
-        }
-
-    }
-}
-
-.phrase {
-    padding: 0 50px;
-}
-
-@keyframes slidein {
-    from {
-        transform: translate3d(0, 0, 0);
-    }
-
-    to {
-        transform: translate3d(-75%, 0, 0);
-    }
-}
-
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-} */
