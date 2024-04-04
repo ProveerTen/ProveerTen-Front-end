@@ -26,13 +26,13 @@
     <!-- <div class="row bg_svg"></div>
     <div class="row bg-danger"></div> -->
 </div>
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+<button *ngIf="auth.isLoggedIn() | async" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
     aria-controls="offcanvasBottom" style="position: fixed;
     bottom: 0;
     z-index: 1;
-    right: 64px;">Abrir chat</button>
+    right: 64px;"> Abrir chat</button>
 
-<div class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false"
+<div *ngIf="auth.isLoggedIn() | async" class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false"
     id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
 
     <div class="offcanvas-body">
