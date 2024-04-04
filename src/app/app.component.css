@@ -1,6 +1,6 @@
 .offcanvas {
     max-width: none;
-    width: 50%;
+    width: 800px;
 }
 
 .offcanvas.offcanvas-bottom {
@@ -14,7 +14,7 @@
 }
 
 .offcanvas {
-    --bs-offcanvas-height: 78vh;
+    --bs-offcanvas-height: none;
 }
 
 .offcanvas-body {

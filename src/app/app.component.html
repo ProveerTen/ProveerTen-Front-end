@@ -35,12 +35,10 @@
 <div *ngIf="auth.isLoggedIn() | async" class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false"
     id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
 
-    <div class="offcanvas-body">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
             style="position: relative;
     left: 688px;"></button>
         <app-chat></app-chat>
-    </div>
 </div>
 <router-outlet></router-outlet>
 <p-toast position="bottom-right" key="center"></p-toast>
