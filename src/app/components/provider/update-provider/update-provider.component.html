@@ -8,7 +8,7 @@
     <div class="card shadow-lg bg-body-tertiary rounded p-5">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="d-flex flex-column gap-4">
-                <h1 style="color:#e66d3d ; text-align: center;">¡Actualiza el proveedor!</h1>
+                <h1 style="color:#e66d3d ; text-align: center;">¡Actualiza el trabajador!</h1>
 
                 <div class="div">
                     <label class="form-label" for="document_provider"><strong> Documento</strong></label>
@@ -18,17 +18,43 @@
                     <div class="div">
                         <label class="form-label" for="name_provider"><strong> Nombre proveedor</strong></label>
                         <input type="text" class="form-control" formControlName="name_provider" id="name_provider">
+
+                        <div *ngIf="form.get('name_provider')?.hasError('required')" class="message-invalid">
+                            <p>El Nombre es requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('name_provider')?.hasError('minlength') || form.get('name_provider')?.hasError('maxlength')"
+                            class="message-invalid">
+                            El Nombre debe tener entre 1 a maximo 50 carácteres
+                        </div>
                     </div>
                     <div class="div">
                         <label class="form-label" for="last_name_provider"><strong> Apellido proveedor</strong></label>
                         <input type="text" class="form-control" formControlName="last_name_provider"
                             id="last_name_provider">
+
+                        <div *ngIf="form.get('last_name_provider')?.hasError('required')" class="message-invalid">
+                            <p>El apellido es requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('last_name_provider')?.hasError('minlength') || form.get('last_name_provider')?.hasError('maxlength')"
+                            class="message-invalid">
+                            <p>El apellido debe tener entre 1 a maximo 40 carácteres</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="div">
-                    <label class="form-label" for="document_provider"><strong> Correo proveedor</strong></label>
+                    <label class="form-label" for="email_provider"><strong> Correo proveedor</strong></label>
                     <input type="text" class="form-control" formControlName="email_provider" id="email_provider">
+
+                    <div *ngIf="form.get('email_provider')?.hasError('required')" class="message-invalid">
+                        <p class="error-message">El email es un campo requerido.</p>
+                    </div>
+
+                    <div *ngIf="form.get('email_provider')?.hasError('email')" class="message-invalid">
+                        <p>Ingrese un correo valido</p>
+                    </div>
                 </div>
 
 
@@ -36,6 +62,16 @@
                     <div class="div">
                         <label class="form-label" for="number_provider"><strong>Numero del proveedor</strong></label>
                         <input type="text" class="form-control" formControlName="number_provider" id="number_provider">
+
+
+                        <div *ngIf="form.get('number_provider')?.hasError('required')" class="message-invalid">
+                            <p>El numero es requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('number_provider')?.hasError('minlength') || form.get('number_provider')?.hasError('maxlength')"
+                            class="message-invalid">
+                            <p> El numero debe tener entre 1 a maximo 15 carácteres</p>
+                        </div>
                     </div>
 
                     <div class="div">
@@ -48,6 +84,10 @@
                                 {{ department.name }}
                             </option>
                         </select>
+
+                        <div *ngIf="form.get('department')?.hasError('required')" class="message-invalid">
+                            <p>El departamento es requerido.</p>
+                        </div>
                     </div>
 
                     <div class="div">
@@ -57,6 +97,10 @@
                             <option *ngFor="let city of cities" [value]="city.name">{{
                                 city.name }}</option>
                         </select>
+
+                        <div *ngIf="form.get('city_provider')?.hasError('required')" class="message-invalid">
+                            <p>La ciudad es requrida.</p>
+                        </div>
                     </div>
 
                 </div>
@@ -65,16 +109,43 @@
                     <div class="div">
                         <label class="form-label" for="neighborhood"><strong> Barrio</strong></label>
                         <input type="text" class="form-control" formControlName="neighborhood" id="neighborhood">
+
+                        <div *ngIf="form.get('neighborhood')?.hasError('required')" class="message-invalid">
+                            <p>El Barrio es requerido.</p>
+                        </div>
+
+                        <div *ngIf="form.get('neighborhood')?.hasError('minlength') || form.get('neighborhood')?.hasError('maxlength')"
+                            class="message-invalid">
+                            <p> El barrio debe tener entre 4 a maximo 40 carácteres</p>
+                        </div>
                     </div>
                     <div class="div">
                         <label class="form-label" for="street"><strong>Calle</strong></label>
                         <input type="text" class="form-control" formControlName="street" id="street">
+
+                        <div *ngIf="form.get('street')?.hasError('required')" class="message-invalid">
+                            <p>La calle es requerida.</p>
+                        </div>
+
+                        <div *ngIf="form.get('street')?.hasError('minlength') || form.get('street')?.hasError('maxlength')"
+                            class="message-invalid">
+                            <p> La calle debe tener entre 1 a maximo 25 carácteres</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="div">
                     <label class="form-label" for="number_street"><strong> Numero de calle</strong></label>
                     <input type="text" class="form-control" formControlName="number_street" id="number_street">
+
+                    <div *ngIf="form.get('number_street')?.hasError('number_street')" class="message-invalid">
+                        <p>El numero de calle es requerido.</p>
+                    </div>
+
+                    <div *ngIf="form.get('number_street')?.hasError('minlength') || form.get('number_street')?.hasError('maxlength')"
+                        class="message-invalid">
+                        <p> El numero de calle debe tener entre 1 a maximo 15 carácteres</p>
+                    </div>
                 </div>
 
                 <div class="d-flex gap-2 justify-content-center">
@@ -104,6 +175,11 @@
                     <label class="form-label" for="password_provider"><strong>Password</strong></label>
                     <input type="password" class="form-control" formControlName="password_provider"
                         id="password_provider">
+
+                    <div *ngIf="form.get('password_provider')?.hasError('minlength') || form.get('password_provider')?.hasError('maxlength')"
+                        class="message-invalid">
+                        <p>La contraseña debe tener entre 1 a maximo 40 carácteres</p>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button class="btn btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16"
