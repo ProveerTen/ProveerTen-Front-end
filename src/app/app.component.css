@@ -15,6 +15,7 @@
 
 .offcanvas {
     --bs-offcanvas-height: none;
+    width: 100%;
 }
 
 .offcanvas-body {
@@ -22,12 +23,10 @@
     padding: 0px;
 }
 
-.custom-offcanvas {
-    width: 100%;
-}
-
 @media (min-width: 768px) {
-    .custom-offcanvas {
-        width: 50%;
+
+    .offcanvas {
+        width: 70%;
     }
+
 }
