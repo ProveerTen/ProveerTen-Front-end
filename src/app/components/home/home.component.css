@@ -8,33 +8,19 @@ html {
   font-style: normal;
 }
 
-/* Estilo para el contenedor del slider */
-.custom-slider {
-  width: 1000px;
-  height: 20vh;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  margin: 0;
-  flex: 1;
-}
-
 /* Estilo para las imágenes dentro del carrusel */
 .custom-carousel-item img {
-  height: 100%;
-  width: 100%;
-  display: flex;
+  width: auto ;
+  height: 400px; /* Ajusta el valor de altura deseado */
+  object-fit: contain; /* Escala la imagen para que cubra todo el contenedor manteniendo la relación de aspecto */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 768px) {
-  .custom-slider {
-    height: 20vh;
-  }
-
   .custom-carousel-item img {
     height: auto;
-    max-height: 100%;
-    max-width: 100%;
   }
 }
 
