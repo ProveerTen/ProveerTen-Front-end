@@ -116,19 +116,21 @@
 </div> -->
 
 <div class="container bootdey">
-    <div class="row product-list">
-        <div class="col-md-4" *ngFor="let company of companies;">
+    <div class="all row product-list">
+        <div class="company col-md-4" *ngFor="let company of companies;">
             <section class="panel">
                 <div class="pro-img-box">
-                    <img appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt="">
+                    <div class="p-4" style="background-color: white;">
+                        <img style="height: 190px;" appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt="" class="img-fluid">
+                    </div>
                     <a class="adtocart">
                         <i class="fa-solid fa-building" style="color: #ffffff;"></i>
                     </a>
                 </div>
 
-                <div class="panel-body text-center">
+                <div class="panel-body text-center p-2">
                     <h4>
-                        <h2 class="pro-title">{{company.name_company}}</h2>
+                        <h2 class="pro-title fs-5" >{{company.name_company}}</h2>
                     </h4>
                     <button (click)="viewCompanyModal(company.nit_company) " class="btn btn-primary"
                         data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor:pointer">Ver perfil</button>

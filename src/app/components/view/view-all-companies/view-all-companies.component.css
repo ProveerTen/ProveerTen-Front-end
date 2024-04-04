@@ -170,3 +170,36 @@ body {
     font-size: 18px;
     font-weight: 300;
 }
+
+@media (max-width: 576px) { 
+
+    .company{
+        width: 300px;
+        
+    }
+
+    .all{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: none;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) { 
+
+    .company{
+        width: 400px;
+    }
+
+    .all{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: none;
+        gap: 30px;
+    }
+}
