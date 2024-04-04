@@ -14,6 +14,7 @@ export class PanelComponent {
   // public chart: Chart;
   data: any;
   id_company: any;
+  modalProfileCompany:string;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router) { }
 
@@ -81,7 +82,7 @@ export class PanelComponent {
   }
 
   viewModalCompany(id: string) {
-
+    this.modalProfileCompany = id;
   }
 
 }

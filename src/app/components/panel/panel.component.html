@@ -160,7 +160,8 @@
                     </path>
                 </svg>
             </button>
-            <button class="animated-button" (click)="viewModalCompany(data.fk_nit_company)">
+            <!-- (click)="viewModalCompany(data.fk_nit_company)" data-bs-toggle="modal" data-bs-target="modalProfileCompany" -->
+            <button class="animated-button" (click)="viewCompany(data.fk_nit_company)">
                 <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
@@ -178,3 +179,20 @@
     </div>
 
 </div>
+
+
+<div class="modal fade" id="modalProfileCompany" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLabel">Detalles de la publicación</h5> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-view-profile-company [companyModal]="modalProfileCompany"></app-view-profile-company>
+                <!-- <app-view-product [productModal]="product_modal"></app-view-product> -->
+                <!-- <app-view-publication [publicationModal]="modalProfileCompany"></app-view-publication> -->
+            </div>
+        </div>
+    </div>
+</div> 
