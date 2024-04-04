@@ -1,0 +1,12 @@
+@media (max-width: 768px) { 
+    button{
+        width: 35%;
+    }
+
+    .botones{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+ }
