@@ -58,32 +58,17 @@ export class ViewProfileGrocerComponent {
     this.client.postRequest(`${environment.url_chat}/chat/find`, { grocerId: this.id, providerId: this.auth.getId() }, undefined, undefined).subscribe({
       next: (response: any) => {
         this.chat = response
+        this.shared.chatear.next(true);
         if (response.chat.length === 0) {
           this.client.postRequest(`${environment.url_chat}/chat/create`, { grocerId: this.id, providerId: this.auth.getId() }, undefined, undefined).subscribe({
             next: (response: any) => {
-              let localchats = localStorage.getItem('chats');
-              if (localchats) {
-                this.chats = localchats.split(',');
-              }
-              this.chats.push(response.chat._id);
-              this.shared.changeChatList(this.chats);
-              localStorage.setItem('chats', this.chats.toString());
+              this.shared.chatear.next(true);
             },
             error: (error) => {
               console.log(error);
             }
           })
-        } else {
-          if (this.chats.indexOf(response.chat[0]._id) === -1) {
-            let localchats = localStorage.getItem('chats');
-            if (localchats) {
-              this.chats = localchats.split(',');
-            }
-            this.chats.push(response.chat[0]._id);
-            this.shared.changeChatList(this.chats);
-            localStorage.setItem('chats', this.chats.toString());
-          }
-        }
+        } 
       },
       error: (error) => {
         console.log(error);

@@ -6,9 +6,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class SharedService {
 
+  public chatear = new BehaviorSubject<boolean>(false);
   public searchTerm = new BehaviorSubject('');
   public type = new BehaviorSubject<string>('products');
-  public chatList = new BehaviorSubject<string[]>([]);
+  //public chatList = new BehaviorSubject<string[]>([]);
   public companyOrder = new BehaviorSubject<object>(null);
   public category = new BehaviorSubject<string>('');
   public home_category = new BehaviorSubject<string>('');
@@ -24,10 +25,10 @@ export class SharedService {
   changeType(newValue: string): void {
     this.type.next(newValue);
   }
-
+  /*
   changeChatList(list: string[]): void {
     this.chatList.next(list);
-  }
+  }*/
 
   changeDepartmentCity(newValue: object): void {
     //console.log(newValue);
@@ -46,5 +47,9 @@ export class SharedService {
 
   changeProduct_sub_category(sub_category: string): void {
     this.sub_category.next(sub_category);
+  }
+
+  changeStatusChat(value: boolean): void {
+    this.chatear.next(value);
   }
 }

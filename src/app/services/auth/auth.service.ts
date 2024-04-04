@@ -114,8 +114,8 @@ export class AuthService {
     this.authGoogleService.logout();
     this.router.navigate(['login']);
     this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: 'Cierre de sesión exitoso' });
-    localStorage.removeItem('chats')
-    this.shared.changeChatList([])
+    //localStorage.removeItem('chats')
+    //this.shared.changeChatList([])
   }
 
 }
