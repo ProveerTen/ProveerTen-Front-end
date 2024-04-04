@@ -29,9 +29,9 @@
 
 <button *ngIf="auth.isLoggedIn() | async" class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
     data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" style="position: fixed;
-    bottom: 0;
+    bottom: 0; width: 120px; font-size: 20px;
     z-index: 1;
-    right: 64px;"> Abrir chat</button>
+    right: 0px;"><i class="fa-solid fa-comments" style="color: #ffffff;"></i> Chat</button>
 
 <div *ngIf="auth.isLoggedIn() | async" class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true"
     data-bs-backdrop="false" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
