@@ -41,7 +41,7 @@ export class ManageOrdersComponent {
         next: (response: any) => {
           console.log(response);
           this.data_order = response.order;
-
+          this.filter = this.data_order.slice();
         },
         error: (error) => {
           console.log(error.error.Status);

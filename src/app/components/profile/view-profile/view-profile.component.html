@@ -21,8 +21,7 @@
                                         class="d-flex justify-content-center gap-3 mt-2 flex-column align-items-center">
 
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-primary"
-                                                (click)="updatePhoto()">Actualizar</button>
+                                            <button class="btn btn-primary" (click)="updatePhoto()">Actualizar</button>
                                             <button class="btn btn-danger" *ngIf="data?.profile_photo_company"
                                                 (click)="deleteValue('profile_photo')">Eliminar foto</button>
                                         </div>
@@ -31,7 +30,7 @@
                                             <div class="mb-3 d-flex gap-2" *ngIf="photo">
                                                 <input class="form-control" type="file" id="formFile"
                                                     (change)="onFileSelected($event)">
-                                                <button class="btn btn-outline-success" type="submit"
+                                                <button class="btn btn-primary" type="submit"
                                                     [disabled]="!isValidImage">Enviar</button>
                                             </div>
                                         </form>
@@ -60,14 +59,17 @@
                             <!-- <button (click)="updateSocialRed()" *ngIf="dataSocialReds.length > 0" >Actualizar red social</button> -->
 
                             <div class="d-flex justify-content-between">
-                                  
+
                                 <div class="d-flex flex-column">
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (input)="valueRed($event)" *ngIf="!inputLinkRed">
-                                
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" (input)="valueRed($event)"
+                                        *ngIf="!inputLinkRed">
+
                                     <div class="d-flex justify-content-center">
-                                        <span [innerHTML]="iconSocialRed" [style]="colorIcon" *ngIf="iconSocialRed"></span>
+                                        <span [innerHTML]="iconSocialRed" [style]="colorIcon"
+                                            *ngIf="iconSocialRed"></span>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div *ngIf="!inputLinkRed">
@@ -84,10 +86,11 @@
                             <div class="d-flex justify-content-center gap-2 p-2">
 
 
-                                <button class="btn btn-outline-danger" (click)="addSocialRed()" *ngIf="!inputLinkRed">Cancelar</button>
+                                <button class="btn btn-danger" (click)="addSocialRed()"
+                                    *ngIf="!inputLinkRed">Cancelar</button>
 
-                                <button class="btn btn-outline-second" type="submit" *ngIf="!inputLinkRed" (input)="!validOnSubmit()"
-                                    [disabled]="!valid">Enviar</button>
+                                <button class="btn btn-primary" type="submit" *ngIf="!inputLinkRed"
+                                    (input)="!validOnSubmit()" [disabled]="!valid">Enviar</button>
                             </div>
 
                         </form>
@@ -96,7 +99,7 @@
                             <div *ngIf="!inputLinkRed">
                                 <div class="d-flex flex-column p-3">
                                     <p><strong>Escoje un icono para tu red social</strong></p>
-    
+
                                     <div class="modalIcons">
                                         <span class="span" *ngFor="let icon of OptionsIcons; let i = index"
                                             [innerHTML]="icon.value" (click)="iconRed(icon.value, icon.color)"
@@ -132,8 +135,8 @@
                                     style="width: 100%; height: 200px;" class="rounded">
 
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button class="btn btn-outline-dark" (click)="updateCover()">Actualizar</button>
-                                    <button class="btn btn-outline-danger" *ngIf="data?.cover_photo_company"
+                                    <button class="btn btn-primary" (click)="updateCover()">Actualizar</button>
+                                    <button class="btn btn-danger" *ngIf="data?.cover_photo_company"
                                         (click)="deleteValue('cover_photo')">Eliminar foto de portada</button>
                                 </div>
                             </div>
@@ -141,7 +144,7 @@
                                 <div class="mb-3 d-flex gap-2 mt-2" *ngIf="cover">
                                     <input class="form-control" type="file" id="formFile"
                                         (change)="onFileSelected($event)">
-                                    <button class="btn btn-outline-success" type="submit"
+                                    <button class="btn btn-primary" type="submit"
                                         [disabled]="!isValidImage">Enviar</button>
                                 </div>
                             </form>
@@ -222,9 +225,9 @@
                                         class="d-flex justify-content-center gap-3 mt-2 flex-column align-items-center">
 
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-outline-dark"
+                                            <button class="btn btn-primary"
                                                 (click)="updatePhoto()">Actualizar</button>
-                                            <button class="btn btn-outline-danger" *ngIf="data?.profile_photo_provider"
+                                            <button class="btn btn-danger" *ngIf="data?.profile_photo_provider"
                                                 (click)="deleteValue('profile_photo')">Eliminar foto</button>
                                         </div>
 
@@ -232,7 +235,7 @@
                                             <div class="mb-3 d-flex gap-2" *ngIf="photo">
                                                 <input class="form-control" type="file" id="formFile"
                                                     (change)="onFileSelected($event)">
-                                                <button class="btn btn-outline-success" type="submit"
+                                                <button class="btn btn-primary" type="submit"
                                                     [disabled]="!isValidImage">Enviar</button>
                                             </div>
                                         </form>
@@ -316,9 +319,8 @@
                                         class="d-flex justify-content-center gap-3 mt-2 flex-column align-items-center">
 
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-outline-dark"
-                                                (click)="updatePhoto()">Actualizar</button>
-                                            <button class="btn btn-outline-danger" *ngIf="data?.profile_photo_grocer"
+                                            <button class="btn btn-primary" (click)="updatePhoto()">Actualizar</button>
+                                            <button class="btn btn-primary" *ngIf="data?.profile_photo_grocer"
                                                 (click)="deleteValue('profile_photo')">Eliminar foto</button>
                                         </div>
 
@@ -326,7 +328,7 @@
                                             <div class="mb-3 d-flex gap-2" *ngIf="photo">
                                                 <input class="form-control" type="file" id="formFile"
                                                     (change)="onFileSelected($event)">
-                                                <button class="btn btn-outline-success" type="submit"
+                                                <button class="btn btn-primary" type="submit"
                                                     [disabled]="!isValidImage">Enviar</button>
                                             </div>
                                         </form>
@@ -348,8 +350,8 @@
                                     style="width: 100%; height: 200px;" class="rounded">
 
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button class="btn btn-outline-dark" (click)="updateCover()">Actualizar</button>
-                                    <button class="btn btn-outline-danger" *ngIf="data?.cover_photo_grocer"
+                                    <button class="btn btn-primary" (click)="updateCover()">Actualizar</button>
+                                    <button class="btn btn-danger" *ngIf="data?.cover_photo_grocer"
                                         (click)="deleteValue('cover_photo')">Eliminar cover</button>
                                 </div>
                             </div>
@@ -357,7 +359,7 @@
                                 <div class="mb-3 d-flex gap-2 mt-2" *ngIf="cover">
                                     <input class="form-control" type="file" id="formFile"
                                         (change)="onFileSelected($event)">
-                                    <button class="btn btn-outline-success" type="submit"
+                                    <button class="btn btn-primary" type="submit"
                                         [disabled]="!isValidImage">Enviar</button>
                                 </div>
                             </form>
@@ -370,6 +372,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
+                                    <p class="mb-0">Nombre del establecimiento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{data?.name_store}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
                                     <p class="mb-0">Número de teléfono</p>
                                 </div>
                                 <div class="col-sm-9">
@@ -379,10 +390,10 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0">Nombre del establecimiento</p>
+                                    <p class="mb-0">Departamento</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{data?.name_store}}</p>
+                                    <p class="text-muted mb-0">{{data?.department}}</p>
                                 </div>
                             </div>
                             <hr>

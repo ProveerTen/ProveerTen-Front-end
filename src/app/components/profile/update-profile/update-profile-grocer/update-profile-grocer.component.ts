@@ -31,7 +31,7 @@ export class UpdateProfileGrocerComponent {
 
   constructor(private client: ClientService, public auth: AuthService, private fb: FormBuilder, private router: Router,
     private messageService: MessageService) {
-
+    this.loading = true
     this.form = this.fb.group({
       document_grocer: [''],
       name_grocer: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
@@ -62,6 +62,7 @@ export class UpdateProfileGrocerComponent {
           next: (response: any) => {
             console.log("Response data oninit", response.data);
             this.data = response.data;
+      
             this.form.get('document_grocer')!.disable();
             this.form.patchValue({
               document_grocer: response.data.document_grocer,
@@ -76,6 +77,7 @@ export class UpdateProfileGrocerComponent {
               department: response.data.department,
               city_grocer: response.data.city_grocer,
             })
+            this.loading = false;
           },
           error: (error) => {
             console.log(error.error.Status);

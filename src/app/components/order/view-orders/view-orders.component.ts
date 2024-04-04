@@ -15,6 +15,9 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 export class ViewOrdersComponent {
 
   data_orders: any;
+  selectedStatus: any = '';
+  selectedDate: any = '';
+  filter: any;
 
   constructor(private client: ClientService, public auth: AuthService, private router: Router, private routerActivate: ActivatedRoute, private shared: SharedService) { }
 
@@ -24,6 +27,7 @@ export class ViewOrdersComponent {
         console.log(response);
         this.data_orders = response.order;
         console.log(this.data_orders);
+        this.filter = this.data_orders.slice();
 
       },
       error: (error) => {
@@ -43,6 +47,30 @@ export class ViewOrdersComponent {
 
   goBack() {
     this.router.navigate([''])
+  }
+
+  applyFilters() {
+    if (this.selectedStatus !== "" && this.selectedDate === "") {
+      this.data_orders = this.filter.filter(order => { return order.status === this.selectedStatus })
+    } else if (this.selectedDate !== "" && this.selectedStatus === "") {
+      const selectedDateISO = new Date(this.selectedDate).toISOString();
+      this.data_orders = this.filter.filter(order => {
+        return new Date(order.order_date).toISOString().slice(0, 10) === selectedDateISO.slice(0, 10);
+      });
+    } else if (this.selectedStatus !== "" && this.selectedDate !== "") {
+      const selectedDateISO = new Date(this.selectedDate).toISOString();
+      this.data_orders = this.filter.filter(order => {
+        return (new Date(order.order_date).toISOString().slice(0, 10) === selectedDateISO.slice(0, 10)
+          &&
+          order.status === this.selectedStatus
+        );
+      });
+    }
+
+    if (this.selectedDate === "" && this.selectedStatus === "") {
+      this.data_orders = this.filter;
+    }
+
   }
 
 }

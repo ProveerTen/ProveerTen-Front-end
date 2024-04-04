@@ -1,35 +1,17 @@
-<div class="d-flex flex-column flex-md-row justify-content-center mt-5 gap-3 p-3">
-
-    <button (click)="setRole('grocer')">
-        <span class="shadow"></span>
-        <span class="edge"></span>
-        <span class="front text"> Tendero
-        </span>
-      </button>
-
-      <button (click)="setRole('company')">
-        <span class="shadow"></span>
-        <span class="edge"></span>
-        <span class="front text"> Empresa
-        </span>
-      </button>
-
-      <button (click)="setRole('provider')">
-        <span class="shadow"></span>
-        <span class="edge"></span>
-        <span class="front text"> Trabajador
-        </span>
-      </button>
+<div class="d-flex justify-content-center mt-5 gap-3">
+  <button (click)="setRole('grocer')" type="button" class="btn btn-outline-secondary btn-lg">Tendero</button>
+  <button (click)="setRole('company')" type="button" class="btn btn-outline-secondary btn-lg">Empresa</button>
+  <button (click)="setRole('provider')" type="button" class="btn btn-outline-secondary btn-lg">Trabajador</button>
 </div>
 
 <div *ngIf="isRole('grocer')">
-    <app-login-grocer></app-login-grocer>
+  <app-login-grocer></app-login-grocer>
 </div>
 
 <div *ngIf="isRole('company')">
-    <app-login-company></app-login-company>
+  <app-login-company></app-login-company>
 </div>
 
 <div *ngIf="isRole('provider')">
-    <app-login-provider></app-login-provider>
+  <app-login-provider></app-login-provider>
 </div>

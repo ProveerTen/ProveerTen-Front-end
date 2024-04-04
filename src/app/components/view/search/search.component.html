@@ -1,175 +1,44 @@
-<!-- <div class="container d-flex flex-column">
-
-    <div class="d-flex justify-content-center mt-5 gap-3">
-        <button (click)="setOption('products')" type="button"
-            class="btn btn-outline-secondary btn-lg">Productos</button>
-        <button (click)="setOption('companies')" type="button"
-            class="btn btn-outline-secondary btn-lg">Compañías</button>
-    </div>
-
-    <div class="row d-flex gap-0">
-        <div class="col">
-            <div class="overflow-auto w-25" style="max-height: 200px;">
-                <div class="div" *ngFor="let category of dataCategories">
-                    <input type="checkbox" [value]="category.name_category"
-                        (click)="verifyCheckbox(category.name_category)" id=" {{category.name_category}}">
-                    <label for="checkbox_categories"> {{category.name_category}}</label>
+<div class="container mt-5">
+    <div class="row justify-content-between">
+        <div class="col-md-4" style="padding-bottom: 300px;">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Categorías</h5>
                 </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div *ngIf="isOption('products')">
-                <app-view-all-products></app-view-all-products>
-            </div>
-
-            <div *ngIf="isOption('companies')">
-                <app-view-all-companies></app-view-all-companies>
-            </div>
-        </div>
-    </div>
-
-</div> -->
-
-
-
-
-
-
-
-<!-- <div class="container mt-5 d-flex flex-column">
-    <div class="d-flex justify-content-center mb-3 gap-3">
-        <button (click)="setOption('products')" type="button"
-            class="btn btn-outline-secondary btn-lg">Productos</button>
-        <button (click)="setOption('companies')" type="button"
-            class="btn btn-outline-secondary btn-lg">Compañías</button>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="overflow-auto" style="max-height: 200px;">
-                <div class="form-check" *ngFor="let category of dataCategories">
-                    <input class="form-check-input" type="checkbox" [value]="category.name_category"
-                        (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}">
-                    <label class="form-check-label" for="{{category.name_category}}">{{category.name_category}}</label>
-                </div>
-            </div>
-            <button>Filtrar</button>
-        </div>
-
-        <div class="col-md-8">
-            <div class="container d-flex justify-content-center">
-                <div *ngIf="(shared.getSearchOption() | async) === 'products'">
-                    <app-view-all-products></app-view-all-products>
-                </div>
-
-                <div *ngIf="(shared.getSearchOption() | async) === 'companies'">
-                    <app-view-all-companies></app-view-all-companies>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- <div *ngIf="isOption('products')">
-        <app-view-all-products></app-view-all-products>
-    </div>
-
-    <div *ngIf="isOption('companies')">
-        <app-view-all-companies></app-view-all-companies>
-    </div>
-</div> -->
-
-
-<div class="container mt-5 d-flex flex-column p-5">
-
-    <div class="row d-flex justify-content-between">
-        <div class="col-md-4">
-            <!--
-                 <div class="d-flex justify-content-center mb-3 gap-3">
-                <button (click)="setOption('products')" type="button"
-                    class="btn btn-outline-secondary btn-lg">Productos</button>
-                <button (click)="setOption('companies')" type="button"
-                    class="btn btn-outline-secondary btn-lg">Compañías</button>
-            </div>
-              -->
-
-
-            <div class="card ">
-                <div class="card-header">
-                    <h5 class="card-title">Categorías</h5>
-                </div>
-                <!--
-                      <div class="card-body">
-                    <input type="text" class="form-control mb-2" placeholder="Buscar categoría"
-                        [(ngModel)]="valueCategory" (input)="searchCategory()">
-                    <div class="overflow-auto" style="max-height: 200px;">
-                        <div class="form-check" *ngFor="let category of categories">
-                            <input class="form-check-input" type="checkbox" [value]="category.name_category"
-                                (click)="verifyCheckbox(category.name_category)" id="{{category.name_category}}"
-                                [checked]="categoriesCheckbox.includes(category.name_category)">
-                            <label class="form-check-label"
-                                for="{{category.name_category}}">{{category.name_category}}</label>
-                        </div>
-                    </div>
-                </div>
-
-                 -->
-
                 <div class="card-body">
                     <input type="text" class="form-control mb-2" placeholder="Buscar categoría"
                         [(ngModel)]="valueCategory" (input)="searchCategory()">
                     <div style="max-height: 300px; overflow-y: auto;">
-                        <div *ngFor="let category of categories">
-                            <label class="d-block">
-                                <input  type="checkbox" [ngModel]="category.isSelected"
-                                    (click)="updateSelectionCategory(category.name_category)"> {{ category.name_category
-                                }}
-                            </label>
+                        <div *ngFor="let category of categories" class="form-check">
+                            <input type="checkbox" class="form-check-input" [ngModel]="category.isSelected"
+                                (click)="updateSelectionCategory(category.name_category)">
+                            <label class="form-check-label">{{ category.name_category }}</label>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-footer text-center">
-                    <!-- <button class="btn btn-warning text-white">Filtrar</button> -->
-                </div>
             </div>
-
-            <div class="card" *ngIf="selectedCategory">
-                <div class="card-header">
-                    <h5 class="card-title">Sub categorías</h5>
+            <div class="card mt-4" *ngIf="selectedCategory">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Subcategorías</h5>
                 </div>
-
                 <div class="card-body">
-                    <div>
-                        <div *ngFor="let subCategory of subCategories">
-                            <label class="d-block">
-                                <input type="checkbox" [(ngModel)]="subCategory.isSelected"
-                                    (click)="updateSelectionSubCategory(subCategory.name_subcategory)">
-                                {{ subCategory.name_subcategory }}
-                            </label>
-                        </div>
+                    <div *ngFor="let subCategory of subCategories" class="form-check">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="subCategory.isSelected"
+                            (click)="updateSelectionSubCategory(subCategory.name_subcategory)">
+                        <label class="form-check-label">{{ subCategory.name_subcategory }}</label>
                     </div>
                 </div>
-                <div class=" card-footer text-center">
-                    <!-- <button class="btn btn-warning text-white">Filtrar</button> -->
-                </div>
             </div>
-
-
-
         </div>
         <div class="col-md-8">
             <div class="container">
                 <div *ngIf="type === 'products'">
                     <app-view-all-products></app-view-all-products>
                 </div>
-
                 <div *ngIf="type === 'companies'">
                     <app-view-all-companies></app-view-all-companies>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>

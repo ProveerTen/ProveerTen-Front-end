@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import product from '../../../interfaces/product';
 
 @Component({
   selector: 'app-view-products',
@@ -14,9 +15,12 @@ import { environment } from 'src/environments/environment';
 export class ViewProductsComponent {
 
   loading: boolean = false;
-  data: any;
+  products: any;
   id!: string;
-  product_modal:string;
+  product_modal: string;
+  value: any;
+  filter: any;
+  availability_product: string;
 
   constructor(
     private client: ClientService,
@@ -41,7 +45,15 @@ export class ViewProductsComponent {
           next: (response: any) => {
             this.loading = false;
             console.log(response);
-            this.data = response.products;
+            this.products = response.products;
+            this.products.forEach(product => {
+              if (product.stock_product === 0) {
+                product.availability_product = "No Disponible"
+              } else {
+                product.availability_product = "Disponible"
+              }
+            });
+            this.filter = this.products.slice();
           },
           error: (error) => {
             this.loading = false;
@@ -53,6 +65,24 @@ export class ViewProductsComponent {
   }
 
   viewProductModal(id: string) {
-   this.product_modal = id
+    this.product_modal = id
+  }
+
+  searchProducts() {
+
+    this.products = this.filter.filter((product: any) => {
+      return (
+        this.removeAccents(product.name_product).toLowerCase().includes(this.removeAccents(this.value).toLowerCase()) ||
+        this.removeAccents(product.description_product).toLowerCase().includes(this.removeAccents(this.value).toLowerCase())
+      );
+    });
+
+  }
+
+  removeAccents(text: string): string {
+    if (!text) {
+      return '';
+    }
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 }

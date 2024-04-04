@@ -28,25 +28,21 @@ export class ViewAllProductsComponent {
   }
 
   ngOnInit() {
-    // Suscripción a cambios en el término de búsqueda
     this.shared.searchTerm.subscribe(value => {
       this.value = value;
       this.handleProductFiltering();
     });
 
-    // Suscripción a cambios en la categoría
     this.shared.category.subscribe(value => {
       this.category = value;
       this.handleProductFiltering();
     });
 
-    // Suscripción a cambios en la subcategoría
     this.shared.sub_category.subscribe(value => {
       this.sub_category = value;
       this.handleProductFiltering();
     });
 
-    // Obtener los productos inicialmente
     this.getProducts();
   }
 

@@ -102,7 +102,7 @@ export class CreateProductsComponent {
     } else {
       console.log('Archivo no válido');
       this.isValidFile = false;
-      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los tipo de archivo ingresado es inválido. Por favor, revise la información proporcionada.' });
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los tipo de archivo ingresado es inválido. Por favor, subir un archivo de excel o un csv.' });
     }
   }
 
@@ -110,9 +110,11 @@ export class CreateProductsComponent {
     this.client.postRequest(`${environment.url_logic}/product/fileProducts`, { data: this.products_file }, undefined, { Authorization: `Bearer ${this.auth.getToken()}` }).subscribe({
       next: (response: any) => {
         console.log(response);
+        this.messageService.add({ key: 'center', severity: 'success', summary: 'Éxito', detail: '¡Productos creados exitosamente!' });
       },
       error: (error) => {
         console.log(error);
+        this.messageService.add({ key: 'center', severity: 'error', summary: 'Error', detail: '¡Error en la creación de productos por favor revisa que este bien la plantilla de los productos!' });
       },
       complete: () => console.log('complete'),
     });

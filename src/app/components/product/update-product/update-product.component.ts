@@ -124,6 +124,7 @@ export class UpdateProductComponent {
       reader.readAsDataURL(this.imageFile);
       this.isValidImage = true;
     } else {
+      this.messageService.add({ key: 'center', severity: 'warn', summary: 'Advertencia', detail: 'Los tipo de archivo ingresado es inválido. Por favor, subir una imagen.' });
       this.isValidImage = false;
     }
   }

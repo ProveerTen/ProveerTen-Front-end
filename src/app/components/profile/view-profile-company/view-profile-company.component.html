@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center my-3" *ngIf="auth.isGrocer() | async">
-                            <button type="button" class="btn btn-outline-primary" (click)="order()" data-bs-dismiss="modal"
+                            <button type="button" class="btn btn-primary" (click)="order()" data-bs-dismiss="modal"
                                 aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-border-style" viewBox="0 0 16 16">
                                     <path d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm8 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-4 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm8 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-4-4a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/>
                                   </svg> Realizar pedido</button>
@@ -60,7 +60,7 @@
                             <div class="d-flex justify-content-center mb-2">
                             </div>
                             <button (click)="chatear(provider.document_provider)" data-bs-dismiss="modal"
-                                aria-label="Close" class="btn btn-outline-primary btn-chatear">
+                                aria-label="Close" class="btn btn-primary btn-chatear">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-chat-right-text" viewBox="0 0 16 16">
                                     <path

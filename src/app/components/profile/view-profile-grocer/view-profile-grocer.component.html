@@ -1,7 +1,7 @@
 <div class="modal" *ngIf="loading">
-  <div class="modal-content">
-    <app-loader [loading]="loading"></app-loader>
-  </div>
+    <div class="modal-content">
+        <app-loader [loading]="loading"></app-loader>
+    </div>
 </div>
 
 
@@ -15,7 +15,7 @@
                             <img appBrokenImageProfile [imageType]="'photo'" [src]="data?.profile_photo_grocer"
                                 style="width: 200px; height: 168px;" alt="avatar" class="rounded-circle img-fluid">
                             <h5 class="my-3">{{data?.name_grocer}} {{data?.last_name_grocer}}</h5>
-                            <button (click)="chatear()">Chatear</button>
+                            <button class="btn btn-primary" (click)="chatear()">Chatear</button>
                             <div class="d-flex justify-content-center mb-2">
                                 <div class="d-flex justify-content-center gap-3 mt-2 flex-xxl-column">
                                     <div
