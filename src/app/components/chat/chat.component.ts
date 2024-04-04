@@ -24,7 +24,7 @@ export class ChatComponent {
 
   chatId: any;
 
-  page: any;
+  page: any = 1;
 
   is_chat: boolean = false;
 

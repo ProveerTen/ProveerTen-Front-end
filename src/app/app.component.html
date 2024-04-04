@@ -26,20 +26,17 @@
     <!-- <div class="row bg_svg"></div>
     <div class="row bg-danger"></div> -->
 </div>
-<button *ngIf="auth.isLoggedIn() | async" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
-    aria-controls="offcanvasBottom" style="position: fixed;
+<button *ngIf="auth.isLoggedIn() | async" class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" style="position: fixed;
     bottom: 0;
     z-index: 1;
     right: 64px;"> Abrir chat</button>
 
-<div *ngIf="auth.isLoggedIn() | async" class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false"
-    id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
-            style="position: relative;
-    left: 688px;"></button>
-        <app-chat></app-chat>
+<div *ngIf="auth.isLoggedIn() | async" class="offcanvas d-none d-md-flex offcanvas-bottom" tabindex="-1"
+    data-bs-scroll="true" data-bs-backdrop="false" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <app-chat></app-chat>
 </div>
+
 <router-outlet></router-outlet>
 <p-toast position="bottom-right" key="center"></p-toast>
 <div class="container-fluid bg-danger">

@@ -3,8 +3,11 @@
         <div class="col-3">
             <h2>Chat</h2>
         </div>
-        <div class="col-4">
+        <!-- <div class="col-4">
             <button class="d-flex d-md-none" (click)="changePage(1)">Lista de chats</button>
+        </div> -->
+        <div class="col-4">
+            <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">Cerrar chat</button>
         </div>
     </div>
     <div class="row border border-dark">
@@ -38,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="page == 1 && !is_chat" class="col border border-dark d-flex d-md-none" style="height: 400px">
+        <div *ngIf="page == 1 && !is_chat" class="col border border-dark d-flex d-md-none" style="height: 500px;">
             <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isGrocer() | async">
                 <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
                     <div class="user_chat d-flex w-100 justify-content-center"
@@ -79,7 +82,7 @@
                         data_chat.grocer[0].name_grocer }}</p>
                 </div>
                 <div class="col-1">
-                    <button (click)="changePage(0)">X</button>
+                    <button (click)="changePage(1)">X</button>
                 </div>
             </div>
             <div *ngIf="is_chat" class="row">
@@ -107,8 +110,8 @@
                 <button type="button" class="btn btn-outline-primary col-2" (click)="sendMessage()">Enviar</button>
             </div>
         </div>
-        <div *ngIf="!is_chat && page != 1"
-            class="col-12 border border-dark d-flex flex-column justify-content-center align-items-center col-md-8"
+        <div *ngIf="!is_chat"
+            class="col-12 border border-dark d-none d-md-flex flex-column justify-content-center align-items-center col-md-8"
             style="height: 500px;">
             <p>Inicia un chat</p>
         </div>
