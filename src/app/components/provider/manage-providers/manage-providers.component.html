@@ -23,9 +23,34 @@
             </svg></button>
     </div>
 
-    <div class="container ">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="nameSearch" class="form-label">Buscar por Nombre:</label>
+                <input type="text" placeholder="Buscar trabajador por nombre..." class="form-control" id="nameSearch"
+                    [(ngModel)]="searchTerm" (input)="filterProviders()">
+            </div>
+            <div class="col-md-4">
+                <label for="departmentFilter" class="form-label">Filtrar por Departamento:</label>
+                <select class="form-select" id="departmentFilter" (ngModelChange)="selected_department($event)"
+                    [(ngModel)]="selectedDepartment" (change)="filterProviders()">
+                    <option value="">Todos</option>
+                    <option *ngFor="let department of departments" [value]="department.name">{{department.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-4" *ngIf="cities.length !== 0">
+                <label for="cityFilter" class="form-label">Filtrar por Ciudad:</label>
+                <select class="form-select" id="cityFilter" [(ngModel)]="selectedCity" (change)="filterProviders()">
+                    <option value="">Todos</option>
+                    <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lista de proveedores -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col mb-4" *ngFor="let provider of data">
+            <div class="col mb-4" *ngFor="let provider of providers">
                 <div class="card h-100 rounded-3 shadow" style="height: 340px; max-width: 400px;">
                     <img appBrokenImageProfile [imageType]="'photo'" [src]="provider?.profile_photo_provider"
                         [alt]="provider?.name_provider" class="card-img-top rounded-top"
@@ -36,9 +61,7 @@
                         <p class="card-text text-center">{{provider?.city_provider}}, {{provider?.department}}</p>
                     </div>
                     <div class="card-footer d-flex justify-content-center bg-transparent border-top-0">
-
-                        <!-- (click)="viewProfile(provider.document_provider)"  -->
-                        <button type="button" class="btn btn-primary me-2" 
+                        <button type="button" class="btn btn-primary me-2"
                             (click)="viewModalProfile(provider?.document_provider)" data-bs-toggle="modal"
                             data-bs-target="#modalProfile" style="cursor:pointer">
                             Ver Perfil
@@ -65,6 +88,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="modal fade" id="modalProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">

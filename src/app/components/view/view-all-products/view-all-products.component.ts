@@ -71,6 +71,13 @@ export class ViewAllProductsComponent {
           next: (response: any) => {
             this.products = response.categoriesByProducts;
             console.log(this.products);
+            this.products.forEach(product => {
+              if (product.stock_product === 0) {
+                product.availability_product = "No Disponible"
+              } else {
+                product.availability_product = "Disponible"
+              }
+            });
             this.filter = this.products.slice();
             this.handleProductFiltering();
           },
@@ -85,6 +92,13 @@ export class ViewAllProductsComponent {
         next: (response: any) => {
           this.products = response.categoriesByProducts;
           console.log(this.products);
+          this.products.forEach(product => {
+            if (product.stock_product === 0) {
+              product.availability_product = "No Disponible"
+            } else {
+              product.availability_product = "Disponible"
+            }
+          });
           this.filter = this.products.slice();
           this.handleProductFiltering();
 
