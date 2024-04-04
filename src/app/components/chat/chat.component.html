@@ -1,11 +1,15 @@
-<div class="container p-3">
+<div class="container p-5">
 
-    <div class="row border border-dark">
-        <h2>Chat</h2>
+    <div class="row d-flex justify-content-between align-items-center border border-dark">
+        <div class="col-3">
+            <h2>Chat</h2>
+        </div>
+        <div class="col-4">
+            <button class="d-flex d-md-none" (click)="changePage(1)">Lista de chats</button>
+        </div>
     </div>
     <div class="row border border-dark">
         <div class="col-4 border border-dark d-none d-md-flex">
-
             <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isGrocer() | async">
                 <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
                     <div class="user_chat d-flex w-100 justify-content-center"
@@ -20,7 +24,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isProvider() | async">
                 <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
                     <div class="user_chat d-flex w-100 justify-content-center"
@@ -35,17 +38,52 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="col-12 border border-dark col-md-8">
-            <div class="row border border-dark d-flex align-items-center">
-                <p class="mb-0 fw-bold" *ngIf="data_chat && data_chat.provider && auth.isGrocer() | async">{{
-                    data_chat.provider[0].name_provider }}</p>
-
-                <p class="mb-0 fw-bold" *ngIf="data_chat && data_chat.provider && auth.isProvider() | async">{{
-                    data_chat.grocer[0].name_grocer }}</p>
+        <div *ngIf="page == 1 && !is_chat" class="col border border-dark d-flex d-md-none" style="height: 400px">
+            <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isGrocer() | async">
+                <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
+                    <div class="user_chat d-flex w-100 justify-content-center"
+                        style="cursor: pointer; padding: 5px; border-radius: 5px;">
+                        <div class="d-flex align-items-center gap-2" (click)="chatear(chat)">
+                            <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider"
+                                [imageType]="'photo'" width="40px" height="40px" class="mr-2">
+                            <p class="mb-0">
+                                {{chat.dataUser.name_provider}} {{chat.dataUser.last_name_provider}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="row">
+            <div class="overflow-auto w-100" style="max-height: 55vh" *ngIf="auth.isProvider() | async">
+                <div *ngFor="let chat of list_chat" class="d-flex flex-column p-2 ">
+                    <div class="user_chat d-flex w-100 justify-content-center"
+                        style="cursor: pointer; padding: 5px; border-radius: 5px;" (click)="chatear(chat)">
+                        <div class="d-flex align-items-center gap-2">
+                            <img appBrokenImageProfile [src]="chat.dataUser.photo_profile_provider"
+                                [imageType]="'photo'" width="40px" height="40px" class="mr-2">
+                            <p class="mb-0">
+                                {{chat.dataUser.name_grocer}} {{chat.dataUser.last_name_grocer}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="is_chat" class="col-12 border border-dark d-flex flex-column justify-content-between col-md-8"
+            style="height: 500px;">
+            <div *ngIf="is_chat" class="row border border-dark d-flex align-items-center justify-content-between">
+                <div class="col-4">
+                    <p class="mb-0 fw-bold" *ngIf="data_chat && data_chat.provider && auth.isGrocer() | async">{{
+                        data_chat.provider[0].name_provider }}</p>
+
+                    <p class="mb-0 fw-bold" *ngIf="data_chat && data_chat.provider && auth.isProvider() | async">{{
+                        data_chat.grocer[0].name_grocer }}</p>
+                </div>
+                <div class="col-1">
+                    <button (click)="changePage(0)">X</button>
+                </div>
+            </div>
+            <div *ngIf="is_chat" class="row">
                 <div class="overflow-auto" style="height: 400px" #messageContainer>
                     <div *ngFor="let message of messages" class="message">
                         <div *ngIf="isMyMessage(message.sender)" class="my-message d-flex flex-column"
@@ -64,11 +102,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row d-flex border border-danger">
+            <div *ngIf="is_chat" class="row d-flex border border-danger">
                 <input class="col-10" type="text" [(ngModel)]="messageText" placeholder="Escribe un mensaje..."
                     (keyup.enter)="sendMessage()">
                 <button type="button" class="btn btn-outline-primary col-2" (click)="sendMessage()">Enviar</button>
             </div>
+        </div>
+        <div *ngIf="!is_chat && page != 1"
+            class="col-12 border border-dark d-flex flex-column justify-content-center align-items-center col-md-8"
+            style="height: 500px;">
+            <p>Inicia un chat</p>
         </div>
     </div>
 

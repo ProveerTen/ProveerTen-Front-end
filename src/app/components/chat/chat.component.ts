@@ -14,16 +14,17 @@ export class ChatComponent {
 
   list_chat: any;
   isLogin: any;
-  chats: string[] = [];
 
   // data: any;
   nameSender: any = '';
   messages: any[] = [];
   messageText: string = '';
 
-  data_chat: any;
+  data_chat: any = null;
 
   chatId: any;
+
+  page: any;
 
   is_chat: boolean = false;
 
@@ -41,10 +42,16 @@ export class ChatComponent {
     });
   }
 
-  chatear(data: any) {
+  changePage(page: any) {
+    this.page = page;
+    this.is_chat = false;
+  }
 
+  chatear(data: any) {
     this.is_chat = true;
     this.chatId = data._id;
+    this.data_chat = null;
+    this.messages = null;
     this.chatService.joinChat(this.auth.getId(), this.chatId);
     this.loadMessages();
     this.chatService.getMessages(this.chatId).subscribe(
