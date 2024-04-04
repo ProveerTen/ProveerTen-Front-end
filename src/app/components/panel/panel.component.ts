@@ -80,4 +80,8 @@ export class PanelComponent {
     this.router.navigate(['view/products/', id]);
   }
 
+  viewModalCompany(id: string) {
+
+  }
+
 }

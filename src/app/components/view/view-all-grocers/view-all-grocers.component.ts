@@ -15,6 +15,9 @@ export class ViewAllGrocersComponent {
   value: any = '';
   neighborhoods: any;
   selectedNeighborhood: string = '';
+  modalProfile:string = '';
+  nameGrocer:string = '';
+
   constructor(private client: ClientService, public auth: AuthService, private router: Router) {
 
     this.client.postRequest(`${environment.url_logic}/view/grocers/neighborhood`, { document_provider: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
@@ -92,6 +95,13 @@ export class ViewAllGrocersComponent {
   viewProfile(id: string) {
     console.log("fff", id);
     this.router.navigate(['profile/grocer', id])
+  }
+
+  viewModalProfile(id:string, nameGrocer:string) {
+    console.log("qqq", id);
+    
+    this.modalProfile = id
+    this.nameGrocer = nameGrocer
   }
 }
 
