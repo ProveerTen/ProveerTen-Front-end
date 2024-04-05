@@ -115,5 +115,17 @@ export class ChatComponent {
 
     return sender === this.auth.getId();
   }
+  refreshChats() {
+    this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        this.list_chat = response.chatData;
+        console.log(this.list_chat);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
+  }
 
 }
