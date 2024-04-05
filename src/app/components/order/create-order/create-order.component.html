@@ -57,7 +57,7 @@
                                                 Eliminar
                                             </button>
                                             <div class="d-flex align-items-center my-2">
-                                                <button class="btn btn-sm btn-success" (click)="increaseProduct(product)">+</button>
+                                                <button class="btn btn-sm btn-danger" (click)="increaseProduct(product)">+</button>
                                                 <span class="mx-2">{{ product.product_quantity }}</span>
                                                 <button class="btn btn-sm btn-danger" (click)="decreaseProduct(product)">-</button>
                                             </div>
@@ -69,7 +69,7 @@
                                         </button>
                                     </div>
                                     <div class="card-footer bg-transparent">
-                                        <button class="btn btn-primary btn-sm w-100"
+                                        <button class="btn btn-danger btn-sm w-100"
                                             (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
                                             data-bs-target="#productModal">
                                             Ver detalle
@@ -145,7 +145,7 @@
                         </table>
                     </div>
                     <div style="text-align: center; margin-top: 30px;">
-                        <p style="font-size: 18px; color: #666;"><strong>Trabajador:</strong> {{
+                        <p style="font-size: 18px; color: #666;"><strong>El trabajador encargado es:</strong> {{
                             data_order?.name_provider}} {{ data_order?.last_name_provider}}</p>
                     </div>
                 </div>
@@ -156,12 +156,12 @@
                         <p><strong>Total:</strong> ${{total}} COP</p>
                     </div>
                     <div class="buttons" style="display: flex; gap: 10px;">
-                        <button class="btn btn-outline-danger" [disabled]="isData" (click)="cancel()">Cancelar</button>
-                        <button class="btn btn-outline-success" *ngIf="indexPage !== 3" [disabled]="isData"
+                        <button class="btn btn-danger" [disabled]="isData" (click)="cancel()">Cancelar</button>
+                        <button class="btn btn-primary" *ngIf="indexPage !== 3" [disabled]="isData"
                             (click)="nextPage()">Siguiente</button>
-                        <button class="btn btn-outline-success" (click)="confirm()"
+                        <button class="btn btn-primary" (click)="confirm()"
                             *ngIf="indexPage === 3">Confirmar</button>
-                        <button class="btn btn-outline-primary" (click)="editOrder()"
+                        <button class="btn btn-danger" (click)="editOrder()"
                             *ngIf="indexPage === 3">Editar</button>
                     </div>
                 </div>
