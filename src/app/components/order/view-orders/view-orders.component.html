@@ -42,7 +42,7 @@
                     </div>
                     <div class="card rounded-3 shadow" style="border: rgba(255, 145, 77, 1) 2px solid;">
                         <div class="card-body">
-                            <h5 class="card-title mb-3">Pedido #{{ order.id_order }}</h5>
+                            <!-- <h5 class="card-title mb-3">Pedido #{{ order.id_order }}</h5> -->
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <strong>Fecha de realización:</strong> {{ order.order_date | date: 'short' }}
@@ -52,6 +52,9 @@
                                 </li>
                                 <li class="list-group-item">
                                     <strong>Estado del pedido:</strong> {{ order.status }}
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Trabajador:</strong> {{ order.name_provider }} {{order.last_name_provider.split(" ")[0] }}
                                 </li>
                             </ul>
                         </div>
