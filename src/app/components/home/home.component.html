@@ -314,7 +314,8 @@ Pasabocas
     </div>
 
 
-    <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap w-75" *ngIf="publicaciones; else noPublications">
+    <div class="col-md-6 d-flex gap-3 flex-xxl-column flex-wrap" style="width: 60%;"
+        *ngIf="publicaciones; else noPublications">
         <div class="card" style="width: 100%; height: 100%;" *ngFor="let publicacion of publicaciones; let i = index">
             <div class="card-header d-flex align-items-center gap-4">
                 <img (click)="viewProfile(publicacion.nit_company)" style="cursor: pointer;" appBrokenImageProfile
