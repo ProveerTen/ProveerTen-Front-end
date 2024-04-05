@@ -135,7 +135,7 @@ export class UpdateOrderComponent {
       this.list_show_products.push(product);
       product.stock_product += product.quantity;
     } else {
-      product.stock_product -= product.quantity;
+      //product.stock_product -= product.quantity;
       this.list_products_delete.push(product);
       const index = this.order.findIndex((p: any) => p.id_product === product.id_product);
       if (index !== -1) {
