@@ -96,10 +96,11 @@
 
                     <p class="product-description">{{data?.description_product}}</p>
                 </div>
-
-
             </div>
             <div class="product-div-right">
+                <button class="btn btn-primary w-50 mt-4" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver
+                    compañía</button>
                 <p id="disponibilidad"
                     [ngClass]="{'disponible': data?.stock_product > 0, 'no-disponible': data?.stock_product == 0}"> <svg
                         *ngIf="data?.stock_product > 0" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
