@@ -32,9 +32,11 @@
     bottom: 0; width: 120px; font-size: 20px;
     z-index: 1;
     right: 0px;"><i class="fa-solid fa-comments" style="color: #ffffff;"></i> Chat</button>
+    right: 0px;"><i class="fa-solid fa-comments" style="color: #ffffff;"></i> Chat</button>
 
-<div *ngIf="auth.isLoggedIn() | async" class="offcanvas offcanvas-bottom" tabindex="-1" data-bs-scroll="true"
-    data-bs-backdrop="false" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+<div *ngIf="((auth.isGrocer() | async ) || (auth.isProvider() | async))" class="offcanvas offcanvas-bottom"
+    tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvasBottom"
+    aria-labelledby="offcanvasBottomLabel">
     <app-chat></app-chat>
 </div>
 

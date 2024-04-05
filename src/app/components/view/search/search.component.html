@@ -33,7 +33,10 @@
         <div class="col-md-8">
             <div class="container">
                 <div *ngIf="type === 'products'">
-                    <app-view-all-products></app-view-all-products>
+                    <div>
+                        <app-view-all-products></app-view-all-products>
+
+                    </div>
                 </div>
                 <div *ngIf="type === 'companies'">
                     <app-view-all-companies></app-view-all-companies>

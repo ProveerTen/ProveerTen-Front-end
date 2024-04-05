@@ -10,9 +10,11 @@ html {
 
 /* Estilo para las imágenes dentro del carrusel */
 .custom-carousel-item img {
-  width: auto ;
-  height: 400px; /* Ajusta el valor de altura deseado */
-  object-fit: contain; /* Escala la imagen para que cubra todo el contenedor manteniendo la relación de aspecto */
+  width: auto;
+  height: 400px;
+  /* Ajusta el valor de altura deseado */
+  object-fit: contain;
+  /* Escala la imagen para que cubra todo el contenedor manteniendo la relación de aspecto */
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -270,4 +272,3 @@ html {
   font-size: 18px;
   font-weight: 300;
 }
-
