@@ -122,7 +122,8 @@
                 <div class="pro-img-box">
                     <div style="background-color: white;">
                         <div class="p-4">
-                            <img style="height: 190px;" appBrokenImageProfile [imageType]="'photo'" [src]="company?.profile_photo_company" alt="" class="img-fluid">
+                            <img style="height: 190px;" appBrokenImageProfile [imageType]="'photo'"
+                                [src]="company?.profile_photo_company" alt="" class="img-fluid">
                         </div>
                     </div>
                     <a class="adtocart">
@@ -132,10 +133,13 @@
 
                 <div class="panel-body text-center p-2 border border-3">
                     <h4>
-                        <h2 class="pro-title fs-5" >{{company.name_company}}</h2>
+                        <h2 class="pro-title fs-5">{{company.name_company}}</h2>
                     </h4>
-                    <button (click)="viewCompanyModal(company.nit_company) " class="btn btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor:pointer">Ver perfil</button>
+                    <!-- <button (click)="viewCompanyModal(company.nit_company) " class="btn btn-primary"
+                        style="cursor:pointer">Ver perfil</button> -->
+
+                    <a class="btn btn-primary" style="cursor:pointer" href="/profile/company/{{company.nit_company}} "
+                        target="_blank">Ver perfil</a>
                 </div>
             </section>
         </div>
