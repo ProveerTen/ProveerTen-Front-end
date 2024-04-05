@@ -75,14 +75,16 @@
                 <table class="table table-bordered border-primary text-center table-hover">
                     <thead class="table-primary">
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Valor del pedido</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let product of order">
-                            <td>{{ product.fk_id_product }}</td>
+                            <td><img style="height: 100px; width: 100px;" src="{{product?.image_product}}" alt=""></td>
+                            <td>{{ product.name_product }}</td>
                             <td>{{ product.quantity }}</td>
                             <td>{{ product.total_amount }}</td>
                         </tr>

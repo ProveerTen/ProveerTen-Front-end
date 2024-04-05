@@ -32,6 +32,8 @@ export class UpdateOrderComponent {
       next: (response: any) => {
         this.data_order = response.order;
         this.order = response.order_detail;
+        console.log(this.order);
+        
         this.order.forEach(product => {
           product.individual_product_price = product.quantity * product.purchase_price_product;
           product.id_product = product.fk_id_product;
