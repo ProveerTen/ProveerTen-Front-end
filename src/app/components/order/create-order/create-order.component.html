@@ -57,21 +57,19 @@
                                                 Eliminar
                                             </button>
                                             <div class="d-flex align-items-center my-2">
-                                                <button class="btn btn-sm btn-outline-warning"
-                                                    (click)="decreaseProduct(product)">-</button>
+                                                <button class="btn btn-sm btn-success" (click)="increaseProduct(product)">+</button>
                                                 <span class="mx-2">{{ product.product_quantity }}</span>
-                                                <button class="btn btn-sm btn-outline-success"
-                                                    (click)="increaseProduct(product)">+</button>
+                                                <button class="btn btn-sm btn-danger" (click)="decreaseProduct(product)">-</button>
                                             </div>
                                         </div>
-                                        <button class="btn btn-dark btn-sm mt-2 w-100" (click)="addProduct(product)"
+                                        <button class="btn btn-primary btn-sm mt-2 w-100" (click)="addProduct(product)"
                                             [disabled]="product.product_quantity === 0">
                                             <i class="bi bi-cart"></i>
                                             Agregar al carrito
                                         </button>
                                     </div>
                                     <div class="card-footer bg-transparent">
-                                        <button class="btn btn-dark btn-sm w-100"
+                                        <button class="btn btn-primary btn-sm w-100"
                                             (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
                                             data-bs-target="#productModal">
                                             Ver detalle
