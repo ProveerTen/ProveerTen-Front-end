@@ -96,10 +96,11 @@
 
                     <p class="product-description">{{data?.description_product}}</p>
                 </div>
-
-
             </div>
             <div class="product-div-right">
+                <button class="btn btn-primary w-50 mt-4" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="viewCompany(data.fk_product_nit_company)" *ngIf="auth.isGrocer() | async">Ver
+                    compañía</button>
                 <p id="disponibilidad"
                     [ngClass]="{'disponible': data?.stock_product > 0, 'no-disponible': data?.stock_product == 0}"> <svg
                         *ngIf="data?.stock_product > 0" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -125,6 +126,47 @@
                 <span class="product-info"><strong>Precio sugerido de venta por unidad:</strong>
                     {{data?.suggested_unit_selling_price_product}}</span>
                 <span class="product-info"><strong>Stock:</strong>{{data?.stock_product}}</span>
+
+                <h3 class="pro-title" style="margin: 0px;
+                    padding: 0px;
+                    position: relative;
+                    left: -59px;">Categoria:</h3>
+                <div class="category" style="position: relative; padding: 0px;">
+                    <div class="flex" style="display: flex;">
+                        <div class="triangulo" style="display: flex; flex-direction: column;">
+                            <div class="arriba-atra"></div>
+                            <div class="abajo-atra"></div>
+                        </div>
+                        <div class="box" style="width:150px; background-color: #ec8f6a; color: white;">
+                            {{data?.categories[0]}}</div>
+                        <div class="triangulo-adelante" style="display: flex; flex-direction: column;">
+                            <div class="arriba-ade">
+                            </div>
+                            <div class="abajo-ade">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="pro-title" style="padding: 0px;
+                    margin: 0px;
+                    position: relative;
+                    left: -24px;">Sub categoria:</h3>
+                <div class="sub_category" style="position: relative;">
+                    <div class="flex" style="display: flex;">
+                        <div class="triangulo" style="display: flex; flex-direction: column;">
+                            <div class="arriba-atra"></div>
+                            <div class="abajo-atra"></div>
+                        </div>
+                        <div class="box" style="width:150px; background-color: #ec8f6a; color: white;">
+                            {{data?.fk_subcategory_name_subcategory}}</div>
+                        <div class="triangulo-adelante" style="display: flex; flex-direction: column;">
+                            <div class="arriba-ade">
+                            </div>
+                            <div class="abajo-ade">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- <div class = "product-rating">
                     <span><i class = "fas fa-star"></i></span>

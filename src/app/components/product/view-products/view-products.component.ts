@@ -46,7 +46,7 @@ export class ViewProductsComponent {
             this.loading = false;
             console.log(response);
             this.products = response.products;
-            
+
             this.products.forEach(product => {
               if (product.stock_product === 0) {
                 product.availability_product = "No Disponible"
@@ -67,6 +67,10 @@ export class ViewProductsComponent {
 
   viewProductModal(id: string) {
     this.product_modal = id
+  }
+
+  viewProduct(id: string) {
+    this.router.navigate(['view/product', id])
   }
 
   searchProducts() {

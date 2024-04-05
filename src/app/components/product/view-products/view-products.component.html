@@ -1,11 +1,10 @@
 <div class="d-flex justify-content-center align-items-center " style="padding-bottom: 400px;">
     <div class="container mt-4 col-7">
-        <input type="text" class="form-control mb-3" placeholder="Buscar por nombre o descripción..." [(ngModel)]="value"
-            (input)="searchProducts()">
+        <input type="text" class="form-control mb-3" placeholder="Buscar por nombre o descripción..."
+            [(ngModel)]="value" (input)="searchProducts()">
         <div class="row product-list">
             <div class="col-md-4" *ngFor="let product of products">
-                <section class="panel" (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
-                    data-bs-target="#productModal" style="cursor:pointer">
+                <section class="panel" (click)="viewProduct(product.id_product)" style="cursor:pointer">
                     <div class="pro-img-box">
                         <img appBrokenImage loading="lazy" [src]="product.image_product" class="card-img-top"
                             alt="{{product?.name_product}}">
@@ -20,13 +19,14 @@
 
                         <p id="disponibilidad"
                             [ngClass]="{'disponible': product?.stock_product > 0, 'no-disponible': product?.stock_product === 0}">
-                            
-                            <svg *ngIf="product?.stock_product > 0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+
+                            <svg *ngIf="product?.stock_product > 0" xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                 <path
                                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                             </svg>
-                            <svg *ngIf="product?.stock_product === 0"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            <svg *ngIf="product?.stock_product === 0" xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor"
                                 viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path
                                     d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
@@ -42,25 +42,6 @@
         </div>
     </div>
 </div>
-
-
-
-<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLabel">Detalles de la publicación</h5> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- <app-view-product [productModal]="product_modal"></app-view-product> -->
-                <app-view-product [productModal]="product_modal"></app-view-product>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 
 <div class=" modal" *ngIf="loading">
     <div class="modal-content">

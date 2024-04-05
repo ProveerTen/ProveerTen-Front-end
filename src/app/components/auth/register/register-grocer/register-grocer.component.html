@@ -25,11 +25,11 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <section class="">
-                <div class="container py-5">
+                <div class="container py-3">
                     <div class="row d-flex align-items-center justify-content-center  rounded">
                         <div class="col-md-8 col-lg-7 col-xl-6">
-                            <img style="width: 700px;" src="../../../../../assets/register.png"
-                                class="img-fluid" alt="Phone image">
+                            <img style="width: 700px;" src="../../../../../assets/register.png" class="img-fluid"
+                                alt="Phone image">
                         </div>
                         <div class=" col-xl-5 offset-xl-1 m-4  ">
                             <div class="d-flex fs-1 justify-content-center mb-3">
@@ -84,7 +84,8 @@
                                     <label class="form-label" for="form1Example13"><strong>Correo</strong></label>
                                     <input type="email" formControlName="email_grocer"
                                         class="form-control form-control-lg" />
-                                    <div *ngIf="form.get('email_grocer').errors?.['required'] && form.get('email_grocer').touched" class="message-invalid">
+                                    <div *ngIf="form.get('email_grocer').errors?.['required'] && form.get('email_grocer').touched"
+                                        class="message-invalid">
                                         <p style="color: red;">El correo electrónico es requerido.</p>
                                     </div>
                                     <div *ngIf="form.get('email_grocer').errors?.['email'] && form.get('email_grocer').touched && form.get('document_grocer').errors?.['required']"

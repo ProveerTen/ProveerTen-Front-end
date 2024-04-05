@@ -27,8 +27,8 @@
     <div class="row bg-danger"></div> -->
 </div>
 
-<button *ngIf="auth.isLoggedIn() | async" class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" style="position: fixed;
+<button *ngIf="((auth.isGrocer() | async ) || (auth.isProvider() | async))" class="btn btn-primary" type="button"
+    data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" style="position: fixed;
     bottom: 0; width: 120px; font-size: 20px;
     z-index: 1;
     right: 0px;"><i class="fa-solid fa-comments" style="color: #ffffff;" (click)="refreshChats()"></i> Chat</button>
@@ -40,6 +40,12 @@
 </div>
 
 <router-outlet></router-outlet>
+<button style="position: fixed;
+bottom: 0; 
+z-index: 1;
+margin-bottom: 10px;
+left: 10px;" *ngIf="showScrollButton" (click)="scrollToTop()" class="btn btn-primary btn-floating"><i
+        class="fa-solid fa-arrow-up" style="color: #ffffff;"></i> Subir </button>
 <p-toast position="bottom-right" key="center"></p-toast>
 <div class="container-fluid bg-danger">
     <app-footer></app-footer>
