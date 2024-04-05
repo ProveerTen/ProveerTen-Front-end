@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'ProveerTen';
   showScrollButton: boolean = false;
 
-  constructor(public auth: AuthService, private router: Router, private shared:SharedService) {
+  constructor(public auth: AuthService, private router: Router, private shared: SharedService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0);
@@ -30,7 +30,9 @@ export class AppComponent {
     }
   }
 
-
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   refreshChats() {
     this.shared.chatear.next(!true)

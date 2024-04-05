@@ -40,6 +40,12 @@
 </div>
 
 <router-outlet></router-outlet>
+<button style="position: fixed;
+bottom: 0; 
+z-index: 1;
+margin-bottom: 10px;
+left: 10px;" *ngIf="showScrollButton" (click)="scrollToTop()" class="btn btn-primary btn-floating"><i
+        class="fa-solid fa-arrow-up" style="color: #ffffff;"></i> Subir </button>
 <p-toast position="bottom-right" key="center"></p-toast>
 <div class="container-fluid bg-danger">
     <app-footer></app-footer>
