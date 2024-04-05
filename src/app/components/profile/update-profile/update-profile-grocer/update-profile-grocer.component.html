@@ -8,7 +8,7 @@
 
     <div class="d-flex justify-content-center mt-4 flex-column align-items-center gap-3 mb-5">
         <h1>¡Actualiza tus datos!</h1>
-        <div class="card w-100 rounded-4 border border-warning-subtle p-4 shadow-lg gap-5"
+        <div class="formulario card rounded-4 border border-warning-subtle p-4 shadow-lg gap-5"
             *ngIf="auth.isGrocer() | async">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="d-flex justify-content-center flex-column align-items-center">
