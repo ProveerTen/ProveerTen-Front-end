@@ -1,7 +1,6 @@
 <div class="container bootdey">
-    <!-- <p>{{products | json}}</p> -->
-    <div *ngIf="products != ''; else thereAreNotProducts"  class="row product-list">
-        <div class="col-md-4" *ngFor="let product of products">
+    <div class="all row product-list d-flex gap-1 mb-4">
+        <div class="col-md-4" *ngFor="let product of products" style="width: 270px;">
             <section class="panel" (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
                 data-bs-target="#exampleModal" style="cursor:pointer">
                 <div class="pro-img-box">
@@ -11,7 +10,7 @@
                         <i class="fa fa-shopping-cart"></i>
                     </a>
                 </div>
-                <div class="panel-body text-center">
+                <div class="panel-body text-center  border border-3">
                     <h4>
                         <h2 class="pro-title">Nombre : {{product?.name_product}}</h2>
                     </h4>
@@ -37,12 +36,8 @@
                     <p class="price">Precio : ${{product?.purchase_price_product}}</p>
                 </div>
             </section>
-            
         </div>
     </div>
-    <ng-template #thereAreNotProducts >
-        <p class="d-flex justify-content-center" style="font-weight: bold;">No hay productos por mostrar en estas categorias</p>
-    </ng-template>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

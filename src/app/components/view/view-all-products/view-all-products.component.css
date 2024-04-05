@@ -183,3 +183,11 @@ body {
     color: red;
     text-transform: uppercase;
 }
+
+@media (max-width: 768px) {
+    .all{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
