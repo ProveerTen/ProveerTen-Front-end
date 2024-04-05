@@ -126,6 +126,47 @@
                     {{data?.suggested_unit_selling_price_product}}</span>
                 <span class="product-info"><strong>Stock:</strong>{{data?.stock_product}}</span>
 
+                <h3 class="pro-title" style="margin: 0px;
+                    padding: 0px;
+                    position: relative;
+                    left: -59px;">Categoria:</h3>
+                <div class="category" style="position: relative; padding: 0px;">
+                    <div class="flex" style="display: flex;">
+                        <div class="triangulo" style="display: flex; flex-direction: column;">
+                            <div class="arriba-atra"></div>
+                            <div class="abajo-atra"></div>
+                        </div>
+                        <div class="box" style="width:150px; background-color: #ec8f6a; color: white;">
+                            {{data?.categories[0]}}</div>
+                        <div class="triangulo-adelante" style="display: flex; flex-direction: column;">
+                            <div class="arriba-ade">
+                            </div>
+                            <div class="abajo-ade">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="pro-title" style="padding: 0px;
+                    margin: 0px;
+                    position: relative;
+                    left: -24px;">Sub categoria:</h3>
+                <div class="sub_category" style="position: relative;">
+                    <div class="flex" style="display: flex;">
+                        <div class="triangulo" style="display: flex; flex-direction: column;">
+                            <div class="arriba-atra"></div>
+                            <div class="abajo-atra"></div>
+                        </div>
+                        <div class="box" style="width:150px; background-color: #ec8f6a; color: white;">
+                            {{data?.fk_subcategory_name_subcategory}}</div>
+                        <div class="triangulo-adelante" style="display: flex; flex-direction: column;">
+                            <div class="arriba-ade">
+                            </div>
+                            <div class="abajo-ade">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- <div class = "product-rating">
                     <span><i class = "fas fa-star"></i></span>
                     <span><i class = "fas fa-star"></i></span>

@@ -202,3 +202,52 @@ html, body{
   color: red;
   text-transform: uppercase;
 }
+
+
+.arriba-atra {
+    width: 0px;
+    height: 0px;
+    border-bottom: 6px transparent solid;
+    border-top: 6px #ec8f6a solid;
+    border-right: 6px #ec8f6a solid;
+    border-left: 6px transparent solid;
+}
+
+.abajo-atra {
+    width: 0px;
+    height: 0px;
+    border-bottom: 6px #ec8f6a solid;
+    border-top: 6px transparent solid;
+    border-right: 6px #ec8f6a solid;
+    border-left: 6px transparent solid;
+}
+
+.arriba-ade {
+    width: 0px;
+    height: 0px;
+    border-bottom: 6px #ec8f6a solid;
+    border-top: 6px transparent solid;
+    border-right: 6px transparent solid;
+    border-left: 6px #ec8f6a solid
+}
+
+.abajo-ade {
+    width: 0px;
+    height: 0px;
+    border-bottom: 6px transparent solid;
+    border-top: 6px #ec8f6a solid;
+    border-right: 6px transparent solid;
+    border-left: 6px #ec8f6a solid;
+}
+
+.category {
+
+    position: relative;
+    left: -23px;
+    padding-bottom: 10px;
+
+}
+
+.box {
+text-align: center;
+}

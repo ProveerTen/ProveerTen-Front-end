@@ -2,7 +2,7 @@
     <div class="all row product-list d-flex gap-5 gap-md-1 mb-4">
         <div class="col-md-4" *ngFor="let product of products" style="width: 270px;">
             <section class="panel" (click)="viewProductModal(product.id_product)" data-bs-toggle="modal"
-                data-bs-target="#exampleModal" style="cursor:pointer">
+                data-bs-target="#exampleModal" style="cursor:pointer;">
                 <div class="pro-img-box">
                     <img appBrokenImage loading="lazy" [src]="product.image_product" class="card-img-top"
                         alt="{{product?.name_product}}">
@@ -11,9 +11,55 @@
                     </a>
                 </div>
                 <div class="panel-body text-center  border border-3">
+
                     <h4>
-                        <h2 class="pro-title">Nombre : {{product?.name_product}}</h2>
+                        <h2 class="pro-title" style="margin-top: 21px;">Nombre : {{product?.name_product}}</h2>
                     </h4>
+                    <p class="price" style="margin: 0px;">Precio : ${{product?.purchase_price_product}}</p>
+                    <h2 class="pro-title">Stock : {{product?.stock_product}}</h2>
+
+                    <h3 class="pro-title" style="margin: 0px;
+    padding: 0px;
+    position: relative;
+    left: -59px;">Categoria:</h3>
+                    <div class="category" style="position: relative; padding: 0px;">
+                        <div class="flex" style="display: flex;">
+                            <div class="triangulo" style="display: flex; flex-direction: column;">
+                                <div class="arriba-atra"></div>
+                                <div class="abajo-atra"></div>
+                            </div>
+                            <div class="box"
+                                style="font-size: 13px;  width:150px; background-color: #ec8f6a; color: white;">
+                                {{product.fk_product_category_name_category}}</div>
+                            <div class="triangulo-adelante" style="display: flex; flex-direction: column;">
+                                <div class="arriba-ade">
+                                </div>
+                                <div class="abajo-ade">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="pro-title" style="padding: 0px;
+    margin: 0px;
+    position: relative;
+    left: -24px;">Sub categoria:</h3>
+                    <div class="sub_category" style="position: relative;">
+                        <div class="flex" style="display: flex;">
+                            <div class="triangulo" style="display: flex; flex-direction: column;">
+                                <div class="arriba-atra"></div>
+                                <div class="abajo-atra"></div>
+                            </div>
+                            <div class="box"
+                                style="font-size: 13px;  width:150px; background-color: #ec8f6a; color: white;">
+                                {{product.fk_subcategory_name_subcategory}}</div>
+                            <div class="triangulo-adelante" style="display: flex; flex-direction: column;">
+                                <div class="arriba-ade">
+                                </div>
+                                <div class="abajo-ade">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <p id="disponibilidad"
                         [ngClass]="{'disponible': product?.stock_product > 0, 'no-disponible': product?.stock_product === 0}">
@@ -32,8 +78,8 @@
                         <strong> {{product.availability_product}}</strong>
                     </p>
 
-                    <h2 class="pro-title">Stock : {{product?.stock_product}}</h2>
-                    <p class="price">Precio : ${{product?.purchase_price_product}}</p>
+
+
                 </div>
             </section>
         </div>
