@@ -42,7 +42,7 @@
             <table class="table table-bordered border-primary table-hover text-center">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col"><strong>ID</strong></th>
+                        <th scope="col"><strong>IMAGEN</strong></th>
                         <th scope="col"><strong>NOMBRE DEL PRODUCTO</strong></th>
                         <th scope="col"><strong>CANTIDAD</strong></th>
                         <th scope="col"><strong>STOCK DEL PRODUCTO</strong></th>
@@ -53,7 +53,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let product of list_products">
-                        <td>{{product.id_product}}</td>
+                        <td><img src="{{product?.image_product}}" alt="" style="height: 100px; width: 100px;"></td>
                         <td>{{ product.name_product }}</td>
                         <td class="text-center">
                             <div class="d-flex align-items-center justify-content-center">
@@ -109,6 +109,7 @@
             <table class="table table-bordered border-primary table-hover text-center">
                 <thead class="table-primary">
                     <tr>
+                        <th scope="col">IMAGEN DEL PRODUCTO</th>
                         <th scope="col">NOMBRE DEL PRODUCTO</th>
                         <th scope="col">PRECIO DE COMPRA</th>
                         <th scope="col">STOCK</th>
@@ -117,6 +118,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let product of list_show_products">
+                        <td><img src="{{product?.image_product}}" alt="" style="height: 85px; width: 85px;"></td>
                         <td>{{ product?.name_product }}</td>
                         <td>{{ product?.purchase_price_product }}</td>
                         <td>{{ product?.stock_product }}</td>
