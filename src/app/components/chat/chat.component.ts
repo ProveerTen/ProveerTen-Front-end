@@ -28,19 +28,20 @@ export class ChatComponent {
 
   is_chat: boolean = false;
 
+  @ViewChild('messageContainer') messageContainer: ElementRef;
+
   constructor(private client: ClientService, private chatService: ChatService, public auth: AuthService, public shared: SharedService) {
-    this.shared.chatear.subscribe(value => {
-      this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-        next: (response: any) => {
-          this.list_chat = response.chatData;
-          console.log(this.list_chat);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => console.log('complete'),
-      });
-    })
+
+    this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
+      next: (response: any) => {
+        this.list_chat = response.chatData;
+        console.log(this.list_chat);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => console.log('complete'),
+    });
   }
 
   changePage(page: any) {
@@ -64,7 +65,8 @@ export class ChatComponent {
       next: (response: any) => {
         console.log(response);
         this.data_chat = response;
-
+        console.log(this.data_chat);
+        this.scrollToBottom();
       },
       error: (error) => {
         console.log(error);
@@ -92,7 +94,7 @@ export class ChatComponent {
       };
       this.chatService.sendMessage(messageData, this.chatId);
       this.messageText = '';
-
+      this.scrollToBottom();
     }
 
   }
@@ -115,17 +117,11 @@ export class ChatComponent {
 
     return sender === this.auth.getId();
   }
-  refreshChats() {
-    this.client.postRequest(`${environment.url_chat}/chat/getchats`, { role: this.auth.getRole(), id: this.auth.getId() }, undefined, { "Authorization": `Bearer ${this.auth.getToken()}` }).subscribe({
-      next: (response: any) => {
-        this.list_chat = response.chatData;
-        console.log(this.list_chat);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => console.log('complete'),
-    });
+
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+    }, 2000);
   }
 
 }
