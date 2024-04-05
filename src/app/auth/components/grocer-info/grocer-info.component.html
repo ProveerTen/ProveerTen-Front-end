@@ -1,0 +1,40 @@
+<div class="all is-flex is-justify-content-center">
+
+    <div class="card is-flex mt-5 ">
+        <div class="left is-half ">
+
+        </div>
+        <div class="right is-half is-flex is-flex-direction-column has-background-light">
+
+            <div class="form is-flex is-flex-direction-column p-6">
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <h1 class="grocer is-size-3">Tendero</h1>
+
+                <div class="above is-flex is-flex-wrap-wrap is-flex-direction-row ">
+                    <input class="half input" type="text" formControlName="name_grocer" placeholder="Nombre">
+                    <input class="half input" type="text" formControlName="last_name_grocer" placeholder="Apellidos">
+                </div>
+
+                <h1 class="grocer is-size-3">Establecimiento</h1>
+
+                <div class="down is-flex is-flex-wrap-wrap is-flex-direction-row">
+                    <input class="half input" type="text" formControlName="dni_grocer" placeholder="DNI">
+                    <input class="half input" type="text" formControlName="city_grocer" placeholder="Ciudad">
+                    <input class="input is-fullwidth" type="text" formControlName="name_store" placeholder="Nombre de la tienda">
+                    <input class="half input" type="text" formControlName="number_grocer" placeholder="Telefono">
+                    <input class="half input" type="text" formControlName="neighborhood" placeholder="Barrio">
+                    <input class="half input" type="text" formControlName="street" placeholder="Calle">
+                    <input class="half input" type="text" formControlName="number_street" placeholder="Numero">
+                    <input class="input is-fullwidth" type="text" formControlName="email_grocer" placeholder="Correo">
+                    <input class="input is-fullwidth" type="text" formControlName="password_grocer" placeholder="Contraseña">
+                    <button class="button is-fullwidth has-text-white" type="sunmit">Registrarse</button>
+                </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

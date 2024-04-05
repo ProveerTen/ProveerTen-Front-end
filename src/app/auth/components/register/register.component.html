@@ -1,0 +1,24 @@
+<div class="card">
+    <h1>Selecciona un rol</h1>
+    <div class="rol">
+        <button class="grocer" (click)="toggleForm('grocer')" [class.active]="showGrocerForm">Tendero</button>
+        <button class="supplier" (click)="toggleForm('supplier')" [class.active]="!showGrocerForm">Proveedor</button>
+    </div>
+</div>
+
+<hr class="mt-8">
+
+<div class="card" [ngClass]="{ 'is-flipped': !showGrocerForm }">
+    <div class="card-inner">
+        <div class="card-front">
+            <ng-container *ngIf="showGrocerForm">
+                <app-grocer-info></app-grocer-info>
+            </ng-container>
+        </div>
+        <div class="card-back">
+            <ng-container *ngIf="!showGrocerForm">
+                <app-supplier-info></app-supplier-info>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="all is-flex is-justify-content-center ">
+
+    <div class="card is-flex mt-6 ">
+        <div class="right is-half is-flex is-flex-direction-column has-background-light">
+            
+            <div class="form is-flex is-flex-direction-column p-6">
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <h1 class="grocer is-size-3">Proveedor</h1>
+                <div class="above is-flex is-flex-wrap-wrap is-flex-direction-row ">
+                    <input class="half input" type="text" formControlName="name_provider" placeholder="Nombre">
+                    <input class="half input" type="text" formControlName="last_name_provider" placeholder="Apellidos">
+                </div>
+
+                <h1 class="grocer is-size-3">Empresa</h1>
+
+                <div class="down is-flex is-flex-wrap-wrap is-flex-direction-row">
+                    <input class="half input" type="text"  formControlName="nit_provider"placeholder="NIT">
+                    <input class="half input" type="text" formControlName="city_provider" placeholder="Ciudad">
+                    <input class="input is-fullwidth" type="text"  formControlName="name_company" placeholder="Nombre de la empresa">
+                    <input class="half input" type="text" formControlName="number_provider" placeholder="Telefono">
+                    <input class="half input" type="text" formControlName="neighborhood" placeholder="Barrio">
+                    <input class="half input" type="text" formControlName="street" placeholder="Calle">
+                    <input class="half input" type="text" formControlName="number_street" placeholder="Numero">
+                    <input class="input is-fullwidth" type="text" formControlName="email_provider" placeholder="Correo">
+                    <input class="input is-fullwidth" type="text" formControlName="password_provider" placeholder="Contraseña">
+                    <button class="button is-fullwidth has-text-white" type="sunmit">Registrarse</button>
+                </div>
+
+            </form>
+
+            </div>
+        </div>
+        <div class="left is-half">
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+.card{
+    width: 60%;
+}
+
+.grocer{
+    text-align: center;
+}
+
+.form{
+    gap: 10px;
+}
+
+.above{
+    gap: 10px;
+}
+
+.down{
+    gap: 10px;
+}
+
+.half{
+    width: 48%;
+}
+
+.left{
+    width: 50%;
+    background-color: #000022;
+    background-image: url("../../../../assets/images/supplier.jpg");
+    background-size: cover;
+}
+
+.right{
+    width: 50%;
+}
+
+button{
+    background-color: orangered;
+}
+
